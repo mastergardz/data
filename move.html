@@ -1,0 +1,502 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Interactive Report: แผนการดำเนินงาน กฟภ. ปี 2568</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Sarabun:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <!-- Chosen Palette: Calm Corporate Green -->
+    <!-- Application Structure Plan: The SPA is designed as a dashboard with a fixed sidebar for navigation, promoting easy exploration. The structure is thematic, not linear, starting with a high-level "Overview" (Vision, Challenges), then diving into the core "PEA MOVE" strategy via an interactive tabbed interface, and finally presenting quantitative data in a "Data Dashboard" with charts. This structure breaks down the dense report into digestible, user-centric sections, allowing users to choose their exploration path, which is more effective for usability than a simple document scroll. -->
+    <!-- Visualization & Content Choices: 
+        - Vision/Challenges (Inform): Presented as static, styled cards for immediate context.
+        - PEA MOVE Framework (Organize/Explore): An interactive tabbed section (HTML/CSS/JS) is used. This is the most intuitive way to handle the report's core hierarchical MOVE->Sub-strategy structure without overwhelming the user.
+        - Financials/Operations (Compare/Change): Interactive bar and line charts (Chart.js) are used to visualize trends and comparisons in performance, customer growth, and reliability. This is more engaging and insightful than static data tables.
+        - KPIs (Inform): "Big Number" cards (HTML/CSS) for at-a-glance key metrics.
+    -->
+    <!-- CONFIRMATION: NO SVG graphics used. NO Mermaid JS used. -->
+    <style>
+        body {
+            font-family: 'Sarabun', sans-serif;
+            background-color: #f9fafb;
+        }
+        .chart-container {
+            position: relative;
+            width: 100%;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+            height: 300px;
+            max-height: 400px;
+        }
+        @media (min-width: 768px) {
+            .chart-container {
+                height: 350px;
+            }
+        }
+        .nav-link {
+            transition: all 0.3s ease;
+            transform: translateX(0);
+        }
+        .nav-link.active {
+            background-color: #1E8449;
+            color: white;
+            border-radius: 0.5rem;
+            transform: translateX(4px);
+        }
+        .nav-link:not(.active):hover {
+            background-color: #e5e7eb;
+            transform: translateX(4px);
+        }
+        .move-tab.active {
+            border-color: #1E8449;
+            background-color: #1E8449;
+            color: white;
+        }
+        .card-enter {
+            animation: card-enter 0.5s ease-out forwards;
+        }
+        @keyframes card-enter {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+    </style>
+</head>
+<body class="text-gray-800">
+    <div class="flex flex-col md:flex-row min-h-screen">
+        <aside class="w-full md:w-64 bg-white shadow-lg p-4 md:p-6 sticky top-0 md:h-screen">
+            <div class="flex items-center mb-8">
+                <div class="bg-green-700 text-white rounded-full w-12 h-12 flex items-center justify-center text-2xl font-bold mr-3">
+                    PEA
+                </div>
+                <div>
+                    <h1 class="text-lg font-bold text-green-800">แผนการดำเนินงาน</h1>
+                    <p class="text-sm text-gray-500">ปี 2568</p>
+                </div>
+            </div>
+            <nav id="navigation" class="space-y-2">
+                <a href="#overview" class="nav-link flex items-center p-3 rounded-lg active">
+                    <span class="mr-3">📊</span> ภาพรวม
+                </a>
+                <a href="#move" class="nav-link flex items-center p-3 rounded-lg">
+                    <span class="mr-3">🚀</span> นโยบาย PEA MOVE
+                </a>
+                <a href="#data-dashboard" class="nav-link flex items-center p-3 rounded-lg">
+                    <span class="mr-3">📈</span> แดชบอร์ดข้อมูล
+                </a>
+            </nav>
+            <div class="mt-auto pt-8 text-center text-xs text-gray-400 hidden md:block">
+                <p>การไฟฟ้าส่วนภูมิภาค</p>
+                <p>Interactive Report</p>
+            </div>
+        </aside>
+
+        <main class="flex-1 p-4 md:p-8 lg:p-10 overflow-y-auto">
+            <div id="overview" class="content-section">
+                <header class="mb-8">
+                    <h2 class="text-3xl font-bold text-gray-800">สรุปแผนการดำเนินงาน กฟภ. ปี 2568</h2>
+                    <p class="text-gray-500 mt-1">นำเสนอทิศทางการขับเคลื่อนองค์กรสู่ "ไฟฟ้าอัจฉริยะ เพื่อคุณภาพชีวิตที่ดีอย่างยั่งยืน"</p>
+                </header>
+                
+                <section id="vision-mission" class="mb-8 p-6 bg-white rounded-xl shadow-md border-l-4 border-green-600">
+                    <h3 class="text-2xl font-semibold mb-4 text-green-800">วิสัยทัศน์และพันธกิจ</h3>
+                    <p class="text-lg mb-2"><strong>วิสัยทัศน์:</strong> ไฟฟ้าอัจฉริยะ เพื่อคุณภาพชีวิตที่ดีอย่างยั่งยืน (Smart Energy for Better Life and Sustainability)</p>
+                    <p class="text-gray-600"><strong>พันธกิจ:</strong> ผลิต จัดหา ให้บริการพลังงานไฟฟ้าและธุรกิจที่เกี่ยวเนื่อง เพื่อตอบสนองความต้องการของลูกค้าด้วยคุณภาพและบริการที่เป็นเลิศ พร้อมพัฒนาองค์กรอย่างต่อเนื่อง รับผิดชอบต่อสังคมและสิ่งแวดล้อม</p>
+                </section>
+
+                <section id="challenges">
+                    <h3 class="text-2xl font-semibold mb-4 text-gray-700">5 ความท้าทายหลักของ กฟภ. (PEA Challenge)</h3>
+                    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                        <div class="bg-white p-6 rounded-lg shadow-sm hover:shadow-lg transition-shadow duration-300">
+                            <h4 class="font-bold text-lg mb-2">1. การเปลี่ยนแปลงอุตสาหกรรมไฟฟ้า</h4>
+                            <p class="text-gray-600 text-sm">การแข่งขันที่สูงขึ้นและการปรับตัวสู่พลังงานทดแทน ต้องการการลงทุนในโครงข่ายอัจฉริยะ (Smart Grid) จำนวนมาก</p>
+                        </div>
+                        <div class="bg-white p-6 rounded-lg shadow-sm hover:shadow-lg transition-shadow duration-300">
+                            <h4 class="font-bold text-lg mb-2">2. การพัฒนาธุรกิจใหม่</h4>
+                            <p class="text-gray-600 text-sm">การขยายธุรกิจเกี่ยวเนื่องต้องเผชิญกับการแข่งขันและต้องสร้างความเชื่อมั่นให้ลูกค้าในบริการใหม่ๆ</p>
+                        </div>
+                        <div class="bg-white p-6 rounded-lg shadow-sm hover:shadow-lg transition-shadow duration-300">
+                            <h4 class="font-bold text-lg mb-2">3. การพัฒนาบุคลากร</h4>
+                            <p class="text-gray-600 text-sm">จำเป็นต้องยกระดับทักษะบุคลากรให้ทันต่อเทคโนโลยีใหม่ เช่น AI, Data Science และการสร้างวัฒนธรรมแห่งการเรียนรู้</p>
+                        </div>
+                        <div class="bg-white p-6 rounded-lg shadow-sm hover:shadow-lg transition-shadow duration-300">
+                            <h4 class="font-bold text-lg mb-2">4. สิ่งแวดล้อมและพลังงานสะอาด</h4>
+                            <p class="text-gray-600 text-sm">การลงทุนเพิ่มเติมเพื่อบรรลุเป้าหมายความเป็นกลางทางคาร์บอน (PEA Net Zero) และพัฒนาระบบรองรับพลังงานที่ผันผวน</p>
+                        </div>
+                        <div class="bg-white p-6 rounded-lg shadow-sm hover:shadow-lg transition-shadow duration-300">
+                            <h4 class="font-bold text-lg mb-2">5. การตอบสนองความต้องการลูกค้า</h4>
+                            <p class="text-gray-600 text-sm">ต้องพัฒนาบริการดิจิทัลแบบครบวงจร (One-Stop Service) และระบบ CRM เพื่อตอบสนองความต้องการที่หลากหลายและรวดเร็ว</p>
+                        </div>
+                    </div>
+                </section>
+            </div>
+            
+            <div id="move" class="content-section hidden">
+                <header class="mb-8">
+                    <h2 class="text-3xl font-bold text-gray-800">🚀 นโยบายการขับเคลื่อนองค์กร PEA MOVE</h2>
+                    <p class="text-gray-500 mt-1">กรอบการดำเนินงานหลัก 4 ด้าน 12 กลยุทธ์ เพื่อนำพา กฟภ. สู่องค์กรแห่งอนาคต</p>
+                </header>
+                
+                <div class="bg-white p-4 sm:p-6 rounded-xl shadow-md">
+                    <div id="move-tabs" class="flex flex-wrap border-b border-gray-200 mb-6">
+                        <button data-target="move-m" class="move-tab py-2 px-4 font-semibold border-b-2 active">M: Modern</button>
+                        <button data-target="move-o" class="move-tab py-2 px-4 font-semibold border-b-2">O: Oriented</button>
+                        <button data-target="move-v" class="move-tab py-2 px-4 font-semibold border-b-2">V: Versatile</button>
+                        <button data-target="move-e" class="move-tab py-2 px-4 font-semibold border-b-2">E: Efficient</button>
+                    </div>
+
+                    <div id="move-content" class="min-h-[300px]">
+                        <div id="move-m" class="move-content-panel">
+                             <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+                                <div class="p-4 border rounded-lg card-enter" style="animation-delay: 0.1s;">
+                                    <h4 class="font-bold text-lg mb-2">M1: Grid Modernization</h4>
+                                    <p class="text-sm text-gray-600">พัฒนาโครงข่ายไฟฟ้าอัจฉริยะ (Smart Grid) รองรับ EV, Prosumer, Microgrid, ติดตั้งอุปกรณ์ IoT และ Smart Meter</p>
+                                </div>
+                                <div class="p-4 border rounded-lg card-enter" style="animation-delay: 0.2s;">
+                                    <h4 class="font-bold text-lg mb-2">M2: Digital and AI</h4>
+                                    <p class="text-sm text-gray-600">ปรับปรุงกระบวนการทำงาน เพิ่มประสิทธิภาพ ลดค่าใช้จ่าย และสร้างธุรกิจใหม่ด้วยดิจิทัลและ AI</p>
+                                </div>
+                                <div class="p-4 border rounded-lg card-enter" style="animation-delay: 0.3s;">
+                                    <h4 class="font-bold text-lg mb-2">M3: Innovation & Green Energy</h4>
+                                    <p class="text-sm text-gray-600">ส่งเสริมนวัตกรรม, R&D และลงทุนในพลังงานสะอาดและระบบกักเก็บพลังงาน</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div id="move-o" class="move-content-panel hidden">
+                            <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+                                <div class="p-4 border rounded-lg card-enter">
+                                    <h4 class="font-bold text-lg mb-2">O1: Customer Service</h4>
+                                    <p class="text-sm text-gray-600">พัฒนาบริการลูกค้าให้สะดวก รวดเร็ว มีคุณภาพ ผ่านแพลตฟอร์มดิจิทัล เช่น PEA Smart Plus</p>
+                                </div>
+                                <div class="p-4 border rounded-lg card-enter">
+                                    <h4 class="font-bold text-lg mb-2">O2: New Business</h4>
+                                    <p class="text-sm text-gray-600">สร้างธุรกิจใหม่ ร่วมมือกับพันธมิตร และลงทุนในสตาร์ทอัพด้านระบบไฟฟ้าและพลังงานสะอาด</p>
+                                </div>
+                                <div class="p-4 border rounded-lg card-enter">
+                                    <h4 class="font-bold text-lg mb-2">O3: Grid Performance</h4>
+                                    <p class="text-sm text-gray-600">ใช้ Asset Management เพื่อเพิ่มประโยชน์จากสินทรัพย์ ลดการลงทุนและบำรุงรักษาที่ไม่จำเป็น</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div id="move-v" class="move-content-panel hidden">
+                             <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+                                <div class="p-4 border rounded-lg card-enter">
+                                    <h4 class="font-bold text-lg mb-2">V1: Technology Adoption</h4>
+                                    <p class="text-sm text-gray-600">จัดหาเครื่องมือดิจิทัล AI และการวิเคราะห์ข้อมูล รวมถึงใช้ IoT และ Robotics</p>
+                                </div>
+                                <div class="p-4 border rounded-lg card-enter">
+                                    <h4 class="font-bold text-lg mb-2">V2: People Empowering</h4>
+                                    <p class="text-sm text-gray-600">พัฒนาทักษะบุคลากรในยุคดิจิทัล (Reskill, Upskill, Newskill) และสร้างวัฒนธรรมองค์กรแห่งการเรียนรู้</p>
+                                </div>
+                                <div class="p-4 border rounded-lg card-enter">
+                                    <h4 class="font-bold text-lg mb-2">V3: Sustainability</h4>
+                                    <p class="text-sm text-gray-600">ส่งเสริมความยั่งยืนตามแนวทาง ESG (Environmental, Social and Governance) และลดการใช้พลังงาน</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div id="move-e" class="move-content-panel hidden">
+                             <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+                                <div class="p-4 border rounded-lg card-enter">
+                                    <h4 class="font-bold text-lg mb-2">E1: Investment Management</h4>
+                                    <p class="text-sm text-gray-600">ใช้แนวทางใหม่ในการจัดหาทุน เช่น ESG Bond และบริหารจัดการต้นทุนอย่างมีประสิทธิภาพ</p>
+                                </div>
+                                <div class="p-4 border rounded-lg card-enter">
+                                    <h4 class="font-bold text-lg mb-2">E2: Good Governance</h4>
+                                    <p class="text-sm text-gray-600">ส่งเสริมวัฒนธรรมองค์กรที่มีความโปร่งใส รับผิดชอบต่อสังคม และพัฒนาระบบจัดการข้อร้องเรียน</p>
+                                </div>
+                                <div class="p-4 border rounded-lg card-enter">
+                                    <h4 class="font-bold text-lg mb-2">E3: Lean Process</h4>
+                                    <p class="text-sm text-gray-600">ปรับปรุงกระบวนการทำงาน ลดความสูญเสีย และนำเทคโนโลยีมาช่วยสร้างระบบงานอัตโนมัติ</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div id="data-dashboard" class="content-section hidden">
+                <header class="mb-8">
+                    <h2 class="text-3xl font-bold text-gray-800">📈 แดชบอร์ดข้อมูลสำคัญ</h2>
+                    <p class="text-gray-500 mt-1">ภาพรวมข้อมูลการดำเนินงานและการเงินของ กฟภ. (ปี 2566-2568)</p>
+                </header>
+                
+                <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+                    <div class="bg-white p-6 rounded-xl shadow-md">
+                        <h3 class="font-semibold text-lg mb-4">สถานะทางการเงิน (ล้านบาท)</h3>
+                        <div class="chart-container">
+                            <canvas id="financialChart"></canvas>
+                        </div>
+                    </div>
+                     <div class="bg-white p-6 rounded-xl shadow-md">
+                        <h3 class="font-semibold text-lg mb-4">จำนวนผู้ใช้ไฟฟ้า (ราย)</h3>
+                        <div class="chart-container">
+                            <canvas id="customerChart"></canvas>
+                        </div>
+                    </div>
+                    <div class="bg-white p-6 rounded-xl shadow-md">
+                        <h3 class="font-semibold text-lg mb-4">ดัชนีความน่าเชื่อถือระบบไฟฟ้า</h3>
+                        <div class="chart-container">
+                            <canvas id="reliabilityChart"></canvas>
+                        </div>
+                    </div>
+                     <div class="bg-white p-6 rounded-xl shadow-md">
+                        <h3 class="font-semibold text-lg mb-4">ภาพรวม KPIs</h3>
+                        <div class="space-y-4 pt-4">
+                            <div class="flex justify-between items-center bg-gray-50 p-3 rounded-lg">
+                                <span class="font-medium">สินทรัพย์รวม (ล้านบาท)</span>
+                                <span class="font-bold text-green-700 text-xl">586,766</span>
+                            </div>
+                             <div class="flex justify-between items-center bg-gray-50 p-3 rounded-lg">
+                                <span class="font-medium">จำนวนพนักงาน (คน)</span>
+                                <span class="font-bold text-green-700 text-xl">27,313</span>
+                            </div>
+                            <div class="flex justify-between items-center bg-gray-50 p-3 rounded-lg">
+                                <span class="font-medium">หน่วยสูญเสียในระบบ (%)</span>
+                                <span class="font-bold text-red-500 text-xl">6.07%</span>
+                            </div>
+                             <p class="text-xs text-center text-gray-400 pt-4">ข้อมูลล่าสุด ณ มีนาคม 2568</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </main>
+    </div>
+
+<script>
+document.addEventListener('DOMContentLoaded', () => {
+
+    const navigationLinks = document.querySelectorAll('#navigation a');
+    const contentSections = document.querySelectorAll('.content-section');
+
+    function showSection(hash) {
+        contentSections.forEach(section => {
+            section.classList.add('hidden');
+        });
+        const activeSection = document.querySelector(hash);
+        if (activeSection) {
+            activeSection.classList.remove('hidden');
+        } else {
+            document.querySelector('#overview').classList.remove('hidden');
+        }
+
+        navigationLinks.forEach(link => {
+            link.classList.remove('active');
+            if (link.getAttribute('href') === hash) {
+                link.classList.add('active');
+            }
+        });
+    }
+
+    navigationLinks.forEach(link => {
+        link.addEventListener('click', (event) => {
+            event.preventDefault();
+            const targetId = link.getAttribute('href');
+            history.pushState(null, '', targetId);
+            showSection(targetId);
+        });
+    });
+
+    window.addEventListener('popstate', () => {
+        showSection(window.location.hash || '#overview');
+    });
+
+    showSection(window.location.hash || '#overview');
+
+
+    const moveTabs = document.querySelectorAll('.move-tab');
+    const moveContentPanels = document.querySelectorAll('.move-content-panel');
+
+    moveTabs.forEach(tab => {
+        tab.addEventListener('click', () => {
+            const target = tab.dataset.target;
+
+            moveTabs.forEach(t => t.classList.remove('active'));
+            tab.classList.add('active');
+
+            moveContentPanels.forEach(panel => {
+                panel.classList.add('hidden');
+                const cards = panel.querySelectorAll('.card-enter');
+                cards.forEach(card => card.style.opacity = '0');
+            });
+
+            const activePanel = document.getElementById(target);
+            activePanel.classList.remove('hidden');
+            const activeCards = activePanel.querySelectorAll('.card-enter');
+            activeCards.forEach((card, index) => {
+                card.style.animationDelay = `${(index + 1) * 0.1}s`;
+                card.style.opacity = '1';
+            });
+        });
+    });
+
+    Chart.defaults.font.family = "'Sarabun', sans-serif";
+
+    const financialData = {
+        labels: ['ปี 2566', 'ปี 2567'],
+        datasets: [
+            {
+                label: 'รายได้รวม',
+                data: [690462.90, 673079.54],
+                backgroundColor: 'rgba(54, 162, 235, 0.6)',
+                borderColor: 'rgba(54, 162, 235, 1)',
+                borderWidth: 1
+            },
+            {
+                label: 'กำไรสุทธิ',
+                data: [14574.04, 27038.63],
+                backgroundColor: 'rgba(75, 192, 192, 0.6)',
+                borderColor: 'rgba(75, 192, 192, 1)',
+                borderWidth: 1
+            }
+        ]
+    };
+
+    const financialChartCtx = document.getElementById('financialChart').getContext('2d');
+    new Chart(financialChartCtx, {
+        type: 'bar',
+        data: financialData,
+        options: {
+            responsive: true,
+            maintainAspectRatio: false,
+            scales: {
+                y: {
+                    beginAtZero: true,
+                    ticks: {
+                         callback: function(value) {
+                            return value / 1000 + 'K';
+                        }
+                    }
+                }
+            },
+            plugins: {
+                tooltip: {
+                    callbacks: {
+                        label: function(context) {
+                            let label = context.dataset.label || '';
+                            if (label) {
+                                label += ': ';
+                            }
+                            if (context.parsed.y !== null) {
+                                label += new Intl.NumberFormat('th-TH', { style: 'decimal', maximumFractionDigits: 2 }).format(context.parsed.y);
+                            }
+                            return label;
+                        }
+                    }
+                }
+            }
+        }
+    });
+
+    const customerData = {
+        labels: ['ปี 2566', 'ปี 2567', 'มี.ค. 2568'],
+        datasets: [{
+            label: 'จำนวนผู้ใช้ไฟฟ้าทั้งหมด',
+            data: [22006683, 22062761, 22119599],
+            fill: false,
+            borderColor: 'rgb(217, 119, 6)',
+            tension: 0.1
+        }]
+    };
+
+    const customerChartCtx = document.getElementById('customerChart').getContext('2d');
+    new Chart(customerChartCtx, {
+        type: 'line',
+        data: customerData,
+        options: {
+            responsive: true,
+            maintainAspectRatio: false,
+            scales: {
+                y: {
+                    ticks: {
+                        callback: function(value) {
+                            return (value / 1000000).toFixed(2) + 'M';
+                        }
+                    }
+                }
+            },
+             plugins: {
+                tooltip: {
+                    callbacks: {
+                        label: function(context) {
+                            return ' ' + new Intl.NumberFormat('th-TH').format(context.parsed.y) + ' ราย';
+                        }
+                    }
+                }
+            }
+        }
+    });
+    
+    const reliabilityData = {
+        labels: ['ปี 2566', 'ปี 2567'],
+        datasets: [
+            {
+                label: 'SAIDI (นาที/ราย/ปี)',
+                data: [27.58, 21.03],
+                backgroundColor: 'rgba(255, 159, 64, 0.6)',
+                borderColor: 'rgba(255, 159, 64, 1)',
+                borderWidth: 1,
+                yAxisID: 'y'
+            },
+             {
+                label: 'SAIFI (ครั้ง/ราย/ปี)',
+                data: [1.46, 1.17],
+                backgroundColor: 'rgba(153, 102, 255, 0.6)',
+                borderColor: 'rgba(153, 102, 255, 1)',
+                borderWidth: 1,
+                yAxisID: 'y1'
+            }
+        ]
+    };
+    
+    const reliabilityChartCtx = document.getElementById('reliabilityChart').getContext('2d');
+    new Chart(reliabilityChartCtx, {
+        type: 'bar',
+        data: reliabilityData,
+        options: {
+            responsive: true,
+            maintainAspectRatio: false,
+            scales: {
+                y: {
+                    type: 'linear',
+                    display: true,
+                    position: 'left',
+                    title: {
+                        display: true,
+                        text: 'SAIDI (นาที)'
+                    }
+                },
+                y1: {
+                    type: 'linear',
+                    display: true,
+                    position: 'right',
+                     title: {
+                        display: true,
+                        text: 'SAIFI (ครั้ง)'
+                    },
+                    grid: {
+                        drawOnChartArea: false
+                    }
+                }
+            },
+            plugins: {
+                title: {
+                    display: true,
+                    text: 'ค่าดัชนีลดลง = ความน่าเชื่อถือดีขึ้น'
+                }
+            }
+        }
+    });
+});
+</script>
+</body>
+</html>
