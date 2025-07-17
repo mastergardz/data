@@ -3,499 +3,658 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Interactive Data Quality Framework</title>
+    <title>กรอบการบริหารจัดการคุณภาพข้อมูล</title>
     <script src="https://cdn.tailwindcss.com"></script>
-    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Sarabun:wght@300;400;500;700&display=swap" rel="stylesheet">
-    <!-- Chosen Palette: Warm Neutrals -->
-    <!-- Application Structure Plan: The SPA is designed as a thematic, interactive guide. It uses a sticky top navigation for easy access to key sections (Principles, Framework, Workflows, Key Success, Ownership). The core is an interactive 5-step workflow diagram. Clicking a step dynamically reveals detailed information, combining data from two separate tables in the source into one cohesive view. This approach prevents information overload and guides the user through the complex process logically, from high-level concepts to detailed execution. A Gantt chart is added to visually summarize the project timeline, making it more digestible than a table. This structure was chosen to transform a dense, linear document into an engaging, non-linear, and user-friendly exploratory experience. -->
+    
+    <!-- Chosen Palette: Serene Corporate -->
+    <!-- Application Structure Plan: The application is structured as a single-page experience with a fixed top navigation bar for easy access to key sections: Home, Principles & Roles, Problem Types, Concepts & Methods, Workflow, and Checklist. This thematic structure allows users to explore the dense report content in a non-linear, digestible manner. The 'Workflow' section uses a clickable visual diagram to reveal comprehensive activity lists. This design prioritizes user engagement and comprehension over a simple linear text presentation, making complex ideas more accessible and providing a clear self-assessment tool. -->
     <!-- Visualization & Content Choices: 
-        - Report Info: 7 Principles -> Goal: Inform -> Viz/Method: Interactive HTML cards with icons -> Interaction: Static display for clarity -> Justification: Better scannability than a plain list -> Library/Method: HTML/Tailwind.
-        - Report Info: 5 Workflows & Timelines -> Goal: Organize/Explain Process -> Viz/Method: Interactive horizontal process diagram that reveals content blocks on click -> Interaction: Click a workflow to show its synthesized details (activities, roles, timeline) -> Justification: This is the core interaction, breaking down the most complex part of the report into manageable, user-controlled steps. It avoids overwhelming the user with all details at once. -> Library/Method: HTML/CSS/JS.
-        - Report Info: Timeline Table -> Goal: Compare/Show Duration -> Viz/Method: Horizontal Bar Chart (Gantt-style) -> Interaction: Tooltips on hover -> Justification: Provides a quick, powerful visual summary of the project plan, which is more effective than a raw table. -> Library/Method: Chart.js.
-        - Report Info: Key Success Factors & Ownership -> Goal: Inform -> Viz/Method: Styled cards and lists -> Interaction: None, focus on readability -> Justification: Improves visual hierarchy and readability of text-heavy sections. -> Library/Method: HTML/Tailwind. -->
+        - 7 Principles: Goal: Inform. Method: Interactive card grid using HTML/Tailwind/JS for a visually engaging layout. Justification: More appealing and scannable than a list.
+        - Roles: Goal: Inform. Method: Clean, structured text sections. Justification: Clear and direct presentation for responsibility definitions.
+        - Problem Types (Reactive vs. Preventive): Goal: Compare. Method: Two-column layout with clear examples. Justification: Simple, direct comparison for easy differentiation.
+        - Key Concepts (Design vs. Flow) & Methods: Goal: Compare/Relate. Method: Detailed textual lists of methods for each concept, presented side-by-side with full examples. Justification: Provides comprehensive information on the specific methods under each philosophy and their practical application.
+        - Management Workflow: Goal: Organize/Show Process. Method: A horizontal process diagram built with HTML/Tailwind. Each step is clickable, revealing detailed activity lists via JS. Justification: A visual flow is more intuitive for understanding a multi-step process than text alone, with full activity details for depth.
+        - Checklist: Goal: Inform/Assess. Method: Structured text with checkboxes (simulated) and detailed explanations of problem types, workflow linkages, and recommendations. Justification: Provides a practical tool for self-assessment and guides users on applying the framework.
+    -->
     <!-- CONFIRMATION: NO SVG graphics used. NO Mermaid JS used. -->
+
     <style>
         body {
             font-family: 'Sarabun', sans-serif;
-            background-color: #FDF8F0;
-            color: #3D352F;
+            background-color: #F8F9FA;
+            color: #343A40;
         }
         .nav-link {
             transition: color 0.3s, border-bottom-color 0.3s;
             border-bottom: 2px solid transparent;
         }
         .nav-link:hover, .nav-link.active {
-            color: #8D80A3;
-            border-bottom-color: #8D80A3;
+            color: #087f5b;
+            border-bottom-color: #087f5b;
         }
-        .workflow-step {
-            transition: all 0.3s ease-in-out;
-            cursor: pointer;
+        .card {
+            transition: transform 0.3s, box-shadow 0.3s;
         }
-        .workflow-step.active {
-            background-color: #8D80A3;
-            color: #FFFFFF;
+        .card:hover {
             transform: translateY(-5px);
             box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
         }
-        .workflow-step.active .step-icon {
-            transform: scale(1.1);
+        .workflow-step {
+            transition: all 0.3s;
+            cursor: pointer;
         }
-        .workflow-content {
-            display: none;
-            animation: fadeIn 0.5s;
+        .workflow-step.active {
+            background-color: #087f5b;
+            color: white;
+            transform: scale(1.05);
         }
-        .workflow-content.active {
-            display: block;
+        .workflow-line {
+            height: 2px;
+            background-color: #dee2e6;
+            flex-grow: 1;
         }
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(10px); }
-            to { opacity: 1; transform: translateY(0); }
+        .concept-card {
+            transition: all 0.3s;
+            cursor: pointer;
+            border: 2px solid #e9ecef;
         }
-        .chart-container {
-            position: relative;
-            width: 100%;
-            max-width: 900px;
-            margin-left: auto;
-            margin-right: auto;
-            height: 400px;
-            max-height: 60vh;
+        .concept-card.active {
+            border-color: #087f5b;
+            box-shadow: 0 0 0 3px rgba(8, 127, 91, 0.2);
+            transform: scale(1.02);
         }
-        .card {
-            background-color: #FFFFFF;
-            border: 1px solid #EAE0D5;
-            transition: all 0.3s ease;
+        section {
+            scroll-margin-top: 80px;
         }
-        .card:hover {
-            transform: translateY(-4px);
-            box-shadow: 0 8px 25px rgba(141, 128, 163, 0.15);
+        .checkbox-item {
+            display: flex;
+            align-items: flex-start;
+            margin-bottom: 0.5rem;
+        }
+        .checkbox-item input {
+            margin-top: 0.25rem;
+            margin-right: 0.5rem;
         }
     </style>
 </head>
 <body class="antialiased">
 
-    <header class="bg-[#A68B74]/80 backdrop-blur-sm shadow-md sticky top-0 z-50">
-        <nav class="container mx-auto px-6 py-3 flex justify-between items-center">
-            <div class="text-xl font-bold text-white">Data Quality Framework</div>
-            <div class="hidden md:flex space-x-8">
-                <a href="#principles" class="nav-link text-white font-medium pb-1">หลักการ</a>
-                <a href="#framework" class="nav-link text-white font-medium pb-1">กรอบการทำงาน</a>
-                <a href="#workflows" class="nav-link text-white font-medium pb-1">ขั้นตอน</a>
-                <a href="#timeline" class="nav-link text-white font-medium pb-1">แผนการดำเนินงาน</a>
-                <a href="#success" class="nav-link text-white font-medium pb-1">ปัจจัยสำเร็จ</a>
-                <a href="#ownership" class="nav-link text-white font-medium pb-1">การกำหนดเจ้าของ</a>
+    <header class="bg-white/80 backdrop-blur-lg shadow-sm sticky top-0 z-50">
+        <nav class="container mx-auto px-4 lg:px-6 py-4">
+            <div class="flex justify-between items-center">
+                <div class="text-xl font-bold text-gray-800">
+                    <span class="text-teal-600">DQ</span> Framework
+                </div>
+                <div class="hidden md:flex space-x-6 lg:space-x-8 items-center">
+                    <a href="#home" class="nav-link text-gray-600 font-medium pb-1">หน้าแรก</a>
+                    <a href="#principles" class="nav-link text-gray-600 font-medium pb-1">หลักการและบทบาท</a>
+                    <a href="#problem-types" class="nav-link text-gray-600 font-medium pb-1">ประเภทปัญหา</a>
+                    <a href="#concepts-methods" class="nav-link text-gray-600 font-medium pb-1">แนวคิดและวิธีแก้</a>
+                    <a href="#workflow" class="nav-link text-gray-600 font-medium pb-1">กระบวนการทำงาน</a>
+                    <a href="#checklist" class="nav-link text-gray-600 font-medium pb-1">Checklist</a>
+                </div>
+                <button id="mobile-menu-button" class="md:hidden p-2 rounded-md text-gray-600 hover:bg-gray-100">
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7"></path></svg>
+                </button>
             </div>
-            <button id="mobile-menu-button" class="md:hidden text-white">
-                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-16 6h16" />
-                </svg>
-            </button>
+            <div id="mobile-menu" class="hidden md:hidden mt-4">
+                <a href="#home" class="block py-2 px-4 text-sm text-gray-600 hover:bg-gray-100 rounded-md">หน้าแรก</a>
+                <a href="#principles" class="block py-2 px-4 text-sm text-gray-600 hover:bg-gray-100 rounded-md">หลักการและบทบาท</a>
+                <a href="#problem-types" class="block py-2 px-4 text-sm text-gray-600 hover:bg-gray-100 rounded-md">ประเภทปัญหา</a>
+                <a href="#concepts-methods" class="block py-2 px-4 text-sm text-gray-600 hover:bg-gray-100 rounded-md">แนวคิดและวิธีแก้</a>
+                <a href="#workflow" class="block py-2 px-4 text-sm text-gray-600 hover:bg-gray-100 rounded-md">กระบวนการทำงาน</a>
+                <a href="#checklist" class="block py-2 px-4 text-sm text-gray-600 hover:bg-gray-100 rounded-md">Checklist</a>
+            </div>
         </nav>
-        <div id="mobile-menu" class="hidden md:hidden bg-[#A68B74] px-6 pt-2 pb-4">
-             <a href="#principles" class="block nav-link text-white py-2">หลักการ</a>
-             <a href="#framework" class="block nav-link text-white py-2">กรอบการทำงาน</a>
-             <a href="#workflows" class="block nav-link text-white py-2">ขั้นตอน</a>
-             <a href="#timeline" class="block nav-link text-white py-2">แผนการดำเนินงาน</a>
-             <a href="#success" class="block nav-link text-white py-2">ปัจจัยสำเร็จ</a>
-             <a href="#ownership" class="block nav-link text-white py-2">การกำหนดเจ้าของ</a>
-        </div>
     </header>
 
-    <main class="container mx-auto p-4 md:p-8">
-        <section id="principles" class="my-16 scroll-mt-24">
-            <h2 class="text-3xl font-bold text-center mb-2 text-[#A68B74]">✅ 7 หลักการ Data Cleansing</h2>
-            <p class="text-center text-gray-600 mb-10">นี่คือหลักการสำคัญ 7 ข้อที่เป็นหัวใจของการบริหารจัดการคุณภาพข้อมูลตามนโยบายของ ผวก. ซึ่งเป็นพื้นฐานของกรอบการทำงานทั้งหมด</p>
-            <div class="grid md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
-                 <div class="card p-6 rounded-xl shadow-sm">
-                    <h3 class="font-bold text-lg text-[#8D80A3] mb-2">1. การกำหนดมาตรฐานข้อมูล</h3>
-                    <p class="text-gray-600">กำกับดูแลข้อมูลให้เกิดมาตรฐาน เพื่อให้สามารถใช้งานร่วมกันได้อย่างมีประสิทธิภาพ</p>
-                </div>
-                <div class="card p-6 rounded-xl shadow-sm">
-                    <h3 class="font-bold text-lg text-[#8D80A3] mb-2">2. การกำหนดเจ้าของข้อมูล</h3>
-                    <p class="text-gray-600">ระบุผู้รับผิดชอบข้อมูลที่อยู่ในแต่ละกระบวนการให้มีความชัดเจน</p>
-                </div>
-                <div class="card p-6 rounded-xl shadow-sm">
-                    <h3 class="font-bold text-lg text-[#8D80A3] mb-2">3. การมีระบบตรวจสอบอัตโนมัติ</h3>
-                    <p class="text-gray-600">ใช้ระบบช่วยตรวจสอบความถูกต้องของข้อมูลตั้งแต่ต้นทาง เพื่อป้องกันข้อมูลผิดพลาด</p>
-                </div>
-                 <div class="card p-6 rounded-xl shadow-sm">
-                    <h3 class="font-bold text-lg text-[#8D80A3] mb-2">4. การทำความสะอาดข้อมูลเป็นวัฏจักร</h3>
-                    <p class="text-gray-600">กำหนดรอบการตรวจสอบและแก้ไขข้อมูลอย่างสม่ำเสมอ เพื่อรักษาคุณภาพข้อมูล</p>
-                </div>
-                 <div class="card p-6 rounded-xl shadow-sm">
-                    <h3 class="font-bold text-lg text-[#8D80A3] mb-2">5. การวางระบบ Log และ Audit Trail</h3>
-                    <p class="text-gray-600">เก็บประวัติการเปลี่ยนแปลงข้อมูลทั้งหมดเพื่อให้สามารถตรวจสอบย้อนหลังได้</p>
-                </div>
-                 <div class="card p-6 rounded-xl shadow-sm">
-                    <h3 class="font-bold text-lg text-[#8D80A3] mb-2">6. การฝึกอบรมและสร้างวัฒนธรรม</h3>
-                    <p class="text-gray-600">สร้างความเข้าใจและปลูกฝังความสำคัญเรื่องคุณภาพข้อมูลให้ทุกคนในองค์กร</p>
-                </div>
-                 <div class="card p-6 rounded-xl shadow-sm">
-                    <h3 class="font-bold text-lg text-[#8D80A3] mb-2">7. การผสาน Cleansing เข้ากับกระบวนการ</h3>
-                    <p class="text-gray-600">ฝังขั้นตอนการควบคุมคุณภาพข้อมูลไว้ในระบบและกระบวนการทำงานประจำวัน</p>
-                </div>
-            </div>
+    <main class="container mx-auto px-4 lg:px-6 py-8 md:py-12">
+
+        <section id="home" class="text-center py-16">
+            <h1 class="text-4xl md:text-5xl font-bold text-gray-800 mb-4">กรอบการบริหารจัดการคุณภาพข้อมูล</h1>
+            <p class="text-lg text-gray-600 max-w-3xl mx-auto">เว็บแอปพลิเคชันนี้สรุปแนวคิด หลักการ และกระบวนการสำคัญในการสร้างและรักษาคุณภาพข้อมูลอย่างยั่งยืน เพื่อให้คุณสามารถสำรวจและทำความเข้าใจได้ง่ายผ่านองค์ประกอบแบบอินเทอร์แอคทีฟ</p>
         </section>
 
-        <section id="framework" class="my-16 scroll-mt-24">
-            <h2 class="text-3xl font-bold text-center mb-2 text-[#A68B74]">🧩 กรอบการจัดการคุณภาพข้อมูลองค์กร</h2>
-            <p class="text-center text-gray-600 mb-10">กรอบการทำงานนี้แบ่งการขับเคลื่อนคุณภาพข้อมูลออกเป็น 2 มิติหลัก และกำหนดบทบาทของผู้เกี่ยวข้องอย่างชัดเจน เพื่อให้การดำเนินงานเป็นไปอย่างราบรื่นและมีประสิทธิภาพ</p>
-            <div class="grid md:grid-cols-2 gap-8">
-                <div class="card p-6 rounded-xl shadow-sm">
-                    <h3 class="font-bold text-xl text-[#8D80A3] mb-3">มิติการทำงาน</h3>
-                     <div class="space-y-4">
-                        <div>
-                            <h4 class="font-semibold text-lg">Data Quality by Design</h4>
-                            <p class="text-gray-600">การสร้างคุณภาพตั้งแต่การออกแบบกระบวนการและระบบ มุ่งเน้นงานด้าน Data Governance โดยกำหนดมาตรฐานกลางและแนวปฏิบัติขององค์กร</p>
-                        </div>
-                        <div>
-                            <h4 class="font-semibold text-lg">Data Quality in Flow</h4>
-                            <p class="text-gray-600">การควบคุมคุณภาพระหว่างการใช้งานจริง มุ่งเน้นงานด้าน Data Operation เช่น การทำความสะอาดข้อมูลและการตรวจสอบย้อนหลัง</p>
-                        </div>
-                    </div>
+        <section id="principles" class="py-16">
+            <div class="text-center mb-12">
+                <h2 class="text-3xl font-bold text-gray-800">7 หลักการสำคัญของ Data Cleansing</h2>
+                <p class="mt-2 text-gray-600">รากฐานสำคัญในการสร้างข้อมูลที่สะอาดและน่าเชื่อถือทั่วทั้งองค์กร</p>
+            </div>
+            <div id="principles-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8">
+            </div>
+
+            <div class="mt-16">
+                <div class="text-center mb-12">
+                    <h2 class="text-3xl font-bold text-gray-800">บทบาทผู้เกี่ยวข้อง</h2>
+                    <p class="mt-2 text-gray-600">ความสำเร็จในการจัดการคุณภาพข้อมูลขึ้นอยู่กับความร่วมมือของผู้เกี่ยวข้องทุกฝ่าย</p>
                 </div>
-                <div class="card p-6 rounded-xl shadow-sm">
-                    <h3 class="font-bold text-xl text-[#8D80A3] mb-3">💡 แนวคิดและบทบาทหลัก</h3>
-                     <div class="space-y-4">
-                        <div>
-                            <h4 class="font-semibold text-lg">หน่วยงานกลาง (กจข.)</h4>
-                            <p class="text-gray-600">รับผิดชอบมุมมองภาพรวม กำหนดนโยบาย กรอบแนวทาง และมาตรฐานขององค์กร</p>
-                        </div>
-                        <div>
-                            <h4 class="font-semibold text-lg">หน่วยงานเจ้าของกระบวนการ</h4>
-                            <p class="text-gray-600">รับผิดชอบมุมมองกระบวนการ เป็นผู้ปฏิบัติและรับผิดชอบข้อมูลในกระบวนการจริง เช่น ด้านลูกค้า, ระบบไฟฟ้า</p>
-                        </div>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-5xl mx-auto">
+                    <div class="bg-white p-8 rounded-lg shadow-sm border-l-4 border-teal-500">
+                        <h3 class="text-2xl font-bold text-gray-800 mb-4">หน่วยงานกลาง (Data Governance Team - กจข.):</h3>
+                        <p class="text-gray-600 mb-4"><span class="font-semibold">บทบาทหลัก</span>: ผู้ออกแบบกรอบ, กำหนดนโยบาย, มาตรฐาน, แนวทาง, เครื่องมือ, และเป็นผู้กำกับภาพรวมด้านคุณภาพข้อมูลระดับองค์กร</p>
+                        <p class="text-gray-600 mb-2"><span class="font-semibold">ความรับผิดชอบเพิ่มเติม</span>:</p>
+                        <ul class="list-disc list-inside text-gray-600 space-y-2">
+                            <li>สนับสนุนการวิเคราะห์ปัญหาข้าม Use Case, ตรวจสอบและให้คำแนะนำในการแก้ไขต้นเหตุ</li>
+                            <li>สร้างความตระหนักและวัฒนธรรมคุณภาพข้อมูลในวงกว้าง</li>
+                            <li>พัฒนาและติดตามตัวชี้วัดคุณภาพข้อมูลภาพรวม</li>
+                        </ul>
+                    </div>
+                    <div class="bg-white p-8 rounded-lg shadow-sm border-l-4 border-amber-500">
+                        <h3 class="text-2xl font-bold text-gray-800 mb-4">หน่วยงานเจ้าของข้อมูลและกระบวนการ (Data & Process Owning Unit):</h3>
+                        <p class="text-gray-600 mb-4"><span class="font-semibold">บทบาทหลัก</span>: ผู้รับผิดชอบหลักในการปรับใช้มาตรฐาน, ดำเนินการตามแนวทาง, วิเคราะห์และแก้ไขปัญหาคุณภาพข้อมูลใน Use Case ของตนเอง, และผู้ปฏิบัติงานจริงที่เกี่ยวข้องกับการสร้าง/ประมวลผลข้อมูล โดยครอบคลุมบทบาทของหน่วยงานทางธุรกิจที่ดูแลทั้งข้อมูลและกระบวนการที่เกี่ยวข้องกับข้อมูลนั้นๆ</p>
+                        <p class="text-gray-600 mb-2"><span class="font-semibold">ความรับผิดชอบเพิ่มเติม</span>:</p>
+                        <ul class="list-disc list-inside text-gray-600 space-y-2">
+                            <li><span class="font-semibold">เจ้าของข้อมูล (Data Owner)</span>: รับผิดชอบโดยตรงต่อคุณภาพและความถูกต้องของชุดข้อมูลสำคัญ (CDEs)</li>
+                            <li><span class="font-semibold">เจ้าของกระบวนการ (Process Owner)</span>: รับผิดชอบในการออกแบบและปรับปรุงกระบวนการเพื่อให้มั่นใจว่าข้อมูลมีคุณภาพตั้งแต่ต้น (Data Quality by Design) และฝังกลไกควบคุมคุณภาพข้อมูลในทุกขั้นตอน <span class="font-semibold">ห้ามปฏิเสธความรับผิดชอบ</span> หากการออกแบบกระบวนการเป็นต้นเหตุ</li>
+                            <li><span class="font-semibold">ผู้ปฏิบัติงาน (Data Operator)</span>: รับผิดชอบในการปฏิบัติตามมาตรฐาน, ระบุและแจ้งปัญหาแต่เนิ่นๆ, และมีส่วนร่วมในการให้ข้อเสนอแนะเพื่อปรับปรุงกระบวนการ (Data Quality in Flow)</li>
+                        </ul>
                     </div>
                 </div>
             </div>
         </section>
-
-        <section id="workflows" class="my-16 scroll-mt-24">
-            <h2 class="text-3xl font-bold text-center mb-2 text-[#A68B74]">🗺️ 5 ขั้นตอนการดำเนินงาน (Workflows)</h2>
-            <p class="text-center text-gray-600 mb-10">นี่คือหัวใจของกระบวนการจัดการคุณภาพข้อมูล ซึ่งแบ่งออกเป็น 5 ขั้นตอนหลัก <span class="font-semibold">คลิกที่แต่ละขั้นตอน</span> เพื่อดูรายละเอียดกิจกรรม, บทบาท และระยะเวลา</p>
+        
+        <section id="problem-types" class="py-16 bg-white rounded-2xl shadow-md p-6 md:p-10">
+            <div class="text-center mb-12">
+                <h2 class="text-3xl font-bold text-gray-800">ประเภทของปัญหาคุณภาพข้อมูล: Reactive และ Preventive</h2>
+                <p class="mt-2 text-gray-600">ในการบริหารจัดการคุณภาพข้อมูล เราสามารถแบ่งประเภทของปัญหาตามลักษณะการเกิดขึ้นและมีแนวคิดในการแก้ไขปัญหาได้เป็น 2 แบบหลัก</p>
+            </div>
             
-            <div id="workflow-selector" class="flex flex-col md:flex-row justify-center items-center gap-2 md:gap-0 bg-white p-2 rounded-xl shadow-md mb-8">
-                <div data-workflow="1" class="workflow-step active w-full md:w-auto flex-1 text-center p-4 rounded-lg">
-                    <div class="step-icon text-2xl mb-1">🔍</div>
-                    <div class="font-bold">WF1: วิเคราะห์</div>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                <div class="bg-gray-50 p-6 rounded-lg border border-red-200">
+                    <h3 class="font-bold text-xl text-red-700 mb-2">ปัญหาเชิงรับ (Reactive Data Quality Issues):</h3>
+                    <p class="text-gray-600 mb-4">นี่คือปัญหาคุณภาพข้อมูลที่ <span class="font-semibold">เกิดขึ้นแล้ว</span> และ <span class="font-semibold">ถูกตรวจพบจากการนำข้อมูลไปใช้งาน</span> หรือเมื่อมีผลกระทบเกิดขึ้นแล้วเท่านั้น เหมือนกับการ "เห็นบ้านพังแล้วค่อยซ่อม" ปัญหากลุ่มนี้มักสร้างความเสียหายที่จับต้องได้ในปัจจุบัน และเราจำเป็นต้อง <span class="font-semibold">ตอบสนอง (React)</span> เพื่อแก้ไขให้ทันท่วงที</p>
+                    <p class="text-gray-600"><span class="font-semibold">ตัวอย่าง</span>: รายชื่อลูกค้าซ้ำซ้อนในระบบจนส่งบิลผิด, ข้อมูลการใช้ไฟฟ้าไม่ถูกต้องทำให้คำนวณยอดเงินผิด, รายงานสำคัญผิดพลาดเพราะข้อมูลไม่ครบถ้วน</p>
                 </div>
-                <div class="text-gray-300 hidden md:block mx-2">→</div>
-                <div data-workflow="2" class="workflow-step w-full md:w-auto flex-1 text-center p-4 rounded-lg">
-                    <div class="step-icon text-2xl mb-1">🛡️</div>
-                    <div class="font-bold">WF2: กำกับดูแล</div>
-                </div>
-                <div class="text-gray-300 hidden md:block mx-2">→</div>
-                <div data-workflow="3" class="workflow-step w-full md:w-auto flex-1 text-center p-4 rounded-lg">
-                    <div class="step-icon text-2xl mb-1">⚙️</div>
-                    <div class="font-bold">WF3: ออกแบบและติดตั้ง</div>
-                </div>
-                <div class="text-gray-300 hidden md:block mx-2">→</div>
-                <div data-workflow="4" class="workflow-step w-full md:w-auto flex-1 text-center p-4 rounded-lg">
-                    <div class="step-icon text-2xl mb-1">🛠️</div>
-                    <div class="font-bold">WF4: แก้ไขต้นเหตุ</div>
-                </div>
-                <div class="text-gray-300 hidden md:block mx-2">→</div>
-                 <div data-workflow="5" class="workflow-step w-full md:w-auto flex-1 text-center p-4 rounded-lg">
-                    <div class="step-icon text-2xl mb-1">📊</div>
-                    <div class="font-bold">WF5: ติดตามและสร้างวัฒนธรรม</div>
-                </div>
-            </div>
-
-            <div id="workflow-details" class="bg-white p-6 md:p-8 rounded-2xl shadow-lg min-h-[300px]">
-            </div>
-        </section>
-
-        <section id="timeline" class="my-16 scroll-mt-24">
-             <h2 class="text-3xl font-bold text-center mb-2 text-[#A68B74]">📈 แผนภาพรวมการดำเนินงาน</h2>
-             <p class="text-center text-gray-600 mb-10">แผนภาพนี้แสดงระยะเวลาโดยประมาณของแต่ละ Workflow เพื่อให้เห็นภาพรวมของโครงการทั้งหมด</p>
-             <div class="chart-container bg-white p-4 rounded-xl shadow-lg">
-                <canvas id="timelineChart"></canvas>
-            </div>
-        </section>
-
-        <section id="success" class="my-16 scroll-mt-24">
-            <h2 class="text-3xl font-bold text-center mb-2 text-[#A68B74]">🎯 ปัจจัยสู่ความสำเร็จ (Key Success Factors)</h2>
-            <p class="text-center text-gray-600 mb-10">การดำเนินโครงการให้สำเร็จต้องอาศัยปัจจัยสำคัญหลายประการ ตั้งแต่การสนับสนุนจากผู้บริหารไปจนถึงการสื่อสารอย่างต่อเนื่อง</p>
-            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
-                 <div class="card p-6 rounded-xl shadow-sm space-y-2">
-                    <h3 class="font-bold text-lg text-[#8D80A3]">การสนับสนุนจากผู้บริหาร</h3>
-                    <p class="text-gray-600">แม้ปัญหาคุณภาพข้อมูลอาจไม่เร่งด่วนในสายตาผู้บริหาร แต่จำเป็นต้องชี้ให้เห็นถึงผลกระทบระยะยาวเพื่อได้รับการสนับสนุน</p>
-                </div>
-                <div class="card p-6 rounded-xl shadow-sm space-y-2">
-                    <h3 class="font-bold text-lg text-[#8D80A3]">เจ้าของ Use Case เป็นเจ้าภาพ</h3>
-                    <p class="text-gray-600">เจ้าของ Use Case ต้องลงมือเอง โดยมี กจข. เป็นผู้สนับสนุน เพื่อสร้างความรับผิดชอบและความยั่งยืน</p>
-                </div>
-                <div class="card p-6 rounded-xl shadow-sm space-y-2">
-                    <h3 class="font-bold text-lg text-[#8D80A3]">วิเคราะห์ Workflow 1 ให้รอบคอบ</h3>
-                    <p class="text-gray-600">การวิเคราะห์ต้นเหตุและ CDEs เป็นรากฐานสำคัญ หากทำได้ไม่ดีพอจะส่งผลกระทบต่อขั้นตอนที่เหลือทั้งหมด</p>
-                </div>
-                 <div class="card p-6 rounded-xl shadow-sm space-y-2">
-                    <h3 class="font-bold text-lg text-[#8D80A3]">กำหนดเจ้าของข้อมูลให้ถูกต้อง</h3>
-                    <p class="text-gray-600">ควรเป็นหน่วยงานส่วนกลางหรือเขตที่มีอำนาจควบคุมกระบวนการและสั่งการได้จริง</p>
-                </div>
-                 <div class="card p-6 rounded-xl shadow-sm space-y-2">
-                    <h3 class="font-bold text-lg text-[#8D80A3]">วาง KPI ที่ชัดเจนตั้งแต่ต้น</h3>
-                    <p class="text-gray-600">กำหนดตัวชี้วัดทั้งด้านคุณภาพข้อมูลและการดำเนินงาน เพื่อวัดความก้าวหน้าและความสำเร็จ</p>
-                </div>
-                 <div class="card p-6 rounded-xl shadow-sm space-y-2">
-                    <h3 class="font-bold text-lg text-[#8D80A3]">เริ่มจาก Quick Win</h3>
-                    <p class="text-gray-600">เลือก Use Case ที่มีโอกาสสำเร็จเร็ว เพื่อสร้างผลงานที่จับต้องได้และใช้เป็นต้นแบบ</p>
-                </div>
-                 <div class="card p-6 rounded-xl shadow-sm space-y-2">
-                    <h3 class="font-bold text-lg text-[#8D80A3]">ให้ความสำคัญกับ Workflow 4</h3>
-                    <p class="text-gray-600">อย่าหยุดแค่การ Cleansing ข้อมูล แต่ต้องแก้ไขที่ต้นเหตุของปัญหาเพื่อป้องกันไม่ให้เกิดขึ้นซ้ำ</p>
-                </div>
-                 <div class="card p-6 rounded-xl shadow-sm space-y-2">
-                    <h3 class="font-bold text-lg text-[#8D80A3]">สื่อสารและติดตามผลต่อเนื่อง</h3>
-                    <p class="text-gray-600">ใช้ Dashboard หรือรายงานความคืบหน้า เพื่อสร้างแรงจูงใจและรักษา Momentum ของโครงการ</p>
+                <div class="bg-gray-50 p-6 rounded-lg border border-green-200">
+                    <h3 class="font-bold text-xl text-green-700 mb-2">ปัญหาเชิงป้องกัน (Preventive Data Quality Issues):</h3>
+                    <p class="text-gray-600 mb-4">นี่คือปัญหาที่เรา <span class="font-semibold">คาดการณ์ว่าจะเกิดขึ้น</span> หรือ <span class="font-semibold">ดำเนินการป้องกันไว้ก่อน</span> ที่ปัญหาจะแสดงอาการออกมา หรือตั้งแต่ก่อนที่ข้อมูลจะถูกสร้างขึ้นมา เหมือนกับการ "สร้างบ้านให้แข็งแรงตั้งแต่แรก" เพื่อไม่ให้มันพัง การจัดการเชิงป้องกันมุ่งเน้นการสร้างเกราะป้องกัน และลดโอกาสที่ข้อมูลคุณภาพต่ำจะถือกำเนิดขึ้น</p>
                 </div>
             </div>
         </section>
 
-        <section id="ownership" class="my-16 scroll-mt-24">
-             <h2 class="text-3xl font-bold text-center mb-2 text-[#A68B74]">🔑 แนวทางการกำหนดเจ้าของข้อมูล (CDEs)</h2>
-             <p class="text-center text-gray-600 mb-10">การกำหนดเจ้าของข้อมูล (Data Owner) ที่ถูกต้องเป็นสิ่งสำคัญอย่างยิ่ง โดยเฉพาะในองค์กรที่มีโครงสร้างซับซ้อน</p>
-             <div class="max-w-4xl mx-auto space-y-6">
-                <div class="card p-6 rounded-xl shadow-sm">
-                    <h3 class="font-bold text-lg text-[#8D80A3] mb-2">1. วิเคราะห์กระบวนการข้อมูล</h3>
-                    <p class="text-gray-600">ระบุว่าข้อมูล (CDE) แต่ละฟิลด์ถูกสร้าง, บันทึก, หรือแก้ไขที่ขั้นตอนใดใน Value Chain ขององค์กร</p>
+        <section id="concepts-methods" class="py-16">
+            <div class="text-center mb-12">
+                <h2 class="text-3xl font-bold text-gray-800">แนวคิดในการแก้ไขปัญหา</h2>
+                <p class="mt-2 text-gray-600">การบริหารจัดการคุณภาพข้อมูล (Data Quality Management) มุ่งเน้นการสร้างและรักษาคุณภาพข้อมูลอย่างยั่งยืน โดยใช้ 2 แนวคิดหลักในการแก้ไขปัญหา ที่เกื้อหนุนกันและต้องดำเนินไปพร้อมกัน</p>
+            </div>
+
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 mb-16">
+                <div class="bg-white p-8 rounded-lg shadow-sm border-l-4 border-blue-500">
+                    <h3 class="text-2xl font-bold text-gray-800 mb-4">Data Quality by Design (การสร้างคุณภาพตั้งแต่การออกแบบกระบวนการและระบบ):</h3>
+                    <p class="text-gray-600 mb-4"><span class="font-semibold">แก่น</span>: เป็นแนวคิดที่มุ่งเน้นการ <span class="font-semibold">ป้องกันปัญหาคุณภาพข้อมูลตั้งแต่ต้นทางในระดับโครงสร้างและกระบวนการ</span> โดยการคิดและฝังกลไกควบคุมคุณภาพเข้าไปใน <span class="font-semibold">การออกแบบระบบงาน, กระบวนการทางธุรกิจ, และโครงสร้างข้อมูล</span> ตั้งแต่เริ่มต้น หรือเมื่อมีการปรับปรุง</p>
+                    <p class="text-gray-600 mb-4"><span class="font-semibold">บทบาทหลัก</span>: กองบริหารจัดการข้อมูล (กจข.) ในฐานะ <span class="font-semibold">หน่วยงานกลาง</span> เป็นผู้กำหนดนโยบาย กรอบแนวทาง และมาตรฐานภาพรวมขององค์กร เพื่อให้หน่วยงานเจ้าของข้อมูลและกระบวนการสามารถนำไปใช้ในการออกแบบหรือพัฒนาระบบงานและกระบวนการให้สามารถควบคุมคุณภาพข้อมูลได้</p>
+                    <p class="text-gray-600"><span class="font-semibold">ตัวอย่างการประยุกต์ใช้</span>: การ Re-design UI ให้มีการ Validate ข้อมูลก่อนบันทึก เพื่อป้องกันข้อผิดพลาดเชิงระบบ หรือการกำหนดรูปแบบข้อมูลที่ชัดเจน</p>
                 </div>
-                <div class="card p-6 rounded-xl shadow-sm">
-                    <h3 class="font-bold text-lg text-[#8D80A3] mb-2">2. ประเมินอำนาจการควบคุมและสั่งการ</h3>
-                    <ul class="list-disc list-inside space-y-2 text-gray-600">
-                        <li>ถ้า CDE ถูกบันทึกโดยหน้างาน แต่หน้างานไม่มีอำนาจสั่งการเขต → <span class="font-semibold">หน้างานไม่ควรเป็นเจ้าของ</span></li>
-                        <li>ถ้า CDE ถูกบันทึกโดยหน้างานภายใต้เขต/ภาค แต่เขต/ภาคไม่มีอำนาจสั่งการข้ามเขต/ภาค → <span class="font-semibold">เขต/ภาคไม่ควรเป็นเจ้าของ</span></li>
-                        <li>ถ้าอำนาจการควบคุมและสั่งการอยู่ที่ส่วนกลาง → <span class="font-semibold">หน่วยงานส่วนกลางควรเป็นเจ้าของ</span></li>
+                <div class="bg-white p-8 rounded-lg shadow-sm border-l-4 border-purple-500">
+                    <h3 class="text-2xl font-bold text-gray-800 mb-4">Data Quality in Flow (การควบคุมคุณภาพระหว่างการใช้งานจริง):</h3>
+                    <p class="text-gray-600 mb-4"><span class="font-semibold">แก่น</span>: เป็นแนวคิดที่มุ่งเน้นการ <span class="font-semibold">ดูแลและควบคุมคุณภาพข้อมูลที่เกิดขึ้นจริง</span> ระหว่างการปฏิบัติงานประจำวัน รวมถึงการจัดการกับ <span class="font-semibold">ข้อมูลที่กำลังไหลเวียนอยู่ในระบบ</span> และบทบาทของผู้ใช้งานโดยตรง</p>
+                    <p class="text-gray-600 mb-4"><span class="font-semibold">บทบาทหลัก</span>: หน่วยงานเจ้าของข้อมูลและกระบวนการ และผู้เกี่ยวข้องกับข้อมูลในกระบวนการทั้งหมด (Data & Process Owning Unit) เป็นผู้รับผิดชอบการดำเนินการตามแนวทางนี้ เพื่อจัดการกับคุณภาพข้อมูลในระหว่างที่ข้อมูลถูกสร้าง, ประมวลผล, หรือใช้งาน</p>
+                    <p class="text-gray-600"><span class="font-semibold">ตัวอย่างการประยุกต์ใช้</span>: การเน้นให้ <span class="font-semibold">ผู้ปฏิบัติงาน (Data Operator)</span> มีความระมัดระวังในการ Key ข้อมูลเข้าระบบให้ถูกต้อง เพื่อลด Human Error ที่ระบบไม่สามารถ Validate ได้</p>
+                </div>
+            </div>
+
+            <div class="text-center mb-8">
+                <p class="text-gray-600 mb-4">**การทำงานร่วมกัน**: ทั้งสองแนวคิด Data Quality by Design และ Data Quality in Flow จะต้องถูกนำมาใช้และบูรณาการเข้าด้วยกันในทุกๆ สถานการณ์ของการจัดการคุณภาพข้อมูล ไม่ว่าจะเป็นการแก้ไขปัญหาเชิงรับ (Reactive) ที่เกิดขึ้นแล้ว หรือการป้องกันปัญหาเชิงป้องกัน (Preventive) ที่ยังไม่เกิด โดยทั้งสองแนวคิดนี้เป็น "วิธีคิด" และ "แนวทางปฏิบัติ" ที่เสริมซึ่งกันและกัน</p>
+                <p class="text-gray-600 italic">**📖 ที่มา : DAMA International. DAMA-DMBOK: Data Management Body of Knowledge (2nd Edition). Technics Publications, 2017.**</p>
+            </div>
+
+            <div class="mt-16">
+                <div class="text-center mb-12">
+                    <h2 class="text-3xl font-bold text-gray-800">💡 การแก้ไขปัญหาตามแนวคิด: Data Quality by Design และ Data Quality in Flow</h2>
+                    <p class="mt-2 text-gray-600">ไม่ว่าปัญหาจะมาในรูปแบบ Reactive หรือ Preventive เรามี <span class="font-semibold">สองแนวคิดหลัก</span> ในการจัดการและแก้ไขปัญหาคุณภาพข้อมูล ซึ่งแต่ละแนวคิดก็จะมี "วิธีการแก้ไขปัญหา" ที่แตกต่างกันออกไป และต้องทำงานร่วมกันเสมอ</p>
+                </div>
+
+                <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 items-start">
+                    <div>
+                        <div class="bg-blue-50 p-6 rounded-xl mb-4 border-blue-200">
+                            <h3 class="font-bold text-xl text-blue-700 mb-4">Data Quality by Design (การสร้างคุณภาพตั้งแต่การออกแบบ):</h3>
+                            <p class="text-gray-600 mb-4"><span class="font-semibold">แก่นแนวคิด</span>: มุ่งเน้นการ <span class="font-semibold">ป้องกันปัญหาที่ต้นทางในระดับโครงสร้างและกระบวนการ</span> โดยการคิดและฝังกลไกควบคุมคุณภาพเข้าไปใน <span class="font-semibold">การออกแบบระบบงาน, กระบวนการทางธุรกิจ, และโครงสร้างข้อมูล</span> ตั้งแต่เริ่มต้น หรือเมื่อมีการปรับปรุง</p>
+                            <h4 class="font-semibold text-gray-700 mb-2">วิธีการแก้ไขปัญหาหลัก:</h4>
+                            <ul class="list-disc list-inside text-gray-600 space-y-2">
+                                <li>การกำหนดมาตรฐานข้อมูล (Data Standardization)</li>
+                                <li>การออกแบบระบบที่มีกลไกตรวจสอบอัตโนมัติ (Automated Validation & Controls)</li>
+                                <li>การออกแบบกระบวนการที่ชัดเจนและมีคุณภาพในตัว (Process Re-engineering for Quality)</li>
+                                <li>การออกแบบโครงสร้างข้อมูลที่เหมาะสม (Data Model Design)</li>
+                                <li>การวางระบบ Log และ Audit Trail (Logging & Audit Trail)</li>
+                                <li>การฝังกลไก Data Cleansing เข้ากับกระบวนการ (Integrated Cleansing in Workflow)</li>
+                                <li>การฝึกอบรมและสร้างความเข้าใจในการออกแบบคุณภาพข้อมูล (Training & Design Comprehension)</li>
+                            </ul>
+                            <h4 class="font-semibold text-gray-700 mt-4 mb-2">ตัวอย่าง (การนำวิธีแก้ไปใช้):</h4>
+                            <p class="text-gray-600 mb-2"><span class="font-semibold">จากปัญหา Reactive</span>: เมื่อพบปัญหาว่า ชื่อลูกค้าสะกดผิดบ่อยมาก (ปัญหาเชิงรับ) การแก้ไขด้วย Data Quality by Design คือการ <span class="font-semibold">ปรับปรุงหน้าจอบันทึกข้อมูล (UI) ในระบบ</span> ให้มี <span class="font-semibold">การตรวจสอบความถูกต้องอัตโนมัติ (Validation Rules)</span> เช่น บังคับให้กรอกชื่อเป็นภาษาไทยเท่านั้น, หรือมีการตรวจสอบกับฐานข้อมูลชื่อมาตรฐานที่อนุมัติไว้ก่อนที่จะบันทึก ทำให้ไม่สามารถบันทึกข้อมูลที่สะกดผิดได้ตั้งแต่แรก เป็นการแก้ไขที่ต้นเหตุของกระบวนการป้อนข้อมูล</p>
+                            <p class="text-gray-600"><span class="font-semibold">จากปัญหา Preventive</span>: ก่อนจะพัฒนาระบบเก็บข้อมูลมิเตอร์ไฟฟ้าใหม่ (เป็นการป้องกัน) เรากำหนดให้รหัสมิเตอร์ต้องมี <span class="font-semibold">รูปแบบที่ชัดเจน</span> เช่น ขึ้นต้นด้วยตัวอักษร 2 ตัว ตามด้วยตัวเลข 8 หลัก และระบบจะไม่อนุญาตให้บันทึกถ้าไม่ตรงตามรูปแบบนี้</p>
+                        </div>
+                    </div>
+                    <div>
+                        <div class="bg-purple-50 p-6 rounded-xl border-purple-200">
+                            <h3 class="font-bold text-xl text-purple-700 mb-4">Data Quality in Flow (การควบคุมคุณภาพระหว่างการใช้งานจริง):</h3>
+                            <p class="text-gray-600 mb-4"><span class="font-semibold">แก่นแนวคิด</span>: มุ่งเน้นการ <span class="font-semibold">ดูแลและควบคุมคุณภาพข้อมูลที่เกิดขึ้นระหว่างการปฏิบัติงานประจำวัน</span> รวมถึงการจัดการกับ <span class="font-semibold">ข้อมูลที่กำลังไหลเวียนอยู่ในระบบ</span> และบทบาทของผู้ใช้งานโดยตรง</p>
+                            <h4 class="font-semibold text-gray-700 mb-2">วิธีการแก้ไขปัญหาหลัก:</h4>
+                            <ul class="list-disc list-inside text-gray-600 space-y-2">
+                                <li>การทำความสะอาดข้อมูล (Data Cleansing/Correction)</li>
+                                <li>การติดตามและวัดผลคุณภาพข้อมูล (Data Quality Monitoring & Reporting)</li>
+                                <li>การสร้างความระมัดระวังในการปฏิบัติงานข้อมูล (Operational Vigilance Training)</li>
+                                <li>การจัดการเหตุการณ์และปัญหาคุณภาพข้อมูล (Data Quality Incident & Problem Management)</li>
+                                <li>การสอบสวนและตรวจสอบย้อนหลังข้อมูล (Data Investigation & Audit)</li>
+                            </ul>
+                            <h4 class="font-semibold text-gray-700 mt-4 mb-2">ตัวอย่าง (การนำวิธีแก้ไปใช้):</h4>
+                            <p class="text-gray-600 mb-2"><span class="font-semibold">จากปัญหา Reactive</span>: สมมติว่าพบปัญหาว่า ชื่อลูกค้า "สมชาย" ถูกพิมพ์ผิดเป็น "สมชาติ" ในระบบบ่อยครั้ง ซึ่งระบบอาจ Validate ไม่ได้ว่าชื่อนี้ผิดเพราะมันเป็นคำที่ถูกต้อง (แต่ชื่อผิดคน) การแก้ไขด้วย Data Quality in Flow คือการ <span class="font-semibold">ฝึกอบรมและสร้างความตระหนัก</span> ให้กับ<span class="font-semibold">ผู้ปฏิบัติงาน (Data Operator)</span> เน้นย้ำความสำคัญของการ Key ข้อมูลอย่างรอบคอบและถูกต้องมากขึ้น รวมถึงการสร้างวัฒนธรรมการตรวจสอบข้อมูลด้วยสายตาตนเองก่อนบันทึก</p>
+                            <p class="text-gray-600 mb-2"><span class="font-semibold">จากปัญหา Reactive</span>: การกำหนดให้มีการ <span class="font-semibold">สแกนและทำความสะอาดข้อมูลลูกค้าที่ซ้ำซ้อนในฐานข้อมูลเป็นประจำทุกเดือน</span> โดยใช้ Script หรือเครื่องมือเฉพาะทาง เพื่อรวมหรือลบข้อมูลที่ซ้ำกัน เป็นการจัดการข้อมูลที่เกิดขึ้นแล้วและอยู่ในระบบ</p>
+                            <p class="text-gray-600"><span class="font-semibold">จากปัญหา Preventive</span>: แม้จะมีการออกแบบระบบใหม่ด้วย Data Quality by Design แล้ว แต่ก็ต้องมีการ <span class="font-semibold">ติดตามประสิทธิภาพของกฎ Validation และคุณภาพข้อมูลที่เกิดขึ้นจริง (Data Quality in Flow) ผ่าน Dashboard อย่างต่อเนื่อง</span> เพื่อให้มั่นใจว่าการออกแบบนั้นใช้งานได้ผลจริง และตรวจจับปัญหาที่อาจหลุดรอดไปได้</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="text-center mt-8">
+                    <p class="text-gray-600 mb-4">ไม่ว่าปัญหาจะมาในรูปแบบ Reactive ที่ต้องแก้ไขเร่งด่วน หรือ Preventive ที่ต้องการการป้องกันล่วงหน้า ทั้งแนวคิด Data Quality by Design และ Data Quality in Flow ต้องถูกนำมาประยุกต์ใช้ <span class="font-semibold">ควบคู่กันเสมอ</span></p>
+                    <ul class="list-disc list-inside text-gray-600 space-y-1 mb-4 inline-block text-left">
+                        <li><span class="font-semibold">Data Quality by Design</span> สร้างรากฐานป้องกันปัญหาในระดับโครงสร้างและกระบวนการ</li>
+                        <li><span class="font-semibold">Data Quality in Flow</span> จัดการและควบคุมคุณภาพข้อมูลที่เกิดขึ้นจริงจากการดำเนินงานของคนและระบบ</li>
+                    </ul>
+                    <p class="text-gray-600">การผสมผสานสองแนวคิดนี้อย่างชาญฉลาด จะเป็นกุญแจสำคัญที่ทำให้ กฟภ. มีข้อมูลที่มีคุณภาพสูงอย่างยั่งยืน</p>
+                </div>
+            </div>
+        </section>
+
+        <section id="workflow" class="py-16 bg-white rounded-2xl shadow-md p-6 md:p-10">
+            <div class="text-center mb-12">
+                <h2 class="text-3xl font-bold text-gray-800">Workflow การบริหารจัดการคุณภาพข้อมูล</h2>
+                <p class="mt-2 text-gray-600">กระบวนการทำงานที่เป็นระบบเพื่อจัดการคุณภาพข้อมูลอย่างมีประสิทธิภาพ</p>
+            </div>
+            <div id="workflow-diagram" class="flex flex-col md:flex-row items-center justify-center space-y-4 md:space-y-0 md:space-x-4 mb-8">
+            </div>
+            <div id="workflow-details-container" class="mt-8 bg-gray-50 p-6 rounded-lg min-h-[150px]">
+            </div>
+        </section>
+
+        <section id="checklist" class="py-16">
+            <div class="text-center mb-12">
+                <h2 class="text-3xl font-bold text-gray-800">✅ Checklist การประเมินและแก้ไขปัญหาคุณภาพข้อมูลสำหรับหน่วยงานเจ้าของข้อมูลและกระบวนการ</h2>
+                <p class="mt-2 text-gray-600">ใช้ Checklist นี้เพื่อประเมินสถานะคุณภาพข้อมูลของหน่วยงาน และระบุกิจกรรมจาก Workflow การบริหารจัดการคุณภาพข้อมูลที่ควรดำเนินการ เพื่อแก้ไขและป้องกันปัญหาอย่างยั่งยืน</p>
+            </div>
+
+            <div class="bg-white p-8 rounded-lg shadow-sm max-w-4xl mx-auto">
+                <h3 class="text-2xl font-bold text-gray-800 mb-6">ส่วนที่ 1: การระบุประเภทและลักษณะปัญหาคุณภาพข้อมูล (What Problems Are You Facing?)</h3>
+                <p class="text-gray-600 mb-4">โปรดทำเครื่องหมาย ($\checkmark$) ในช่องที่ตรงกับสถานการณ์ที่หน่วยงานของท่านกำลังเผชิญอยู่</p>
+
+                <div class="mb-8">
+                    <h4 class="font-bold text-xl text-red-700 mb-4">A. ปัญหาเชิงรับ (Reactive Data Quality Issues):</h4>
+                    <div class="space-y-2 text-gray-700">
+                        <div class="checkbox-item"><input type="checkbox" class="form-checkbox h-5 w-5 text-blue-600 rounded"> ข้อมูลผิดพลาด/ไม่ถูกต้องบ่อยครั้ง (Accuracy) เช่น ชื่อสะกดผิด, ตัวเลขผิดพลาด</div>
+                        <div class="checkbox-item"><input type="checkbox" class="form-checkbox h-5 w-5 text-blue-600 rounded"> ข้อมูลไม่ครบถ้วน/ขาดหาย (Completeness) เช่น ข้อมูลลูกค้าบางส่วนไม่ถูกกรอก, ช่องว่างในฐานข้อมูล</div>
+                        <div class="checkbox-item"><input type="checkbox" class="form-checkbox h-5 w-5 text-blue-600 rounded"> ข้อมูลซ้ำซ้อน/ไม่สอดคล้องกัน (Consistency/Uniqueness) เช่น ลูกค้ารายเดียวกันมีหลาย Record, ข้อมูลในระบบต่างกัน</div>
+                        <div class="checkbox-item"><input type="checkbox" class="form-checkbox h-5 w-5 text-blue-600 rounded"> ข้อมูลไม่เป็นปัจจุบัน (Timeliness) เช่น ข้อมูลสถานะการดำเนินงานล่าช้า, ข้อมูลการติดต่อไม่อัปเดต</div>
+                        <div class="checkbox-item"><input type="checkbox" class="form-checkbox h-5 w-5 text-blue-600 rounded"> รายงาน/Dashboard แสดงผลผิดพลาด หรือไม่น่าเชื่อถือ</div>
+                        <div class="checkbox-item"><input type="checkbox" class="form-checkbox h-5 w-5 text-blue-600 rounded"> การดำเนินงานติดขัด/ต้องแก้ไขข้อมูลด้วยมือบ่อยครั้ง ทำให้เสียเวลาและทรัพยากร</div>
+                        <div class="checkbox-item"><input type="checkbox" class="form-checkbox h-5 w-5 text-blue-600 rounded"> การตัดสินใจทางธุรกิจผิดพลาดเนื่องจากข้อมูลที่ใช้ไม่มีคุณภาพ</div>
+                    </div>
+                </div>
+
+                <div class="mb-8">
+                    <h4 class="font-bold text-xl text-green-700 mb-4">B. ปัญหาเชิงป้องกัน (Preventive Data Quality Issues):</h4>
+                    <div class="space-y-2 text-gray-700">
+                        <div class="checkbox-item"><input type="checkbox" class="form-checkbox h-5 w-5 text-blue-600 rounded"> ไม่มีมาตรฐานข้อมูลที่ชัดเจน ทำให้การจัดเก็บหรือใช้งานข้อมูลไม่เป็นไปในทิศทางเดียวกัน</div>
+                        <div class="checkbox-item"><input type="checkbox" class="form-checkbox h-5 w-5 text-blue-600 rounded"> ไม่มีผู้รับผิดชอบข้อมูล (Data Owner) ที่ชัดเจนสำหรับชุดข้อมูลสำคัญ</div>
+                        <div class="checkbox-item"><input type="checkbox" class="form-checkbox h-5 w-5 text-blue-600 rounded"> ระบบ/กระบวนการปัจจุบันไม่มีกลไกตรวจสอบความถูกต้องของข้อมูลตั้งแต่ต้นทาง</div>
+                        <div class="checkbox-item"><input type="checkbox" class="form-checkbox h-5 w-5 text-blue-600 rounded"> ขาดการติดตามและวัดผลคุณภาพข้อมูลอย่างสม่ำเสมอ ทำให้ไม่รู้สถานะคุณภาพข้อมูลที่แท้จริง</div>
+                        <div class="checkbox-item"><input type="checkbox" class="form-checkbox h-5 w-5 text-blue-600 rounded"> ผู้ปฏิบัติงาน (Data Operator) ขาดความตระหนัก/ความเข้าใจในความสำคัญของคุณภาพข้อมูลและวิธีปฏิบัติที่ถูกต้อง</div>
+                    </div>
+                </div>
+
+                <h3 class="text-2xl font-bold text-gray-800 mb-6 mt-12">ส่วนที่ 2: การเชื่อมโยงปัญหากับ Workflow และกิจกรรมที่เกี่ยวข้อง (Which Workflow Activities Can Help?)</h3>
+                <p class="text-gray-600 mb-4">จากปัญหาที่ท่านระบุในส่วนที่ 1 โปรดพิจารณากิจกรรมในแต่ละ Workflow ที่เกี่ยวข้องเพื่อช่วยแก้ไขหรือป้องกันปัญหานั้น ๆ</p>
+
+                <div class="mb-8">
+                    <h4 class="font-bold text-xl text-red-700 mb-4">หากท่านเผชิญกับ "ปัญหาเชิงรับ (Reactive Data Quality Issues)" (ปัญหาเกิดขึ้นแล้ว):</h4>
+                    <div class="space-y-6">
+                        <div>
+                            <p class="font-semibold text-lg text-gray-700">Workflow 1: วิเคราะห์ Use Case (Use Case Analysis)</p>
+                            <p class="text-gray-600 mb-2"><span class="font-semibold">กิจกรรมที่เกี่ยวข้อง:</span></p>
+                            <ul class="list-disc list-inside text-gray-600 space-y-1">
+                                <li>รวบรวมและนำเสนอ Use Case ที่มีปัญหา</li>
+                                <li>ระบุตำแหน่งปัญหาในห่วงโซ่คุณค่าทางธุรกิจ (Business Value Chain Identification)</li>
+                                <li>วิเคราะห์และทำความเข้าใจบริบทของ Use Case</li>
+                                <li>ระบุและจำแนกประเภทของปัญหา (เพื่อยืนยันว่าเป็น Reactive)</li>
+                                <li>กำหนดขอบเขตและเป้าหมายเบื้องต้น พร้อมระบุชุดข้อมูลปัญหา</li>
+                            </ul>
+                            <p class="text-gray-600 mt-2"><span class="font-semibold">เหตุผล:</span> เป็นจุดเริ่มต้นที่สำคัญในการทำความเข้าใจบริบทของปัญหาและกำหนดขอบเขตการแก้ไข</p>
+                        </div>
+                        <div>
+                            <p class="font-semibold text-lg text-gray-700">Workflow 2: กำกับดูแลข้อมูล (Data Governance)</p>
+                            <p class="text-gray-600 mb-2"><span class="font-semibold">กิจกรรมที่เกี่ยวข้อง:</span></p>
+                            <ul class="list-disc list-inside text-gray-600 space-y-1">
+                                <li>เสนอและแต่งตั้งเจ้าของข้อมูล (Data Owner)</li>
+                                <li>กำหนดบทบาทและหน้าที่ความรับผิดชอบ (RACI Matrix)</li>
+                                <li>กำกับดูแล Metadata</li>
+                                <li>กำหนดเกณฑ์การวัดคุณภาพข้อมูล (Data Element Rules)</li>
+                            </ul>
+                            <p class="text-gray-600 mt-2"><span class="font-semibold">เหตุผล:</span> สร้างรากฐานที่จำเป็นสำหรับการแก้ไขปัญหาที่เกิดขึ้นแล้ว และป้องกันการเกิดซ้ำ</p>
+                        </div>
+                        <div>
+                            <p class="font-semibold text-lg text-gray-700">Workflow 3: แก้ไขและทำความสะอาดข้อมูล (Data Correction & Cleansing)</p>
+                            <p class="text-gray-600 mb-2"><span class="font-semibold">กิจกรรมที่เกี่ยวข้อง:</span></p>
+                            <ul class="list-disc list-inside text-gray-600 space-y-1">
+                                <li>ระบุและคัดแยกข้อมูลที่บกพร่อง</li>
+                                <li>สอบสวนรายกรณีที่พบปัญหา</li>
+                                <li>วางแผนและดำเนินการทำความสะอาดข้อมูล</li>
+                                <li>กำหนดรอบการทำความสะอาดข้อมูลเป็นประจำ (Cyclic Data Cleansing)</li>
+                                <li>จัดการเหตุการณ์และปัญหาคุณภาพข้อมูล (Data Quality Incident & Problem Management)</li>
+                                <li>ติดตามและวัดผลการทำความสะอาดข้อมูล</li>
+                            </ul>
+                            <p class="text-gray-600 mt-2"><span class="font-semibold">เหตุผล:</span> เป็นหัวใจหลักในการแก้ไขข้อมูลที่เสียหายไปแล้ว เพื่อให้สามารถนำกลับมาใช้งานได้</p>
+                        </div>
+                        <div>
+                            <p class="font-semibold text-lg text-gray-700">Workflow 4: วิเคราะห์ต้นเหตุและป้องกันปัญหาข้อมูล (Root Cause Analysis & Preventive Measures)</p>
+                            <p class="text-gray-600 mb-2"><span class="font-semibold">กิจกรรมที่เกี่ยวข้อง:</span></p>
+                            <ul class="list-disc list-inside text-gray-600 space-y-1">
+                                <li>รวบรวมข้อมูลและวิเคราะห์ต้นเหตุ (Root Cause Analysis - RCA)</li>
+                                <li>ระบุต้นเหตุและแผนการแก้ไขต้นเหตุ (ทั้ง Data Quality by Design และ Data Quality in Flow)</li>
+                                <li>ดำเนินการแก้ไขต้นเหตุ</li>
+                                <li>ติดตามผลและประเมินผลการแก้ไข</li>
+                            </ul>
+                            <p class="text-gray-600 mt-2"><span class="font-semibold">เหตุผล:</span> เพื่อป้องกันไม่ให้ปัญหาเดิมเกิดขึ้นซ้ำอีกในอนาคต โดยการแก้ไขที่สาเหตุที่แท้จริง</p>
+                        </div>
+                        <div>
+                            <p class="font-semibold text-lg text-gray-700">Workflow 5: ติดตามผลและสร้างความยั่งยืนคุณภาพข้อมูล (Monitoring & DQ Sustainability)</p>
+                            <p class="text-gray-600 mb-2"><span class="font-semibold">กิจกรรมที่เกี่ยวข้อง:</span></p>
+                            <ul class="list-disc list-inside text-gray-600 space-y-1">
+                                <li>ติดตามและรายงานผลการดำเนินงาน (ของกิจกรรมใน Workflow 3 และ 4)</li>
+                                <li>จัดอบรมและสร้างความตระหนักเรื่องคุณภาพข้อมูล</li>
+                                <li>สื่อสารผลลัพธ์และความสำเร็จ</li>
+                            </ul>
+                            <p class="text-gray-600 mt-2"><span class="font-semibold">เหตุผล:</span> เพื่อให้มั่นใจว่าการแก้ไขปัญหาได้ผลจริง และสร้างวัฒนธรรมคุณภาพข้อมูลในระยะยาว</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="mb-8 mt-12">
+                    <h4 class="font-bold text-xl text-green-700 mb-4">หากท่านเผชิญกับ "ปัญหาเชิงป้องกัน (Preventive Data Quality Issues)" (ปัญหาที่คาดการณ์/ยังไม่เกิดขึ้น):</h4>
+                    <div class="space-y-6">
+                        <div>
+                            <p class="font-semibold text-lg text-gray-700">Workflow 1: วิเคราะห์ Use Case (Use Case Analysis)</p>
+                            <p class="text-gray-600 mb-2"><span class="font-semibold">กิจกรรมที่เกี่ยวข้อง:</span></p>
+                            <ul class="list-disc list-inside text-gray-600 space-y-1">
+                                <li>รวบรวมและนำเสนอ Use Case ที่มีปัญหา (หรือความเสี่ยงที่คาดว่าจะเกิดขึ้น)</li>
+                                <li>ระบุตำแหน่งปัญหาในห่วงโซ่คุณค่าทางธุรกิจ (Business Value Chain Identification)</li>
+                                <li>วิเคราะห์และทำความเข้าใจบริบทของ Use Case</li>
+                                <li>ระบุและจำแนกประเภทของปัญหา (เพื่อยืนยันว่าเป็น Preventive)</li>
+                                <li>กำหนดขอบเขตและเป้าหมายเบื้องต้น พร้อมระบุชุดข้อมูลปัญหา</li>
+                            </ul>
+                            <p class="text-gray-600 mt-2"><span class="font-semibold">เหตุผล:</span> เป็นจุดเริ่มต้นในการระบุความเสี่ยงและวางแผนการป้องกัน</p>
+                        </div>
+                        <div>
+                            <p class="font-semibold text-lg text-gray-700">Workflow 2: กำกับดูแลข้อมูล (Data Governance)</p>
+                            <p class="text-gray-600 mb-2"><span class="font-semibold">กิจกรรมที่เกี่ยวข้อง:</span></p>
+                            <ul class="list-disc list-inside text-gray-600 space-y-1">
+                                <li>จัดตั้งโครงสร้างการกำกับดูแลข้อมูล</li>
+                                <li>เสนอและแต่งตั้งเจ้าของข้อมูล (Data Owner)</li>
+                                <li>กำหนดบทบาทและหน้าที่ความรับผิดชอบ (RACI Matrix)</li>
+                                <li>กำกับดูแล Metadata</li>
+                                <li>กำหนดเกณฑ์การวัดคุณภาพข้อมูล (Data Element Rules)</li>
+                            </ul>
+                            <p class="text-gray-600 mt-2"><span class="font-semibold">เหตุผล:</span> สร้างรากฐานและโครงสร้างที่แข็งแกร่งเพื่อป้องกันปัญหาคุณภาพข้อมูลตั้งแต่ต้นทาง</p>
+                        </div>
+                        <div>
+                            <p class="font-semibold text-lg text-gray-700">Workflow 4: วิเคราะห์ต้นเหตุและป้องกันปัญหาข้อมูล (Root Cause Analysis & Preventive Measures)</p>
+                            <p class="text-gray-600 mb-2"><span class="font-semibold">กิจกรรมที่เกี่ยวข้อง:</span></p>
+                            <ul class="list-disc list-inside text-gray-600 space-y-1">
+                                <li>รวบรวมข้อมูลและวิเคราะห์ต้นเหตุ (Root Cause Analysis - RCA) (เพื่อระบุจุดอ่อนในกระบวนการ/ระบบที่อาจก่อให้เกิดปัญหา)</li>
+                                <li>ระบุต้นเหตุและแผนการแก้ไขต้นเหตุ (เน้น Data Quality by Design)</li>
+                                <li>ดำเนินการแก้ไขต้นเหตุ</li>
+                                <li>ติดตามผลและประเมินผลการแก้ไข</li>
+                            </ul>
+                            <p class="text-gray-600 mt-2"><span class="font-semibold">เหตุผล:</span> เป็นหัวใจหลักของการป้องกันปัญหา โดยการแก้ไขที่ต้นตอและออกแบบระบบ/กระบวนการให้มีคุณภาพตั้งแต่แรก</p>
+                        </div>
+                        <div>
+                            <p class="font-semibold text-lg text-gray-700">Workflow 5: ติดตามผลและสร้างความยั่งยืนคุณภาพข้อมูล (Monitoring & DQ Sustainability)</p>
+                            <p class="text-gray-600 mb-2"><span class="font-semibold">กิจกรรมที่เกี่ยวข้อง:</span></p>
+                            <ul class="list-disc list-inside text-gray-600 space-y-1">
+                                <li>พัฒนาและบำรุงรักษา Dashboard/รายงานคุณภาพข้อมูล (เพื่อติดตามประสิทธิภาพของมาตรการป้องกัน)</li>
+                                <li>ติดตามและรายงานผลการดำเนินงาน</li>
+                                <li>จัดอบรมและสร้างความตระหนักเรื่องคุณภาพข้อมูล</li>
+                                <li>สื่อสารผลลัพธ์และความสำเร็จ</li>
+                                <li>ทบทวนและปรับปรุงกระบวนการบริหารจัดการคุณภาพข้อมูล</li>
+                            </ul>
+                            <p class="text-gray-600 mt-2"><span class="font-semibold">เหตุผล:</span> เพื่อให้มั่นใจว่ามาตรการป้องกันได้ผลจริง และรักษาคุณภาพข้อมูลอย่างต่อเนื่องและยั่งยืน</p>
+                        </div>
+                    </div>
+                </div>
+
+                <h3 class="text-2xl font-bold text-gray-800 mb-6 mt-12">ส่วนที่ 3: ข้อแนะนำในการเลือกกิจกรรม (Which Activities Should You Choose?)</h3>
+                
+                <div class="mb-6">
+                    <h4 class="font-bold text-xl text-red-700 mb-4">สำหรับปัญหาเชิงรับ (Reactive Issues):</h4>
+                    <ul class="list-disc list-inside text-gray-700 space-y-2">
+                        <li><span class="font-semibold">เริ่มต้นที่ Workflow 1 เสมอ</span> เพื่อให้เข้าใจบริบทและขอบเขตปัญหาอย่างถ่องแท้</li>
+                        <li><span class="font-semibold">ดำเนินการ Workflow 3 อย่างเร่งด่วน</span> เพื่อบรรเทาผลกระทบทางธุรกิจที่เกิดขึ้นแล้ว</li>
+                        <li><span class="font-semibold">ควบคู่ไปกับ Workflow 4 อย่างใกล้ชิด</span> เพื่อหาสาเหตุที่แท้จริงและป้องกันการเกิดซ้ำในระยะยาว</li>
+                        <li><span class="font-semibold">ใช้ Workflow 2</span> เพื่อสร้างรากฐานการกำกับดูแลที่จำเป็นต่อการแก้ไขและป้องกันในระยะยาว</li>
+                        <li><span class="font-semibold">ใช้ Workflow 5</span> เพื่อติดตามผลการแก้ไขและสร้างความยั่งยืนของคุณภาพข้อมูล</li>
                     </ul>
                 </div>
-                <div class="card p-6 rounded-xl shadow-sm">
-                    <h3 class="font-bold text-lg text-[#8D80A3] mb-2">3. หน้าที่ของเจ้าของ CDE</h3>
-                    <ul class="list-disc list-inside space-y-2 text-gray-600">
-                        <li>เป็นผู้ออกแบบและกำหนดกระบวนการทำงานกลาง, วางมาตรฐานการบันทึก, แก้ไข และควบคุมคุณภาพข้อมูล</li>
-                        <li>กำกับดูแล, ควบคุม, และสั่งการหน่วยงานใน Value Chain ให้ปฏิบัติตามมาตรฐานคุณภาพข้อมูล</li>
-                        <li>กำหนดกระบวนการแก้ไขปัญหาเมื่อเกิดข้อมูลผิดพลาด และเป็นผู้ วิเคราะห์ต้นเหตุเพื่อกำหนดแนวทางแก้ไขที่เป็นมาตรฐานเดียวกัน</li>
+
+                <div>
+                    <h4 class="font-bold text-xl text-green-700 mb-4">สำหรับปัญหาเชิงป้องกัน (Preventive Data Quality Issues):</h4>
+                    <ul class="list-disc list-inside text-gray-700 space-y-2">
+                        <li><span class="font-semibold">เริ่มต้นที่ Workflow 1</span> เพื่อระบุความเสี่ยงและวางแผนการป้องกัน</li>
+                        <li><span class="font-semibold">ให้ความสำคัญกับ Workflow 2 และ Workflow 4 เป็นหลัก</span> เพื่อสร้างเกราะป้องกันที่แข็งแกร่งและแก้ไขที่ต้นเหตุของปัญหาตั้งแต่ก่อนที่จะเกิดขึ้น</li>
+                        <li><span class="font-semibold">ใช้ Workflow 5</span> เพื่อติดตามผลและรักษาคุณภาพข้อมูลอย่างต่อเนื่องและยั่งยืน</li>
+                        <li>Workflow 3 (การทำความสะอาดข้อมูล) อาจไม่จำเป็นต้องทำในทันทีหากยังไม่มีข้อมูลที่ "เสีย" แล้ว แต่ควรเตรียมพร้อมสำหรับกรณีที่อาจเกิดขึ้นในอนาคต</li>
                     </ul>
                 </div>
-             </div>
+            </div>
         </section>
 
     </main>
-
-    <footer class="bg-[#A68B74] text-white text-center p-4 mt-12">
-        <p>จัดทำขึ้นโดยอ้างอิงจากเอกสาร Data Quality Framework v.9</p>
+    
+    <footer class="bg-gray-800 text-white mt-16">
+        <div class="container mx-auto px-6 py-4 text-center text-sm">
+            <p>Interactive Data Quality Framework Application | ออกแบบและพัฒนาเพื่อการเรียนรู้และทำความเข้าใจที่ง่ายขึ้น</p>
+        </div>
     </footer>
 
-<script>
-document.addEventListener('DOMContentLoaded', function () {
-    const workflowData = {
-        '1': {
-            title: 'Workflow 1: วิเคราะห์ Use Case และต้นเหตุปัญหา',
-            duration: 'ระยะเวลา: 2 เดือน',
-            content: `
-                <p class="mb-4 text-gray-600">ขั้นตอนนี้เป็นรากฐานที่สำคัญที่สุด คือการทำความเข้าใจปัญหาและบริบทของข้อมูลให้ลึกซึ้ง เพื่อกำหนดทิศทางการดำเนินงานที่ถูกต้อง</p>
-                <h4 class="font-bold mb-2 text-lg text-[#8D80A3]">กิจกรรมหลัก:</h4>
-                <ul class="list-disc list-inside space-y-2 mb-4 text-gray-700">
-                    <li>วิเคราะห์ Use Case และบริบท (Analyze Use Case and Context)</li>
-                    <li>วิเคราะห์ต้นเหตุเบื้องต้นของปัญหา (Initial Root Cause Analysis)</li>
-                    <li>ระบุข้อมูลที่มีปัญหา (Identify Problematic CDEs) และกำหนด KPI</li>
-                </ul>
-                <h4 class="font-bold mb-2 text-lg text-[#8D80A3]">บทบาทและความรับผิดชอบ:</h4>
-                <div class="grid md:grid-cols-2 gap-4">
-                    <div><span class="font-semibold">เจ้าของ Use Case:</span> นำเสนอ Use Case, ให้ข้อมูล, ร่วมวิเคราะห์ปัญหา, และระบุ CDEs ที่มีปัญหาในกระบวนการของตน</div>
-                    <div><span class="font-semibold">กจข. (ทีมกำกับดูแล):</span> สนับสนุนการวิเคราะห์ และกำหนดกรอบแนวทางในการระบุ CDEs</div>
-                </div>
-            `
-        },
-        '2': {
-            title: 'Workflow 2: กำกับดูแลและกำหนดมาตรฐานข้อมูล',
-            duration: 'ระยะเวลา: 1 เดือน',
-            content: `
-                <p class="mb-4 text-gray-600">หลังจากเข้าใจปัญหาแล้ว ขั้นตอนนี้จะมุ่งเน้นการสร้างโครงสร้างการกำกับดูแลและกำหนดมาตรฐานข้อมูลเพื่อให้ทุกคนทำงานบนมาตรฐานเดียวกัน</p>
-                <h4 class="font-bold mb-2 text-lg text-[#8D80A3]">กิจกรรมหลัก:</h4>
-                <ul class="list-disc list-inside space-y-2 mb-4 text-gray-700">
-                    <li>กำหนดเจ้าของข้อมูล (Data Ownership Assignment)</li>
-                    <li>จัดทำและกำหนดมาตรฐานข้อมูลผ่าน Workshop</li>
-                    <li>จัดทำ Template/Checklist สำหรับตรวจสอบข้อมูล</li>
-                    <li>กำกับดูแลการใช้ CDEs และชุดข้อมูลที่เกี่ยวข้อง</li>
-                </ul>
-                <h4 class="font-bold mb-2 text-lg text-[#8D80A3]">บทบาทและความรับผิดชอบ:</h4>
-                <div class="grid md:grid-cols-2 gap-4">
-                    <div><span class="font-semibold">เจ้าของ Use Case:</span> กำหนด RACI, เสนอชื่อเจ้าของข้อมูล, เข้าร่วม Workshop, ให้ Feedback และปฏิบัติตามนโยบาย</div>
-                    <div><span class="font-semibold">กจข. (ทีมกำกับดูแล):</span> จัดตั้งโครงสร้าง, กำหนดนโยบาย, จัด Workshop, อนุมัติมาตรฐาน, และพัฒนากลไกกำกับดูแลภาพรวม</div>
-                </div>
-            `
-        },
-        '3': {
-            title: 'Workflow 3: ออกแบบ ติดตั้ง ตรวจสอบ และแก้ไขข้อมูล',
-            duration: 'ระยะเวลา: 4–6 เดือน',
-            content: `
-                <p class="mb-4 text-gray-600">นำมาตรฐานที่กำหนดไว้มาทำให้เกิดขึ้นจริงในระบบงาน พร้อมทั้งสร้างกลไกการตรวจสอบ แก้ไข และติดตามคุณภาพข้อมูลอย่างเป็นระบบ</p>
-                <h4 class="font-bold mb-2 text-lg text-[#8D80A3]">กิจกรรมหลัก:</h4>
-                <ul class="list-disc list-inside space-y-2 mb-4 text-gray-700">
-                    <li>กำหนดกฎการตรวจสอบข้อมูล (Validation Rules)</li>
-                    <li>ติดตั้งกฎและระบบติดตาม (Log & Audit Trail) ในระบบงาน</li>
-                    <li>ตรวจสอบประสิทธิภาพของกฎที่ติดตั้ง</li>
-                    <li>แก้ไขข้อมูลที่ผิดพลาด (Data Correction)</li>
-                    <li>กำหนดรอบการทำความสะอาดข้อมูล (Cleansing Cycle)</li>
-                </ul>
-                 <h4 class="font-bold mb-2 text-lg text-[#8D80A3]">บทบาทและความรับผิดชอบ:</h4>
-                <div class="grid md:grid-cols-2 gap-4">
-                    <div><span class="font-semibold">เจ้าของ Use Case:</span> กำหนดและติดตั้งกฎ, แก้ไขข้อมูล, วางแผนรอบ Cleansing</div>
-                    <div><span class="font-semibold">กจข./กมม.:</span> ให้คำแนะนำด้านการกำหนดกฎ, มาตรฐาน Log, เกณฑ์วัดคุณภาพ และติดตามผล</div>
-                </div>
-            `
-        },
-        '4': {
-            title: 'Workflow 4: แก้ไขต้นเหตุและปรับปรุงกระบวนการ',
-            duration: 'ระยะเวลา: 6–8 เดือน',
-            content: `
-                <p class="mb-4 text-gray-600">เป็นขั้นตอนที่สำคัญที่สุดเพื่อความยั่งยืน คือการแก้ไขปัญหาที่ต้นตอ เพื่อไม่ให้ข้อมูลที่ไม่มีคุณภาพกลับเข้ามาในระบบอีก</p>
-                <h4 class="font-bold mb-2 text-lg text-[#8D80A3]">กิจกรรมหลัก:</h4>
-                <ul class="list-disc list-inside space-y-2 mb-4 text-gray-700">
-                    <li>รวบรวมข้อมูลและวิเคราะห์ต้นเหตุของปัญหาอย่างละเอียด</li>
-                    <li>กำหนดแผนและดำเนินการแก้ไขต้นเหตุในระบบหรือกระบวนการทำงาน</li>
-                    <li>ติดตามและประเมินผลการแก้ไขเพื่อให้แน่ใจว่าได้ผลตามเป้าหมาย</li>
-                </ul>
-                 <h4 class="font-bold mb-2 text-lg text-[#8D80A3]">บทบาทและความรับผิดชอบ:</h4>
-                <div class="grid md:grid-cols-2 gap-4">
-                     <div><span class="font-semibold">เจ้าของ Use Case:</span> รวบรวมข้อมูล, ร่วมวิเคราะห์, วางแผน, และดำเนินการแก้ไขต้นเหตุในกระบวนการของตนเอง</div>
-                     <div><span class="font-semibold">กจข./กมม.:</span> สนับสนุนเครื่องมือ, ให้คำแนะนำ, ติดตามความคืบหน้า และร่วมประเมินผล</div>
-                </div>
-            `
-        },
-        '5': {
-            title: 'Workflow 5: การติดตามผลและสร้างวัฒนธรรมคุณภาพข้อมูล',
-            duration: 'ระยะเวลา: 3 เดือน',
-            content: `
-                <p class="mb-4 text-gray-600">ขั้นตอนสุดท้ายคือการสร้างกลไกการติดตามผลอย่างต่อเนื่องและปลูกฝังวัฒนธรรมคุณภาพข้อมูลให้กลายเป็นส่วนหนึ่งของ DNA องค์กร</p>
-                <h4 class="font-bold mb-2 text-lg text-[#8D80A3]">กิจกรรมหลัก:</h4>
-                <ul class="list-disc list-inside space-y-2 mb-4 text-gray-700">
-                    <li>จัดอบรมและสร้างความตระหนักรู้เรื่องคุณภาพข้อมูล</li>
-                    <li>ติดตามและรายงานผลการดำเนินงานผ่าน Dashboard หรือรายงาน</li>
-                    <li>สื่อสารผลลัพธ์และความสำเร็จให้ผู้บริหารและทีมงานทราบอย่างต่อเนื่อง</li>
-                </ul>
-                 <h4 class="font-bold mb-2 text-lg text-[#8D80A3]">บทบาทและความรับผิดชอบ:</h4>
-                <div class="grid md:grid-cols-2 gap-4">
-                     <div><span class="font-semibold">เจ้าของ Use Case:</span> เข้าร่วมอบรม, ส่งเสริมทีมงาน, และจัดส่งรายงานผลตาม KPI</div>
-                     <div><span class="font-semibold">กจข. (ทีมกำกับดูแล):</span> จัดโปรแกรมอบรม, สร้างความตระหนักรู้, และรวบรวมข้อมูลเพื่อจัดทำ Dashboard ภาพรวมขององค์กร</div>
-                </div>
-            `
-        }
-    };
 
-    const workflowSelector = document.getElementById('workflow-selector');
-    const workflowDetailsContainer = document.getElementById('workflow-details');
-    const workflowSteps = document.querySelectorAll('.workflow-step');
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            
+            const principlesData = [
+                { id: 1, icon: '🏛️', title: 'การกำหนดมาตรฐานข้อมูล', description: 'กำหนดมาตรฐานกลางเพื่อให้ข้อมูลใช้งานร่วมกันได้อย่างมีประสิทธิภาพ (สนับสนุน Data Quality by Design)' },
+                { id: 2, icon: '👤', title: 'การกำหนดเจ้าของข้อมูล', description: 'ระบุผู้รับผิดชอบข้อมูลและกระบวนการที่เกี่ยวข้องให้ชัดเจน (สนับสนุน Data Quality by Design และ Data Quality in Flow)' },
+                { id: 3, icon: '🤖', title: 'การมีระบบตรวจสอบอัตโนมัติ', description: 'ใช้ระบบช่วยตรวจสอบความถูกต้องของข้อมูลตั้งแต่ต้นทาง (เป็นกลไกสำคัญของ Data Quality by Design)' },
+                { id: 4, icon: '�', title: 'การทำความสะอาดข้อมูลเป็นวัฏจักร', description: 'กำหนดรอบการตรวจและแก้ไขข้อมูลที่เกิดขึ้นแล้วอย่างสม่ำเสมอ (เป็นกลไกสำคัญของ Data Quality in Flow)' },
+                { id: 5, icon: '📜', title: 'การวางระบบ Log และ Audit Trail', description: 'เก็บประวัติการเปลี่ยนแปลงข้อมูลให้สามารถตรวจสอบย้อนหลังได้ (เป็นกลไกสำคัญของ Data Quality by Design)' },
+                { id: 6, icon: '🎓', title: 'การฝึกอบรมและสร้างวัฒนธรรม', description: 'สร้างความเข้าใจและปลูกฝังความสำคัญเรื่องคุณภาพข้อมูล (สำคัญมากต่อความยั่งยืนของทั้ง Data Quality by Design และ Data Quality in Flow)' },
+                { id: 7, icon: '🔗', title: 'การผสาน Cleansing เข้ากับกระบวนการ', description: 'ฝังขั้นตอนควบคุมคุณภาพข้อมูล (ทั้ง Data Quality by Design และ Data Quality in Flow) ไว้ในระบบและงานประจำวัน' },
+            ];
 
-    function updateWorkflowContent(workflowId) {
-        const data = workflowData[workflowId];
-        if (data) {
-            workflowDetailsContainer.innerHTML = `
-                <h3 class="text-2xl font-bold mb-2 text-[#8D80A3]">${data.title}</h3>
-                <p class="font-semibold mb-4 text-gray-500">${data.duration}</p>
-                ${data.content}
-            `;
-            workflowSteps.forEach(step => {
-                step.classList.remove('active');
-                if (step.dataset.workflow === workflowId) {
-                    step.classList.add('active');
+            const workflowData = [
+                { 
+                    id: 1, 
+                    title: 'วิเคราะห์ Use Case', 
+                    duration: '2 เดือน',
+                    details: 'ระบุปัญหาคุณภาพข้อมูลว่าเกิดขึ้นที่จุดใดในห่วงโซ่คุณค่าทางธุรกิจ (Business Value Chain) และเกี่ยวข้องกับข้อมูลชุดใดบ้าง เพื่อเป็นจุดเริ่มต้นในการแก้ไข',
+                    activities: [
+                        'รวบรวมและนำเสนอ Use Case ที่มีปัญหา: หน่วยงานเจ้าของข้อมูลและกระบวนการ (Data & Process Owning Unit) นำเสนอข้อมูลบริบทของ Use Case นั้น ๆ รวมถึงปัญหาคุณภาพข้อมูลที่ตรวจพบ (Reactive) หรือความเสี่ยงที่คาดว่าจะเกิดขึ้น (Preventive) โดยควรพิจารณาเลือก Use Case ที่มีผลกระทบต่อธุรกิจสูง ปัญหาเกิดซ้ำ หรือเกี่ยวข้องกับข้อมูลสำคัญขององค์กร (CDEs)',
+                        'ระบุตำแหน่งปัญหาในห่วงโซ่คุณค่าทางธุรกิจ (Business Value Chain Identification): วิเคราะห์และระบุอย่างชัดเจนว่าปัญหาคุณภาพข้อมูลที่พบนั้นเกิดขึ้นที่ จุดใดของห่วงโซ่คุณค่าทางธุรกิจ และเกี่ยวข้องกับกระบวนการใดบ้าง',
+                        'วิเคราะห์และทำความเข้าใจบริบทของ Use Case: กจข. และ หน่วยงานเจ้าของข้อมูลและกระบวนการ (Data & Process Owning Unit) ทำความเข้าใจขั้นตอนการทำงาน, ระบบที่เกี่ยวข้อง, ข้อมูลหลัก (CDEs) ที่ถูกสร้าง/ใช้งาน, และทิศทางการไหลของข้อมูลใน Use Case นั้น ๆ อย่างละเอียด',
+                        'ระบุและจำแนกประเภทของปัญหา: ระบุว่าปัญหาที่พบเป็น ปัญหาเชิงรับ (Reactive) หรือ ปัญหาเชิงป้องกัน (Preventive)',
+                        'กำหนดขอบเขตและเป้าหมายเบื้องต้น พร้อมระบุชุดข้อมูลปัญหา: ระบุขอบเขตของปัญหาที่ต้องการแก้ไขใน Use Case นั้น ๆ กำหนดเป้าหมายคุณภาพข้อมูล (Data Quality Goals) และตัวชี้วัด (KPIs) เบื้องต้นที่ต้องการบรรลุ รวมถึงระบุชุดข้อมูล (Common Data Elements - CDEs) ที่เป็นปัญหา และต้องได้รับการแก้ไข'
+                    ]
+                },
+                { 
+                    id: 2, 
+                    title: 'กำกับดูแลข้อมูล', 
+                    duration: '1 เดือน',
+                    details: 'กำหนดเจ้าของข้อมูล (Data Owner) และเกณฑ์การวัดคุณภาพข้อมูล (Data Element Rules) ที่ชัดเจนในแต่ละจุดของกระบวนการที่เกี่ยวข้อง เพื่อเป็นรากฐานการควบคุมคุณภาพ',
+                    activities: [
+                        'จัดตั้งโครงสร้างการกำกับดูแลข้อมูล: กจข. จัดตั้งโครงสร้าง, นโยบาย, และกลไกการกำกับดูแลข้อมูล (Data Governance) ในภาพรวมองค์กร',
+                        'เสนอและแต่งตั้งเจ้าของข้อมูล (Data Owner): หน่วยงานเจ้าของข้อมูลและกระบวนการ (Data & Process Owning Unit) เสนอรายชื่อ หน่วยงาน ที่จะเป็น เจ้าของข้อมูล (Data Owner) สำหรับ CDEs ที่เป็นปัญหา ที่ถูกระบุอยู่ใน Workflow 1 โดยพิจารณาจากหน่วยงานที่ได้รับมอบหมายจากผู้บริหารระดับสูงก่อนเป็นลำดับแรก หรือเป็นหน่วยงานที่มีอำนาจในการควบคุมกระบวนการและสั่งการได้',
+                        'กำหนดบทบาทและหน้าที่ความรับผิดชอบ (RACI Matrix): เจ้าของข้อมูลร่วมกับ กจข. กำหนดบทบาทและหน้าที่ความรับผิดชอบ (RACI) ของผู้เกี่ยวข้องทั้งหมดใน Data Value Chain สำหรับ CDEs ที่รับผิดชอบ เช่น A: เจ้าของกระบวนการ, R: ผู้บันทึกข้อมูล, C: หน่วย IT ที่พัฒนาระบบ, I: ผู้บริหารหน่วยงานที่รับข้อมูลปลายทาง',
+                        'กำกับดูแลข้อมูล: เจ้าของข้อมูลร่วมกับ กจข. และผู้เกี่ยวข้อง จัดทำหรือทบทวน Metadata (เช่น คำนิยามข้อมูล, แนวทางปฏิบัติตามวงจรชีวิตข้อมูล (Data Life Cycle), พจนานุกรมข้อมูล (Data Dictionary)) สำหรับ CDEs ที่เกี่ยวข้อง',
+                        'กำหนดเกณฑ์การวัดคุณภาพข้อมูล (Data Element Rules): เจ้าของข้อมูลร่วมกับ กจข. กำหนด เกณฑ์การวัดคุณภาพข้อมูล (เช่น Accuracy, Completeness, Consistency) และกฎเกณฑ์เฉพาะ (Data Quality Rules) สำหรับ CDEs ที่รับผิดชอบอย่างชัดเจน'
+                    ]
+                },
+                { 
+                    id: 3, 
+                    title: 'แก้ไขและทำความสะอาด', 
+                    duration: '4-6 เดือน',
+                    details: 'ดำเนินการแก้ไขและทำความสะอาดข้อมูลคุณภาพต่ำที่เกิดขึ้นแล้วในระบบ เพื่อให้ข้อมูลกลับมาใช้งานได้และน่าเชื่อถือ (แนวคิด Data Quality in Flow)',
+                    activities: [
+                        'แนวคิด: Data Quality in Flow (การควบคุมคุณภาพระหว่างการใช้งานจริง)',
+                        'วัตถุประสงค์ของ Workflow นี้: กิจกรรมในข้อนี้ทั้งหมด จะเป็นเรื่องของการทำแก้ไขข้อมูลเดิม ๆ ที่คุณภาพไม่ดีให้กลับมาดีอีกครั้ง โดยยังไม่สนใจการปรับปรุงกระบวนการสร้างข้อมูลที่ไม่มีคุณภาพซึ่งจะถูกระบุอยู่ใน Workflow 4',
+                        'ระบุและคัดแยกข้อมูลที่บกพร่อง: หน่วยงานเจ้าของข้อมูลและกระบวนการ (Data & Process Owning Unit) หรือ ผู้ปฏิบัติงาน (Data Operator) ใช้รายงานการติดตามคุณภาพข้อมูล หรือการแจ้งปัญหาจากผู้ใช้ เพื่อระบุชุดข้อมูล หรือระเบียนข้อมูลที่มีปัญหา (Data Cleansing/Correction)',
+                        'สอบสวนรายกรณีที่พบปัญหา: ตรวจสอบย้อนหลังข้อมูลโดยใช้ระบบ Log และ Audit Trail (ถ้ามี) เพื่อเข้าใจประวัติการเปลี่ยนแปลงที่ทำให้ข้อมูลบกพร่อง',
+                        'วางแผนและดำเนินการทำความสะอาดข้อมูล: หน่วยงานเจ้าของข้อมูลและกระบวนการ (Data & Process Owning Unit) วางแผนวิธีการและขั้นตอนการแก้ไข/ทำความสะอาดข้อมูลที่มีอยู่แล้วในระบบ โดยอ้างอิงจากเกณฑ์คุณภาพข้อมูลที่กำหนดไว้ แล้วดำเนินการแก้ไข (Data Correction) และทำความสะอาดข้อมูล (Data Cleansing) ตามแผน การดำเนินการนี้อาจทำได้หลายวิธี เช่น การใช้ Script หรือโปรแกรมเฉพาะทาง, การแก้ไขข้อมูลด้วยตนเองโดยผู้ปฏิบัติงาน (Data Operator), หรือการใช้เครื่องมือ Data Quality Tools โดยมีหน่วยงานเจ้าของข้อมูลและกระบวนการเป็นผู้กำกับดูแลและอนุมัติแผน และผู้ปฏิบัติงาน (Data Operator) เป็นผู้ดำเนินการหลักในการแก้ไขข้อมูลรายกรณี หรือดำเนินการตามขั้นตอนที่กำหนดในระบบงานประจำวัน ในบางกรณี หน่วยงาน IT/ผู้พัฒนา อาจเข้ามามีบทบาทในการพัฒนาเครื่องมือหรือปรับปรุงระบบเพื่อรองรับการทำความสะอาดข้อมูลอัตโนมัติ',
+                        'กำหนดรอบการทำความสะอาดข้อมูลเป็นประจำ: หน่วยงานเจ้าของข้อมูลและกระบวนการ (Data & Process Owning Unit) หรือผู้ดูแลข้อมูล กำหนดรอบการทำความสะอาดข้อมูลเป็นวัฏจักร (Cyclic Data Cleansing) สำหรับข้อมูลประเภทที่มักเกิดปัญหาซ้ำซ้อน',
+                        'จัดการเหตุการณ์และปัญหาคุณภาพข้อมูล: เมื่อมีปัญหาคุณภาพข้อมูลเกิดขึ้น ผู้ปฏิบัติงาน (Data Operator) ต้อง แจ้งปัญหาผ่านช่องทางที่กำหนด (Data Quality Incident & Problem Management) และประสานงานกับ หน่วยงานเจ้าของข้อมูลและกระบวนการ/เจ้าของข้อมูล (Data Owner) เพื่อให้มีการตอบสนองและแก้ไขอย่างรวดเร็ว',
+                        'ติดตามและวัดผลการทำความสะอาดข้อมูล: ติดตามและจัดทำรายงานประสิทธิภาพของการทำความสะอาดข้อมูลว่าสามารถปรับปรุงคุณภาพข้อมูลที่บกพร่องให้กลับมาใช้งานได้จริงหรือไม่'
+                    ]
+                },
+                { 
+                    id: 4, 
+                    title: 'วิเคราะห์ต้นเหตุและป้องกัน', 
+                    duration: '6-8 เดือน',
+                    details: 'สืบหาต้นตอที่แท้จริงของปัญหาคุณภาพข้อมูล ซึ่งอาจเกิดจากกระบวนการปัจจุบัน หรือกระบวนการก่อนหน้า โดยไล่ย้อนกลับในกระบวนการ เพื่อนำไปสู่การปรับปรุงแก้ไขที่ต้นเหตุ และป้องกันไม่ให้ข้อมูลคุณภาพต่ำเกิดขึ้นใหม่',
+                    activities: [
+                        'รวบรวมข้อมูลและวิเคราะห์ต้นเหตุ (Root Cause Analysis - RCA): หน่วยงานเจ้าของข้อมูลและกระบวนการ (Data & Process Owning Unit) ร่วมกับ กจข. และผู้เกี่ยวข้องอื่น ๆ รวบรวมข้อมูล, สัมภาษณ์ผู้ปฏิบัติงาน (Data Operator), และใช้หลักฐานเชิงข้อมูล (เช่น Log, Audit Trail, Data Profiling Reports) เพื่อสืบหาต้นตอที่แท้จริงของปัญหาคุณภาพข้อมูล โดยไล่ย้อนกลับใน Value Chain ไปจนถึงจุดที่ปัญหาเริ่มต้น ซึ่งอาจเกิดจากกระบวนการปัจจุบัน ณ จุดที่พบ หรือกระบวนการก่อนหน้า โดยมุ่งเน้นการวิเคราะห์เชิงระบบมากกว่าการแก้เฉพาะรายกรณี',
+                        'เน้น: การวิเคราะห์ต้องมุ่งเน้นไปที่การ แก้ไข "กระบวนการ/ระบบ" ที่เป็นต้นเหตุ มากกว่าการ "หาคนผิด"',
+                        'ระบุต้นเหตุและแผนการแก้ไขต้นเหตุ: จากผลการวิเคราะห์ RCA หน่วยงานเจ้าของข้อมูลและกระบวนการ (Data & Process Owning Unit) และ กจข. ร่วมกันระบุต้นเหตุที่ชัดเจน และกำหนดแผนแก้ไขต้นเหตุ โดยนำวิธีการแก้ไขตามแนวคิด Data Quality by Design และ Data Quality in Flow มาประยุกต์ใช้ ซึ่งจะเลือกใช้ตามความเหมาะสมของแต่ละกรณี ไม่จำเป็นต้องครบทุกข้อ:',
+                        'จากแนวคิด Data Quality by Design (การสร้างคุณภาพตั้งแต่การออกแบบ):',
+                        '  - การกำหนดมาตรฐานข้อมูล (Data Standardization): เช่น ปรับปรุงมาตรฐานหากต้นเหตุคือขาดมาตรฐาน',
+                        '  - การออกแบบระบบที่มีกลไกตรวจสอบอัตโนมัติ (Automated Validation & Controls): เช่น เพิ่มกฎ Validation ในระบบ หากต้นเหตุคือขาดการตรวจสอบ',
+                        '  - การออกแบบกระบวนการที่ชัดเจนและมีคุณภาพในตัว (Process Re-engineering for Quality): เช่น ปรับโครงสร้างกระบวนการ หากต้นเหตุคือกะบวนการไม่รัดกุม',
+                        '  - การออกแบบโครงสร้างข้อมูลที่เหมาะสม (Data Model Design): เช่น ปรับแก้โครงสร้างฐานข้อมูล หากต้นเหตุคือการออกแบบที่ไม่รองรับคุณภาพ',
+                        '  - การวางระบบ Log และ Audit Trail (Logging & Audit Trail): เช่น เพิ่มการเก็บ Log หากต้นเหตุคือขาดความสามารถในการตรวจสอบย้อนหลัง',
+                        '  - การฝังกลไก Data Cleansing เข้ากับกระบวนการ (Integrated Cleansing in Workflow): เช่น ฝังกระบวนการทำความสะอาดอัตโนมัติใน Workflow หากต้นเหตุคือข้อมูลคุณภาพต่ำมักไหลผ่าน',
+                        '  - การฝึกอบรมและสร้างความเข้าใจในการออกแบบคุณภาพข้อมูล (Training & Design Comprehension): เช่น ฝึกอบรมทีมออกแบบ/พัฒนา หากต้นเหตุคือขาดความเข้าใจในการสร้างคุณภาพตั้งแต่ต้น',
+                        'จากแนวคิด Data Quality in Flow (การควบคุมคุณภาพระหว่างการใช้งานจริง):',
+                        '  - การทำความสะอาดข้อมูล (Data Cleansing/Correction): หากพบว่าจำเป็นต้องมีกระบวนการ Cleansing ถาวรที่ต้นทางเพื่อป้องกันปัญหา',
+                        '  - การติดตามและวัดผลคุณภาพข้อมูล (Data Quality Monitoring & Reporting): หากต้องปรับปรุงกลไกการ Monitoring เพื่อจับปัญหาได้เร็วขึ้นในอนาคต',
+                        '  - การสร้างความระมัดระวังในการปฏิบัติงานข้อมูล (Operational Vigilance Training): เช่น จัดอบรมและสร้างความตระหนักให้ผู้ปฏิบัติงาน (Data Operator) หากต้นเหตุคือ Human Error ที่ระบบไม่สามารถป้องกันได้ทั้งหมด',
+                        '  - การจัดการเหตุการณ์และปัญหาคุณภาพข้อมูล (Data Quality Incident & Problem Management): หากกระบวนการ Incident Management เองต้องปรับปรุงเพื่อป้องกันปัญหาซ้ำ',
+                        '  - การสอบสวนและตรวจสอบย้อนหลังข้อมูล (Data Investigation & Audit): หากต้องปรับปรุงกระบวนการสืบค้นเพื่อทำให้การหาต้นตอในอนาคตมีประสิทธิภาพมากขึ้น',
+                        'ดำเนินการแก้ไขต้นเหตุ: หน่วยงานเจ้าของข้อมูลและกระบวนการ (Data & Process Owning Unit) ดำเนินการตามแผนแก้ไขที่กำหนดในระบบหรือกระบวนการของตนเอง (อาจร่วมกับหน่วยงาน IT/พัฒนา หากเป็นการปรับปรุงระบบ)',
+                        'ติดตามผลและประเมินผลการแก้ไข: ติดตามและประเมินผลหลังการแก้ไขต้นเหตุ เพื่อให้แน่ใจว่าปัญหาได้รับการแก้ไขจริงและไม่กลับมาเกิดซ้ำ'
+                    ]
+                },
+                { 
+                    id: 5, 
+                    title: 'ติดตามและสร้างความยั่งยืน', 
+                    duration: '3 เดือน',
+                    details: 'ติดตามและประเมินผลคุณภาพข้อมูลอย่างต่อเนื่อง พร้อมทั้งปลูกฝังความตระหนักและสร้างวัฒนธรรมคุณภาพข้อมูลให้เกิดขึ้นทั่วทั้งองค์กร เพื่อความยั่งยืนในระยะยาว',
+                    activities: [
+                        'พัฒนาและบำรุงรักษา Dashboard/รายงานคุณภาพข้อมูล: กจข. พัฒนา Dashboard และรายงานคุณภาพข้อมูลภาพรวมขององค์กรตาม KPI ที่กำหนด',
+                        'ติดตามและรายงานผลการดำเนินงาน: หน่วยงานเจ้าของข้อมูลและกระบวนการ (Data & Process Owning Unit) จัดส่งข้อมูล/รายงานผลการดำเนินงานด้านคุณภาพข้อมูลที่เกี่ยวข้องกับ Use Case ของตน ให้ กจข. เพื่อรวบรวมและวิเคราะห์ผลภาพรวม โดยควรดำเนินการอย่างสม่ำเสมอ เช่น รายไตรมาส หรือหลังจากดำเนินโครงการแล้วเสร็จในแต่ละรอบ',
+                        'จัดอบรมและสร้างความตระหนักเรื่องคุณภาพข้อมูล: กจข. จัดโปรแกรมอบรมและกิจกรรมเพื่อสร้างความตระหนักด้านคุณภาพข้อมูลในระดับองค์กรอย่างต่อเนื่อง โดยหน่วยงานเจ้าของข้อมูลและกระบวนการ (Data & Process Owning Unit) ส่งเสริมให้ทีมงานของตนเข้าร่วมและปฏิบัติตามแนวทาง',
+                        'สื่อสารผลลัพธ์และความสำเร็จ: สื่อสารผลลัพธ์การปรับปรุงคุณภาพข้อมูลและความสำเร็จที่จับต้องได้ให้ผู้บริหารและหน่วยงานอื่น ๆ รับทราบ เพื่อสร้างแรงจูงใจและรักษา Momentum ของโครงการ',
+                        'ทบทวนและปรับปรุงกระบวนการบริหารจัดการคุณภาพข้อมูล: กจข. และผู้เกี่ยวข้องทบทวนประสิทธิภาพของกรอบการจัดการคุณภาพข้อมูลทั้งหมดเป็นประจำ เช่น ปีละ 1-2 ครั้ง หรือเมื่อมีการเปลี่ยนแปลงระบบ/กระบวนการสำคัญขององค์กร และปรับปรุงอย่างต่อเนื่องเพื่อให้ทันกับการเปลี่ยนแปลงขององค์กรและเทคโนโลยี'
+                    ]
+                }
+            ];
+
+            const principlesGrid = document.getElementById('principles-grid');
+            principlesData.forEach(p => {
+                const card = document.createElement('div');
+                card.className = 'card bg-white p-6 rounded-lg shadow-sm border-t-4 border-teal-500 text-center';
+                card.innerHTML = `
+                    <div class="text-4xl mb-4">${p.icon}</div>
+                    <h3 class="text-lg font-bold text-gray-800 mb-2">${p.title}</h3>
+                    <p class="text-gray-600 text-sm">${p.description}</p>
+                `;
+                principlesGrid.appendChild(card);
+            });
+
+            const workflowDiagram = document.getElementById('workflow-diagram');
+            workflowData.forEach((step, index) => {
+                const stepEl = document.createElement('div');
+                stepEl.className = 'workflow-step flex flex-col items-center justify-center w-32 h-32 md:w-36 md:h-36 rounded-full border-4 border-gray-200 bg-white shadow-lg text-center p-2 font-semibold text-gray-700';
+                stepEl.innerHTML = `<span class="text-3xl font-bold">${step.id}.</span> <span class="text-sm mt-1">${step.title}</span><span class="text-xs text-gray-500 mt-1">${step.duration}</span>`;
+                stepEl.dataset.stepId = step.id;
+                workflowDiagram.appendChild(stepEl);
+                if (index < workflowData.length - 1) {
+                    const line = document.createElement('div');
+                    line.className = 'workflow-line w-full md:w-auto md:h-auto';
+                    workflowDiagram.appendChild(line);
                 }
             });
-            workflowDetailsContainer.classList.add('active');
-        }
-    }
-    
-    workflowSelector.addEventListener('click', function(e) {
-        const selectedStep = e.target.closest('.workflow-step');
-        if (selectedStep && selectedStep.dataset.workflow) {
-            updateWorkflowContent(selectedStep.dataset.workflow);
-        }
-    });
-
-    updateWorkflowContent('1');
-
-    const timelineCtx = document.getElementById('timelineChart').getContext('2d');
-    const timelineChart = new Chart(timelineCtx, {
-        type: 'bar',
-        data: {
-            labels: [
-                'WF5: ติดตามฯ', 
-                'WF4: แก้ไขต้นเหตุ', 
-                'WF3: ออกแบบฯ', 
-                'WF2: กำกับดูแล', 
-                'WF1: วิเคราะห์'
-            ],
-            datasets: [{
-                label: 'ระยะเวลา (เดือน)',
-                data: [
-                    [2, 5], 
-                    [2, 10],
-                    [2, 8], 
-                    [2, 3],
-                    [0, 2]  
-                ],
-                backgroundColor: 'rgba(141, 128, 163, 0.6)',
-                borderColor: 'rgba(141, 128, 163, 1)',
-                borderWidth: 1,
-                borderRadius: 5,
-                borderSkipped: false
-            }]
-        },
-        options: {
-            indexAxis: 'y',
-            responsive: true,
-            maintainAspectRatio: false,
-            plugins: {
-                legend: {
-                    display: false
-                },
-                tooltip: {
-                    callbacks: {
-                        label: function(context) {
-                            const start = context.raw[0];
-                            const end = context.raw[1];
-                            const duration = end - start;
-                            return ` ${context.dataset.label}: ${duration} เดือน (เริ่มเดือนที่ ${start+1} ถึง ${end})`;
-                        }
-                    }
+            
+            const workflowDetailsContainer = document.getElementById('workflow-details-container');
+            function showWorkflowDetails(stepId) {
+                const step = workflowData.find(s => s.id == stepId);
+                let activitiesHtml = '';
+                if (step.activities && step.activities.length > 0) {
+                    activitiesHtml = '<ul class="list-disc list-inside space-y-2 text-gray-600">';
+                    step.activities.forEach(activity => {
+                        activitiesHtml += `<li>${activity}</li>`;
+                    });
+                    activitiesHtml += '</ul>';
+                } else {
+                    activitiesHtml = `<p class="text-gray-600">${step.details}</p>`;
                 }
-            },
-            scales: {
-                x: {
-                    beginAtZero: true,
-                    title: {
-                        display: true,
-                        text: 'เดือน'
-                    },
-                    grid: {
-                        color: '#EAE0D5'
-                    }
-                },
-                y: {
-                    grid: {
-                        display: false
-                    }
-                }
+
+                workflowDetailsContainer.innerHTML = `
+                    <h4 class="text-xl font-bold text-gray-800 mb-2">${step.title} (${step.duration})</h4>
+                    <p class="text-gray-600 mb-4">${step.details}</p>
+                    <h5 class="font-semibold text-gray-700 mb-2">กิจกรรมที่ต้องทำ:</h5>
+                    ${activitiesHtml}
+                `;
+                document.querySelectorAll('.workflow-step').forEach(el => {
+                    el.classList.toggle('active', el.dataset.stepId == stepId);
+                });
             }
-        }
-    });
 
-    const mobileMenuButton = document.getElementById('mobile-menu-button');
-    const mobileMenu = document.getElementById('mobile-menu');
-    mobileMenuButton.addEventListener('click', () => {
-        mobileMenu.classList.toggle('hidden');
-    });
+            workflowDiagram.addEventListener('click', (e) => {
+                let target = e.target;
+                // Traverse up to find the workflow-step element
+                while (target && !target.classList.contains('workflow-step')) {
+                    target = target.parentElement;
+                }
+                if (target && target.classList.contains('workflow-step')) {
+                    showWorkflowDetails(target.dataset.stepId);
+                }
+            });
+            showWorkflowDetails(1);
 
-    const navLinks = document.querySelectorAll('#mobile-menu a');
-    navLinks.forEach(link => {
-        link.addEventListener('click', () => {
-             mobileMenu.classList.add('hidden');
+            const navLinks = document.querySelectorAll('.nav-link');
+            const mobileMenuButton = document.getElementById('mobile-menu-button');
+            const mobileMenu = document.getElementById('mobile-menu');
+            
+            mobileMenuButton.addEventListener('click', () => {
+                mobileMenu.classList.toggle('hidden');
+            });
+
+            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+                anchor.addEventListener('click', function (e) {
+                    e.preventDefault();
+                    document.querySelector(this.getAttribute('href')).scrollIntoView({
+                        behavior: 'smooth'
+                    });
+                    if (mobileMenu.classList.contains('hidden') === false) {
+                        mobileMenu.classList.add('hidden');
+                    }
+                });
+            });
+
+            window.addEventListener('scroll', () => {
+                let current = '';
+                document.querySelectorAll('section').forEach(section => {
+                    const sectionTop = section.offsetTop;
+                    if (pageYOffset >= sectionTop - 100) {
+                        current = section.getAttribute('id');
+                    }
+                });
+
+                navLinks.forEach(link => {
+                    link.classList.remove('active');
+                    if (link.getAttribute('href') === `#${current}`) {
+                        link.classList.add('active');
+                    }
+                });
+            });
         });
-    });
-});
-</script>
+    </script>
+
 </body>
 </html>
+�
