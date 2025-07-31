@@ -603,7 +603,7 @@
             workflowData.forEach((step, index) => {
                 const stepEl = document.createElement('div');
                 stepEl.className = 'workflow-step flex flex-col items-center justify-center w-32 h-32 md:w-36 md:h-36 rounded-full border-4 border-gray-200 bg-white shadow-lg text-center p-2 font-semibold text-gray-700';
-                stepEl.innerHTML = `<span class="text-3xl font-bold">${step.id}.</span> <span class="text-sm mt-1">${step.title}</span><span class="text-xs text-gray-500 mt-1">${step.duration}</span>`;
+                stepEl.innerHTML = `<span class="text-3xl font-bold">${step.id}.</span> <span class="text-sm mt-1">${step.title}</span><span class="text-xs text-white-500 mt-1">${step.duration}</span>`;
                 stepEl.dataset.stepId = step.id;
                 workflowDiagram.appendChild(stepEl);
                 if (index < workflowData.length - 1) {
