@@ -1,0 +1,327 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>การปรับปรุงคุณภาพข้อมูลพนักงาน (HR Data Quality) - PEA</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        /* Custom font for a clean, modern look */
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #f8fafc; /* Lightest blue-gray */
+            color: #334155; /* Slate 700 */
+        }
+        .section-card {
+            background-color: #ffffff;
+            border-radius: 1.5rem; /* More rounded corners */
+            box-shadow: 0 15px 30px -5px rgba(0, 0, 0, 0.1), 0 6px 12px -2px rgba(0, 0, 0, 0.05); /* Deeper shadow */
+            padding: 2rem;
+            margin-bottom: 2.5rem;
+            transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+        }
+        .section-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 20px 40px -8px rgba(0, 0, 0, 0.15), 0 8px 16px -4px rgba(0, 0, 0, 0.08);
+        }
+        .section-title {
+            color: #1e3a8a; /* Dark blue for titles */
+            font-weight: 700;
+            margin-bottom: 1.5rem;
+        }
+        .sub-section-title {
+            color: #3b82f6; /* Medium blue for sub-titles */
+            font-weight: 600;
+            margin-bottom: 1rem;
+        }
+        ul {
+            list-style-type: disc;
+            margin-left: 1.5rem;
+        }
+        li {
+            margin-bottom: 0.75rem;
+        }
+        /* Custom scrollbar for better aesthetics */
+        ::-webkit-scrollbar {
+            width: 8px;
+            height: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #e2e8f0; /* Light gray-blue */
+            border-radius: 10px;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #94a3b8; /* Medium gray-blue */
+            border-radius: 10px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #64748b; /* Darker gray-blue */
+        }
+    </style>
+</head>
+<body class="antialiased">
+    <!-- Header Section -->
+    <header class="bg-gradient-to-r from-blue-600 to-blue-800 text-white shadow-lg py-4 px-6 rounded-b-3xl">
+        <nav class="container mx-auto flex justify-between items-center">
+            <a href="#" class="text-2xl font-bold tracking-tight rounded-lg px-3 py-2 hover:bg-blue-700 transition duration-300">
+                PEA Data Quality
+            </a>
+            <div class="hidden md:flex space-x-6">
+                <a href="#problems" class="text-white hover:text-blue-200 font-medium transition duration-300 rounded-lg px-3 py-2 hover:bg-blue-700">ปัญหา</a>
+                <a href="#strategy-main" class="text-white hover:text-blue-200 font-medium transition duration-300 rounded-lg px-3 py-2 hover:bg-blue-700">กลยุทธ์หลัก</a>
+                <a href="#strategies" class="text-white hover:text-blue-200 font-medium transition duration-300 rounded-lg px-3 py-2 hover:bg-blue-700">กลยุทธ์สนับสนุน</a>
+                <a href="#conclusion" class="text-white hover:text-blue-200 font-medium transition duration-300 rounded-lg px-3 py-2 hover:bg-blue-700">บทสรุป</a>
+            </div>
+            <!-- Mobile Menu Button (Optional: Add JS for functionality) -->
+            <button class="md:hidden text-white focus:outline-none">
+                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
+                </svg>
+            </button>
+        </nav>
+    </header>
+
+    <!-- Hero Section -->
+    <section id="hero" class="relative bg-gradient-to-br from-blue-500 to-indigo-600 text-white py-20 sm:py-24 lg:py-32 rounded-b-3xl mb-12">
+        <div class="absolute inset-0 opacity-10">
+            <!-- Subtle background pattern -->
+            <svg class="w-full h-full" fill="none" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+                <pattern id="grid-pattern" width="20" height="20" patternUnits="userSpaceOnUse">
+                    <path d="M 20 0 L 0 0 L 0 20" fill="none" stroke="white" stroke-width="0.2"></path>
+                </pattern>
+                <rect width="100%" height="100%" fill="url(#grid-pattern)"></rect>
+            </svg>
+        </div>
+        <div class="container mx-auto text-center relative z-10 px-4">
+            <h1 class="text-4xl sm:text-5xl lg:text-6xl font-extrabold leading-tight mb-6 drop-shadow-lg">
+                แผนผังการปรับปรุงคุณภาพข้อมูลพนักงาน
+            </h1>
+            <p class="text-xl sm:text-2xl lg:text-3xl font-light mb-8 max-w-3xl mx-auto drop-shadow-md">
+                (HR Data Quality Improvement Canvas) <br> การไฟฟ้าส่วนภูมิภาค (กฟภ.)
+            </p>
+            <a href="#problems" class="inline-block bg-white text-blue-700 font-bold py-3 px-8 rounded-full shadow-lg hover:bg-blue-100 hover:scale-105 transition duration-300 transform">
+                สำรวจแผนงาน
+            </a>
+        </div>
+    </section>
+
+    <main class="container mx-auto p-4 sm:p-6 lg:p-8">
+        <!-- 1. ปัญหาหลักและข้อจำกัดปัจจุบัน -->
+        <section id="problems" class="section-card">
+            <h2 class="section-title text-3xl text-center">1. ปัญหาหลักและข้อจำกัดปัจจุบัน</h2>
+            <p class="text-gray-700 mb-6 text-center">
+                นี่คือสถานการณ์และความท้าทายที่เรากำลังเผชิญอยู่ในการบริหารจัดการข้อมูล HR :
+            </p>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                <div>
+                    <h3 class="sub-section-title text-2xl">การกรอกข้อมูลที่ระบบ SAP (SAP Data Entry)</h3>
+                    <ul class="text-gray-600">
+                        <li>
+                            - ขาดการตรวจสอบความถูกต้อง (Data Validation) : ระบบ SAP HR Module ไม่มี Data Validation ในขั้นตอนการป้อนข้อมูลพนักงาน ทำให้เกิดความผิดพลาดตั้งแต่จุดเริ่มต้น
+                        </li>
+                        <li>
+                            - ข้อจำกัดทางสัญญา : ไม่สามารถเพิ่มฟังก์ชัน Data Validation หรือดำเนินการแก้ไขข้อมูล (Data Cleansing) บนระบบ SAP โดยตรงได้
+                        </li>
+                        <li>
+                            - ไม่สามารถเขียนข้อมูลกลับ (No Write-Back) : ข้อมูลที่ถูกแก้ไขในแหล่งอื่นไม่สามารถเขียนกลับไปอัปเดตที่ SAP ได้
+                        </li>
+                    </ul>
+                </div>
+                <div>
+                    <h3 class="sub-section-title text-2xl">การกระจายตัวของแหล่งข้อมูล (Data Fragmentation)</h3>
+                    <ul class="text-gray-600">
+                        <li>
+                            ปัจจุบันมีแหล่งข้อมูลพนักงาน 3 แหล่งหลัก ได้แก่ SAP, SQL Database (สำหรับกระบวนการ Non-SAP) และ Database ของแต่ละกระบวนการ Non-SAP
+                        </li>
+                        <li>
+                            การกระจายตัวนี้นำไปสู่ปัญหา ข้อมูลกระจัดกระจายไม่เชื่อมโยงกัน (Data Silo) และ ความไม่สอดคล้องของข้อมูล (Data Inconsistency) ระหว่างแหล่งต่าง ๆ
+                        </li>
+                    </ul>
+                    <h3 class="sub-section-title text-2xl mt-6">การแก้ไขปัญหาเชิงรับ (Reactive Problem Solving)</h3>
+                    <ul class="text-gray-600">
+                        <li>
+                            การรับรู้ปัญหาคุณภาพข้อมูลเกิดขึ้นเมื่อมีปัญหาในการใช้งานแล้วเท่านั้น ทำให้การแก้ไขเป็นแบบปลายเหตุ และไม่ยั่งยืนในระยะยาว
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <!-- 2. กลยุทธ์หลัก: การทวนสอบข้อมูล -->
+        <section id="strategy-main" class="section-card bg-blue-50">
+            <h2 class="section-title text-3xl text-center">2. กลยุทธ์หลัก: การทวนสอบข้อมูล (Data Verification Method) สำหรับ SAP</h2>
+            <p class="text-gray-700 mb-6 text-center">
+                นี่คือหัวใจสำคัญในการขับเคลื่อนคุณภาพข้อมูลอย่างยั่งยืนในระยะยาว :
+            </p>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                <div>
+                    <h3 class="sub-section-title text-2xl">กระบวนการ (Process)</h3>
+                    <ul class="text-gray-600">
+                        <li>
+                            - สกัดข้อมูล (Extract Data) : ดึงข้อมูลจาก SAP ออกมา
+                        </li>
+                        <li>
+                            - ตรวจสอบและระบุ (Validate & Identify) : ใช้ กฎเกณฑ์ข้อมูล (Data Element Rule) เพื่อตรวจสอบและระบุข้อมูลที่ไม่มีคุณภาพ
+                        </li>
+                        <li>
+                            - แสดงผลและชี้เป้า (Visualize & Pinpoint) : จัดทำแดชบอร์ด (Dashboard) เพื่อชี้เป้าข้อมูลที่ผิดพลาดและระบุผู้รับผิดชอบในการป้อนข้อมูล
+                        </li>
+                        <li>
+                            - สร้างแรงจูงใจและบังคับใช้ (Incentivize & Enforce) : กำหนดตัวชี้วัดผลงานหลัก (KPI) ที่เชื่อมโยงกับการปรับปรุงคุณภาพข้อมูล เพื่อกระตุ้นและบังคับให้ผู้เกี่ยวข้องดำเนินการแก้ไขข้อมูลให้ถูกต้อง
+                        </li>
+                    </ul>
+                </div>
+                <div>
+                    <h3 class="sub-section-title text-2xl">วัตถุประสงค์ (Objectives)</h3>
+                    <ul class="text-gray-600">
+                        <li>
+                            - แก้ไขปัญหาที่ต้นตอทางอ้อม โดยการกระตุ้นให้ผู้ใช้งานปรับปรุงพฤติกรรมการป้อนข้อมูล
+                        </li>
+                        <li>
+                            - สร้างความตระหนักรู้ด้านข้อมูล (Data Awareness) และส่งเสริมวัฒนธรรมองค์กรที่ขับเคลื่อนด้วยข้อมูล (Data-Driven Culture)
+                        </li>
+                    </ul>
+                    <h3 class="sub-section-title text-2xl mt-6">ผลลัพธ์ที่คาดหวัง (Expected Outcomes)</h3>
+                    <ul class="text-gray-600">
+                        <li>
+                            - ข้อมูลบน SAP มีคุณภาพดีขึ้นอย่างยั่งยืนในระยะยาว
+                        </li>
+                        <li>
+                            - ผู้ใช้งานมีความตระหนักและรับผิดชอบ Data Quality มากขึ้น
+                        </li>
+                        <li>
+                            - ข้อมูลที่ Replicated ไป SQL Database มีคุณภาพสูงขึ้นตาม
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <!-- 3 & 4. กลยุทธ์สนับสนุนและเสริม -->
+        <section id="strategies" class="section-card">
+            <h2 class="section-title text-3xl text-center">กลยุทธ์สนับสนุนและกลยุทธ์เสริม</h2>
+            <p class="text-gray-700 mb-6 text-center">
+                การจัดการฐานข้อมูลอื่น ๆ เพื่อสนับสนุนการดำเนินงาน:
+            </p>
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+                <!-- 3. กลยุทธ์สนับสนุน: SQL Database -->
+                <div class="bg-white p-6 rounded-xl shadow-md hover:shadow-lg transition duration-300 transform hover:scale-105">
+                    <h3 class="sub-section-title text-2xl text-blue-700 mb-4">3. กลยุทธ์สนับสนุน: SQL Database</h3>
+                    <p class="text-gray-700 mb-4">
+                        การจัดการฐานข้อมูล SQL เพื่อสนับสนุนกระบวนการ Non-SAP :
+                    </p>
+                    <h4 class="font-semibold text-lg text-blue-600 mb-2">กระบวนการ (Process)</h4>
+                    <ul class="text-gray-600">
+                        <li>
+                            - ETL (Extract, Transform, Load): ดึงข้อมูลจาก SAP ไปยัง SQL Database
+                        </li>
+                        <li>
+                            - Data Cleansing (ในขั้นตอน Transform หรือหลัง Load): ปรับปรุงคุณภาพข้อมูลด้วยสคริปต์ (Script) สำหรับกระบวนการ Non-SAP
+                        </li>
+                    </ul>
+                    <h4 class="font-semibold text-lg text-blue-600 mb-2 mt-4">วัตถุประสงค์ (Objectives)</h4>
+                    <ul class="text-gray-600">
+                        <li>
+                            - จัดหาข้อมูลคุณภาพดีสำหรับ Non-SAP Process
+                        </li>
+                        <li>
+                            - ลดผลกระทบจากข้อมูล SAP ที่ยังไม่มีคุณภาพเต็มที่
+                        </li>
+                    </ul>
+                    <h4 class="font-semibold text-lg text-blue-600 mb-2 mt-4">ผลลัพธ์ที่คาดหวัง (Expected Outcomes)</h4>
+                    <ul class="text-gray-600">
+                        <li>
+                            - กระบวนการ Non-SAP ได้ใช้ข้อมูลที่มีคุณภาพดีขึ้น
+                        </li>
+                        <li>
+                            - เป็นการแก้ปัญหาเฉพาะหน้าเพื่อประคองสถานการณ์
+                        </li>
+                    </ul>
+                </div>
+
+                <!-- 4. กลยุทธ์เสริม: Database ของกระบวนการ Non-SAP -->
+                <div class="bg-white p-6 rounded-xl shadow-md hover:shadow-lg transition duration-300 transform hover:scale-105">
+                    <h3 class="sub-section-title text-2xl text-blue-700 mb-4">4. กลยุทธ์เสริม: Database ของกระบวนการ Non-SAP</h3>
+                    <p class="text-gray-700 mb-4">
+                        การเสริมสร้างคุณภาพข้อมูล ณ จุดใช้งานปลายทาง :
+                    </p>
+                    <h4 class="font-semibold text-lg text-blue-600 mb-2">กระบวนการ (Process)</h4>
+                    <ul class="text-gray-600">
+                        <li>
+                            - Owner Responsibility: สนับสนุนให้เจ้าของกระบวนการ Non-SAP ดำเนินการ Data Validation และ Data Cleansing ข้อมูลภายในระบบของตนเองก่อนการบันทึก
+                        </li>
+                    </ul>
+                    <h4 class="font-semibold text-lg text-blue-600 mb-2 mt-4">วัตถุประสงค์ (Objectives)</h4>
+                    <ul class="text-gray-600">
+                        <li>
+                            - เพิ่มคุณภาพข้อมูล ณ จุดใช้งานปลายทาง
+                        </li>
+                        <li>
+                            - สร้างความรับผิดชอบของ Owner ข้อมูล
+                        </li>
+                    </ul>
+                    <h4 class="font-semibold text-lg text-blue-600 mb-2 mt-4">ผลลัพธ์ที่คาดหวัง (Expected Outcomes)</h4>
+                    <ul class="text-gray-600">
+                        <li>
+                            - ข้อมูลในระบบ Non-SAP มีความถูกต้องตามวัตถุประสงค์ของแต่ละกระบวนการ
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <!-- 5. บทสรุป -->
+        <section id="conclusion" class="section-card bg-indigo-50">
+            <h2 class="section-title text-3xl text-center">5. บทสรุป</h2>
+            <p class="text-gray-700 mb-6 text-center">
+                ในสภาวะที่มีข้อจำกัดในการปรับเปลี่ยนระบบหลักอย่าง SAP การดำเนินการตาม "วิธีการทวนสอบข้อมูล" ถือเป็นกลยุทธ์ที่สำคัญที่สุดและเป็นรากฐานในการยกระดับคุณภาพข้อมูลพนักงานของ กฟภ. อย่างยั่งยืนในระยะยาว โดยมี SQL Database และ Database ของกระบวนการ Non-SAP เป็นส่วนเสริมที่ช่วยให้กระบวนการทางธุรกิจสามารถดำเนินไปได้อย่างต่อเนื่องในขณะที่ดำเนินการปรับปรุงข้อมูลหลักให้ดีขึ้น การสร้างความตระหนักและการบังคับใช้ KPI จะเป็นกุญแจสำคัญในการขับเคลื่อนความสำเร็จของแผนงานนี้
+            </p>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                <div>
+                    <h3 class="sub-section-title text-2xl">เป้าหมายสูงสุด (Ultimate Goals)</h3>
+                    <ul class="text-gray-600">
+                        <li>
+                            - สร้าง Data Culture ที่แข็งแกร่ง
+                        </li>
+                        <li>
+                            - ยกระดับ Data Quality ของข้อมูล HR โดยรวม
+                        </li>
+                        <li>
+                            - สนับสนุนการตัดสินใจทางธุรกิจด้วยข้อมูลที่น่าเชื่อถือ
+                        </li>
+                    </ul>
+                </div>
+                <div>
+                    <h3 class="sub-section-title text-2xl">ผลลัพธ์สูงสุดที่คาดหวัง (Ultimate Expected Outcomes)</h3>
+                    <ul class="text-gray-600">
+                        <li>
+                            - องค์กรมีข้อมูลพนักงานที่สะอาด ถูกต้อง และน่าเชื่อถือมากขึ้น
+                        </li>
+                        <li>
+                            - ลดความเสี่ยงจากการตัดสินใจผิดพลาดที่เกิดจากข้อมูล
+                        </li>
+                        <li>
+                            - สร้างรากฐานที่ดีสำหรับการนำ AI/ML มาใช้ในอนาคต
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer Section -->
+    <footer class="bg-gray-800 text-white py-8 mt-12 rounded-t-3xl">
+        <div class="container mx-auto text-center px-4">
+            <p class="text-lg mb-4">
+                &copy; 2025 กองบริหารจัดการข้อมูล (กจข.) การไฟฟ้าส่วนภูมิภาค (PEA). สงวนลิขสิทธิ์.
+            </p>
+            <div class="flex justify-center space-x-6">
+                <a href="#" class="text-gray-400 hover:text-white transition duration-300">นโยบายความเป็นส่วนตัว</a>
+                <a href="#" class="text-gray-400 hover:text-white transition duration-300">ข้อกำหนดการใช้งาน</a>
+            </div>
+        </div>
+    </footer>
+</body>
+</html>
