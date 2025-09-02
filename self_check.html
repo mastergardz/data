@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>รายการตรวจสอบการร้องขอข้อมูล</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                    },
+                }
+            }
+        }
+    </script>
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #f3f4f6;
+        }
+    </style>
+</head>
+<body class="bg-gray-100 p-8">
+    <div class="max-w-4xl mx-auto bg-white rounded-xl shadow-lg p-8">
+        <h1 class="text-3xl font-bold text-center mb-6 text-blue-800">
+            เช็คลิสต์: คำขอข้อมูลนี้ควรส่งให้ กจข. หรือไม่?
+        </h1>
+        <p class="text-gray-600 text-center mb-8">
+            โปรดตรวจสอบข้อมูลของท่านในแต่ละส่วน เพื่อพิจารณาว่าควรส่งเรื่องให้ กจข. หรือสามารถติดต่อผู้ดูแลข้อมูลได้โดยตรง
+        </p>
+
+        <div class="space-y-8">
+            <!-- Part 1 -->
+            <div id="part1" class="bg-red-50 border-2 border-red-300 rounded-lg p-6 shadow-md">
+                <h2 class="text-xl font-bold text-red-700 mb-4">
+                    ส่วนที่ 1: ข้อมูลที่ต้องส่งให้ กจข. พิจารณา
+                </h2>
+                <p class="text-red-600 text-sm mb-4">
+                    หากท่านทำเครื่องหมาย ☑️ ในข้อใดข้อหนึ่งในส่วนนี้ ท่านต้องส่งเรื่องให้ กจข.
+                </p>
+                
+                <div class="space-y-4">
+                    <!-- Checkbox 1 -->
+                    <label class="flex items-start bg-white p-4 rounded-lg shadow-sm border border-gray-200 cursor-pointer">
+                        <input type="checkbox" id="check1" onchange="updateSummary()" class="mt-1 h-5 w-5 text-red-600 rounded-md border-gray-300 focus:ring-red-500">
+                        <div class="ml-3">
+                            <span class="text-lg font-semibold text-gray-800">มีข้อมูลส่วนบุคคล (Personal Data) ที่มีความละเอียดอ่อน (Sensitive)</span>
+                            <p class="text-gray-500 text-sm mt-1">
+                                ข้อมูลที่กฎหมายคุ้มครองเป็นพิเศษ เพราะอาจนำไปสู่การเลือกปฏิบัติหรือสร้างผลกระทบที่รุนแรงได้ (เช่น ข้อมูลสุขภาพ, ประวัติอาชญากรรม, ข้อมูลชีวภาพ เช่น ลายนิ้วมือ, ข้อมูลเชื้อชาติ หรือข้อมูลทางเพศ)
+                            </p>
+                        </div>
+                    </label>
+
+                    <!-- Checkbox 2 -->
+                    <label class="flex items-start bg-white p-4 rounded-lg shadow-sm border border-gray-200 cursor-pointer">
+                        <input type="checkbox" id="check2" onchange="updateSummary()" class="mt-1 h-5 w-5 text-red-600 rounded-md border-gray-300 focus:ring-red-500">
+                        <div class="ml-3">
+                            <span class="text-lg font-semibold text-gray-800">มีข้อมูลที่เกี่ยวข้องกับความมั่นคงของชาติ</span>
+                            <p class="text-gray-500 text-sm mt-1">
+                                ข้อมูลที่หากถูกเปิดเผยอาจส่งผลกระทบต่อความมั่นคงหรือโครงสร้างพื้นฐานสำคัญของประเทศ (เช่น แผนผังระบบจ่ายไฟฟ้าหลัก, ข้อมูลการลงทุนเชิงกลยุทธ์ของ กฟภ.)
+                            </p>
+                        </div>
+                    </label>
+
+                    <!-- Checkbox 3 -->
+                    <label class="flex items-start bg-white p-4 rounded-lg shadow-sm border border-gray-200 cursor-pointer">
+                        <input type="checkbox" id="check3" onchange="updateSummary()" class="mt-1 h-5 w-5 text-red-600 rounded-md border-gray-300 focus:ring-red-500">
+                        <div class="ml-3">
+                            <span class="text-lg font-semibold text-gray-800">การเปิดเผยข้อมูลจะส่งผลกระทบต่อชื่อเสียง, การเงิน, หรือความน่าเชื่อถือของ กฟภ.</span>
+                            <p class="text-gray-500 text-sm mt-1">
+                                การเปิดเผยข้อมูลที่ไม่เหมาะสมอาจสร้างความเสียหายร้ายแรงต่อภาพลักษณ์ขององค์กรได้ (เช่น ข้อมูลการตรวจสอบภายใน, รายละเอียดข้อผิดพลาดทางเทคนิคที่ยังไม่ได้มีการแถลงอย่างเป็นทางการ)
+                            </p>
+                        </div>
+                    </label>
+
+                    <!-- Checkbox 4 -->
+                    <label class="flex items-start bg-white p-4 rounded-lg shadow-sm border border-gray-200 cursor-pointer">
+                        <input type="checkbox" id="check4" onchange="updateSummary()" class="mt-1 h-5 w-5 text-red-600 rounded-md border-gray-300 focus:ring-red-500">
+                        <div class="ml-3">
+                            <span class="text-lg font-semibold text-gray-800">ไม่ทราบว่าใครคือผู้ดูแลข้อมูล (Data Custodian)</span>
+                            <p class="text-gray-500 text-sm mt-1">
+                                ผู้ดูแลข้อมูลคือผู้ที่เก็บและรับผิดชอบข้อมูลนั้น ๆ โดยตรง ถ้าท่านไม่ทราบว่าต้องติดต่อใคร กจข. จะต้องเป็นผู้ช่วยในการสืบค้นให้
+                            </p>
+                        </div>
+                    </label>
+                </div>
+            </div>
+
+            <!-- Part 2 -->
+            <div id="part2" class="bg-green-50 border-2 border-green-300 rounded-lg p-6 shadow-md">
+                <h2 class="text-xl font-bold text-green-700 mb-4">
+                    ส่วนที่ 2: ข้อมูลที่สามารถติดต่อผู้ดูแลข้อมูลได้โดยตรง
+                </h2>
+                <p class="text-green-600 text-sm mb-4">
+                    โปรดทำเครื่องหมาย ☑️ ถ้าท่านมีคุณสมบัติดังต่อไปนี้
+                </p>
+
+                <div class="space-y-4">
+                    <!-- Checkbox 5 -->
+                    <label class="flex items-start bg-white p-4 rounded-lg shadow-sm border border-gray-200 cursor-pointer">
+                        <input type="checkbox" id="check5" onchange="updateSummary()" class="mt-1 h-5 w-5 text-green-600 rounded-md border-gray-300 focus:ring-green-500">
+                        <div class="ml-3">
+                            <span class="text-lg font-semibold text-gray-800">ทราบว่าใครคือผู้ดูแลข้อมูล (Data Custodian)</span>
+                            <p class="text-gray-500 text-sm mt-1">
+                                ผู้ดูแลข้อมูลคือส่วนงานหรือแผนกที่รับผิดชอบข้อมูลนั้นโดยตรง (เช่น ถ้าต้องการข้อมูลการลาหยุดงานของพนักงาน ก็ให้ติดต่อฝ่ายบุคคล)
+                            </p>
+                        </div>
+                    </label>
+                </div>
+            </div>
+
+            <!-- Summary -->
+            <div class="bg-white rounded-xl shadow-lg p-6">
+                <h2 class="text-xl font-bold text-center mb-4 text-blue-800">บทสรุป: แนวทางการดำเนินการของท่าน</h2>
+                <div id="summary" class="text-lg text-center font-semibold text-gray-700">
+                    <p>กรุณาทำเครื่องหมายในเช็คลิสต์เพื่อดูผลสรุป</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function updateSummary() {
+            const part1Checks = document.getElementById('check1').checked || 
+                                document.getElementById('check2').checked || 
+                                document.getElementById('check3').checked || 
+                                document.getElementById('check4').checked;
+            
+            const part2Check = document.getElementById('check5').checked;
+            
+            const summaryDiv = document.getElementById('summary');
+
+            if (part1Checks) {
+                summaryDiv.innerHTML = `
+                    <p class="text-red-700">คำขอของท่านมีความละเอียดอ่อนและจำเป็นต้องได้รับการประเมินจากผู้เชี่ยวชาญ</p>
+                    <p class="text-red-700 font-bold mt-2">โปรดส่งเรื่องให้ กจข. พิจารณา</p>
+                `;
+            } else if (!part1Checks && part2Check) {
+                summaryDiv.innerHTML = `
+                    <p class="text-green-700">คำขอของท่านไม่เข้าข่ายข้อมูลที่ต้องผ่านการพิจารณาจาก กจข.</p>
+                    <p class="text-green-700 font-bold mt-2">ท่านสามารถติดต่อผู้ดูแลข้อมูลโดยตรงเพื่อขอข้อมูลได้เลยค่ะ</p>
+                `;
+            } else {
+                summaryDiv.innerHTML = `
+                    <p class="text-gray-500">กรุณาทำเครื่องหมายในเช็คลิสต์เพื่อดูผลสรุป</p>
+                `;
+            }
+        }
+    </script>
+</body>
+</html>
