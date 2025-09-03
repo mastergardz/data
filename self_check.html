@@ -3,19 +3,13 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>รายการตรวจสอบการร้องขอข้อมูล</title>
+    <title>แบบสอบถามขอใช้ข้อมูล</title>
+    <!-- Tailwind CSS CDN -->
     <script src="https://cdn.tailwindcss.com"></script>
-    <script>
-        tailwind.config = {
-            theme: {
-                extend: {
-                    fontFamily: {
-                        sans: ['Inter', 'sans-serif'],
-                    },
-                }
-            }
-        }
-    </script>
+    <!-- Inter Font -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
     <style>
         body {
             font-family: 'Inter', sans-serif;
@@ -23,103 +17,205 @@
         }
     </style>
 </head>
-<body class="bg-gray-100 p-8">
-    <div class="max-w-4xl mx-auto bg-white rounded-xl shadow-lg p-8">
-        <h1 class="text-3xl font-bold text-center mb-6 text-blue-800">
-            เช็คลิสต์: คำขอข้อมูลนี้ควรส่งให้ กจข. หรือไม่?
-        </h1>
-        <p class="text-gray-600 text-center mb-8">
-            โปรดตรวจสอบข้อมูลของท่านในแต่ละส่วน เพื่อพิจารณาว่าควรส่งเรื่องให้ กจข. หรือสามารถติดต่อผู้ดูแลข้อมูลได้โดยตรง
-        </p>
+<body class="p-4 md:p-8 flex items-center justify-center min-h-screen">
 
-        <div class="space-y-8">
-            <!-- Part 1 -->
-            <div id="part1" class="bg-red-50 border-2 border-red-300 rounded-lg p-6 shadow-md">
-                <h2 class="text-xl font-bold text-red-700 mb-4">
-                    ส่วนที่ 1: ข้อมูลที่ต้องส่งให้ กจข. พิจารณา
-                </h2>
-                <p class="text-red-600 text-sm mb-4">
-                    หากท่านทำเครื่องหมาย ☑️ ในข้อใดข้อหนึ่งในส่วนนี้ ท่านต้องส่งเรื่องให้ กจข.
+<div class="bg-white rounded-2xl shadow-lg p-6 md:p-10 max-w-4xl w-full">
+    <!-- Header Section -->
+    <div class="flex items-center space-x-4 mb-6">
+        <svg xmlns="http://www.w3.org/2000/svg" class="h-12 w-12 text-blue-600 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M9 12h6m-6 4h6m-5 3h4a2 2 0 002-2V7a2 2 0 00-2-2H9a2 2 0 00-2 2v10a2 2 0 002 2z" />
+        </svg>
+        <div>
+            <h1 class="text-3xl font-bold text-gray-800 mb-1">เช็คลิสต์: คำขอข้อมูลนี้ควรใช้แบบฟอร์มขออนุญาตใช้ข้อมูล หรือไม่?</h1>
+            <p class="text-gray-600 text-sm md:text-base">
+                โปรดทำเครื่องหมายในช่องสี่เหลี่ยม ☑️ หน้าข้อที่ **"ใช่"** หรือ **"เกี่ยวข้อง"** กับข้อมูลที่ท่านต้องการ
+            </p>
+        </div>
+    </div>
+    
+    <!-- Checklist Instructions -->
+    <p class="text-sm md:text-base text-gray-500 italic mb-8 border-l-4 border-blue-400 pl-4 py-2">
+        **ถ้าท่านทำเครื่องหมาย "ใช่" ในข้อ 1-4 เพียงข้อใดข้อหนึ่ง** โปรดพิจารณาคำถามข้อ 5 เพื่อดำเนินการต่อ<br>
+        **ถ้าท่านไม่ได้ทำเครื่องหมายในข้อใดเลย** ท่านสามารถติดต่อ ผู้ดูแลข้อมูล หรือผู้ถือครองข้อมูล (Data Custodian) ได้โดยตรง
+    </p>
+
+    <!-- Checklist Items -->
+    <div class="space-y-6">
+        <!-- Item 1: Sensitive Personal Data -->
+        <div class="bg-gray-50 p-6 rounded-xl flex items-start space-x-4 border border-gray-200">
+            <input type="checkbox" id="personal_data" class="checkbox-item w-6 h-6 mt-1 text-blue-600 bg-gray-100 rounded-md border-gray-300 focus:ring-blue-500 focus:ring-2">
+            <label for="personal_data" class="flex-1 cursor-pointer">
+                <h3 class="text-xl font-semibold text-gray-800">1. มีข้อมูลส่วนบุคคล (Personal Data) ที่มีความละเอียดอ่อน (Sensitive)?</h3>
+                <p class="text-sm text-gray-500 mt-2">
+                    <span class="font-medium text-gray-700">คำอธิบาย:</span> ข้อมูลส่วนบุคคลบางประเภทมีความเป็นส่วนตัวสูงมาก ซึ่งกฎหมาย (พ.ร.บ. คุ้มครองข้อมูลส่วนบุคคล) กำหนดให้มีการคุ้มครองเป็นพิเศษ เพราะหากข้อมูลเหล่านี้รั่วไหลอาจนำไปสู่การเลือกปฏิบัติ, การถูกทำให้อับอาย หรือสร้างผลกระทบที่รุนแรงต่อเจ้าของข้อมูลได้
                 </p>
-                
-                <div class="space-y-4">
-                    <!-- Checkbox 1 -->
-                    <label class="flex items-start bg-white p-4 rounded-lg shadow-sm border border-gray-200 cursor-pointer">
-                        <input type="checkbox" id="check1" onchange="updateSummary()" class="mt-1 h-5 w-5 text-red-600 rounded-md border-gray-300 focus:ring-red-500">
-                        <div class="ml-3">
-                            <span class="text-lg font-semibold text-gray-800">มีข้อมูลส่วนบุคคล (Personal Data) ที่มีความละเอียดอ่อน (Sensitive)</span>
-                            <p class="text-gray-500 text-sm mt-1">
-                                ข้อมูลที่กฎหมายคุ้มครองเป็นพิเศษ เพราะอาจนำไปสู่การเลือกปฏิบัติหรือสร้างผลกระทบที่รุนแรงได้ (เช่น ข้อมูลสุขภาพ, ประวัติอาชญากรรม, ข้อมูลชีวภาพ เช่น ลายนิ้วมือ, ข้อมูลเชื้อชาติ หรือข้อมูลทางเพศ)
-                            </p>
-                        </div>
-                    </label>
-
-                    <!-- Checkbox 2 -->
-                    <label class="flex items-start bg-white p-4 rounded-lg shadow-sm border border-gray-200 cursor-pointer">
-                        <input type="checkbox" id="check2" onchange="updateSummary()" class="mt-1 h-5 w-5 text-red-600 rounded-md border-gray-300 focus:ring-red-500">
-                        <div class="ml-3">
-                            <span class="text-lg font-semibold text-gray-800">มีข้อมูลที่เกี่ยวข้องกับความมั่นคงของชาติ</span>
-                            <p class="text-gray-500 text-sm mt-1">
-                                ข้อมูลที่หากถูกเปิดเผยอาจส่งผลกระทบต่อความมั่นคงหรือโครงสร้างพื้นฐานสำคัญของประเทศ (เช่น แผนผังระบบจ่ายไฟฟ้าหลัก, ข้อมูลการลงทุนเชิงกลยุทธ์ของ กฟภ.)
-                            </p>
-                        </div>
-                    </label>
-
-                    <!-- Checkbox 3 -->
-                    <label class="flex items-start bg-white p-4 rounded-lg shadow-sm border border-gray-200 cursor-pointer">
-                        <input type="checkbox" id="check3" onchange="updateSummary()" class="mt-1 h-5 w-5 text-red-600 rounded-md border-gray-300 focus:ring-red-500">
-                        <div class="ml-3">
-                            <span class="text-lg font-semibold text-gray-800">การเปิดเผยข้อมูลจะส่งผลกระทบต่อชื่อเสียง, การเงิน, หรือความน่าเชื่อถือของ กฟภ.</span>
-                            <p class="text-gray-500 text-sm mt-1">
-                                การเปิดเผยข้อมูลที่ไม่เหมาะสมอาจสร้างความเสียหายร้ายแรงต่อภาพลักษณ์ขององค์กรได้ (เช่น ข้อมูลการตรวจสอบภายใน, รายละเอียดข้อผิดพลาดทางเทคนิคที่ยังไม่ได้มีการแถลงอย่างเป็นทางการ)
-                            </p>
-                        </div>
-                    </label>
-
-                    <!-- Checkbox 4 -->
-                    <label class="flex items-start bg-white p-4 rounded-lg shadow-sm border border-gray-200 cursor-pointer">
-                        <input type="checkbox" id="check4" onchange="updateSummary()" class="mt-1 h-5 w-5 text-red-600 rounded-md border-gray-300 focus:ring-red-500">
-                        <div class="ml-3">
-                            <span class="text-lg font-semibold text-gray-800">ไม่ทราบว่าใครคือผู้ดูแลข้อมูล (Data Custodian)</span>
-                            <p class="text-gray-500 text-sm mt-1">
-                                ผู้ดูแลข้อมูลคือผู้ที่เก็บและรับผิดชอบข้อมูลนั้น ๆ โดยตรง ถ้าท่านไม่ทราบว่าต้องติดต่อใคร กจข. จะต้องเป็นผู้ช่วยในการสืบค้นให้
-                            </p>
-                        </div>
-                    </label>
+                <div class="text-xs text-gray-500 mt-2">
+                    <span class="font-medium text-gray-600">ตัวอย่าง:</span> ข้อมูลสุขภาพ, ข้อมูลชีวภาพ, ข้อมูลประวัติอาชญากรรม, ข้อมูลทางเพศ, ข้อมูลเกี่ยวกับเชื้อชาติ, ความคิดเห็นทางการเมือง, ความเชื่อทางศาสนาหรือปรัชญา
                 </div>
+            </label>
+        </div>
+
+        <!-- Item 2: National Security Data -->
+        <div class="bg-gray-50 p-6 rounded-xl flex items-start space-x-4 border border-gray-200">
+            <input type="checkbox" id="national_security" class="checkbox-item w-6 h-6 mt-1 text-blue-600 bg-gray-100 rounded-md border-gray-300 focus:ring-blue-500 focus:ring-2">
+            <label for="national_security" class="flex-1 cursor-pointer">
+                <h3 class="text-xl font-semibold text-gray-800">2. มีข้อมูลที่เกี่ยวข้องกับความมั่นคงของชาติ?</h3>
+                <p class="text-sm text-gray-500 mt-2">
+                    <span class="font-medium text-gray-700">คำอธิบาย:</span> ข้อมูลที่หากถูกเปิดเผยหรือรั่วไหลไปสู่สาธารณะ อาจส่งผลกระทบที่รุนแรงต่อความมั่นคงของประเทศ โดยเฉพาะในส่วนที่เกี่ยวข้องกับโครงสร้างพื้นฐานสำคัญของชาติ (Critical Infrastructure)
+                </p>
+                <div class="text-xs text-gray-500 mt-2">
+                    <span class="font-medium text-gray-600">ตัวอย่าง:</span> ข้อมูลโครงสร้างพื้นฐานด้านพลังงาน, ข้อมูลเชิงกลยุทธ์, ข้อมูลทางเทคนิค
+                </div>
+            </label>
+        </div>
+
+        <!-- Item 3: Reputation/Financial Data -->
+        <div class="bg-gray-50 p-6 rounded-xl flex items-start space-x-4 border border-gray-200">
+            <input type="checkbox" id="reputation_finance" class="checkbox-item w-6 h-6 mt-1 text-blue-600 bg-gray-100 rounded-md border-gray-300 focus:ring-blue-500 focus:ring-2">
+            <label for="reputation_finance" class="flex-1 cursor-pointer">
+                <h3 class="text-xl font-semibold text-gray-800">3. การเปิดเผยข้อมูลจะส่งผลกระทบต่อชื่อเสียง, การเงิน, หรือความน่าเชื่อถือของ กฟภ.?</h3>
+                <p class="text-sm text-gray-500 mt-2">
+                    <span class="font-medium text-gray-700">คำอธิบาย:</span> ข้อมูลบางอย่างแม้ไม่ใช่ข้อมูลลับโดยตรง แต่หากถูกเปิดเผยอย่างไม่เหมาะสม อาจสร้างความเข้าใจผิดหรือความเสียหายอย่างร้ายแรงต่อองค์กรได้
+                </p>
+                <div class="text-xs text-gray-500 mt-2">
+                    <span class="font-medium text-gray-600">ตัวอย่าง:</span> ข้อมูลภายในที่ยังไม่ได้ข้อสรุป, ข้อมูลด้านการเงิน, ข้อมูลด้านกฎหมาย
+                </div>
+            </label>
+        </div>
+        
+        <!-- Item 4: Unknown Data Custodian -->
+        <div class="bg-gray-50 p-6 rounded-xl flex items-start space-x-4 border border-gray-200">
+            <input type="checkbox" id="unknown_custodian" class="checkbox-item w-6 h-6 mt-1 text-blue-600 bg-gray-100 rounded-md border-gray-300 focus:ring-blue-500 focus:ring-2">
+            <label for="unknown_custodian" class="flex-1 cursor-pointer">
+                <h3 class="text-xl font-semibold text-gray-800">4. ไม่ทราบว่าใครคือผู้ดูแลข้อมูล หรือผู้ถือครองข้อมูล (Data Custodian)?</h3>
+                <p class="text-sm text-gray-500 mt-2">
+                    <span class="font-medium text-gray-700">คำอธิบาย:</span> ผู้ดูแลข้อมูลคือผู้ที่เก็บและรับผิดชอบข้อมูลนั้นๆ ในทางปฏิบัติ ซึ่งโดยทั่วไปคือส่วนงานหรือแผนกที่สร้างข้อมูลขึ้นมา หากท่านไม่ทราบว่าต้องติดต่อใคร กจข. จะต้องเป็นผู้ช่วยในการสืบค้นให้
+                </p>
+                <div class="text-xs text-gray-500 mt-2">
+                    <span class="font-medium text-gray-600">ตัวอย่าง:</span> ถ้าท่านต้องการข้อมูล "สถิติการใช้ไฟฟ้าของพื้นที่" ผู้ดูแลข้อมูลคือ ฝ่ายธุรกิจบริการ
+                </div>
+            </label>
+        </div>
+    </div>
+
+    <!-- Additional Question Section -->
+    <div id="additional-question-section" class="mt-8 p-6 md:p-8 rounded-2xl border-2 border-dashed border-gray-300 hidden">
+        <h3 class="text-xl font-semibold text-gray-800 mb-4">5. ข้อมูลที่ท่านต้องการอยู่ในระบบบัญชีข้อมูลของ กฟภ. (PEA Data Catalog : data.pea.co.th) หรือไม่?</h3>
+        <div class="flex items-center space-x-6">
+            <div class="flex items-center">
+                <input id="data_catalog_yes" type="radio" name="data_catalog" value="yes" class="radio-item w-5 h-5 text-blue-600 bg-gray-100 rounded-full border-gray-300 focus:ring-blue-500 focus:ring-2">
+                <label for="data_catalog_yes" class="ml-2 text-md font-medium text-gray-700">ใช่</label>
             </div>
-
-            <!-- Summary -->
-            <div class="bg-white rounded-xl shadow-lg p-6">
-                <h2 class="text-xl font-bold text-center mb-4 text-blue-800">บทสรุป: แนวทางการดำเนินการของท่าน</h2>
-                <div id="summary" class="text-lg text-center font-semibold text-gray-700">
-                    <p>กรุณาทำเครื่องหมายในเช็คลิสต์เพื่อดูผลสรุป</p>
-                </div>
+            <div class="flex items-center">
+                <input id="data_catalog_no" type="radio" name="data_catalog" value="no" class="radio-item w-5 h-5 text-blue-600 bg-gray-100 rounded-full border-gray-300 focus:ring-blue-500 focus:ring-2">
+                <label for="data_catalog_no" class="ml-2 text-md font-medium text-gray-700">ไม่ใช่</label>
             </div>
         </div>
     </div>
 
-    <script>
-        function updateSummary() {
-            const part1Checks = document.getElementById('check1').checked || 
-                                document.getElementById('check2').checked || 
-                                document.getElementById('check3').checked || 
-                                document.getElementById('check4').checked;
-            
-            const summaryDiv = document.getElementById('summary');
+    <!-- Summary Section (Initially hidden) -->
+    <div id="summary-section" class="mt-10 p-6 md:p-8 rounded-2xl border-2 border-gray-300 transition-opacity duration-300 hidden">
+        <h2 class="text-2xl font-bold mb-4 text-center">บทสรุป</h2>
+        
+        <!-- Summary for "Use Form" -->
+        <div id="summary-form" class="text-center hidden">
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-16 w-16 text-red-500 mx-auto mb-4 animate-bounce" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z" />
+            </svg>
+            <p id="form-summary-text" class="text-lg text-gray-700 font-semibold mb-2"></p>
+            <p class="text-gray-500" id="form-guidance-text"></p>
+            <a href="#" id="form-download-link" class="mt-4 inline-block bg-blue-600 text-white font-bold py-3 px-6 rounded-full shadow-lg hover:bg-blue-700 transition-colors duration-300">
+                ดาวน์โหลดแบบฟอร์ม
+            </a>
+        </div>
+        
+        <!-- Summary for "Contact Custodian" -->
+        <div id="summary-custodian" class="text-center hidden">
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-16 w-16 text-green-500 mx-auto mb-4 animate-pulse" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+            </svg>
+            <p class="text-lg text-gray-700 font-semibold mb-2">ข้อมูลที่ท่านต้องการใช้ไม่เข้าข่ายข้อมูลที่ต้องผ่านการพิจารณาจากผู้เชี่ยวชาญ</p>
+            <p class="text-gray-500">ท่านสามารถ <span class="font-bold text-green-600">ติดต่อผู้ดูแลข้อมูล หรือผู้ถือครองข้อมูล (Data Custodian)</span> ได้โดยตรง</p>
+            <a href="#" class="mt-4 inline-block bg-green-600 text-white font-bold py-3 px-6 rounded-full shadow-lg hover:bg-green-700 transition-colors duration-300">
+                ค้นหาผู้ดูแลข้อมูล
+            </a>
+        </div>
+    </div>
+</div>
 
-            if (part1Checks) {
-                summaryDiv.innerHTML = `
-                    <p class="text-red-700">คำขอของท่านมีความละเอียดอ่อนและจำเป็นต้องได้รับการประเมินจากผู้เชี่ยวชาญ</p>
-                    <p class="text-red-700 font-bold mt-2">โปรดส่งเรื่องให้ กจข. พิจารณา</p>
-                `;
+<script>
+    document.addEventListener('DOMContentLoaded', () => {
+        const checkboxes = document.querySelectorAll('.checkbox-item');
+        const dataCatalogRadios = document.querySelectorAll('input[name="data_catalog"]');
+        const summarySection = document.getElementById('summary-section');
+        const summaryForm = document.getElementById('summary-form');
+        const summaryCustodian = document.getElementById('summary-custodian');
+        const additionalQuestionSection = document.getElementById('additional-question-section');
+        const formSummaryText = document.getElementById('form-summary-text');
+        const formGuidanceText = document.getElementById('form-guidance-text');
+        const formDownloadLink = document.getElementById('form-download-link');
+        
+        // Function to check if any of the main 4 checkboxes are checked
+        const isAnyChecked = () => {
+            return Array.from(checkboxes).some(checkbox => checkbox.checked);
+        };
+
+        const updateSummary = () => {
+            const anyChecked = isAnyChecked();
+            const dataCatalogYes = document.getElementById('data_catalog_yes').checked;
+            const dataCatalogNo = document.getElementById('data_catalog_no').checked;
+
+            if (anyChecked) {
+                // Case 1: At least one of the first 4 boxes is checked.
+                additionalQuestionSection.classList.remove('hidden');
+                
+                if (dataCatalogYes) {
+                    // Sub-case 1.1: Data is in catalog
+                    summarySection.classList.remove('hidden');
+                    summaryForm.classList.remove('hidden');
+                    summaryCustodian.classList.add('hidden');
+                    summarySection.classList.remove('bg-red-50', 'border-red-300', 'bg-green-50', 'border-green-300');
+                    summarySection.classList.add('bg-blue-50', 'border-blue-300');
+                    formSummaryText.textContent = "ข้อมูลที่ท่านต้องการใช้มีความละเอียดอ่อนและอยู่ในระบบบัญชีข้อมูลของ กฟภ.";
+                    formGuidanceText.innerHTML = `โปรดใช้ <span class="font-bold text-blue-600">แบบฟอร์มขออนุญาตใช้ข้อมูล (กรณีมีชุดข้อมูลบนระบบบัญชีข้อมูล)</span> ในการดำเนินการร้องขอข้อมูล`;
+                    formDownloadLink.href = "#"; // Replace with actual link
+                } else if (dataCatalogNo) {
+                    // Sub-case 1.2: Data is NOT in catalog
+                    summarySection.classList.remove('hidden');
+                    summaryForm.classList.remove('hidden');
+                    summaryCustodian.classList.add('hidden');
+                    summarySection.classList.remove('bg-red-50', 'border-red-300', 'bg-green-50', 'border-green-300');
+                    summarySection.classList.add('bg-blue-50', 'border-blue-300');
+                    formSummaryText.textContent = "ข้อมูลที่ท่านต้องการใช้มีความละเอียดอ่อนและยังไม่มีในระบบบัญชีข้อมูลของ กฟภ.";
+                    formGuidanceText.innerHTML = `โปรดใช้ <span class="font-bold text-blue-600">แบบฟอร์มขออนุญาตใช้ข้อมูล (กรณีไม่มีชุดข้อมูลบนระบบบัญชีข้อมูล)</span> ในการดำเนินการร้องขอข้อมูล`;
+                    formDownloadLink.href = "#"; // Replace with actual link
+                } else {
+                    // Sub-case 1.3: Data catalog question not yet answered
+                    summarySection.classList.add('hidden');
+                }
             } else {
-                summaryDiv.innerHTML = `
-                    <p class="text-green-700">คำขอของท่านไม่เข้าข่ายข้อมูลที่ต้องผ่านการพิจารณาจาก กจข.</p>
-                    <p class="text-green-700 font-bold mt-2">ท่านสามารถติดต่อผู้ดูแลข้อมูลโดยตรงเพื่อขอข้อมูลได้เลยค่ะ</p>
-                `;
+                // Case 2: NONE of the first 4 are checked.
+                additionalQuestionSection.classList.add('hidden');
+                summarySection.classList.remove('hidden');
+                summaryForm.classList.add('hidden');
+                summaryCustodian.classList.remove('hidden');
+                summarySection.classList.remove('bg-red-50', 'border-red-300', 'bg-blue-50', 'border-blue-300');
+                summarySection.classList.add('bg-green-50', 'border-green-300');
             }
-        }
-    </script>
+        };
+
+        // Add event listeners to all inputs
+        checkboxes.forEach(checkbox => {
+            checkbox.addEventListener('change', updateSummary);
+        });
+        dataCatalogRadios.forEach(radio => {
+            radio.addEventListener('change', updateSummary);
+        });
+
+        // Initial check on load
+        updateSummary();
+    });
+</script>
+
 </body>
 </html>
