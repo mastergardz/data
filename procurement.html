@@ -1,0 +1,278 @@
+<!DOCTYPE html>
+<html lang="th" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ศูนย์บัญชาการการจัดซื้อจัดจ้างภาครัฐ</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Sarabun:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <!-- Chosen Palette: Ocean Serenity (Deep Teal, Muted Grey, Soft Aqua) -->
+    <!-- Application Structure Plan: The new structure is a single-page dashboard. The user interacts with a central, prominent flow of three stages: Planning, Bidding, and Contract. Clicking a stage card updates a detailed information panel to the right. This design eliminates scrolling and tab-switching, making all key components (process flow, chart, committee roles) accessible from a single view. The objective is to create a "control panel" feel, where the user can quickly navigate and drill down into information, promoting efficient information consumption. -->
+    <!-- Visualization & Content Choices: 
+        1. Process Flow: Report Info -> The sequence of procurement steps. Goal -> Organize & Navigate. Viz/Method -> Three large, prominent, clickable cards representing the stages. Interaction -> Clicking a card updates a separate content panel. Justification -> This is the most direct and clear way to present a multi-stage process on a single screen without clutter. Method -> HTML/CSS/JS.
+        2. Stage Details: Report Info -> Sub-steps of each stage. Goal -> Inform. Viz/Method -> Accordion menu inside the content panel. Interaction -> Click to show/hide text details. Justification -> Provides structured detail in a compact format within the designated content area. Method -> HTML/CSS/JS.
+        3. Procurement Methods: Report Info -> Different methods and their value thresholds. Goal -> Compare & Inform. Viz/Method -> Three information cards with icons and key text. Interaction -> None needed, as the data is static and easy to consume. Justification -> Replaced the graph with a more direct, textual-visual comparison that the user requested, improving clarity and directness. Method -> HTML/CSS.
+        4. Committee Roles: Report Info -> Responsibilities of various committees. Goal -> Organize. Viz/Method -> Accordion-style cards. Interaction -> Click to expand/collapse. Justification -> Efficiently presents detailed lists without taking up excessive screen real estate. Method -> HTML/CSS/JS.
+    -->
+    <style>
+        body {
+            font-family: 'Sarabun', sans-serif;
+            background-color: #F0F4F8;
+            color: #2c3e50;
+        }
+        .bg-card {
+            background-color: #ffffff;
+            border-radius: 16px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+            transition: all 0.3s ease;
+        }
+        .bg-card:hover {
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+            transform: translateY(-2px);
+        }
+        .main-card {
+            cursor: pointer;
+            transition: all 0.3s ease;
+            border: 2px solid transparent;
+        }
+        .main-card.active {
+            border-color: #34495e;
+            transform: scale(1.02);
+            background-color: #ecf0f1;
+        }
+        .text-main {
+            color: #34495e;
+        }
+        .text-accent {
+            color: #1abc9c;
+        }
+        .text-secondary {
+            color: #95a5a6;
+        }
+        .accordion-item {
+            border-bottom: 1px solid #e0e6ed;
+        }
+        .accordion-toggle {
+            transition: all 0.3s ease;
+        }
+        .accordion-content {
+            transition: max-height 0.5s ease-in-out, opacity 0.5s ease;
+            max-height: 0;
+            overflow: hidden;
+            opacity: 0;
+        }
+        .accordion-content.show {
+            max-height: 500px;
+            opacity: 1;
+        }
+    </style>
+</head>
+<body class="bg-gray-100">
+    <div class="container mx-auto px-4 py-8">
+        <header class="text-center mb-8">
+            <h1 class="text-4xl md:text-5xl font-bold text-main mb-2">แดชบอร์ดการจัดซื้อจัดจ้าง</h1>
+            <p class="text-lg md:text-xl text-secondary">
+                ศูนย์บัญชาการเพื่อสำรวจทุกขั้นตอนได้อย่างรวดเร็วและแม่นยำ
+            </p>
+        </header>
+
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+            <!-- Left Panel: Main Process Flow -->
+            <div class="md:col-span-1">
+                <div class="bg-card p-6 md:p-8 space-y-6">
+                    <h2 class="text-2xl font-semibold text-main">ขั้นตอนหลัก</h2>
+                    <div id="main-flow" class="space-y-4">
+                        <div id="card-plan" class="main-card active p-6 text-center bg-gray-100 rounded-lg shadow-sm">
+                            <h3 class="font-bold text-lg text-main">ระยะที่ 1</h3>
+                            <p class="text-sm text-secondary">การวางแผนและเตรียมการ</p>
+                        </div>
+                        <div id="card-process" class="main-card p-6 text-center bg-gray-100 rounded-lg shadow-sm">
+                            <h3 class="font-bold text-lg text-main">ระยะที่ 2</h3>
+                            <p class="text-sm text-secondary">การดำเนินการและคัดเลือก</p>
+                        </div>
+                        <div id="card-contract" class="main-card p-6 text-center bg-gray-100 rounded-lg shadow-sm">
+                            <h3 class="font-bold text-lg text-main">ระยะที่ 3</h3>
+                            <p class="text-sm text-secondary">การทำสัญญาและตรวจรับ</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Center Panel: Dynamic Content Display -->
+            <div class="md:col-span-2">
+                <div id="details-content" class="bg-card p-6 md:p-8 min-h-[600px]">
+                    <!-- Content will be rendered here by JavaScript -->
+                    <div class="text-center text-gray-400">
+                        <h3 class="text-xl md:text-2xl font-semibold">เลือกขั้นตอนจากเมนูทางซ้ายเพื่อเริ่มต้น</h3>
+                        <p class="mt-2 text-base">ข้อมูลรายละเอียดและข้อควรระวังจะแสดงขึ้นที่นี่</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <section id="procurement-methods" class="mt-8 mb-8">
+            <div class="bg-card p-6 md:p-8">
+                <h2 class="text-2xl font-bold text-center mb-2 text-main">ภาพรวมวิธีการจัดซื้อจัดจ้าง</h2>
+                <p class="text-center text-secondary mb-6">กฎหมายพัสดุฯ กำหนดวิธีที่แตกต่างกันตามวงเงิน การ์ดด้านล่างแสดงรายละเอียดแต่ละวิธี</p>
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                    <div class="p-6 bg-gray-50 rounded-lg border border-gray-200">
+                        <div class="text-5xl text-center mb-4">🏆</div>
+                        <h3 class="text-xl font-bold text-center mb-2 text-main">วิธีประกาศเชิญชวนทั่วไป</h3>
+                        <p class="text-center text-sm text-secondary">สำหรับวงเงินที่ "เกิน 500,000 บาท" และเป็นกรณีทั่วไป</p>
+                    </div>
+                    <div class="p-6 bg-gray-50 rounded-lg border border-gray-200">
+                        <div class="text-5xl text-center mb-4">✨</div>
+                        <h3 class="text-xl font-bold text-center mb-2 text-main">วิธีคัดเลือก</h3>
+                        <p class="text-center text-sm text-secondary">สำหรับวงเงินที่ "เกิน 500,000 บาท" และมีเงื่อนไขเฉพาะที่กำหนดในกฎหมาย</p>
+                    </div>
+                    <div class="p-6 bg-gray-50 rounded-lg border border-gray-200">
+                        <div class="text-5xl text-center mb-4">🎯</div>
+                        <h3 class="text-xl font-bold text-center mb-2 text-main">วิธีเฉพาะเจาะจง</h3>
+                        <p class="text-center text-sm text-secondary">สำหรับวงเงินที่ "ไม่เกิน 500,000 บาท" หรือมีเหตุจำเป็นเร่งด่วน</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="roles" class="mb-8">
+             <div class="bg-card p-6 md:p-8">
+                <h2 class="text-2xl font-bold text-center mb-2 text-main">ผู้มีบทบาทสำคัญ: คณะกรรมการต่างๆ</h2>
+                <p class="text-center text-secondary mb-6">คลิกเพื่อดูบทบาทและความรับผิดชอบของคณะกรรมการที่เกี่ยวข้องในกระบวนการ</p>
+                <div class="space-y-4 max-w-4xl mx-auto">
+                    <div class="accordion-item">
+                        <button class="accordion-toggle w-full text-left p-4 font-semibold text-lg flex justify-between items-center text-main">
+                            <span>คณะกรรมการกำหนดราคากลาง</span>
+                            <span class="text-xl transform transition-transform duration-300">▼</span>
+                        </button>
+                        <div class="accordion-content px-4 pb-4">
+                            <p class="text-gray-600">มีหน้าที่กำหนดราคากลางของพัสดุที่จะทำการจัดซื้อจัดจ้าง เพื่อใช้เป็นราคาอ้างอิงในการเปรียบเทียบและป้องกันการตั้งราคาที่สูงเกินจริง</p>
+                        </div>
+                    </div>
+                    <div class="accordion-item">
+                         <button class="accordion-toggle w-full text-left p-4 font-semibold text-lg flex justify-between items-center text-main">
+                            <span>คณะกรรมการพิจารณาผล</span>
+                            <span class="text-xl transform transition-transform duration-300">▼</span>
+                        </button>
+                        <div class="accordion-content px-4 pb-4">
+                            <p class="text-gray-600">ทำหน้าที่ตรวจสอบคุณสมบัติและข้อเสนอของผู้ยื่นทุกราย จากนั้นจะคัดเลือกผู้ยื่นข้อเสนอที่เสนอราคาต่ำสุดและมีคุณสมบัติถูกต้องครบถ้วน หรือใช้เกณฑ์ราคาประกอบเกณฑ์อื่น เพื่อให้ได้พัสดุที่คุ้มค่าที่สุด</p>
+                        </div>
+                    </div>
+                     <div class="accordion-item">
+                         <button class="accordion-toggle w-full text-left p-4 font-semibold text-lg flex justify-between items-center text-main">
+                            <span>คณะกรรมการตรวจรับพัสดุ</span>
+                            <span class="text-xl transform transition-transform duration-300">▼</span>
+                        </button>
+                        <div class="accordion-content px-4 pb-4">
+                            <p class="text-gray-600">มีหน้าที่สำคัญในการตรวจรับพัสดุ ณ ที่ทำการของผู้ใช้พัสดุ เพื่อตรวจสอบว่าพัสดุที่ส่งมอบนั้นถูกต้องครบถ้วน ตรงตามคุณลักษณะและเงื่อนไขที่ระบุไว้ในสัญญาหรือไม่ ก่อนจะดำเนินการเบิกจ่ายเงินต่อไป</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <footer class="text-center pt-8 mt-8 border-t border-gray-200">
+            <p class="text-gray-500 text-sm">ข้อมูลอ้างอิงจาก พระราชบัญญัติการจัดซื้อจัดจ้างและการบริหารพัสดุภาครัฐ พ.ศ. 2560 และระเบียบที่เกี่ยวข้อง</p>
+        </footer>
+    </div>
+
+    <script>
+        const data = {
+            plan: {
+                title: 'ระยะที่ 1: การวางแผนและเตรียมการ',
+                steps: [
+                    { title: '1. จัดทำแผนจัดซื้อจัดจ้างประจำปี', text: 'หน่วยงานของรัฐต้องจัดทำแผนการจัดซื้อจัดจ้างประจำปีและเผยแพร่ในระบบ เพื่อให้สาธารณชนสามารถตรวจสอบได้' },
+                    { title: '2. กำหนดราคากลาง', text: 'ตั้งคณะกรรมการเพื่อสืบหาราคาอ้างอิงของพัสดุที่จะจัดหา เพื่อใช้เป็นเกณฑ์ในการเปรียบเทียบราคา' },
+                    { title: '3. จัดทำร่างขอบเขตของงาน (TOR)', text: 'จัดทำเอกสารที่ระบุรายละเอียด คุณสมบัติ และเงื่อนไขต่างๆ ของพัสดุหรืองานจ้างที่ต้องการอย่างชัดเจน' },
+                    { title: '4. จัดทำรายงานขอซื้อ/ขอจ้าง', text: 'เจ้าหน้าที่พัสดุจะจัดทำรายงานขอซื้อ/ขอจ้าง เสนอต่อหัวหน้าหน่วยงานของรัฐเพื่อขอความเห็นชอบ' },
+                ]
+            },
+            process: {
+                title: 'ระยะที่ 2: การดำเนินการและคัดเลือก',
+                steps: [
+                    { title: '1. เผยแพร่ประกาศเชิญชวน', text: 'หน่วยงานจะนำประกาศเชิญชวนและเอกสารประกวดราคา (e-bidding) ขึ้นเผยแพร่บนเว็บไซต์ของกรมบัญชีกลาง' },
+                    { title: '2. การยื่นข้อเสนอ', text: 'ผู้ประกอบการต้องยื่นข้อเสนอทางเทคนิคและข้อเสนอด้านราคาผ่านระบบ e-GP ภายในวันและเวลาที่กำหนด' },
+                    { title: '3. การพิจารณาผล', text: 'คณะกรรมการจะตรวจสอบคุณสมบัติและข้อเสนอของผู้ยื่นทุกรายตามเกณฑ์ที่กำหนดไว้ในประกาศ' },
+                    { title: '4. ประกาศผลผู้ชนะ', text: 'เมื่อได้ผู้ชนะการประกวดราคาแล้ว หน่วยงานจะประกาศผลอย่างเป็นทางการและแจ้งให้ผู้ชนะมาทำสัญญา' },
+                ]
+            },
+            contract: {
+                title: 'ระยะที่ 3: การทำสัญญาและตรวจรับ',
+                steps: [
+                    { title: '1. การทำสัญญา', text: 'หน่วยงานของรัฐและผู้ชนะการประกวดราคาจะลงนามในสัญญา ซึ่งต้องเป็นไปตามแบบที่กฎหมายกำหนด' },
+                    { title: '2. การบริหารสัญญาและควบคุมงาน', text: 'ตลอดระยะเวลาของสัญญา คณะกรรมการตรวจรับพัสดุจะคอยกำกับดูแลให้คู่สัญญาปฏิบัติตามข้อตกลง' },
+                    { title: '3. การตรวจรับพัสดุ', text: 'เมื่อคู่สัญญาส่งมอบพัสดุ คณะกรรมการตรวจรับจะทำการตรวจสอบว่าสินค้าหรืองานนั้นถูกต้องครบถ้วนตามสัญญาหรือไม่' },
+                    { title: '4. การเบิกจ่ายเงิน', text: 'หลังจากตรวจรับพัสดุเรียบร้อยแล้ว หน่วยงานจะดำเนินการเบิกจ่ายเงินค่าพัสดุหรือค่าจ้างให้แก่คู่สัญญา ถือเป็นการสิ้นสุดกระบวนการ' },
+                ]
+            }
+        };
+
+        const cardPlan = document.getElementById('card-plan');
+        const cardProcess = document.getElementById('card-process');
+        const cardContract = document.getElementById('card-contract');
+        const detailsContent = document.getElementById('details-content');
+
+        function renderDetails(key) {
+            const stageData = data[key];
+            let detailsHtml = `
+                <div class="space-y-4">
+                    <h3 class="text-xl md:text-2xl font-bold text-main mb-4">${stageData.title}</h3>
+            `;
+            stageData.steps.forEach((step, index) => {
+                detailsHtml += `
+                    <div class="accordion-item">
+                        <button class="accordion-toggle w-full text-left p-4 font-semibold text-lg flex justify-between items-center text-main">
+                            <span>${step.title}</span>
+                            <span class="text-xl transform transition-transform duration-300">▼</span>
+                        </button>
+                        <div class="accordion-content px-4 pb-4">
+                            <p class="text-gray-600">${step.text}</p>
+                        </div>
+                    </div>
+                `;
+            });
+            detailsHtml += `</div>`;
+            detailsContent.innerHTML = detailsHtml;
+            addAccordionListeners();
+        }
+
+        function addAccordionListeners() {
+            document.querySelectorAll('.accordion-toggle').forEach(button => {
+                button.addEventListener('click', () => {
+                    const content = button.nextElementSibling;
+                    const icon = button.querySelector('span:last-child');
+                    const isExpanded = content.classList.toggle('show');
+                    if (isExpanded) {
+                        content.style.maxHeight = content.scrollHeight + "px";
+                        icon.style.transform = 'rotate(180deg)';
+                    } else {
+                        content.style.maxHeight = '0px';
+                        icon.style.transform = 'rotate(0deg)';
+                    }
+                });
+            });
+        }
+
+        cardPlan.addEventListener('click', () => {
+            document.querySelectorAll('.main-card').forEach(card => card.classList.remove('active'));
+            cardPlan.classList.add('active');
+            renderDetails('plan');
+        });
+        cardProcess.addEventListener('click', () => {
+            document.querySelectorAll('.main-card').forEach(card => card.classList.remove('active'));
+            cardProcess.classList.add('active');
+            renderDetails('process');
+        });
+        cardContract.addEventListener('click', () => {
+            document.querySelectorAll('.main-card').forEach(card => card.classList.remove('active'));
+            cardContract.classList.add('active');
+            renderDetails('contract');
+        });
+
+        document.addEventListener('DOMContentLoaded', () => {
+            renderDetails('plan');
+        });
+    </script>
+</body>
+</html>
