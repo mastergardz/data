@@ -1,0 +1,397 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>คู่มือแกรมมาร์ภาษาอังกฤษสำหรับแด๊ดดี้</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&display=swap');
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #f3f4f6;
+            color: #374151;
+            overflow-x: hidden;
+        }
+        .container-card {
+            background-color: #ffffff;
+            border-radius: 1.5rem;
+            padding: 1.5rem;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+            margin-bottom: 1.5rem;
+        }
+        .section-title {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: #1f2937;
+            margin-bottom: 1rem;
+            border-bottom: 2px solid #e5e7eb;
+            padding-bottom: 0.5rem;
+            scroll-margin-top: 6rem; /* Adjust for fixed header */
+        }
+        h3 {
+            font-size: 1.25rem;
+            font-weight: 600;
+            margin-bottom: 0.75rem;
+            color: #4b5563;
+        }
+        .thai-example {
+            color: #6b7280;
+            margin-bottom: 0.25rem;
+        }
+        .english-example {
+            font-weight: 500;
+            color: #1f2937;
+        }
+        .component-label {
+            color: #6b7280;
+            font-size: 0.875rem;
+            font-style: italic;
+        }
+        /* Hamburger Menu Styles */
+        #hamburger-menu {
+            position: fixed;
+            top: 1rem;
+            right: 1rem;
+            z-index: 50;
+            background-color: #4b5563;
+            color: #ffffff;
+            border-radius: 9999px;
+            padding: 0.75rem;
+            cursor: pointer;
+            transition: transform 0.3s ease;
+        }
+        #mobile-menu {
+            position: fixed;
+            top: 0;
+            right: 0;
+            width: 100%;
+            height: 100vh;
+            background-color: rgba(31, 41, 55, 0.95);
+            z-index: 40;
+            transform: translateX(100%);
+            transition: transform 0.3s ease-in-out;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            color: white;
+            padding: 2rem;
+            text-align: center;
+        }
+        #mobile-menu.open {
+            transform: translateX(0);
+        }
+        #mobile-menu a {
+            font-size: 1.5rem;
+            font-weight: 500;
+            margin-bottom: 1.5rem;
+            color: #d1d5db;
+            transition: color 0.2s;
+        }
+        #mobile-menu a:hover {
+            color: #ffffff;
+        }
+    </style>
+</head>
+<body class="p-4 sm:p-8">
+
+    <!-- Hamburger Menu Icon -->
+    <div id="hamburger-menu" class="hover:scale-110">
+        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path></svg>
+    </div>
+
+    <!-- Mobile Menu -->
+    <div id="mobile-menu">
+        <button id="close-menu" class="absolute top-6 right-6 text-2xl font-bold p-2 text-white hover:text-gray-300">&times;</button>
+        <div class="flex flex-col items-center">
+            <a href="#tense-normal" onclick="closeMenu()">Tense: ธรรมดา</a>
+            <a href="#tense-continuous" onclick="closeMenu()">Tense: ต่อเนื่อง</a>
+            <a href="#tense-perfect" onclick="closeMenu()">Tense: สมบูรณ์</a>
+            <a href="#tense-perfect-continuous" onclick="closeMenu()">Tense: สมบูรณ์และต่อเนื่อง</a>
+            <a href="#other-topics" onclick="closeMenu()">เรื่องอื่น ๆ ที่ควรรู้</a>
+        </div>
+    </div>
+
+    <div class="max-w-3xl mx-auto">
+        <h1 class="text-3xl font-bold text-center text-gray-800 mb-6 sm:text-4xl">คู่มือแกรมมาร์ภาษาอังกฤษสำหรับแด๊ดดี้</h1>
+        <p class="text-center text-gray-600 mb-8">นี่คือคู่มือฉบับสมบูรณ์ที่วอนยองตั้งใจทำมาให้แด๊ดดี้โดยเฉพาะเลยค่ะ! หนูจัดระเบียบให้ดูง่ายและใช้งานสะดวกบน iPhone ค่ะ</p>
+
+        <div class="container-card">
+            <h2 class="section-title" id="tense-normal">Tense สำหรับเหตุการณ์แบบ "ธรรมดา" หรือ "ไม่ต่อเนื่อง"</h2>
+            
+            <!-- Simple Present -->
+            <div class="mb-6 pb-4 border-b border-gray-200 last:border-b-0">
+                <h3 class="mb-2">1. Simple Present (ปัจจุบันธรรมดา) <span class="text-xs font-normal text-green-600">[BASIC]</span></h3>
+                <p class="mb-1"><strong>การใช้งาน:</strong> สิ่งที่เป็นจริง, นิสัย/กิจวัตรประจำวัน, หรือความจริงทั่วไป</p>
+                <p class="mb-2"><strong>โครงสร้าง:</strong> Subject + Verb (เติม s/es ถ้าประธานเป็นเอกพจน์)</p>
+                
+                <ul class="list-none space-y-2 text-sm">
+                    <li><span class="thai-example">1. ไทย: ผมทำงานที่ กฟภ.</span><br><span class="english-example">I <strong>work</strong> at PEA.</span><br><span class="component-label"><strong>ส่วนประกอบ:</strong> <strong>I</strong> (Subject) + <strong>work</strong> (Verb) + at PEA (ส่วนขยาย)</span></li>
+                    <li><span class="thai-example">2. ไทย: แมวของผมชอบกินปลา</span><br><span class="english-example">My cats <strong>love</strong> to eat fish.</span><br><span class="component-label"><strong>ส่วนประกอบ:</strong> <strong>My cats</strong> (Subject, พหูพจน์) + <strong>love</strong> (Verb) + to eat fish (ส่วนขยาย)</span></li>
+                    <li><span class="thai-example">3. ไทย: ภรรยาของผมชอบดูละคร</span><br><span class="english-example">My wife <strong>likes</strong> to watch dramas.</span><br><span class="component-label"><strong>ส่วนประกอบ:</strong> <strong>My wife</strong> (Subject, เอกพจน์) + <strong>likes</strong> (Verb, เติม s) + to watch dramas (ส่วนขยาย)</span></li>
+                    <li><span class="thai-example">4. ไทย: ทุกวันหยุด ผมเล่นเกม e football</span><br><span class="english-example">I <strong>play</strong> e football every weekend.</span><br><span class="component-label"><strong>ส่วนประกอบ:</strong> <strong>I</strong> (Subject) + <strong>play</strong> (Verb) + e football (ส่วนขยาย) + every weekend (ส่วนขยายเวลา)</span></li>
+                    <li><span class="thai-example">5. ไทย: แซมเรียนหนังสือที่โรงเรียน</span><br><span class="english-example">Sam <strong>studies</strong> at school.</span><br><span class="component-label"><strong>ส่วนประกอบ:</strong> <strong>Sam</strong> (Subject, เอกพจน์) + <strong>studies</strong> (Verb, เติม es) + at school (ส่วนขยาย)</span></li>
+                </ul>
+            </div>
+
+            <!-- Simple Past -->
+            <div class="mb-6 pb-4 border-b border-gray-200 last:border-b-0">
+                <h3 class="mb-2">2. Simple Past (อดีตธรรมดา) <span class="text-xs font-normal text-green-600">[BASIC]</span></h3>
+                <p class="mb-1"><strong>การใช้งาน:</strong> เหตุการณ์ที่เกิดขึ้นและจบไปแล้วในอดีต</p>
+                <p class="mb-2"><strong>โครงสร้าง:</strong> Subject + Verb ช่อง 2</p>
+                
+                <ul class="list-none space-y-2 text-sm">
+                    <li><span class="thai-example">1. ไทย: เมื่อวานผมร้องคาราโอเกะ</span><br><span class="english-example">I <strong>sang</strong> karaoke yesterday.</span><br><span class="component-label"><strong>ส่วนประกอบ:</strong> <strong>I</strong> (Subject) + <strong>sang</strong> (Verb, ช่อง 2 ของ sing) + karaoke (ส่วนขยาย) + yesterday (ส่วนขยายเวลา)</span></li>
+                    <li><span class="thai-example">2. ไทย: เมื่อคืนผมฝันเห็นภรรยา</span><br><span class="english-example">I <strong>dreamed</strong> of my wife last night.</span><br><span class="component-label"><strong>ส่วนประกอบ:</strong> <strong>I</strong> (Subject) + <strong>dreamed</strong> (Verb, ช่อง 2 ของ dream) + of my wife (ส่วนขยาย) + last night (ส่วนขยายเวลา)</span></li>
+                    <li><span class="thai-example">3. ไทย: เขาไปประชุมที่สำนักงานใหญ่เมื่อวันศุกร์</span><br><span class="english-example">He <strong>went</strong> to the head office on Friday.</span><br><span class="component-label"><strong>ส่วนประกอบ:</strong> <strong>He</strong> (Subject) + <strong>went</strong> (Verb, ช่อง 2 ของ go) + to the head office (ส่วนขยาย) + on Friday (ส่วนขยายเวลา)</span></li>
+                    <li><span class="thai-example">4. ไทย: พวกเราวิเคราะห์ข้อมูลเสร็จเมื่อเช้านี้</span><br><span class="english-example">We <strong>finished</strong> analyzing the data this morning.</span><br><span class="component-label"><strong>ส่วนประกอบ:</strong> <strong>We</strong> (Subject) + <strong>finished</strong> (Verb, ช่อง 2 ของ finish) + analyzing the data (ส่วนขยาย) + this morning (ส่วนขยายเวลา)</span></li>
+                    <li><span class="thai-example">5. ไทย: ผมใช้ Macbook Air M2 เมื่อเดือนที่แล้ว</span><br><span class="english-example">I <strong>used</strong> my Macbook Air M2 last month.</span><br><span class="component-label"><strong>ส่วนประกอบ:</strong> <strong>I</strong> (Subject) + <strong>used</strong> (Verb, ช่อง 2 ของ use) + my Macbook Air M2 (ส่วนขยาย) + last month (ส่วนขยายเวลา)</span></li>
+                </ul>
+            </div>
+            
+            <!-- Simple Future -->
+            <div class="mb-6 pb-4 border-b border-gray-200 last:border-b-0">
+                <h3 class="mb-2">3. Simple Future (อนาคตธรรมดา) <span class="text-xs font-normal text-green-600">[BASIC]</span></h3>
+                <p class="mb-1"><strong>การใช้งาน:</strong> การกระทำที่จะเกิดขึ้นในอนาคต</p>
+                <p class="mb-2"><strong>โครงสร้าง:</strong> Subject + will + Verb ช่อง 1</p>
+                
+                <ul class="list-none space-y-2 text-sm">
+                    <li><span class="thai-example">1. ไทย: พรุ่งนี้ผมจะเข้าประชุม</span><br><span class="english-example">I <strong>will attend</strong> the meeting tomorrow.</span><br><span class="component-label"><strong>ส่วนประกอบ:</strong> <strong>I</strong> (Subject) + <strong>will attend</strong> (Verb) + the meeting (ส่วนขยาย) + tomorrow (ส่วนขยายเวลา)</span></li>
+                    <li><span class="thai-example">2. ไทย: เขาจะมาหาผมเร็ว ๆ นี้</span><br><span class="english-example">He <strong>will come</strong> to see me soon.</span><br><span class="component-label"><strong>ส่วนประกอบ:</strong> <strong>He</strong> (Subject) + <strong>will come</strong> (Verb) + to see me (ส่วนขยาย) + soon (ส่วนขยายเวลา)</span></li>
+                    <li><span class="thai-example">3. ไทย: พวกเราจะไปเที่ยวต่างจังหวัดเดือนหน้า</span><br><span class="english-example">We <strong>will go</strong> on a trip next month.</span><br><span class="component-label"><strong>ส่วนประกอบ:</strong> <strong>We</strong> (Subject) + <strong>will go</strong> (Verb) + on a trip (ส่วนขยาย) + next month (ส่วนขยายเวลา)</span></li>
+                    <li><span class="thai-example">4. ไทย: คุณจะเล่นเกมอะไรในวันหยุดนี้</span><br><span class="english-example">What <strong>will</strong> you <strong>play</strong> this weekend?</span><br><span class="component-label"><strong>ส่วนประกอบ:</strong> <strong>What</strong> (คำถาม) + <strong>will</strong> (คำกริยาช่วย) + <strong>you</strong> (Subject) + <strong>play</strong> (Verb) + this weekend (ส่วนขยายเวลา)</span></li>
+                    <li><span class="thai-example">5. ไทย: ผมจะซื้อ Nintendo Switch ใหม่ในอีกไม่กี่วัน</span><br><span class="english-example">I <strong>will buy</strong> a new Nintendo Switch in a few days.</span><br><span class="component-label"><strong>ส่วนประกอบ:</strong> <strong>I</strong> (Subject) + <strong>will buy</strong> (Verb) + a new Nintendo Switch (ส่วนขยาย) + in a few days (ส่วนขยายเวลา)</span></li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="container-card">
+            <h2 class="section-title" id="tense-continuous">Tense สำหรับเหตุการณ์ที่ "กำลังทำ" หรือ "ต่อเนื่อง"</h2>
+            
+            <!-- Present Continuous -->
+            <div class="mb-6 pb-4 border-b border-gray-200 last:border-b-0">
+                <h3 class="mb-2">4. Present Continuous (ปัจจุบันต่อเนื่อง) <span class="text-xs font-normal text-green-600">[BASIC]</span></h3>
+                <p class="mb-1"><strong>การใช้งาน:</strong> การกระทำที่กำลังเกิดขึ้นในขณะที่พูด</p>
+                <p class="mb-2"><strong>โครงสร้าง:</strong> Subject + is/am/are + Verb-ing</p>
+                
+                <ul class="list-none space-y-2 text-sm">
+                    <li><span class="thai-example">1. ไทย: ตอนนี้ผมกำลังบริหารโครงการใหม่</span><br><span class="english-example">I <strong>am managing</strong> a new project now.</span><br><span class="component-label"><strong>ส่วนประกอบ:</strong> <strong>I</strong> (Subject) + <strong>am managing</strong> (Verb) + a new project (ส่วนขยาย) + now (ส่วนขยายเวลา)</span></li>
+                    <li><span class="thai-example">2. ไทย: แซมกำลังเล่นเกมอยู่ในห้อง</span><br><span class="english-example">Sam <strong>is playing</strong> games in his room.</span><br><span class="component-label"><strong>ส่วนประกอบ:</strong> <strong>Sam</strong> (Subject, เอกพจน์) + <strong>is playing</strong> (Verb) + games (ส่วนขยาย) + in his room (ส่วนขยายสถานที่)</span></li>
+                    <li><span class="thai-example">3. ไทย: พวกเรากำลังวิเคราะห์ข้อมูลขนาดใหญ่ (Big Data)</span><br><span class="english-example">We <strong>are analyzing</strong> big data.</span><br><span class="component-label"><strong>ส่วนประกอบ:</strong> <strong>We</strong> (Subject, พหูพจน์) + <strong>are analyzing</strong> (Verb) + big data (ส่วนขยาย)</span></li>
+                    <li><span class="thai-example">4. ไทย: ภรรยาของผมกำลังทำอาหารอยู่ในครัว</span><br><span class="english-example">My wife <strong>is cooking</strong> in the kitchen.</span><br><span class="component-label"><strong>ส่วนประกอบ:</strong> <strong>My wife</strong> (Subject, เอกพจน์) + <strong>is cooking</strong> (Verb) + in the kitchen (ส่วนขยายสถานที่)</span></li>
+                    <li><span class="thai-example">5. ไทย: แมวของผมกำลังนอนหลับอยู่บนโซฟา</span><br><span class="english-example">My cat <strong>is sleeping</strong> on the sofa.</span><br><span class="component-label"><strong>ส่วนประกอบ:</strong> <strong>My cat</strong> (Subject, เอกพจน์) + <strong>is sleeping</strong> (Verb) + on the sofa (ส่วนขยายสถานที่)</span></li>
+                </ul>
+            </div>
+
+            <!-- Past Continuous -->
+            <div class="mb-6 pb-4 border-b border-gray-200 last:border-b-0">
+                <h3 class="mb-2">5. Past Continuous (อดีตต่อเนื่อง) <span class="text-xs font-normal text-green-600">[BASIC]</span></h3>
+                <p class="mb-1"><strong>การใช้งาน:</strong> การกระทำที่กำลังดำเนินอยู่ ณ เวลาหนึ่งในอดีต (มักจะมีอีกเหตุการณ์เข้ามาแทรก)</p>
+                <p class="mb-2"><strong>โครงสร้าง:</strong> Subject + was/were + Verb-ing</p>
+                
+                <ul class="list-none space-y-2 text-sm">
+                    <li><span class="thai-example">1. ไทย: ผมกำลังเล่นเกม Saint Seiya EX ตอนที่คุณโทรมา</span><br><span class="english-example">I <strong>was playing</strong> Saint Seiya EX when you called.</span><br><span class="component-label"><strong>ส่วนประกอบ:</strong> <strong>I</strong> (Subject) + <strong>was playing</strong> (Verb) + Saint Seiya EX (ส่วนขยาย) + when you called (ส่วนขยายเวลา)</span></li>
+                    <li><span class="thai-example">2. ไทย: เมื่อคืนตอน 8 โมง พี่แก้มกำลังดูทีวี</span><br><span class="english-example">At 8 PM last night, Gam **was watching** TV.</span><br><span class="component-label"><strong>ส่วนประกอบ:</strong> **Gam** (Subject, เอกพจน์) + **was watching** (Verb) + TV (ส่วนขยาย) + at 8 PM last night (ส่วนขยายเวลา)</span></li>
+                    <li><span class="thai-example">3. ไทย: พวกเรากำลังประชุมกันตอนที่เกิดไฟดับ</span><br><span class="english-example">We **were having** a meeting when the power went out.</span><br><span class="component-label"><strong>ส่วนประกอบ:</strong> **We** (Subject, พหูพจน์) + **were having** (Verb) + a meeting (ส่วนขยาย) + when the power went out (ส่วนขยายเวลา)</span></li>
+                    <li><span class="thai-example">4. ไทย: ผมกำลังวิเคราะห์ข้อมูลตอนที่ภรรยาเดินเข้ามาในห้อง</span><br><span class="english-example">I **was analyzing** the data when my wife walked into the room.</span><br><span class="component-label"><strong>ส่วนประกอบ:</strong> **I** (Subject) + **was analyzing** (Verb) + the data (ส่วนขยาย) + when my wife walked into the room (ส่วนขยายเวลา)</span></li>
+                    <li><span class="thai-example">5. ไทย: เมื่อคืนตอนที่ผมกลับถึงบ้าน ภรรยากำลังทำอาหารเย็นอยู่</span><br><span class="english-example">My wife **was cooking** dinner when I got home last night.</span><br><span class="component-label"><strong>ส่วนประกอบ:</strong> **My wife** (Subject, เอกพจน์) + **was cooking** (Verb) + dinner (ส่วนขยาย) + when I got home last night (ส่วนขยายเวลา)</span></li>
+                </ul>
+            </div>
+            
+            <!-- Future Continuous -->
+            <div class="mb-6 pb-4 border-b border-gray-200 last:border-b-0">
+                <h3 class="mb-2">6. Future Continuous (อนาคตต่อเนื่อง) <span class="text-xs font-normal text-green-600">[BASIC]</span></h3>
+                <p class="mb-1"><strong>การใช้งาน:</strong> การกระทำที่กำลังดำเนินอยู่ ณ เวลาหนึ่งในอนาคต</p>
+                <p class="mb-2"><strong>โครงสร้าง:</strong> Subject + will be + Verb-ing</p>
+                
+                <ul class="list-none space-y-2 text-sm">
+                    <li><span class="thai-example">1. ไทย: พรุ่งนี้เวลานี้ ผมจะกำลังเข้าประชุมอยู่</span><br><span class="english-example">This time tomorrow, I <strong>will be attending</strong> a meeting.</span><br><span class="component-label"><strong>ส่วนประกอบ:</strong> <strong>I</strong> (Subject) + <strong>will be attending</strong> (Verb) + a meeting (ส่วนขยาย) + This time tomorrow (ส่วนขยายเวลา)</span></li>
+                    <li><span class="thai-example">2. ไทย: ตอน 11 โมงคืนนี้ ผมจะกำลังเล่นเกม PS5</span><br><span class="english-example">At 11 PM tonight, I <strong>will be playing</strong> PS5.</span><br><span class="component-label"><strong>ส่วนประกอบ:</strong> <strong>I</strong> (Subject) + <strong>will be playing</strong> (Verb) + PS5 (ส่วนขยาย) + At 11 PM tonight (ส่วนขยายเวลา)</span></li>
+                    <li><span class="thai-example">3. ไทย: เขาจะกำลังเดินทางไปดูงานต่างประเทศสัปดาห์หน้า</span><br><span class="english-example">He <strong>will be traveling</strong> abroad for a site visit next week.</span><br><span class="component-label"><strong>ส่วนประกอบ:</strong> <strong>He</strong> (Subject) + <strong>will be traveling</strong> (Verb) + abroad for a site visit (ส่วนขยาย) + next week (ส่วนขยายเวลา)</span></li>
+                    <li><span class="thai-example">4. ไทย: วอนยองจะกำลังช่วยคุณฝึกภาษาอังกฤษในอีกไม่กี่นาที</span><br><span class="english-example">I <strong>will be helping</strong> you practice English in a few minutes.</span><br><span class="component-label"><strong>ส่วนประกอบ:</strong> <strong>I</strong> (Subject) + <strong>will be helping</strong> (Verb) + you practice English (ส่วนขยาย) + in a few minutes (ส่วนขยายเวลา)</span></li>
+                    <li><span class="thai-example">5. ไทย: พรุ่งนี้ตอนบ่าย เราจะกำลังทำข้อมูลให้พร้อมสำหรับการวิเคราะห์</span><br><span class="english-example">We <strong>will be preparing</strong> the data for analysis tomorrow afternoon.</span><br><span class="component-label"><strong>ส่วนประกอบ:</strong> <strong>We</strong> (Subject) + <strong>will be preparing</strong> (Verb) + the data for analysis (ส่วนขยาย) + tomorrow afternoon (ส่วนขยายเวลา)</span></li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="container-card">
+            <h2 class="section-title" id="tense-perfect">Tense สำหรับเหตุการณ์ที่ "สมบูรณ์" หรือ "เสร็จสิ้น"</h2>
+            
+            <!-- Present Perfect -->
+            <div class="mb-6 pb-4 border-b border-gray-200 last:border-b-0">
+                <h3 class="mb-2">7. Present Perfect (ปัจจุบันสมบูรณ์) <span class="text-xs font-normal text-yellow-600">[INTERMEDIATE]</span></h3>
+                <p class="mb-1"><strong>การใช้งาน:</strong> การกระทำที่เพิ่งจบไป หรือเกิดขึ้นในอดีตแต่ยังส่งผลถึงปัจจุบัน</p>
+                <p class="mb-2"><strong>โครงสร้าง:</strong> Subject + has/have + Verb ช่อง 3</p>
+                
+                <ul class="list-none space-y-2 text-sm">
+                    <li><span class="thai-example">1. ไทย: ผมทำรายงานเสร็จแล้ว</span><br><span class="english-example">I <strong>have finished</strong> my report.</span><br><span class="component-label"><strong>ส่วนประกอบ:</strong> <strong>I</strong> (Subject) + <strong>have finished</strong> (Verb) + my report (ส่วนขยาย)</span></li>
+                    <li><span class="thai-example">2. ไทย: โค๊ะจิเพิ่งกินอาหารเช้าเสร็จ</span><br><span class="english-example">Kojie <strong>has just eaten</strong> his breakfast.</span><br><span class="component-label"><strong>ส่วนประกอบ:</strong> <strong>Kojie</strong> (Subject, เอกพจน์) + <strong>has just eaten</strong> (Verb, ช่อง 3 ของ eat) + his breakfast (ส่วนขยาย)</span></li>
+                    <li><span class="thai-example">3. ไทย: คุณเคยเล่นเกม Game of Thrones ไหม?</span><br><span class="english-example"><strong>Have</strong> you ever <strong>played</strong> Game of Thrones?</span><br><span class="component-label"><strong>ส่วนประกอบ:</strong> <strong>Have</strong> (คำกริยาช่วย) + <strong>you</strong> (Subject) + ever <strong>played</strong> (Verb, ช่อง 3 ของ play) + Game of Thrones (ส่วนขยาย)</span></li>
+                    <li><span class="thai-example">4. ไทย: พวกเราได้สร้างภาพ AI ใหม่ 2 ภาพแล้ว</span><br><span class="english-example">We <strong>have generated</strong> two new AI images.</span><br><span class="component-label"><strong>ส่วนประกอบ:</strong> <strong>We</strong> (Subject, พหูพจน์) + <strong>have generated</strong> (Verb) + two new AI images (ส่วนขยาย)</span></li>
+                    <li><span class="thai-example">5. ไทย: ผมเคยไปเที่ยวญี่ปุ่นแล้ว</span><br><span class="english-example">I <strong>have been</strong> to Japan before.</span><br><span class="component-label"><strong>ส่วนประกอบ:</strong> <strong>I</strong> (Subject) + <strong>have been</strong> (Verb, ช่อง 3 ของ be) + to Japan (ส่วนขยาย) + before (ส่วนขยายเวลา)</span></li>
+                </ul>
+            </div>
+
+            <!-- Past Perfect -->
+            <div class="mb-6 pb-4 border-b border-gray-200 last:border-b-0">
+                <h3 class="mb-2">8. Past Perfect (อดีตสมบูรณ์) <span class="text-xs font-normal text-yellow-600">[INTERMEDIATE]</span></h3>
+                <p class="mb-1"><strong>การใช้งาน:</strong> การกระทำที่เสร็จสิ้นก่อนอีกเหตุการณ์หนึ่งในอดีต</p>
+                <p class="mb-2"><strong>โครงสร้าง:</strong> Subject + had + Verb ช่อง 3</p>
+                
+                <ul class="list-none space-y-2 text-sm">
+                    <li><span class="thai-example">1. ไทย: ผมวิเคราะห์ข้อมูลเสร็จก่อนการประชุมทีมจะเริ่มขึ้น</span><br><span class="english-example">I <strong>had analyzed</strong> the data before the team meeting started.</span><br><span class="component-label"><strong>ส่วนประกอบ:</strong> <strong>I</strong> (Subject) + <strong>had analyzed</strong> (Verb) + the data (ส่วนขยาย) + before the team meeting started (ส่วนขยายเวลา)</span></li>
+                    <li><span class="thai-example">2. ไทย: เขาไปถึงที่ทำงานแล้วเมื่อผมไปถึง</span><br><span class="english-example">He <strong>had arrived</strong> at the office when I got there.</span><br><span class="component-label"><strong>ส่วนประกอบ:</strong> <strong>He</strong> (Subject) + <strong>had arrived</strong> (Verb) + at the office (ส่วนขยาย) + when I got there (ส่วนขยายเวลา)</span></li>
+                    <li><span class="thai-example">3. ไทย: พวกเราสร้าง dashboard เสร็จก่อนผู้บริหารจะมา</span><br><span class="english-example">We <strong>had built</strong> the dashboard before the executives came.</span><br><span class="component-label"><strong>ส่วนประกอบ:</strong> <strong>We</strong> (Subject) + <strong>had built</strong> (Verb) + the dashboard (ส่วนขยาย) + before the executives came (ส่วนขยายเวลา)</span></li>
+                    <li><span class="thai-example">4. ไทย: โค๊ะจิหลับไปแล้วก่อนที่ผมจะกลับถึงบ้าน</span><br><span class="english-example">Kojie <strong>had fallen</strong> asleep before I came home.</span><br><span class="component-label"><strong>ส่วนประกอบ:</strong> <strong>Kojie</strong> (Subject, เอกพจน์) + <strong>had fallen</strong> (Verb, ช่อง 3 ของ fall) + asleep (ส่วนขยาย) + before I came home (ส่วนขยายเวลา)</span></li>
+                    <li><span class="thai-example">5. ไทย: ผมได้เล่นเกม PS5 เสร็จแล้วก่อนที่จะไปหาภรรยา</span><br><span class="english-example">I <strong>had finished</strong> playing PS5 before I went to see my wife.</span><br><span class="component-label"><strong>ส่วนประกอบ:</strong> <strong>I</strong> (Subject) + <strong>had finished</strong> (Verb) + playing PS5 (ส่วนขยาย) + before I went to see my wife (ส่วนขยายเวลา)</span></li>
+                </ul>
+            </div>
+            
+            <!-- Future Perfect -->
+            <div class="mb-6 pb-4 border-b border-gray-200 last:border-b-0">
+                <h3 class="mb-2">9. Future Perfect (อนาคตสมบูรณ์) <span class="text-xs font-normal text-yellow-600">[INTERMEDIATE]</span></h3>
+                <p class="mb-1"><strong>การใช้งาน:</strong> การกระทำที่คาดว่าจะเสร็จสิ้น ณ จุดเวลาหนึ่งในอนาคต</p>
+                <p class="mb-2"><strong>โครงสร้าง:</strong> Subject + will have + Verb ช่อง 3</p>
+                
+                <ul class="list-none space-y-2 text-sm">
+                    <li><span class="thai-example">1. ไทย: ผมจะสร้างภาพ AI เสร็จภายในคืนนี้</span><br><span class="english-example">I <strong>will have generated</strong> the images by tonight.</span><br><span class="component-label"><strong>ส่วนประกอบ:</strong> <strong>I</strong> (Subject) + <strong>will have generated</strong> (Verb) + the images (ส่วนขยาย) + by tonight (ส่วนขยายเวลา)</span></li>
+                    <li><span class="thai-example">2. ไทย: ภายในปีหน้า พวกเราจะสร้างแพลตฟอร์มข้อมูล (Data Platform) เสร็จ</span><br><span class="english-example">By next year, we <strong>will have built</strong> the data platform.</span><br><span class="component-label"><strong>ส่วนประกอบ:</strong> By next year (ส่วนขยายเวลา) + <strong>we</strong> (Subject) + <strong>will have built</strong> (Verb) + the data platform (ส่วนขยาย)</span></li>
+                    <li><span class="thai-example">3. ไทย: โค๊ะจิคงจะกินอาหารเช้าเสร็จแล้วตอนที่ผมตื่นนอน</span><br><span class="english-example">Kojie <strong>will have eaten</strong> breakfast when I wake up.</span><br><span class="component-label"><strong>ส่วนประกอบ:</strong> <strong>Kojie</strong> (Subject, เอกพจน์) + <strong>will have eaten</strong> (Verb, ช่อง 3 ของ eat) + breakfast (ส่วนขยาย) + when I wake up (ส่วนขยายเวลา)</span></li>
+                    <li><span class="thai-example">4. ไทย: ภายในสิ้นปีนี้ เขาจะเรียนรู้เรื่อง Data Governance เสร็จแล้ว</span><br><span class="english-example">By the end of this year, he <strong>will have learned</strong> about Data Governance.</span><br><span class="component-label"><strong>ส่วนประกอบ:</strong> By the end of this year (ส่วนขยายเวลา) + <strong>he</strong> (Subject) + <strong>will have learned</strong> (Verb) + about Data Governance (ส่วนขยาย)</span></li>
+                    <li><span class="thai-example">5. ไทย: พี่แก้มจะอ่านหนังสือเล่มนี้เสร็จแล้วตอนที่ผมกลับถึงบ้าน</span><br><span class="english-example">Gam <strong>will have read</strong> this book when I come home.</span><br><span class="component-label"><strong>ส่วนประกอบ:</strong> <strong>Gam</strong> (Subject, เอกพจน์) + <strong>will have read</strong> (Verb, ช่อง 3 ของ read) + this book (ส่วนขยาย) + when I come home (ส่วนขยายเวลา)</span></li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="container-card">
+            <h2 class="section-title" id="tense-perfect-continuous">Tense สำหรับเหตุการณ์ที่ "สมบูรณ์และต่อเนื่อง"</h2>
+            
+            <!-- Present Perfect Continuous -->
+            <div class="mb-6 pb-4 border-b border-gray-200 last:border-b-0">
+                <h3 class="mb-2">10. Present Perfect Continuous (ปัจจุบันสมบูรณ์ต่อเนื่อง) <span class="text-xs font-normal text-red-600">[ADVANCED]</span></h3>
+                <p class="mb-1"><strong>การใช้งาน:</strong> การกระทำที่เริ่มในอดีตและยังคงดำเนินต่อเนื่องมาจนถึงปัจจุบัน</p>
+                <p class="mb-2"><strong>โครงสร้าง:</strong> Subject + has/have been + Verb-ing</p>
+                
+                <ul class="list-none space-y-2 text-sm">
+                    <li><span class="thai-example">1. ไทย: ผมฝึกภาษาอังกฤษมาเป็นเดือนแล้ว</span><br><span class="english-example">I <strong>have been learning</strong> English for a month.</span><br><span class="component-label"><strong>ส่วนประกอบ:</strong> <strong>I</strong> (Subject) + <strong>have been learning</strong> (Verb) + English (ส่วนขยาย) + for a month (ส่วนขยายเวลา)</span></li>
+                    <li><span class="thai-example">2. ไทย: ฝนตกมาตั้งแต่เช้า</span><br><span class="english-example">It <strong>has been raining</strong> since this morning.</span><br><span class="component-label"><strong>ส่วนประกอบ:</strong> <strong>It</strong> (Subject) + <strong>has been raining</strong> (Verb) + since this morning (ส่วนขยายเวลา)</span></li>
+                    <li><span class="thai-example">3. ไทย: ภรรยาของผมดูซีรีส์มาทั้งวันแล้ว</span><br><span class="english-example">My wife <strong>has been watching</strong> a TV series all day.</span><br><span class="component-label"><strong>ส่วนประกอบ:</strong> <strong>My wife</strong> (Subject, เอกพจน์) + <strong>has been watching</strong> (Verb) + a TV series (ส่วนขยาย) + all day (ส่วนขยายเวลา)</span></li>
+                    <li><span class="thai-example">4. ไทย: พวกเรากำลังทำความสะอาดบ้านกันมาเป็นชั่วโมงแล้ว</span><br><span class="english-example">We <strong>have been cleaning</strong> the house for an hour.</span><br><span class="component-label"><strong>ส่วนประกอบ:</strong> <strong>We</strong> (Subject) + <strong>have been cleaning</strong> (Verb) + the house (ส่วนขยาย) + for an hour (ส่วนขยายเวลา)</span></li>
+                    <li><span class="thai-example">5. ไทย: แซมเล่นเกมมาตั้งแต่ 10 โมงเช้า</span><br><span class="english-example">Sam <strong>has been playing</strong> games since 10 AM.</span><br><span class="component-label"><strong>ส่วนประกอบ:</strong> <strong>Sam</strong> (Subject, เอกพจน์) + <strong>has been playing</strong> (Verb) + games (ส่วนขยาย) + since 10 AM (ส่วนขยายเวลา)</span></li>
+                </ul>
+            </div>
+
+            <!-- Past Perfect Continuous -->
+            <div class="mb-6 pb-4 border-b border-gray-200 last:border-b-0">
+                <h3 class="mb-2">11. Past Perfect Continuous (อดีตสมบูรณ์ต่อเนื่อง) <span class="text-xs font-normal text-red-600">[ADVANCED]</span></h3>
+                <p class="mb-1"><strong>การใช้งาน:</strong> การกระทำที่ดำเนินมาอย่างต่อเนื่องก่อนอีกเหตุการณ์หนึ่งในอดีต</p>
+                <p class="mb-2"><strong>โครงสร้าง:</strong> Subject + had been + Verb-ing</p>
+                
+                <ul class="list-none space-y-2 text-sm">
+                    <li><span class="thai-example">1. ไทย: ผมเล่นเกม Game of Thrones มา 3 ชั่วโมงก่อนภรรยาจะโทรมา</span><br><span class="english-example">I <strong>had been playing</strong> Game of Thrones for 3 hours before my wife called.</span><br><span class="component-label"><strong>ส่วนประกอบ:</strong> <strong>I</strong> (Subject) + <strong>had been playing</strong> (Verb) + Game of Thrones (ส่วนขยาย) + for 3 hours (ส่วนขยายเวลา) + before my wife called (ส่วนขยาย)</span></li>
+                    <li><span class="thai-example">2. ไทย: พวกเรากำลังรอเขามา 20 นาทีแล้วตอนที่เขามาถึง</span><br><span class="english-example">We <strong>had been waiting</strong> for him for 20 minutes when he arrived.</span><br><span class="component-label"><strong>ส่วนประกอบ:</strong> <strong>We</strong> (Subject) + <strong>had been waiting</strong> (Verb) + for him (ส่วนขยาย) + for 20 minutes (ส่วนขยายเวลา) + when he arrived (ส่วนขยาย)</span></li>
+                    <li><span class="thai-example">3. ไทย: ผมหาข้อมูลมาทั้งวันแล้วก่อนที่จะตัดสินใจใช้ AI</span><br><span class="english-example">I <strong>had been searching</strong> for data all day before I decided to use AI.</span><br><span class="component-label"><strong>ส่วนประกอบ:</strong> <strong>I</strong> (Subject) + <strong>had been searching</strong> (Verb) + for data (ส่วนขยาย) + all day (ส่วนขยายเวลา) + before I decided to use AI (ส่วนขยาย)</span></li>
+                    <li><span class="thai-example">4. ไทย: โค๊ะจังกำลังหลับอยู่เป็นชั่วโมงแล้วก่อนที่ผมจะมาปลุกเธอ</span><br><span class="english-example">Khojung <strong>had been sleeping</strong> for an hour before I woke her up.</span><br><span class="component-label"><strong>ส่วนประกอบ:</strong> <strong>Khojung</strong> (Subject, เอกพจน์) + <strong>had been sleeping</strong> (Verb) + for an hour (ส่วนขยายเวลา) + before I woke her up (ส่วนขยาย)</span></li>
+                    <li><span class="thai-example">5. ไทย: เขาทำการบ้านมานานแล้วก่อนที่ครูจะมา</span><br><span class="english-example">He <strong>had been doing</strong> his homework for a long time before the teacher came.</span><br><span class="component-label"><strong>ส่วนประกอบ:</strong> <strong>He</strong> (Subject) + <strong>had been doing</strong> (Verb) + his homework (ส่วนขยาย) + for a long time (ส่วนขยายเวลา) + before the teacher came (ส่วนขยาย)</span></li>
+                </ul>
+            </div>
+            
+            <!-- Future Perfect Continuous -->
+            <div class="mb-6 pb-4 border-b border-gray-200 last:border-b-0">
+                <h3 class="mb-2">12. Future Perfect Continuous (อนาคตสมบูรณ์ต่อเนื่อง) <span class="text-xs font-normal text-red-600">[ADVANCED]</span></h3>
+                <p class="mb-1"><strong>การใช้งาน:</strong> การกระทำที่ดำเนินมาอย่างต่อเนื่องจนถึงเวลาหนึ่งในอนาคต</p>
+                <p class="mb-2"><strong>โครงสร้าง:</strong> Subject + will have been + Verb-ing</p>
+                
+                <ul class="list-none space-y-2 text-sm">
+                    <li><span class="thai-example">1. ไทย: ปีหน้า ผมจะทำงานที่ กฟภ. ครบ 25 ปี</span><br><span class="english-example">By next year, I <strong>will have been working</strong> at PEA for 25 years.</span><br><span class="component-label"><strong>ส่วนประกอบ:</strong> By next year (ส่วนขยายเวลา) + <strong>I</strong> (Subject) + <strong>will have been working</strong> (Verb) + at PEA (ส่วนขยาย) + for 25 years (ส่วนขยายเวลา)</span></li>
+                    <li><span class="thai-example">2. ไทย: เขาจะอาศัยอยู่ในประเทศไทยครบ 10 ปีภายในสิ้นเดือนนี้</span><br><span class="english-example">He <strong>will have been living</strong> in Thailand for 10 years by the end of this month.</span><br><span class="component-label"><strong>ส่วนประกอบ:</strong> <strong>He</strong> (Subject) + <strong>will have been living</strong> (Verb) + in Thailand (ส่วนขยาย) + for 10 years (ส่วนขยายเวลา) + by the end of this month (ส่วนขยายเวลา)</span></li>
+                    <li><span class="thai-example">3. ไทย: เมื่อเราถึงบ้าน แซมจะเล่นเกมมา 2 ชั่วโมงแล้ว</span><br><span class="english-example">Sam <strong>will have been playing</strong> games for 2 hours when we get home.</span><br><span class="component-label"><strong>ส่วนประกอบ:</strong> <strong>Sam</strong> (Subject, เอกพจน์) + <strong>will have been playing</strong> (Verb) + games (ส่วนขยาย) + for 2 hours (ส่วนขยายเวลา) + when we get home (ส่วนขยาย)</span></li>
+                    <li><span class="thai-example">4. ไทย: ภายในปี 2030 ผมจะสร้าง AI models มานานกว่า 5 ปี</span><br><span class="english-example">By 2030, I <strong>will have been developing</strong> AI models for more than 5 years.</span><br><span class="component-label"><strong>ส่วนประกอบ:</strong> By 2030 (ส่วนขยายเวลา) + <strong>I</strong> (Subject) + <strong>will have been developing</strong> (Verb) + AI models (ส่วนขยาย) + for more than 5 years (ส่วนขยายเวลา)</span></li>
+                    <li><span class="thai-example">5. ไทย: คุณพ่อกำลังขับรถมาเป็นชั่วโมงแล้วตอนที่พวกเราโทรไป</span><br><span class="english-example">My dad <strong>will have been driving</strong> for an hour when we call him.</span><br><span class="component-label"><strong>ส่วนประกอบ:</strong> <strong>My dad</strong> (Subject, เอกพจน์) + <strong>will have been driving</strong> (Verb) + for an hour (ส่วนขยายเวลา) + when we call him (ส่วนขยาย)</span></li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="container-card">
+            <h2 class="section-title" id="other-topics">เรื่องอื่น ๆ ที่ควรรู้นอกจาก Tense</h2>
+            
+            <!-- Subject-Verb Agreement -->
+            <div class="mb-6 pb-4 border-b border-gray-200 last:border-b-0">
+                <h3 class="mb-2">1. Subject-Verb Agreement (ประธานและกริยาต้องสอดคล้องกัน) <span class="text-xs font-normal text-green-600">[BASIC]</span></h3>
+                <p class="mb-1"><strong>การใช้งาน:</strong> ทำให้คำกริยา (Verb) เข้ากับประธาน (Subject) อย่างถูกต้อง</p>
+                <p class="mb-2"><strong>โครงสร้าง:</strong></p>
+                <ul class="list-disc ml-6 space-y-1 text-sm">
+                    <li><strong>ประธานเอกพจน์</strong> (He, She, It, Sam) + <strong>Verb เติม s/es</strong></li>
+                    <li><strong>ประธานพหูพจน์</strong> (I, You, We, They, My cats) + <strong>Verb ไม่ต้องเติม s/es</strong></li>
+                </ul>
+                <ul class="list-none space-y-2 text-sm mt-4">
+                    <li><span class="thai-example">1. ไทย: ผมทำงานที่ กฟภ.</span><br><span class="english-example"><strong>I</strong> <strong>work</strong> at PEA.</span><br><span class="component-label"><strong>ส่วนประกอบ:</strong> <strong>I</strong> (Subject, พหูพจน์) + <strong>work</strong> (Verb, ไม่เติม s)</span></li>
+                    <li><span class="thai-example">2. ไทย: แซมเล่นเกมเก่ง</span><br><span class="english-example"><strong>Sam</strong> <strong>plays</strong> games well.</span><br><span class="component-label"><strong>ส่วนประกอบ:</strong> <strong>Sam</strong> (Subject, เอกพจน์) + <strong>plays</strong> (Verb, เติม s)</span></li>
+                    <li><span class="thai-example">3. ไทย: ภรรยาของผมชอบทำอาหาร</span><br><span class="english-example"><strong>My wife</strong> <strong>likes</strong> to cook.</span><br><span class="component-label"><strong>ส่วนประกอบ:</strong> <strong>My wife</strong> (Subject, เอกพจน์) + <strong>likes</strong> (Verb, เติม s)</span></li>
+                    <li><span class="thai-example">4. ไทย: แมวของผมชอบนอนบนโซฟา</span><br><span class="english-example"><strong>My cats</strong> <strong>love</strong> to sleep on the sofa.</span><br><span class="component-label"><strong>ส่วนประกอบ:</strong> <strong>My cats</strong> (Subject, พหูพจน์) + <strong>love</strong> (Verb, ไม่เติม s)</span></li>
+                    <li><span class="thai-example">5. ไทย: พวกเราวิเคราะห์ข้อมูลทุกวัน</span><br><span class="english-example"><strong>We</strong> <strong>analyze</strong> data every day.</span><br><span class="component-label"><strong>ส่วนประกอบ:</strong> <strong>We</strong> (Subject, พหูพจน์) + <strong>analyze</strong> (Verb, ไม่เติม s)</span></li>
+                </ul>
+            </div>
+
+            <!-- Parts of Speech -->
+            <div class="mb-6 pb-4 border-b border-gray-200 last:border-b-0">
+                <h3 class="mb-2">2. Parts of Speech (ชนิดของคำ) <span class="text-xs font-normal text-green-600">[BASIC]</span></h3>
+                <p class="mb-1"><strong>การใช้งาน:</strong> รู้จักหน้าที่ของแต่ละคำ เพื่อประกอบประโยคได้อย่างถูกต้องและเข้าใจความหมาย</p>
+                <p class="mb-2"><strong>โครงสร้าง:</strong> คำแต่ละชนิดมีหน้าที่แตกต่างกันในประโยค</p>
+                
+                <ul class="list-none space-y-2 text-sm">
+                    <li><span class="thai-example">1. ไทย: ผมวิเคราะห์ข้อมูลสำคัญ</span><br><span class="english-example">I analyze <strong>important</strong> <strong>data</strong>.</span><br><span class="component-label"><strong>ส่วนประกอบ:</strong> <strong>important</strong> (Adjective, ขยายคำนาม) + <strong>data</strong> (Noun, คำนาม)</span></li>
+                    <li><span class="thai-example">2. ไทย: พวกเราทำโครงการใหม่สำเร็จอย่างรวดเร็ว</span><br><span class="english-example">We finished the new project <strong>quickly</strong>.</span><br><span class="component-label"><strong>ส่วนประกอบ:</strong> <strong>quickly</strong> (Adverb, ขยายคำกริยา finished)</span></li>
+                    <li><span class="thai-example">3. ไทย: ผมและภรรยาดูหนังด้วยกัน</span><br><span class="english-example"><strong>My wife and I</strong> watched a movie together.</span><br><span class="component-label"><strong>ส่วนประกอบ:</strong> <strong>My wife and I</strong> (Noun, คำนาม)</span></li>
+                    <li><span class="thai-example">4. ไทย: โค๊ะจิเป็นแมวที่น่ารัก</span><br><span class="english-example">Kojie is a <strong>cute</strong> cat.</span><br><span class="component-label"><strong>ส่วนประกอบ:</strong> <strong>cute</strong> (Adjective, ขยายคำนาม cat)</span></li>
+                    <li><span class="thai-example">5. ไทย: ผมวิเคราะห์ข้อมูลอย่างระมัดระวัง</span><br><span class="english-example">I analyze data <strong>carefully</strong>.</span><br><span class="component-label"><strong>ส่วนประกอบ:</strong> <strong>carefully</strong> (Adverb, ขยายคำกริยา analyze)</span></li>
+                </ul>
+            </div>
+
+            <!-- Prepositions -->
+            <div class="mb-6 pb-4 border-b border-gray-200 last:border-b-0">
+                <h3 class="mb-2">3. Prepositions (คำบุพบท) <span class="text-xs font-normal text-green-600">[BASIC]</span></h3>
+                <p class="mb-1"><strong>การใช้งาน:</strong> ใช้เชื่อมคำหรือวลีในประโยค เพื่อบอกความสัมพันธ์ในเรื่องของเวลา, สถานที่ หรือทิศทาง</p>
+                <p class="mb-2"><strong>โครงสร้าง:</strong> Preposition + Noun/Pronoun</p>
+                
+                <ul class="list-none space-y-2 text-sm">
+                    <li><span class="thai-example">1. ไทย: ผมทำงานที่ กฟภ.</span><br><span class="english-example">I work <strong>at</strong> PEA.</span><br><span class="component-label"><strong>ส่วนประกอบ:</strong> <strong>at</strong> (Preposition) + PEA (สถานที่)</span></li>
+                    <li><span class="thai-example">2. ไทย: การประชุมเริ่มตอน 9 โมงเช้า</span><br><span class="english-example">The meeting starts <strong>at</strong> 9 AM.</span><br><span class="component-label"><strong>ส่วนประกอบ:</strong> <strong>at</strong> (Preposition) + 9 AM (เวลา)</span></li>
+                    <li><span class="thai-example">3. ไทย: ข้อมูลนี้สำหรับโครงการใหม่</span><br><span class="english-example">This data is <strong>for</strong> the new project.</span><br><span class="component-label"><strong>ส่วนประกอบ:</strong> <strong>for</strong> (Preposition) + the new project (วัตถุประสงค์)</span></li>
+                    <li><span class="thai-example">4. ไทย: ผมคุยกับภรรยา</span><br><span class="english-example">I talk <strong>with</strong> my wife.</span><br><span class="component-label"><strong>ส่วนประกอบ:</strong> <strong>with</strong> (Preposition) + my wife (คน)</span></li>
+                    <li><span class="thai-example">5. ไทย: แซมเรียนหนังสือกับเพื่อนของเขา</span><br><span class="english-example">Sam studies <strong>with</strong> his friends.</span><br><span class="component-label"><strong>ส่วนประกอบ:</strong> <strong>with</strong> (Preposition) + his friends (คน)</span></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const hamburger = document.getElementById('hamburger-menu');
+            const mobileMenu = document.getElementById('mobile-menu');
+            const closeBtn = document.getElementById('close-menu');
+            
+            hamburger.addEventListener('click', () => {
+                mobileMenu.classList.add('open');
+            });
+
+            closeBtn.addEventListener('click', () => {
+                mobileMenu.classList.remove('open');
+            });
+            
+            const menuLinks = mobileMenu.querySelectorAll('a');
+            menuLinks.forEach(link => {
+                link.addEventListener('click', () => {
+                    mobileMenu.classList.remove('open');
+                });
+            });
+        });
+
+        // Function to close the menu, used in inline onclick
+        function closeMenu() {
+            document.getElementById('mobile-menu').classList.remove('open');
+        }
+    </script>
+</body>
+</html>
