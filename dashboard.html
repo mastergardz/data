@@ -1,0 +1,328 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>กลยุทธ์การบูรณาการแดชบอร์ดระดับภาค</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=sarabun:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <!-- Chosen Palette: Warm Neutrals -->
+    <!-- Application Structure Plan: The application is structured as a narrative journey, starting with the core problem, presenting the two conflicting current approaches side-by-side for clear comparison, then introducing the proposed "Hybrid" model as the hero solution. It then details roles and responsibilities and concludes with a visual representation of expected outcomes using a chart. This thematic, storytelling structure was chosen over a simple list to guide the user logically from problem to solution, making the strategic plan more persuasive and easier to understand for all stakeholders. Navigation allows users to jump to sections they are most interested in. -->
+    <!-- Visualization & Content Choices: 1. Problem: Goal(Compare), Viz(Side-by-side HTML diagrams), Interaction(None), Justification(Clearly contrasts the pros and cons of the two existing systems, IMS and PEAEX). 2. Solution: Goal(Organize), Viz(Central HTML flowchart), Interaction(None), Justification(Visually merges the two concepts into the new Hybrid model, showing how the foundation supports custom applications). 3. Outcomes: Goal(Compare/Inform), Viz(Chart.js Bar Chart), Interaction(Tooltips on hover), Justification(Provides a quick, impactful visual summary of the benefits, comparing the 'before' and 'after' states across key metrics). All textual content is organized in cards and lists for readability. -->
+    <!-- CONFIRMATION: NO SVG graphics used. NO Mermaid JS used. -->
+    <style>
+        body {
+            font-family: 'Sarabun', sans-serif;
+            background-color: #FDFBF6;
+            color: #3C3633;
+        }
+        .chart-container {
+            position: relative;
+            width: 100%;
+            max-width: 800px;
+            margin-left: auto;
+            margin-right: auto;
+            height: 300px;
+            max-height: 450px;
+        }
+        @media (min-width: 768px) {
+            .chart-container {
+                height: 400px;
+            }
+        }
+        .nav-link {
+            transition: color 0.3s, border-bottom-color 0.3s;
+            border-bottom: 2px solid transparent;
+        }
+        .nav-link:hover, .nav-link.active {
+            color: #E07A5F;
+            border-bottom-color: #E07A5F;
+        }
+        .flow-box {
+            border: 2px solid #81B29A;
+            background-color: #F7F5F2;
+        }
+        .flow-arrow {
+            font-size: 2rem;
+            color: #81B29A;
+        }
+        .tab.active {
+            background-color: #E07A5F;
+            color: #FDFBF6;
+        }
+        .tab-content {
+            display: none;
+        }
+        .tab-content.active {
+            display: block;
+        }
+    </style>
+</head>
+<body class="antialiased">
+    <header class="bg-[#F7F5F2]/80 backdrop-blur-sm sticky top-0 z-50 shadow-sm">
+        <nav class="container mx-auto px-6 py-3 flex justify-between items-center">
+            <h1 class="text-xl md:text-2xl font-bold text-[#3C3633]">PEA Dashboard Strategy</h1>
+            <div class="hidden md:flex space-x-8">
+                <a href="#problem" class="nav-link font-medium pb-1">ปัญหา</a>
+                <a href="#solution" class="nav-link font-medium pb-1">แนวทางแก้ไข</a>
+                <a href="#stakeholders" class="nav-link font-medium pb-1">ผู้เกี่ยวข้อง</a>
+                <a href="#outcomes" class="nav-link font-medium pb-1">ผลลัพธ์</a>
+            </div>
+        </nav>
+    </header>
+
+    <main class="container mx-auto px-6 py-8 md:py-12">
+        <section id="intro" class="text-center mb-16">
+            <h2 class="text-3xl md:text-4xl font-bold text-[#E07A5F] mb-4">การบูรณาการแดชบอร์ดระดับภาค</h2>
+            <p class="text-lg md:text-xl max-w-3xl mx-auto text-gray-700">
+                สร้างมาตรฐานกลางเพื่อรวมจุดแข็งของแดชบอร์ดทั้ง 2 รูปแบบ นำไปสู่ระบบที่ **สร้างง่าย** และ **ใช้งานง่าย** เปลี่ยนข้อมูลให้เป็นเข็มทิศนำทางองค์กรสู่การเติบโตอย่างยั่งยืน
+            </p>
+        </section>
+
+        <section id="problem" class="mb-16 scroll-mt-20">
+            <h3 class="text-2xl md:text-3xl font-bold text-center mb-2">ปัญหาและความท้าทายในปัจจุบัน</h3>
+            <p class="text-center text-gray-600 mb-10">แต่ละภาคมีแนวทางการสร้างแดชบอร์ดที่แตกต่างกัน ทำให้ขาดมาตรฐานและประสิทธิภาพ</p>
+            <div class="grid md:grid-cols-2 gap-8">
+                <div class="bg-white p-6 rounded-xl shadow-lg border border-gray-200">
+                    <h4 class="text-xl font-bold text-center mb-4 text-[#3C3633]">ภาคเหนือและตะวันออกเฉียงเหนือ (IMS)</h4>
+                    <p class="text-center text-gray-500 text-sm mb-6">"Top-Down Approach: KPI-to-Dashboard"</p>
+                    <div class="flex flex-col items-center space-y-4">
+                        <div class="flow-box w-full p-3 rounded-lg text-center font-semibold">เริ่มต้นจาก KPI</div>
+                        <div class="flow-arrow">↓</div>
+                        <div class="flow-box w-full p-3 rounded-lg text-center font-semibold">ผสมผสานและปรับแต่งข้อมูล</div>
+                        <div class="flow-arrow">↓</div>
+                        <div class="flow-box w-full p-3 rounded-lg text-center font-semibold bg-[#81B29A] text-white">ได้แดชบอร์ดที่สรุปผลแล้ว</div>
+                    </div>
+                    <div class="mt-6 pt-6 border-t">
+                         <h5 class="font-semibold mb-2">สรุป:</h5>
+                         <ul class="space-y-2">
+                             <li class="flex items-start"><span class="text-green-500 mr-2">✔</span> <strong>ข้อดี:</strong> ใช้งานง่าย ผู้บริหารเข้าใจได้ทันที</li>
+                             <li class="flex items-start"><span class="text-red-500 mr-2">✘</span> <strong>ข้อเสีย:</strong> ต้องปรับแต่งข้อมูลเยอะ ไม่สามารถทำ Automation ได้เต็มที่</li>
+                         </ul>
+                    </div>
+                </div>
+                
+                <div class="bg-white p-6 rounded-xl shadow-lg border border-gray-200">
+                    <h4 class="text-xl font-bold text-center mb-4 text-[#3C3633]">ภาคกลางและภาคใต้ (PEAEX)</h4>
+                    <p class="text-center text-gray-500 text-sm mb-6">"Bottom-Up Approach: Data-to-Dashboard"</p>
+                    <div class="flex flex-col items-center space-y-4">
+                        <div class="flow-box w-full p-3 rounded-lg text-center font-semibold">เริ่มต้นจากข้อมูลดิบ</div>
+                         <div class="flow-arrow">↓</div>
+                        <div class="flow-box w-full p-3 rounded-lg text-center font-semibold">Data Pipeline อัตโนมัติ</div>
+                         <div class="flow-arrow">↓</div>
+                        <div class="flow-box w-full p-3 rounded-lg text-center font-semibold bg-[#81B29A] text-white">ได้แดชบอร์ดข้อมูล</div>
+                    </div>
+                    <div class="mt-6 pt-6 border-t">
+                        <h5 class="font-semibold mb-2">สรุป:</h5>
+                         <ul class="space-y-2">
+                             <li class="flex items-start"><span class="text-green-500 mr-2">✔</span> <strong>ข้อดี:</strong> สร้างง่าย วางระบบ Automation ได้</li>
+                             <li class="flex items-start"><span class="text-red-500 mr-2">✘</span> <strong>ข้อเสีย:</strong> ผู้ใช้ต้องมีประสบการณ์ในการตีความข้อมูลเอง</li>
+                         </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="solution" class="mb-16 scroll-mt-20">
+            <h3 class="text-2xl md:text-3xl font-bold text-center mb-2 text-[#E07A5F]">แนวทางแก้ไข: Hybrid Approach</h3>
+            <p class="text-center text-gray-600 mb-10 max-w-2xl mx-auto">ผสานจุดแข็งของทั้งสองแนวทาง โดยแบ่งบทบาทชัดเจนระหว่าง "งานรากฐาน" และ "งานปลายทาง" เพื่อสร้างระบบที่ยั่งยืน</p>
+            <div class="bg-white p-8 rounded-xl shadow-lg border border-gray-200">
+                <div class="w-full text-center p-4 rounded-lg flow-box mb-4">
+                    <h5 class="font-bold text-lg">งานรากฐาน (Bottom-Up): โดย ทีม กจข.</h5>
+                    <p>สร้าง Data Pipeline ที่แข็งแกร่ง เพื่อรวบรวมข้อมูลดิบคุณภาพสูงและพร้อมใช้</p>
+                </div>
+                <div class="flex justify-center text-4xl my-4 text-[#81B29A]">↓</div>
+                 <div class="grid md:grid-cols-2 gap-8">
+                     <div class="flex flex-col items-center">
+                         <div class="flow-box w-full p-4 rounded-lg text-center">
+                             <h5 class="font-bold text-lg">งานปลายทาง (Top-Down)</h5>
+                             <p>ภาคเหนือและภาคตะวันออกเฉียงเหนือ กำหนด KPI</p>
+                         </div>
+                         <div class="flow-arrow my-2">↓</div>
+                         <div class="w-full p-4 rounded-lg text-center bg-[#E07A5F] text-white font-bold">
+                             แดชบอร์ดสำหรับภาคเหนือ, ตะวันออกเฉียงเหนือ
+                         </div>
+                     </div>
+                     <div class="flex flex-col items-center">
+                          <div class="flow-box w-full p-4 rounded-lg text-center">
+                             <h5 class="font-bold text-lg">งานปลายทาง (Top-Down)</h5>
+                             <p>ภาคกลางและภาคใต้ กำหนด KPI</p>
+                         </div>
+                         <div class="flow-arrow my-2">↓</div>
+                         <div class="w-full p-4 rounded-lg text-center bg-[#E07A5F] text-white font-bold">
+                             แดชบอร์ดสำหรับภาคกลาง, ใต้
+                         </div>
+                     </div>
+                 </div>
+            </div>
+        </section>
+
+        <section id="stakeholders" class="mb-16 scroll-mt-20">
+            <h3 class="text-2xl md:text-3xl font-bold text-center mb-10">ผู้มีส่วนได้ส่วนเสีย (Stakeholders)</h3>
+            <div class="max-w-3xl mx-auto">
+                <div class="flex border-b border-gray-300 mb-6">
+                    <button class="tab active flex-1 py-2 px-4 text-center font-medium rounded-t-lg" onclick="openTab(event, 'coordinator')">ผู้ขับเคลื่อน</button>
+                    <button class="tab flex-1 py-2 px-4 text-center font-medium rounded-t-lg" onclick="openTab(event, 'builders')">ผู้สร้าง</button>
+                    <button class="tab flex-1 py-2 px-4 text-center font-medium rounded-t-lg" onclick="openTab(event, 'users')">ผู้ใช้งาน</button>
+                </div>
+                <div id="coordinator" class="tab-content active bg-white p-6 rounded-lg shadow">
+                    <h4 class="font-bold text-lg text-[#E07A5F]">ผู้ประสานงานและขับเคลื่อน</h4>
+                    <p class="text-gray-700 mt-2"><strong>ผู้อำนวยการกองบริหารจัดการข้อมูล (กจข.):</strong> ทำหน้าที่ประสานงานและผลักดันให้การบูรณาการนี้ประสบความสำเร็จ</p>
+                </div>
+                <div id="builders" class="tab-content bg-white p-6 rounded-lg shadow">
+                    <h4 class="font-bold text-lg text-[#E07A5F]">ผู้สร้าง</h4>
+                    <ul class="list-disc list-inside mt-2 space-y-2 text-gray-700">
+                        <li><strong>ทีม กจข.:</strong> วางรากฐาน Data Pipeline และสนับสนุนเครื่องมือในการจัดทำแดชบอร์ด</li>
+                        <li><strong>ทีมระดับภาค (น, ฉ, ก, ต):</strong> ทั้งเจ้าหน้าที่และผู้บริหารร่วมกันกำหนดมุมมอง, KPI และจัดทำแดชบอร์ดตามความต้องการ</li>
+                    </ul>
+                </div>
+                <div id="users" class="tab-content bg-white p-6 rounded-lg shadow">
+                    <h4 class="font-bold text-lg text-[#E07A5F]">ผู้ใช้งาน</h4>
+                    <p class="text-gray-700 mt-2">ผู้บริหารและเจ้าหน้าที่ทุกหน่วยงานที่ต้องการนำข้อมูลไปใช้ประกอบการตัดสินใจ เพื่อขับเคลื่อนองค์กร</p>
+                </div>
+            </div>
+        </section>
+
+        <section id="outcomes" class="scroll-mt-20">
+            <h3 class="text-2xl md:text-3xl font-bold text-center mb-10">ผลลัพธ์ที่คาดหวังและความเสี่ยง</h3>
+            <div class="grid lg:grid-cols-5 gap-8">
+                <div class="lg:col-span-3 bg-white p-6 rounded-xl shadow-lg border border-gray-200">
+                    <h4 class="text-xl font-bold mb-4 text-center">เปรียบเทียบประสิทธิภาพก่อน-หลัง</h4>
+                    <p class="text-center text-gray-600 text-sm mb-6">แนวทาง Hybrid จะช่วยลดความซับซ้อนและเพิ่มความสม่ำเสมอของข้อมูล</p>
+                    <div class="chart-container">
+                        <canvas id="outcomesChart"></canvas>
+                    </div>
+                </div>
+                <div class="lg:col-span-2 space-y-6">
+                    <div class="bg-white p-6 rounded-xl shadow-lg border border-gray-200 h-full">
+                        <h4 class="font-bold text-lg mb-3 text-green-600">ผลลัพธ์ที่คาดหวัง</h4>
+                        <ul class="list-disc list-inside space-y-2 text-gray-700">
+                            <li>แดชบอร์ดใช้งานง่าย</li>
+                            <li>บริหารจัดการข้อมูลมีประสิทธิภาพ</li>
+                            <li>มีความยืดหยุ่นสูง</li>
+                            <li>ประหยัดเวลาและทรัพยากร</li>
+                        </ul>
+                    </div>
+                     <div class="bg-white p-6 rounded-xl shadow-lg border-2 border-amber-400 h-full">
+                        <h4 class="font-bold text-lg mb-3 text-amber-600">ความเสี่ยงที่ต้องพิจารณา</h4>
+                        <ul class="list-disc list-inside space-y-2 text-gray-700">
+                            <li>การต่อต้านการเปลี่ยนแปลง</li>
+                            <li>KPI ที่ไม่ชัดเจน</li>
+                            <li>การขาดความร่วมมือในการแชร์ข้อมูล</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <footer class="bg-[#F7F5F2] mt-16 py-6 border-t">
+        <div class="container mx-auto px-6 text-center text-gray-500">
+            <p>&copy; 2025 PEA Data Management Division. All Rights Reserved.</p>
+        </div>
+    </footer>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const chartCtx = document.getElementById('outcomesChart').getContext('2d');
+            const outcomesChart = new Chart(chartCtx, {
+                type: 'bar',
+                data: {
+                    labels: ['เวลาในการสร้าง', 'ความซับซ้อนในการตีความ', 'ความสอดคล้องของข้อมูล'],
+                    datasets: [{
+                        label: 'ก่อน (ค่าเฉลี่ยปัจจุบัน)',
+                        data: [7, 8, 3],
+                        backgroundColor: 'rgba(129, 178, 154, 0.6)',
+                        borderColor: 'rgba(129, 178, 154, 1)',
+                        borderWidth: 1
+                    }, {
+                        label: 'หลัง (เป้าหมาย Hybrid)',
+                        data: [3, 2, 9],
+                        backgroundColor: 'rgba(224, 122, 95, 0.6)',
+                        borderColor: 'rgba(224, 122, 95, 1)',
+                        borderWidth: 1
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    scales: {
+                        y: {
+                            beginAtZero: true,
+                            max: 10,
+                             ticks: {
+                                callback: function(value, index, values) {
+                                    if(value === 10) return 'สูง';
+                                    if(value === 5) return 'ปานกลาง';
+                                    if(value === 0) return 'ต่ำ';
+                                    return '';
+                                }
+                            }
+                        }
+                    },
+                    plugins: {
+                        title: {
+                            display: false,
+                            text: 'เปรียบเทียบประสิทธิภาพ'
+                        },
+                        tooltip: {
+                            callbacks: {
+                                label: function(context) {
+                                    let label = context.dataset.label || '';
+                                    if (label) {
+                                        label += ': ';
+                                    }
+                                    if (context.parsed.y !== null) {
+                                        label += context.parsed.y + ' / 10';
+                                    }
+                                    return label;
+                                }
+                            }
+                        }
+                    }
+                }
+            });
+            
+            const navLinks = document.querySelectorAll('.nav-link');
+            const sections = document.querySelectorAll('main section');
+
+            window.addEventListener('scroll', () => {
+                let current = '';
+                sections.forEach(section => {
+                    const sectionTop = section.offsetTop;
+                    if (pageYOffset >= sectionTop - 80) {
+                        current = section.getAttribute('id');
+                    }
+                });
+
+                navLinks.forEach(link => {
+                    link.classList.remove('active');
+                    if (link.getAttribute('href') === `#${current}`) {
+                        link.classList.add('active');
+                    }
+                });
+            });
+        });
+
+        function openTab(event, tabName) {
+            let i, tabcontent, tablinks;
+            tabcontent = document.getElementsByClassName("tab-content");
+            for (i = 0; i < tabcontent.length; i++) {
+                tabcontent[i].style.display = "none";
+                tabcontent[i].classList.remove('active');
+            }
+            tablinks = document.getElementsByClassName("tab");
+            for (i = 0; i < tablinks.length; i++) {
+                tablinks[i].classList.remove("active");
+            }
+            document.getElementById(tabName).style.display = "block";
+            document.getElementById(tabName).classList.add('active');
+            event.currentTarget.classList.add("active");
+        }
+    </script>
+</body>
+</html>
