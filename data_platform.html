@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>เส้นทางเปลี่ยนข้อมูลสู่เข็มทิศองค์กร</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #f3f4f6;
+        }
+        .container {
+            max-width: 1200px;
+        }
+        .card {
+            border-radius: 12px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease;
+        }
+        .card:hover {
+            transform: translateY(-5px);
+        }
+        .text-gradient {
+            background-image: linear-gradient(to right, #6b46c1, #9f7aea);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        .icon {
+            font-size: 2.5rem;
+            color: #9f7aea;
+        }
+    </style>
+</head>
+<body class="p-8">
+
+    <div class="container mx-auto">
+        <header class="text-center mb-12">
+            <h1 class="text-4xl sm:text-5xl font-extrabold text-gray-900 mb-4">
+                <span class="text-gradient">เส้นทางเปลี่ยนข้อมูลสู่เข็มทิศองค์กร</span>
+            </h1>
+            <p class="text-lg sm:text-xl text-gray-600">แผนภาพกระบวนการจัดการข้อมูลแบบครบวงจร</p>
+        </header>
+
+        <!-- Process-Driven Phase -->
+        <div class="bg-white p-8 mb-12 rounded-lg card">
+            <h2 class="text-3xl font-bold text-gray-800 mb-4">1. ส่วนของกระบวนการ (Process-Driven Phase)</h2>
+            <p class="text-gray-600 mb-4">
+                นี่คือขั้นตอนเริ่มต้นที่สำคัญที่สุดและเป็นงานที่เน้นเรื่อง **คน** และ **กลยุทธ์** เป็นหลัก
+            </p>
+            <div class="p-6 bg-purple-50 rounded-lg">
+                <h3 class="text-2xl font-semibold text-purple-700 mb-2">งาน:</h3>
+                <p class="text-gray-700">คือการ **คัดเลือกชุดข้อมูล (Data Curation)** เพื่อนำมากำกับดูแลก่อนหลัง โดยพิจารณาจากความสำคัญทางธุรกิจและกฎหมาย</p>
+                <h3 class="text-2xl font-semibold text-purple-700 mt-4 mb-2">ปัญหาหลัก:</h3>
+                <p class="text-gray-700">ปัญหาที่ยากที่สุดในขั้นตอนนี้คือการ **ระบุและกำหนดเจ้าของข้อมูล (Data Owner)**</p>
+            </div>
+        </div>
+
+        <!-- Tool-Driven Phase -->
+        <div class="bg-white p-8 rounded-lg card">
+            <h2 class="text-3xl font-bold text-gray-800 mb-4">2. ส่วนของการใช้เครื่องมือ (Tool-Driven Phase)</h2>
+            <p class="text-gray-600 mb-6">
+                เมื่อผ่านขั้นตอนแรกและมีข้อมูลที่พร้อมจะนำมาจัดการแล้ว ก็จะเข้าสู่โลกของเครื่องมือ โดยเครื่องมือที่ใช้จะแตกต่างกันไปตามประเภทของข้อมูล
+            </p>
+
+            <div class="grid md:grid-cols-2 gap-8">
+                <!-- Data not ready for connection -->
+                <div class="p-6 bg-gray-100 rounded-lg shadow-sm">
+                    <h3 class="text-2xl font-semibold text-gray-700 mb-2">ข้อมูลที่ไม่พร้อมเชื่อมต่อ</h3>
+                    <p class="text-gray-600 mb-4">
+                        ข้อมูลประเภทนี้จะทำได้แค่ **การกำกับดูแล (Governance)** เท่านั้น
+                    </p>
+                    <div class="bg-white p-4 rounded-lg shadow-md">
+                        <p class="font-bold text-gray-800 mb-2">เครื่องมือที่เหมาะสม:</p>
+                        <p class="text-gray-700">ใช้ **Data Catalog** (เช่น **Apache Atlas**) เพื่อทำหน้าที่เป็นที่เก็บ **Metadata** (คำอธิบายข้อมูล, เจ้าของ, ระดับความลับ)</p>
+                    </div>
+                </div>
+
+                <!-- Data ready for connection -->
+                <div class="p-6 bg-gray-100 rounded-lg shadow-sm">
+                    <h3 class="text-2xl font-semibold text-gray-700 mb-2">ข้อมูลที่พร้อมเชื่อมต่อ</h3>
+                    <p class="text-gray-600 mb-4">
+                        ข้อมูลประเภทนี้จะทำได้แบบ **ครบวงจร (End-to-End)** โดยใช้แพลตฟอร์มเดียวจัดการทุกขั้นตอน
+                    </p>
+                    <div class="bg-white p-4 rounded-lg shadow-md">
+                        <p class="font-bold text-gray-800 mb-2">แพลตฟอร์มแนะนำ:</p>
+                        <p class="text-gray-700">**Microsoft Fabric** ซึ่งรวมทุกขั้นตอนไว้ในที่เดียว</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- End-to-End Process -->
+            <div class="mt-8 bg-white p-8 rounded-lg card">
+                <h3 class="text-2xl font-bold text-gray-800 mb-6 text-center">กระบวนการ End-to-End: การทำงานแบบครบวงจรสำหรับข้อมูลที่พร้อมเชื่อมต่อ</h3>
+                
+                <div class="p-6 bg-purple-50 rounded-lg mb-4">
+                    <h4 class="text-xl font-semibold text-purple-700 mb-2">1. การกำกับดูแล (Data Governance)</h4>
+                    <p class="text-gray-700 mb-2">ในขั้นตอนนี้ แพลตฟอร์มจะช่วยให้งานของ **แผนกกํากับดูแลข้อมูลองค์กร (ผกข.)** ง่ายขึ้นมากค่ะ</p>
+                    <ul class="list-disc list-inside text-gray-700 pl-4">
+                        <li>**การค้นหาข้อมูล (Data Discovery) อัตโนมัติ:** แพลตฟอร์มจะสามารถเชื่อมต่อและสแกนแหล่งข้อมูลเพื่อเก็บ **Metadata** ได้โดยอัตโนมัติ</li>
+                        <li>**สร้าง Data Catalog อัจฉริยะ:** Metadata ทั้งหมดจะถูกรวบรวมไว้ใน **Data Catalog** ทำให้ค้นหาข้อมูลได้ง่าย และระบุ **เจ้าของข้อมูล (Data Owner)** ได้อย่างชัดเจน</li>
+                        <li>**การจัดระดับชั้นความลับ (Data Classification):** แพลตฟอร์มจะช่วยสแกนและแนะนำการจัดระดับชั้นความลับให้กับชุดข้อมูล เพื่อให้เป็นไปตาม **Data Policy** และ **PDPA**</li>
+                        <li>**สายใยข้อมูล (Data Lineage):** ระบบจะสร้างแผนภาพแสดงที่มาที่ไปของข้อมูลให้โดยอัตโนมัติ ทำให้เห็นได้ทันทีว่าข้อมูลชุดนี้ถูกนำไปใช้ที่ไหนบ้าง</li>
+                    </ul>
+                    <div class="mt-4 border-t pt-4">
+                        <p class="font-bold text-gray-800 mb-2">ตัวอย่างเครื่องมือ:</p>
+                        <ul class="list-disc list-inside text-gray-700 pl-4">
+                            <li><span class="font-semibold">Open Source:</span> **Apache Atlas**, **Amundsen** (ใช้สร้าง Data Catalog)</li>
+                            <li><span class="font-semibold">Commercial:</span> **Collibra**, **Alation**, **Informatica** (มีแพลตฟอร์ม Data Governance ครบวงจร)</li>
+                        </ul>
+                    </div>
+                </div>
+            
+                <div class="p-6 bg-purple-50 rounded-lg mb-4">
+                    <h4 class="text-xl font-semibold text-purple-700 mb-2">2. การเตรียมความพร้อม (Data Preparation)</h4>
+                    <p class="text-gray-700 mb-2">เป็นหน้าที่ของ **แผนกบริหารจัดการและตรวจวัดคุณภาพข้อมูล (ผบค.)** และ **แผนกบริหารจัดการแพลตฟอร์มข้อมูล (ผบพ.)** ซึ่งเครื่องมือจะช่วยลดภาระงานหนักไปได้มากค่ะ</p>
+                    <ul class="list-disc list-inside text-gray-700 pl-4">
+                        <li>**การนำเข้าข้อมูล (Data Ingestion):** แพลตฟอร์มจะมีเครื่องมือ **Data Pipeline** ในตัวที่สร้าง Workflow การดึงข้อมูลจากแหล่งต้นทาง (ทั้งแบบ Batch และ Real-time) และนำเข้ามาเก็บไว้ใน Data Lakehouse</li>
+                        <li>**การตรวจสอบและทำความสะอาด (Data Quality & Cleansing):** แพลตฟอร์มจะตรวจสอบคุณภาพข้อมูลไปพร้อมกับการนำเข้าและสามารถทำความสะอาดข้อมูลให้ถูกต้องได้เลย</li>
+                    </ul>
+                    <div class="mt-4 border-t pt-4">
+                        <p class="font-bold text-gray-800 mb-2">ตัวอย่างเครื่องมือ:</p>
+                        <ul class="list-disc list-inside text-gray-700 pl-4">
+                            <li><span class="font-semibold">Open Source:</span> **Apache Airflow**, **Apache Kafka** (สำหรับ Ingestion), **Great Expectations** (สำหรับ Data Quality)</li>
+                            <li><span class="font-semibold">Commercial:</span> **Fivetran**, **Talend**, **Informatica** (สำหรับ ETL/Ingestion), **Trifacta** (สำหรับ Data Wrangling)</li>
+                        </ul>
+                    </div>
+                </div>
+            
+                <div class="p-6 bg-purple-50 rounded-lg mb-4">
+                    <h4 class="text-xl font-semibold text-purple-700 mb-2">3. การให้บริการข้อมูล (Data Service)</h4>
+                    <p class="text-gray-700 mb-2">เมื่อข้อมูลมีคุณภาพแล้ว ก็จะเข้าสู่ขั้นตอนการให้บริการ ที่ **แผนกบริหารจัดการและสนับสนุนการใช้ข้อมูลขับเคลื่อนองค์กร (ผบข.)** และ **แผนกบริหารจัดการแพลตฟอร์มข้อมูล (ผบพ.)** เป็นผู้ดูแล</p>
+                    <ul class="list-disc list-inside text-gray-700 pl-4">
+                        <li>**ระบบร้องขออัตโนมัติ:** ผู้ใช้สามารถเข้ามาใน **Data Catalog** เพื่อร้องขอสิทธิการเข้าถึงข้อมูลได้ทันที</li>
+                        <li>**การควบคุมสิทธิการเข้าถึง (Access Control):** ระบบจะจัดการสิทธิเมื่อได้รับการอนุมัติ และสามารถเข้ารหัสหรือทำข้อมูลปลอม (Masking) ข้อมูลส่วนบุคคลเพื่อเพิ่มความปลอดภัยได้</li>
+                        <li>**การส่งมอบข้อมูล:** ข้อมูลจะถูกส่งมอบให้ผู้ใช้ได้หลายรูปแบบผ่านแพลตฟอร์ม เช่น **API** หรือ **Batch** โดยมีการ **เก็บ Log** การใช้งานอย่างรัดกุม</li>
+                    </ul>
+                    <div class="mt-4 border-t pt-4">
+                        <p class="font-bold text-gray-800 mb-2">ตัวอย่างเครื่องมือ:</p>
+                        <ul class="list-disc list-inside text-gray-700 pl-4">
+                            <li><span class="font-semibold">Open Source:</span> **Apache Kafka** (สำหรับ Real-time API), **Apache Spark** (สำหรับ Batch)</li>
+                            <li><span class="font-semibold">Commercial:</span> **Informatica** (มี API Gateway ในตัว), **Snowflake** (มีระบบ Data Sharing ที่สะดวก)</li>
+                        </ul>
+                    </div>
+                </div>
+            
+                <div class="p-6 bg-purple-50 rounded-lg mb-4">
+                    <h4 class="text-xl font-semibold text-purple-700 mb-2">4. การใช้ข้อมูลให้เกิดประโยชน์ (Data Utility)</h4>
+                    <p class="text-gray-700 mb-2">นี่คือขั้นตอนสุดท้ายที่ทำให้ข้อมูลมีคุณค่าอย่างแท้จริง ซึ่งเป็นงานหลักของ **แผนกวิเคราะห์และจัดทำผลิตภัณฑ์ข้อมูล (ผวผ.)** ค่ะ</p>
+                    <ul class="list-disc list-inside text-gray-700 pl-4">
+                        <li>**การวิเคราะห์ขั้นพื้นฐานและขั้นสูง:** ผู้ใช้สามารถใช้เครื่องมือ **BI (Business Intelligence)** หรือ **Data Science** ที่อยู่ในแพลตฟอร์มเดียวกัน เพื่อสร้าง Dashboard และพัฒนาโมเดล **AI/ML** ได้ทันที</li>
+                        <li>**การสร้างผลิตภัณฑ์ข้อมูล:** เมื่อได้ผลลัพธ์จากการวิเคราะห์แล้ว สามารถนำไปแสดงผลในรูปแบบ Dashboard หรือส่งมอบเป็น **API** ได้ค่ะ</li>
+                    </ul>
+                    <div class="mt-4 border-t pt-4">
+                        <p class="font-bold text-gray-800 mb-2">ตัวอย่างเครื่องมือ:</p>
+                        <ul class="list-disc list-inside text-gray-700 pl-4">
+                            <li><span class="font-semibold">Open Source:</span> **Apache Superset**, **Metabase** (สำหรับ BI), **Python** (พร้อมไลบรารีอย่าง Pandas, Scikit-learn)</li>
+                            <li><span class="font-semibold">Commercial:</span> **Tableau**, **Microsoft Power BI** (สำหรับ BI), **Databricks**, **Snowflake** (สำหรับ Data Science/Analytics)</li>
+                        </ul>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+        
+        <!-- Final Recommendations -->
+        <div class="bg-white p-8 mt-12 rounded-lg card">
+            <h2 class="text-3xl font-bold text-gray-800 mb-4">ข้อสรุปและคำแนะนำจากผู้เชี่ยวชาญ (Final Recommendations)</h2>
+            <p class="text-gray-600 mb-6">
+                จากการวิเคราะห์งานและบริบทของ กฟภ. (PEA) ที่ได้ให้ข้อมูลมา ขอสรุปการจัดหาเครื่องมือที่เหมาะสมที่สุดโดยให้คะแนนและเหตุผลเพื่อประกอบการตัดสินใจ ดังนี้
+            </p>
+
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-6">
+                <!-- Option 1: All-in-One Cloud Platform -->
+                <div class="p-6 bg-indigo-50 rounded-lg shadow-md">
+                    <h3 class="text-2xl font-bold text-indigo-800 mb-2">1. แพลตฟอร์มครบวงจร (Microsoft Fabric)</h3>
+                    <p class="text-4xl font-extrabold text-indigo-600 mb-4">9/10</p>
+                    <p class="text-gray-700">
+                        **เหตุผล:** เป็นตัวเลือกที่ตอบโจทย์ที่สุดในภาพรวม เพราะช่วยลดความซับซ้อนในการเชื่อมต่อเครื่องมือ ทำให้ทีมสามารถมุ่งเน้นไปที่การแก้ปัญหาด้านคนและกระบวนการในขั้นตอนแรกได้อย่างเต็มที่
+                    </p>
+                    <div class="mt-4 border-t pt-4">
+                        <p class="font-bold text-gray-800 mb-2">Gap ที่เหลือ:</p>
+                        <p class="text-gray-700">ขาดอีก 1 คะแนนคือเรื่อง **ความใหม่ของแพลตฟอร์ม** ที่อาจยังมีฟีเจอร์บางอย่างที่ยังไม่สมบูรณ์เท่าคู่แข่งที่อยู่ในตลาดมานาน</p>
+                        <p class="font-bold text-gray-800 mt-2 mb-2">วิธีปิด Gap:</p>
+                        <p class="text-gray-700">ต้องลงทุนกับการฝึกอบรมทีมให้มีความเชี่ยวชาญ และร่วมกับ Microsoft ในการพัฒนาฟีเจอร์ที่ขาดหายไป</p>
+                    </div>
+                </div>
+
+                <!-- Option 2: Best-of-Breed Commercial -->
+                <div class="p-6 bg-indigo-50 rounded-lg shadow-md">
+                    <h3 class="text-2xl font-bold text-indigo-800 mb-2">2. ชุดเครื่องมือ Commercial (Informatica + Tableau)</h3>
+                    <p class="text-4xl font-extrabold text-indigo-600 mb-4">8/10</p>
+                    <p class="text-gray-700">
+                        **เหตุผล:** เป็นตัวเลือกที่ทรงพลังที่สุดในแต่ละด้าน แต่ก็ต้องแลกมาด้วยความซับซ้อนในการจัดการและการเชื่อมต่อระหว่างเครื่องมือที่อาจต้องใช้ทีมผู้เชี่ยวชาญเฉพาะทาง
+                    </p>
+                    <div class="mt-4 border-t pt-4">
+                        <p class="font-bold text-gray-800 mb-2">Gap ที่เหลือ:</p>
+                        <p class="text-gray-700">ขาดอีก 2 คะแนนคือเรื่อง **ความยุ่งยากในการทำงานร่วมกัน** และ **ต้นทุนรวม (Total Cost of Ownership)** ที่สูงกว่า</p>
+                        <p class="font-bold text-gray-800 mt-2 mb-2">วิธีปิด Gap:</p>
+                        <p class="text-gray-700">ต้องมีทีม **Data Architect** ที่เชี่ยวชาญในการออกแบบและดูแลระบบ และลงทุนในทีมงานด้าน Integration โดยเฉพาะ</p>
+                    </div>
+                </div>
+
+                <!-- Option 3: Open Source Stack -->
+                <div class="p-6 bg-indigo-50 rounded-lg shadow-md">
+                    <h3 class="text-2xl font-bold text-indigo-800 mb-2">3. ชุดเครื่องมือ Open Source (Apache Stack)</h3>
+                    <p class="text-4xl font-extrabold text-indigo-600 mb-4">6/10</p>
+                    <p class="text-gray-700">
+                        **เหตุผล:** เป็นทางเลือกที่คุ้มค่าด้านค่าใช้จ่าย แต่ต้องใช้ทีมที่มีความเชี่ยวชาญสูงในการติดตั้งและดูแลระบบ ซึ่งอาจทำให้เกิดความยุ่งยากและใช้เวลานานในการนำไปใช้งานจริง
+                    </p>
+                    <div class="mt-4 border-t pt-4">
+                        <p class="font-bold text-gray-800 mb-2">Gap ที่เหลือ:</p>
+                        <p class="text-gray-700">ขาดอีก 4 คะแนนคือ **ความยุ่งยากในการดูแลระบบ** และ **ขาดการสนับสนุนแบบครบวงจร**</p>
+                        <p class="font-bold text-gray-800 mt-2 mb-2">วิธีปิด Gap:</p>
+                        <p class="text-gray-700">ต้องมีทีม **Data Engineering** ขนาดใหญ่ที่พร้อมจะทำตั้งแต่ต้นจนจบ และต้องสร้างความรู้ความเชี่ยวชาญในองค์กรด้วยตัวเอง</p>
+                    </div>
+                </div>
+                
+                <!-- Option 4: Oracle Cloud -->
+                <div class="p-6 bg-indigo-50 rounded-lg shadow-md">
+                    <h3 class="text-2xl font-bold text-indigo-800 mb-2">4. แพลตฟอร์ม Oracle Cloud (OCI)</h3>
+                    <p class="text-4xl font-extrabold text-indigo-600 mb-4">7/10</p>
+                    <p class="text-gray-700">
+                        **เหตุผล:** เป็นตัวเลือกที่น่าสนใจหากองค์กรมีประสบการณ์กับ Oracle อยู่แล้ว แต่แพลตฟอร์มยังไม่ครบวงจรและบูรณาการได้อย่างราบรื่นเหมือนคู่แข่งในตลาด
+                    </p>
+                    <div class="mt-4 border-t pt-4">
+                        <p class="font-bold text-gray-800 mb-2">Gap ที่เหลือ:</p>
+                        <p class="text-gray-700">ขาดอีก 3 คะแนนคือ **ความง่ายในการใช้งาน** และ **การบูรณาการบริการที่ยังไม่เป็นหนึ่งเดียว** เมื่อเทียบกับ Microsoft Fabric</p>
+                        <p class="font-bold text-gray-800 mt-2 mb-2">วิธีปิด Gap:</p>
+                        <p class="text-gray-700">ต้องใช้เวลาและทรัพยากรในการเชื่อมต่อบริการต่าง ๆ ของ OCI เข้าด้วยกันเพื่อสร้างกระบวนการ End-to-End ที่สมบูรณ์</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+</body>
+</html>
