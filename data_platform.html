@@ -15,95 +15,116 @@
             max-width: 1200px;
         }
         .card {
-            border-radius: 12px;
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-            transition: transform 0.3s ease;
+            border-radius: 1rem;
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+            transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+            will-change: transform, box-shadow;
         }
         .card:hover {
-            transform: translateY(-5px);
+            transform: translateY(-8px);
+            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
         }
-        .text-gradient {
-            background-image: linear-gradient(to right, #6b46c1, #9f7aea);
+        .text-gradient-main {
+            background-image: linear-gradient(to right, #6b46c1, #9f7aea, #4f46e5);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
         }
-        .icon {
-            font-size: 2.5rem;
-            color: #9f7aea;
+        .text-gradient-secondary {
+            background-image: linear-gradient(to right, #4c1d95, #7c3aed);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
         }
-        .medal-gold {
-            background-color: #FFF59D;
+        .block-card {
+            background-color: #ffffff;
+            padding: 2.5rem;
+            border-radius: 1rem;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+            margin-bottom: 2.5rem;
         }
-        .medal-silver {
-            background-color: #E2E8F0;
+        .table-header {
+            background-color: #4b5563;
+            color: white;
+            white-space: nowrap;
         }
-        .medal-bronze {
-            background-color: #D5A683;
+        .table-cell-header {
+            background-color: #e5e7eb;
+            font-weight: 600;
         }
-        .medal-wood {
-            background-color: #E8D9C5;
+        .table-row-even { background-color: #f9fafb; }
+        .table-row-odd { background-color: #ffffff; }
+        .score-box {
+            display: inline-block;
+            padding: 0.25rem 0.75rem;
+            border-radius: 9999px;
+            font-weight: 700;
+            color: white;
+            text-shadow: 1px 1px 2px rgba(0,0,0,0.2);
         }
-        .medal-green {
-            background-color: #C8E6C9;
+        .score-9 { background-color: #10B981; }
+        .score-8-5 { background-color: #2563EB; }
+        .score-8 { background-color: #3B82F6; }
+        .score-7-5 { background-color: #F59E0B; }
+        .score-6 { background-color: #6B7280; }
+        .responsive-table-wrapper {
+            overflow-x: auto;
         }
     </style>
 </head>
-<body class="p-8">
+<body class="p-4 sm:p-8">
 
-    <div class="container mx-auto">
-        <header class="text-center mb-12">
+    <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+        <header class="text-center mb-12 py-8 rounded-xl bg-white shadow-lg">
             <h1 class="text-4xl sm:text-5xl font-extrabold text-gray-900 mb-4">
-                <span class="text-gradient">เส้นทางเปลี่ยนข้อมูลสู่เข็มทิศองค์กร</span>
+                <span class="text-gradient-main">เส้นทางเปลี่ยนข้อมูลสู่เข็มทิศองค์กร</span>
             </h1>
             <p class="text-lg sm:text-xl text-gray-600">แผนภาพกระบวนการจัดการข้อมูลแบบครบวงจร</p>
         </header>
 
         <!-- Process-Driven Phase -->
-        <div class="bg-white p-8 mb-12 rounded-lg card">
-            <h2 class="text-3xl font-bold text-gray-800 mb-4">1. ส่วนของกระบวนการ (Process-Driven Phase)</h2>
+        <div class="block-card card">
+            <h2 class="text-3xl font-bold text-gray-800 mb-4 text-gradient-secondary">1. ส่วนของกระบวนการ (Process-Driven Phase)</h2>
             <p class="text-gray-600 mb-4">
                 นี่คือขั้นตอนเริ่มต้นที่สำคัญที่สุดและเป็นงานที่เน้นเรื่อง **คน** และ **กลยุทธ์** เป็นหลัก
             </p>
-            <div class="p-6 bg-purple-50 rounded-lg">
+            <div class="p-6 bg-purple-50 rounded-lg shadow-inner">
                 <h3 class="text-2xl font-semibold text-purple-700 mb-2">กระบวนการที่เกี่ยวข้อง:</h3>
-                <ul class="list-disc list-inside text-gray-700 pl-4">
-                    <li>กระบวนการกำหนดเจ้าของข้อมูล</li>
-                    <li>กระบวนการประเมินระดับความสำคัญของชุดข้อมูล</li>
-                    <li>กระบวนการวิเคราะห์ความคุ้มทุนในการกำกับดูแลข้อมูล</li>
-                </ul>
-                <p class="text-gray-700 mt-4">โดย Output ของกระบวนการคือ **เจ้าของข้อมูล** และ **Roadmap** การกำกับดูแลข้อมูลขององค์กร</p>
+                <p class="text-gray-700 mb-2">1. กระบวนการกำหนดเจ้าของข้อมูล</p>
+                <p class="text-gray-700 mb-2">2. กระบวนการประเมินระดับความสำคัญของชุดข้อมูล</p>
+                <p class="text-gray-700">3. กระบวนการวิเคราะห์ความคุ้มทุนในการกำกับดูแลข้อมูล</p>
+                <h3 class="text-2xl font-semibold text-purple-700 mt-4 mb-2">ผลลัพธ์ของกระบวนการ:</h3>
+                <p class="text-gray-700">ผลลัพธ์ที่ได้จากกระบวนการนี้คือ **เจ้าของข้อมูล** และ **Roadmap การกำกับดูแลข้อมูลขององค์กร**</p>
             </div>
         </div>
 
         <!-- Tool-Driven Phase -->
-        <div class="bg-white p-8 rounded-lg card">
-            <h2 class="text-3xl font-bold text-gray-800 mb-4">2. ส่วนของการใช้เครื่องมือ (Tool-Driven Phase)</h2>
+        <div class="block-card card">
+            <h2 class="text-3xl font-bold text-gray-800 mb-4 text-gradient-secondary">2. ส่วนของการใช้เครื่องมือ (Tool-Driven Phase)</h2>
             <p class="text-gray-600 mb-6">
                 เมื่อผ่านขั้นตอนแรกและมีข้อมูลที่พร้อมจะนำมาจัดการแล้ว ก็จะเข้าสู่โลกของเครื่องมือ โดยเครื่องมือที่ใช้จะแตกต่างกันไปตามประเภทของข้อมูล
             </p>
 
             <div class="grid md:grid-cols-2 gap-8">
                 <!-- Data not ready for connection -->
-                <div class="p-6 bg-gray-100 rounded-lg shadow-sm">
+                <div class="p-6 bg-gray-100 rounded-lg shadow-md hover:shadow-xl transition-shadow duration-300">
                     <h3 class="text-2xl font-semibold text-gray-700 mb-2">ข้อมูลที่ไม่พร้อมเชื่อมต่อ</h3>
                     <p class="text-gray-600 mb-4">
-                        ข้อมูลประเภทนี้จะทำได้แค่ **การกำกับดูแล (Governance)** เท่านั้น เครื่องมือจะเข้ามาช่วยในการบันทึกและจัดการ **Metadata** เพื่อสนับสนุนกระบวนการต่างๆ
+                        ข้อมูลประเภทนี้จะใช้เครื่องมือควบคู่ไปกับกระบวนการต่างๆ และจะทำได้แค่ **การกำกับดูแล (Governance)** เท่านั้น
                     </p>
-                    <div class="bg-white p-4 rounded-lg shadow-md">
+                    <div class="bg-white p-4 rounded-lg shadow-sm">
                         <p class="font-bold text-gray-800 mb-2">เครื่องมือที่แนะนำเบื้องต้น:</p>
-                        <p class="text-gray-700">ใช้ **Data Catalog** (เช่น **Apache Atlas**) เพื่อเป็นศูนย์กลางในการเก็บรายละเอียดของข้อมูลทั้งหมด ช่วยให้สามารถทำ **กระบวนการจัดระดับชั้นความลับข้อมูล**, **กระบวนการกำหนดหมวดหมู่ข้อมูล** และ **กระบวนการกำกับดูแลข้อมูล** ได้อย่างเป็นระบบ แม้จะยังไม่สามารถให้บริการเนื้อข้อมูลได้โดยตรงก็ตาม</p>
+                        <p class="text-gray-700">ใช้ **Data Catalog** (เช่น **Apache Atlas**) เพื่อทำหน้าที่เป็นที่เก็บ **Metadata** (คำอธิบายข้อมูล, เจ้าของ, ระดับความลับ) ทำให้ทุกคนรู้ว่าข้อมูลนี้มีอยู่จริงและอยู่ที่ไหน</p>
                     </div>
                 </div>
 
                 <!-- Data ready for connection -->
-                <div class="p-6 bg-gray-100 rounded-lg shadow-sm">
+                <div class="p-6 bg-gray-100 rounded-lg shadow-md hover:shadow-xl transition-shadow duration-300">
                     <h3 class="text-2xl font-semibold text-gray-700 mb-2">ข้อมูลที่พร้อมเชื่อมต่อ</h3>
                     <p class="text-gray-600 mb-4">
-                        ข้อมูลประเภทนี้จะทำได้แบบ **ครบวงจร (End-to-End)** โดยใช้เครื่องมือที่เชื่อมต่อกันจัดการทุกขั้นตอน
+                        ข้อมูลประเภทนี้จะใช้เครื่องมือควบคู่ไปกับกระบวนการต่างๆ และสามารถทำได้แบบ **ครบวงจร (End-to-End)** ตั้งแต่ต้นจนจบ
                     </p>
-                    <div class="bg-white p-4 rounded-lg shadow-md">
+                    <div class="bg-white p-4 rounded-lg shadow-sm">
                         <p class="font-bold text-gray-800 mb-2">เครื่องมือที่แนะนำเบื้องต้น:</p>
-                        <p class="text-gray-700">ใช้ **แพลตฟอร์ม Cloud Data Platform** (เช่น **Microsoft Fabric**) ซึ่งรวมทุกขั้นตอนไว้ในที่เดียว</p>
+                        <p class="text-gray-700">**Microsoft Fabric** ซึ่งเป็นแพลตฟอร์มที่รวมทุกขั้นตอนไว้ในที่เดียว</p>
                     </div>
                 </div>
             </div>
@@ -114,9 +135,9 @@
                 
                 <div class="p-6 bg-purple-50 rounded-lg mb-4">
                     <h4 class="text-xl font-semibold text-purple-700 mb-2">1. การกำกับดูแล (Data Governance)</h4>
-                    <p class="text-gray-700 mb-2">ในขั้นตอนนี้ แพลตฟอร์มจะช่วยให้งานของ **แผนกกํากับดูแลข้อมูลองค์กร (ผกข.)** ง่ายขึ้นมาก</p>
+                    <p class="text-gray-700 mb-2">ในขั้นตอนนี้ เครื่องมือจะช่วยให้งานของ **แผนกกํากับดูแลข้อมูลองค์กร (ผกข.)** ง่ายขึ้นมาก</p>
                     <ul class="list-disc list-inside text-gray-700 pl-4">
-                        <li>**การค้นหาข้อมูล (Data Discovery) อัตโนมัติ:** แพลตฟอร์มจะสามารถเชื่อมต่อและสแกนแหล่งข้อมูลเพื่อเก็บ **Metadata** ได้โดยอัตโนมัติ ซึ่งเป็นการสนับสนุน **กระบวนการกำกับดูแลข้อมูล** และ **กระบวนการข้อมูลเปิดภาครัฐ**</li>
+                        <li>**การค้นหาข้อมูล (Data Discovery) อัตโนมัติ:** แพลตฟอร์มจะสามารถเชื่อมต่อและสแกนแหล่งข้อมูลเพื่อเก็บ **Metadata** ได้โดยอัตโนมัติ</li>
                         <li>**สร้าง Data Catalog อัจฉริยะ:** Metadata ทั้งหมดจะถูกรวบรวมไว้ใน **Data Catalog** ทำให้ค้นหาข้อมูลได้ง่าย และระบุ **เจ้าของข้อมูล (Data Owner)** ได้อย่างชัดเจน</li>
                         <li>**การจัดระดับชั้นความลับ (Data Classification):** แพลตฟอร์มจะช่วยสแกนและแนะนำการจัดระดับชั้นความลับให้กับชุดข้อมูล เพื่อให้เป็นไปตาม **Data Policy** และ **PDPA**</li>
                         <li>**สายใยข้อมูล (Data Lineage):** ระบบจะสร้างแผนภาพแสดงที่มาที่ไปของข้อมูลให้โดยอัตโนมัติ ทำให้เห็นได้ทันทีว่าข้อมูลชุดนี้ถูกนำไปใช้ที่ไหนบ้าง</li>
@@ -148,11 +169,11 @@
             
                 <div class="p-6 bg-purple-50 rounded-lg mb-4">
                     <h4 class="text-xl font-semibold text-purple-700 mb-2">3. การให้บริการข้อมูล (Data Service)</h4>
-                    <p class="text-gray-700 mb-2">เมื่อข้อมูลมีคุณภาพแล้ว ก็จะเข้าสู่ขั้นตอนการให้บริการ ที่ **แผนกบริหารจัดการและสนับสนุนการใช้ข้อมูลขับเคลื่อนองค์กร (ผบข.)** และ **แผนกบริหารจัดการแพลตฟอร์มข้อมูล (ผบพ.)** เป็นผู้ดูแล โดยใช้ **กระบวนการร้องขอและอนุญาตใช้ข้อมูล** เป็นหลัก</p>
+                    <p class="text-gray-700 mb-2">เมื่อข้อมูลมีคุณภาพแล้ว ก็จะเข้าสู่ขั้นตอนการให้บริการ ที่ **แผนกบริหารจัดการและสนับสนุนการใช้ข้อมูลขับเคลื่อนองค์กร (ผบข.)** และ **แผนกบริหารจัดการแพลตฟอร์มข้อมูล (ผบพ.)** เป็นผู้ดูแล</p>
                     <ul class="list-disc list-inside text-gray-700 pl-4">
                         <li>**ระบบร้องขออัตโนมัติ:** ผู้ใช้สามารถเข้ามาใน **Data Catalog** เพื่อร้องขอสิทธิการเข้าถึงข้อมูลได้ทันที</li>
                         <li>**การควบคุมสิทธิการเข้าถึง (Access Control):** ระบบจะจัดการสิทธิเมื่อได้รับการอนุมัติ และสามารถเข้ารหัสหรือทำข้อมูลปลอม (Masking) ข้อมูลส่วนบุคคลเพื่อเพิ่มความปลอดภัยได้</li>
-                        <li>**การส่งมอบข้อมูล:** ข้อมูลจะถูกส่งมอบให้ผู้ใช้ได้หลายรูปแบบผ่านแพลตฟอร์ม เช่น **API** หรือ **Batch** โดยมีการ **เก็บ Log** การใช้งานอย่างรัดกุม ซึ่งเป็นการสนับสนุน **กระบวนการข้อมูลเปิดภาครัฐ** ได้ด้วย</li>
+                        <li>**การส่งมอบข้อมูล:** ข้อมูลจะถูกส่งมอบให้ผู้ใช้ได้หลายรูปแบบผ่านแพลตฟอร์ม เช่น **API** หรือ **Batch** โดยมีการ **เก็บ Log** การใช้งานอย่างรัดกุม</li>
                     </ul>
                     <div class="mt-4 border-t pt-4">
                         <p class="font-bold text-gray-800 mb-2">ตัวอย่างเครื่องมือ:</p>
@@ -178,341 +199,221 @@
                         </ul>
                     </div>
                 </div>
-
             </div>
         </div>
         
-        <!-- Final Recommendations -->
-        <div class="bg-white p-8 mt-12 rounded-lg card">
-            <h2 class="text-3xl font-bold text-gray-800 mb-4">ข้อสรุปและคำแนะนำจากการวิเคราะห์ตามบริบทการทำงานของกองบริหารจัดการข้อมูลและการดำเนินงานของ กฟภ.</h2>
-            <p class="text-gray-600 mb-6">
-                จากการวิเคราะห์งานและบริบทของ กฟภ. ที่ได้รับมา ขอสรุปการจัดหาเครื่องมือที่เหมาะสมที่สุดโดยให้คะแนนและเหตุผลเพื่อประกอบการตัดสินใจ ดังนี้
-            </p>
-
-            <div class="grid grid-cols-1 md:grid-cols-5 gap-6">
-                <!-- Option 1: All-in-One Cloud Platform -->
-                <div class="p-6 rounded-lg shadow-md medal-gold">
-                    <h3 class="text-2xl font-bold text-gray-800 mb-2">1. แพลตฟอร์มครบวงจร (Microsoft Fabric)</h3>
-                    <p class="text-4xl font-extrabold text-gray-900 mb-4">9/10</p>
-                    <div class="bg-white p-4 rounded-lg shadow-sm mb-4">
-                        <p class="font-bold text-gray-800 mb-2">เครื่องมือที่เกี่ยวข้อง:</p>
-                        <ul class="list-disc list-inside text-gray-700 pl-4">
-                            <li><span class="font-semibold">กลุ่มเครื่องมือด้านการกำกับดูแลข้อมูล (Data Governance Tools)</span>
-                                <ul class="list-disc list-inside pl-4 mt-1">
-                                    <li>Microsoft Purview (Data Catalog, Data Lineage)</li>
+        <!-- Comparison Table -->
+        <div class="block-card card">
+            <h2 class="text-3xl font-bold text-gray-800 mb-4 text-center text-gradient-secondary">ข้อสรุปและคำแนะนำจากการวิเคราะห์ตามบริบทการทำงานของกองบริหารจัดการข้อมูลและการดำเนินงานของ กฟภ.</h2>
+            <div class="responsive-table-wrapper card mt-8">
+                <table class="min-w-full divide-y divide-gray-200">
+                    <thead>
+                        <tr class="table-header">
+                            <th class="px-6 py-3 text-left text-sm font-medium uppercase tracking-wider sticky-col" style="min-width: 150px;">คุณสมบัติ</th>
+                            <th class="px-6 py-3 text-left text-sm font-medium uppercase tracking-wider" style="min-width: 200px;">แพลตฟอร์มครบวงจร (Microsoft Fabric)</th>
+                            <th class="px-6 py-3 text-left text-sm font-medium uppercase tracking-wider" style="min-width: 200px;">ชุดเครื่องมือ Commercial (Informatica + Tableau + Snowflake/Databricks + Collibra)</th>
+                            <th class="px-6 py-3 text-left text-sm font-medium uppercase tracking-wider" style="min-width: 200px;">ชุดเครื่องมือ Commercial (Microsoft Azure + Denodo)</th>
+                            <th class="px-6 py-3 text-left text-sm font-medium uppercase tracking-wider" style="min-width: 200px;">แพลตฟอร์ม Oracle Cloud (OCI + Tableau)</th>
+                            <th class="px-6 py-3 text-left text-sm font-medium uppercase tracking-wider" style="min-width: 200px;">ชุดเครื่องมือ Open Source (Apache Stack)</th>
+                        </tr>
+                    </thead>
+                    <tbody class="divide-y divide-gray-200 text-sm">
+                        <!-- Row: คะแนน -->
+                        <tr class="table-row-odd">
+                            <td class="px-6 py-4 font-semibold table-cell-header">คะแนนประเมินโดยรวม</td>
+                            <td class="px-6 py-4 text-left font-bold text-lg"><span class="score-box score-9">9/10</span></td>
+                            <td class="px-6 py-4 text-left font-bold text-lg"><span class="score-box score-8-5">8.5/10</span></td>
+                            <td class="px-6 py-4 text-left font-bold text-lg"><span class="score-box score-8">8/10</span></td>
+                            <td class="px-6 py-4 text-left font-bold text-lg"><span class="score-box score-7-5">7.5/10</span></td>
+                            <td class="px-6 py-4 text-left font-bold text-lg"><span class="score-box score-6">6/10</span></td>
+                        </tr>
+                        <!-- Row: จุดแข็ง -->
+                        <tr class="table-row-even">
+                            <td class="px-6 py-4 font-semibold table-cell-header">จุดแข็ง</td>
+                            <td class="px-6 py-4">
+                                <ul class="list-disc list-inside">
+                                    <li>เป็นแพลตฟอร์มที่รวมทุกอย่างในที่เดียว ใช้งานง่าย</li>
+                                    <li>ลดความซับซ้อนในการเชื่อมต่อ</li>
+                                    <li>ทีมสามารถมุ่งเน้นที่การแก้ปัญหาทางธุรกิจได้มากขึ้น</li>
                                 </ul>
-                            </li>
-                            <li><span class="font-semibold">กลุ่มเครื่องมือนำเข้า จัดเก็บ และบริหารจัดการข้อมูล (Data Ingestion, Storage & Management Tools)</span>
-                                <ul class="list-disc list-inside pl-4 mt-1">
-                                    <li>Data Factory (Data Ingestion)</li>
-                                    <li>OneLake (Data Storage)</li>
+                            </td>
+                            <td class="px-6 py-4">
+                                <ul class="list-disc list-inside">
+                                    <li>เครื่องมือแต่ละตัวมีความสามารถที่ลึกและทรงพลังที่สุดในด้านของตัวเอง</li>
+                                    <li>มีความยืดหยุ่นในการปรับแต่งสูง</li>
                                 </ul>
-                            </li>
-                            <li><span class="font-semibold">กลุ่มเครื่องมือ Data Cleansing, Data Quality, Data Profiling</span>
-                                <ul class="list-disc list-inside pl-4 mt-1">
-                                    <li>Dataflow Gen2, Spark Notebooks ใน Fabric (Data Cleansing, Data Quality)</li>
+                            </td>
+                            <td class="px-6 py-4">
+                                <ul class="list-disc list-inside">
+                                    <li>ผสมผสานจุดแข็งของ Cloud และ Data Virtualization เข้าด้วยกันอย่างลงตัว</li>
+                                    <li>สามารถเชื่อมต่อข้อมูลจากแหล่งที่มาที่หลากหลายทั้งในและนอก Cloud</li>
+                                    <li>ลดความยุ่งยากในการทำ ETL และการย้ายข้อมูล</li>
                                 </ul>
-                            </li>
-                            <li><span class="font-semibold">กลุ่มเครื่องมือการวิเคราะห์ข้อมูล (Data Analytics Tools)</span>
-                                <ul class="list-disc list-inside pl-4 mt-1">
-                                    <li>Fabric Data Warehouse, Spark Notebooks, Real-Time Analytics</li>
+                            </td>
+                            <td class="px-6 py-4">
+                                <ul class="list-disc list-inside">
+                                    <li>เหมาะกับองค์กรที่มีประสบการณ์กับ Oracle อยู่แล้ว</li>
+                                    <li>มีบริการที่รองรับงานด้านข้อมูลหลากหลาย</li>
                                 </ul>
-                            </li>
-                            <li><span class="font-semibold">กลุ่มเครื่องมือการให้บริการข้อมูล (Data Service Tools)</span>
-                                <ul class="list-disc list-inside pl-4 mt-1">
-                                    <li>Fabric Data API, Power BI (สำหรับ Data Sharing)</li>
-                                    <li>Microsoft Purview (Access Control, Masking)</li>
+                            </td>
+                            <td class="px-6 py-4">
+                                <ul class="list-disc list-inside">
+                                    <li>คุ้มค่าด้านค่าใช้จ่าย</li>
+                                    <li>สามารถปรับแต่งได้อย่างอิสระ</li>
                                 </ul>
-                            </li>
-                            <li><span class="font-semibold">กลุ่มเครื่องมือแสดงผล Data Visualization, Dashboard</span>
-                                <ul class="list-disc list-inside pl-4 mt-1">
-                                    <li>Power BI (Data Visualization, Dashboard)</li>
+                            </td>
+                        </tr>
+                        <!-- Row: จุดอ่อน -->
+                        <tr class="table-row-odd">
+                            <td class="px-6 py-4 font-semibold table-cell-header">จุดอ่อน</td>
+                            <td class="px-6 py-4">- เป็นแพลตฟอร์มที่ค่อนข้างใหม่ ฟีเจอร์บางอย่างอาจยังไม่สมบูรณ์เท่าคู่แข่ง</td>
+                            <td class="px-6 py-4">
+                                <ul class="list-disc list-inside">
+                                    <li>มีความซับซ้อนในการจัดการและการเชื่อมต่อระหว่างเครื่องมือ</li>
+                                    <li>ต้นทุนรวม (Total Cost of Ownership) สูง</li>
                                 </ul>
-                            </li>
-                        </ul>
-                    </div>
-                    <div class="bg-white p-4 rounded-lg shadow-sm mb-4">
-                        <p class="font-bold text-gray-800 mb-2">ความคุ้มค่าและราคา:</p>
-                        <p class="text-gray-700">เป็นแพลตฟอร์มแบบ **All-in-One** ที่มาในราคาเดียว ช่วยลดต้นทุนในการจัดซื้อและดูแลรักษาเครื่องมือหลายตัวพร้อมกัน</p>
-                    </div>
-                    <div class="bg-white p-4 rounded-lg shadow-sm mb-4">
-                        <p class="font-bold text-gray-800 mb-2">จุดแข็ง:</p>
-                        <p class="text-gray-700">- เป็นแพลตฟอร์มที่รวมทุกอย่างในที่เดียว ใช้งานง่าย<br>- ลดความซับซ้อนในการเชื่อมต่อระหว่างเครื่องมือ<br>- ทีมสามารถมุ่งเน้นที่การแก้ปัญหาทางธุรกิจได้มากขึ้น</p>
-                    </div>
-                    <div class="bg-white p-4 rounded-lg shadow-sm mb-4">
-                        <p class="font-bold text-gray-800 mt-2 mb-2">จุดอ่อน:</p>
-                        <p class="text-gray-700">- เป็นแพลตฟอร์มที่ค่อนข้างใหม่ ฟีเจอร์บางอย่างอาจยังไม่สมบูรณ์เท่าคู่แข่ง</p>
-                    </div>
-                    <div class="bg-white p-4 rounded-lg shadow-sm mb-4">
-                        <p class="font-bold text-gray-800 mt-2 mb-2">Gap ที่เหลือ:</p>
-                        <p class="text-gray-700">ขาดอีก 1 คะแนนคือเรื่อง **ความใหม่ของแพลตฟอร์ม**</p>
-                    </div>
-                    <div class="bg-white p-4 rounded-lg shadow-sm">
-                        <p class="font-bold text-gray-800 mt-2 mb-2">วิธีปิด Gap:</p>
-                        <p class="text-gray-700">ต้องลงทุนกับการฝึกอบรมทีมให้มีความเชี่ยวชาญ และร่วมกับ Microsoft ในการพัฒนาฟีเจอร์ที่ขาดหายไป</p>
-                    </div>
-                </div>
-
-                <!-- Option 2: Best-of-Breed Commercial -->
-                <div class="p-6 rounded-lg shadow-md medal-silver">
-                    <h3 class="text-2xl font-bold text-gray-800 mb-2">2. ชุดเครื่องมือ Commercial (Informatica + Tableau)</h3>
-                    <p class="text-4xl font-extrabold text-gray-900 mb-4">8/10</p>
-                    <div class="bg-white p-4 rounded-lg shadow-sm mb-4">
-                        <p class="font-bold text-gray-800 mb-2">เครื่องมือที่เกี่ยวข้อง:</p>
-                        <ul class="list-disc list-inside text-gray-700 pl-4">
-                            <li><span class="font-semibold">กลุ่มเครื่องมือด้านการกำกับดูแลข้อมูล (Data Governance Tools)</span>
-                                <ul class="list-disc list-inside pl-4 mt-1">
-                                    <li>Informatica Enterprise Data Catalog</li>
-                                    <li>Collibra (Data Governance & Catalog)</li>
+                            </td>
+                            <td class="px-6 py-4">
+                                <ul class="list-disc list-inside">
+                                    <li>ไม่ใช่แพลตฟอร์มแบบ End-to-End ต้องใช้ร่วมกับเครื่องมืออื่น</li>
+                                    <li>ต้องอาศัยความเชี่ยวชาญในการออกแบบโมเดลข้อมูล</li>
                                 </ul>
-                            </li>
-                            <li><span class="font-semibold">กลุ่มเครื่องมือนำเข้า จัดเก็บ และบริหารจัดการข้อมูล (Data Ingestion, Storage & Management Tools)</span>
-                                <ul class="list-disc list-inside pl-4 mt-1">
-                                    <li>Informatica Intelligent Data Management Cloud (IDMC)</li>
+                            </td>
+                            <td class="px-6 py-4">
+                                <ul class="list-disc list-inside">
+                                    <li>การบูรณาการบริการยังไม่เป็นหนึ่งเดียว</li>
+                                    <li>ขาดความง่ายในการใช้งานแบบ End-to-End</li>
                                 </ul>
-                            </li>
-                            <li><span class="font-semibold">กลุ่มเครื่องมือ Data Cleansing, Data Quality, Data Profiling</span>
-                                <ul class="list-disc list-inside pl-4 mt-1">
-                                    <li>Informatica Data Quality, Informatica Data Profiling</li>
+                            </td>
+                            <td class="px-6 py-4">
+                                <ul class="list-disc list-inside">
+                                    <li>มีความยุ่งยากในการดูแลระบบ</li>
+                                    <li>ขาดการสนับสนุนแบบครบวงจร</li>
                                 </ul>
-                            </li>
-                            <li><span class="font-semibold">กลุ่มเครื่องมือการวิเคราะห์ข้อมูล (Data Analytics Tools)</span>
-                                <ul class="list-disc list-inside pl-4 mt-1">
-                                    <li>Databricks, Snowflake (สำหรับการวิเคราะห์ขั้นสูง)</li>
+                            </td>
+                        </tr>
+                        <!-- Row: Gap ที่เหลือ -->
+                        <tr class="table-row-even">
+                            <td class="px-6 py-4 font-semibold table-cell-header">Gap ที่เหลือ</td>
+                            <td class="px-6 py-4">ขาดอีก 1 คะแนน คือเรื่อง **ความใหม่ของแพลตฟอร์ม**</td>
+                            <td class="px-6 py-4">ขาดอีก 1.5 คะแนน คือ **ความซับซ้อนในการจัดการและการเชื่อมต่อ** และ **ต้นทุน**</td>
+                            <td class="px-6 py-4">ขาดอีก 2 คะแนน คือ **การบูรณาการแบบรวมศูนย์** และ **การจัดการกับข้อมูลที่ไม่พร้อมเชื่อมต่อ**</td>
+                            <td class="px-6 py-4">ขาดอีก 2.5 คะแนน คือ **ความง่ายในการใช้งาน** และ **การบูรณาการบริการ**</td>
+                            <td class="px-6 py-4">ขาดอีก 3.5 คะแนน คือ **ความยุ่งยากในการดูแลระบบ** และ **ขาดการสนับสนุน**</td>
+                        </tr>
+                        <!-- Row: วิธีปิด Gap -->
+                        <tr class="table-row-odd">
+                            <td class="px-6 py-4 font-semibold table-cell-header">วิธีปิด Gap</td>
+                            <td class="px-6 py-4">ลงทุนกับการฝึกอบรมทีมให้มีความเชี่ยวชาญ และร่วมกับ Microsoft ในการพัฒนาฟีเจอร์ที่ขาดหายไป</td>
+                            <td class="px-6 py-4">ต้องมีทีม **Data Architect** ที่เชี่ยวชาญในการออกแบบและดูแลระบบ และลงทุนในทีมงานด้าน Integration โดยเฉพาะ</td>
+                            <td class="px-6 py-4">ต้องมีการออกแบบสถาปัตยกรรมร่วมกันระหว่าง Denodo และทีม Azure เพื่อให้เกิดการทำงานที่ราบรื่นที่สุด</td>
+                            <td class="px-6 py-4">ต้องใช้เวลาและทรัพยากรในการเชื่อมต่อบริการต่าง ๆ ของ OCI เพื่อสร้างกระบวนการ End-to-End ที่สมบูรณ์</td>
+                            <td class="px-6 py-4">ต้องมีทีม **Data Engineering** ขนาดใหญ่ที่พร้อมจะทำตั้งแต่ต้นจนจบ และต้องสร้างความรู้ความเชี่ยวชาญในองค์กรด้วยตัวเอง</td>
+                        </tr>
+                        <!-- Row: ความคุ้มค่าและราคา -->
+                        <tr class="table-row-even">
+                            <td class="px-6 py-4 font-semibold table-cell-header">ความคุ้มค่าและราคา</td>
+                            <td class="px-6 py-4">เป็นแพลตฟอร์มแบบ **All-in-One** ที่มาในราคาเดียว ช่วยลดต้นทุนในการจัดซื้อและดูแลรักษาเครื่องมือหลายตัวพร้อมกัน</td>
+                            <td class="px-6 py-4">มีต้นทุนในการจัดซื้อซอฟต์แวร์และค่าใช้จ่ายด้านการบำรุงรักษาที่สูงกว่า แต่คุ้มค่าหากต้องการโซลูชันเชิงลึก</td>
+                            <td class="px-6 py-4">เป็นเครื่องมือระดับ Commercial ที่มีค่าไลเซนส์สูง แต่ช่วยลดต้นทุนด้านการจัดเก็บข้อมูลและการทำ ETL ได้อย่างมหาศาล</td>
+                            <td class="px-6 py-4">มีโครงสร้างราคาที่ยืดหยุ่นตามการใช้งาน แต่การจัดการเพื่อควบคุมค่าใช้จ่ายให้คุ้มค่าต้องใช้ความเชี่ยวชาญ</td>
+                            <td class="px-6 py-4">เป็นทางเลือกที่คุ้มค่าที่สุดในแง่ของค่าไลเซนส์ แต่มีต้นทุนแฝงในด้านการบำรุงรักษาและการพัฒนาที่สูงกว่า</td>
+                        </tr>
+                        <!-- Row: เครื่องมือที่เกี่ยวข้อง -->
+                        <tr class="table-row-odd">
+                            <td class="px-6 py-4 font-semibold table-cell-header">เครื่องมือที่เกี่ยวข้อง</td>
+                            <td class="px-6 py-4">
+                                <ul class="list-disc list-inside">
+                                    <li>**กำกับดูแล:** Microsoft Purview, Data Catalog</li>
+                                    <li>**นำเข้า/จัดเก็บ:** Data Factory, OneLake</li>
+                                    <li>**คุณภาพ:** Dataflow Gen2, Spark Notebooks</li>
+                                    <li>**วิเคราะห์:** Fabric Data Warehouse, Spark Notebooks</li>
+                                    <li>**ให้บริการ:** Fabric Data API, Data Hub</li>
+                                    <li>**แสดงผล:** Power BI</li>
                                 </ul>
-                            </li>
-                            <li><span class="font-semibold">กลุ่มเครื่องมือการให้บริการข้อมูล (Data Service Tools)</span>
-                                <ul class="list-disc list-inside pl-4 mt-1">
-                                    <li>Informatica API Gateway</li>
-                                    <li>Informatica Data Virtualization</li>
+                            </td>
+                            <td class="px-6 py-4">
+                                <ul class="list-disc list-inside">
+                                    <li>**กำกับดูแล:** Informatica Enterprise Data Catalog, Collibra</li>
+                                    <li>**นำเข้า/จัดเก็บ:** Informatica Intelligent Data Management Cloud (IDMC)</li>
+                                    <li>**คุณภาพ:** Informatica Data Quality, Informatica Data Profiling</li>
+                                    <li>**วิเคราะห์:** Databricks, Snowflake</li>
+                                    <li>**ให้บริการ:** Informatica Data Services, Informatica Data Virtualization</li>
+                                    <li>**แสดงผล:** Tableau Desktop, Tableau Server</li>
                                 </ul>
-                            </li>
-                            <li><span class="font-semibold">กลุ่มเครื่องมือแสดงผล Data Visualization, Dashboard</span>
-                                <ul class="list-disc list-inside pl-4 mt-1">
-                                    <li>Tableau</li>
-                                    <li>Microsoft Power BI</li>
+                            </td>
+                            <td class="px-6 py-4">
+                                <ul class="list-disc list-inside">
+                                    <li>**กำกับดูแล:** Denodo Platform, Microsoft Purview</li>
+                                    <li>**นำเข้า/จัดเก็บ:** Azure Data Factory, Azure Data Lake Storage</li>
+                                    <li>**คุณภาพ:** Azure Databricks, Azure Synapse Spark</li>
+                                    <li>**วิเคราะห์:** Azure Synapse Analytics</li>
+                                    <li>**ให้บริการ:** Denodo Platform</li>
+                                    <li>**แสดงผล:** Power BI, Tableau</li>
                                 </ul>
-                            </li>
-                        </ul>
-                    </div>
-                    <div class="bg-white p-4 rounded-lg shadow-sm mb-4">
-                        <p class="font-bold text-gray-800 mb-2">ความคุ้มค่าและราคา:</p>
-                        <p class="text-gray-700">มีต้นทุนในการจัดซื้อซอฟต์แวร์และค่าใช้จ่ายด้านการบำรุงรักษาที่สูงกว่า แต่คุ้มค่าหากต้องการโซลูชันที่มีความสามารถเชิงลึก</p>
-                    </div>
-                    <div class="bg-white p-4 rounded-lg shadow-sm mb-4">
-                        <p class="font-bold text-gray-800 mb-2">จุดแข็ง:</p>
-                        <p class="text-gray-700">- เครื่องมือแต่ละตัวมีความสามารถที่ลึกและทรงพลังที่สุดในด้านของตัวเอง<br>- มีความยืดหยุ่นในการปรับแต่งสูง</p>
-                    </div>
-                    <div class="bg-white p-4 rounded-lg shadow-sm mb-4">
-                        <p class="font-bold text-gray-800 mt-2 mb-2">จุดอ่อน:</p>
-                        <p class="text-gray-700">- มีความซับซ้อนในการจัดการและการเชื่อมต่อระหว่างเครื่องมือ<br>- ต้นทุนรวม (Total Cost of Ownership) สูง</p>
-                    </div>
-                    <div class="bg-white p-4 rounded-lg shadow-sm mb-4">
-                        <p class="font-bold text-gray-800 mt-2 mb-2">Gap ที่เหลือ:</p>
-                        <p class="text-gray-700">ขาดอีก 2 คะแนนคือเรื่อง **ความยุ่งยากในการทำงานร่วมกัน** และ **ต้นทุน**</p>
-                    </div>
-                    <div class="bg-white p-4 rounded-lg shadow-sm">
-                        <p class="font-bold text-gray-800 mt-2 mb-2">วิธีปิด Gap:</p>
-                        <p class="text-gray-700">ต้องมีทีม **Data Architect** ที่เชี่ยวชาญในการออกแบบและดูแลระบบ และลงทุนในทีมงานด้าน Integration โดยเฉพาะ</p>
-                    </div>
-                </div>
-
-                <!-- Option 3: Denodo -->
-                <div class="p-6 rounded-lg shadow-md medal-bronze">
-                    <h3 class="text-2xl font-bold text-gray-800 mb-2">3. ชุดเครื่องมือ Denodo (Data Virtualization)</h3>
-                    <p class="text-4xl font-extrabold text-gray-900 mb-4">7.5/10</p>
-                    <div class="bg-white p-4 rounded-lg shadow-sm mb-4">
-                        <p class="font-bold text-gray-800 mb-2">เครื่องมือที่เกี่ยวข้อง:</p>
-                        <ul class="list-disc list-inside text-gray-700 pl-4">
-                            <li><span class="font-semibold">กลุ่มเครื่องมือด้านการกำกับดูแลข้อมูล (Data Governance Tools)</span>
-                                <ul class="list-disc list-inside pl-4 mt-1">
-                                    <li>Denodo Platform (มี Data Catalog ในตัว)</li>
-                                    <li>Collibra (สำหรับ Data Governance ขั้นสูง)</li>
+                            </td>
+                            <td class="px-6 py-4">
+                                <ul class="list-disc list-inside">
+                                    <li>**กำกับดูแล:** OCI Data Catalog</li>
+                                    <li>**นำเข้า/จัดเก็บ:** Oracle Data Integration, OCI Lakehouse</li>
+                                    <li>**คุณภาพ:** Oracle Enterprise Data Quality (EDQ)</li>
+                                    <li>**วิเคราะห์:** Oracle Analytics Cloud (OAC), Autonomous Data Warehouse</li>
+                                    <li>**ให้บริการ:** OCI Data Flow, OCI GoldenGate</li>
+                                    <li>**แสดงผล:** Oracle Analytics Cloud (OAC), Tableau</li>
                                 </ul>
-                            </li>
-                            <li><span class="font-semibold">กลุ่มเครื่องมือนำเข้า จัดเก็บ และบริหารจัดการข้อมูล (Data Ingestion, Storage & Management Tools)</span>
-                                <ul class="list-disc list-inside pl-4 mt-1">
-                                    <li>**Denodo ไม่ใช่เครื่องมือสำหรับ Ingestion** แต่ใช้เชื่อมต่อกับแหล่งข้อมูลต้นทางได้โดยตรง (เช่น Database, Data Lake)</li>
+                            </td>
+                            <td class="px-6 py-4">
+                                <ul class="list-disc list-inside">
+                                    <li>**กำกับดูแล:** Apache Atlas, Amundsen</li>
+                                    <li>**นำเข้า/จัดเก็บ:** Apache Airflow, Apache Kafka, Apache Hadoop</li>
+                                    <li>**คุณภาพ:** Great Expectations, Apache Spark</li>
+                                    <li>**วิเคราะห์:** Apache Spark, Apache Flink, Python Libraries (Pandas)</li>
+                                    <li>**ให้บริการ:** Apache Kafka, Apache Spark, Apache Ranger</li>
+                                    <li>**แสดงผล:** Apache Superset, Metabase, Grafana</li>
                                 </ul>
-                            </li>
-                            <li><span class="font-semibold">กลุ่มเครื่องมือ Data Cleansing, Data Quality, Data Profiling</span>
-                                <ul class="list-disc list-inside pl-4 mt-1">
-                                    <li>Denodo Platform (มีฟังก์ชัน Data Profiling)</li>
-                                    <li>Great Expectations (สำหรับ Data Quality เชิงลึก)</li>
-                                </ul>
-                            </li>
-                            <li><span class="font-semibold">กลุ่มเครื่องมือการวิเคราะห์ข้อมูล (Data Analytics Tools)</span>
-                                <ul class="list-disc list-inside pl-4 mt-1">
-                                    <li>Denodo Platform (สำหรับสร้าง Logical Data Warehouse)</li>
-                                    <li>Databricks, Snowflake (สำหรับการวิเคราะห์ขั้นสูง)</li>
-                                </ul>
-                            </li>
-                            <li><span class="font-semibold">กลุ่มเครื่องมือการให้บริการข้อมูล (Data Service Tools)</span>
-                                <ul class="list-disc list-inside pl-4 mt-1">
-                                    <li>Denodo Platform (สำหรับ Data Virtualization, API Services)</li>
-                                </ul>
-                            </li>
-                            <li><span class="font-semibold">กลุ่มเครื่องมือแสดงผล Data Visualization, Dashboard</span>
-                                <ul class="list-disc list-inside pl-4 mt-1">
-                                    <li>Tableau, Microsoft Power BI, Looker (Denodo เชื่อมต่อได้ดีกับทุกตัว)</li>
-                                </ul>
-                            </li>
-                        </ul>
-                    </div>
-                    <div class="bg-white p-4 rounded-lg shadow-sm mb-4">
-                        <p class="font-bold text-gray-800 mb-2">ความคุ้มค่าและราคา:</p>
-                        <p class="text-gray-700">เป็นเครื่องมือระดับ Commercial ที่มีค่าไลเซนส์สูง แต่ช่วยลดต้นทุนด้านการจัดเก็บข้อมูลและการทำ ETL/Ingestion ได้อย่างมหาศาล</p>
-                    </div>
-                    <div class="bg-white p-4 rounded-lg shadow-sm mb-4">
-                        <p class="font-bold text-gray-800 mb-2">จุดแข็ง:</p>
-                        <p class="text-gray-700">- ช่วยให้เข้าถึงข้อมูลได้แบบ Real-time โดยไม่ต้องย้ายข้อมูล<br>- ลดความซ้ำซ้อนของข้อมูลในองค์กร<br>- สร้างมุมมองข้อมูลแบบรวมศูนย์ (Unified View) ได้รวดเร็ว</p>
-                    </div>
-                    <div class="bg-white p-4 rounded-lg shadow-sm mb-4">
-                        <p class="font-bold text-gray-800 mt-2 mb-2">จุดอ่อน:</p>
-                        <p class="text-gray-700">- ไม่ใช่แพลตฟอร์มแบบ End-to-End ต้องใช้ร่วมกับเครื่องมืออื่น<br>- ต้องอาศัยความเชี่ยวชาญในการออกแบบโมเดลข้อมูลเพื่อใช้งานอย่างมีประสิทธิภาพ</p>
-                    </div>
-                    <div class="bg-white p-4 rounded-lg shadow-sm mb-4">
-                        <p class="font-bold text-gray-800 mt-2 mb-2">Gap ที่เหลือ:</p>
-                        <p class="text-gray-700">ขาดอีก 2.5 คะแนนคือ **การเป็นแพลตฟอร์มแบบครบวงจร** และ **การจัดการกับข้อมูลที่ไม่พร้อมเชื่อมต่อ**</p>
-                    </div>
-                    <div class="bg-white p-4 rounded-lg shadow-sm">
-                        <p class="font-bold text-gray-800 mt-2 mb-2">วิธีปิด Gap:</p>
-                        <p class="text-gray-700">ต้องมีการบูรณาการ Denodo เข้ากับเครื่องมืออื่น ๆ ในแต่ละกระบวนการอย่างเหมาะสม</p>
-                    </div>
-                </div>
-
-                <!-- Option 4: Oracle Cloud -->
-                <div class="p-6 rounded-lg shadow-md medal-wood">
-                    <h3 class="text-2xl font-bold text-gray-800 mb-2">4. แพลตฟอร์ม Oracle Cloud (OCI)</h3>
-                    <p class="text-4xl font-extrabold text-gray-900 mb-4">7/10</p>
-                    <div class="bg-white p-4 rounded-lg shadow-sm mb-4">
-                        <p class="font-bold text-gray-800 mb-2">เครื่องมือที่เกี่ยวข้อง:</p>
-                        <ul class="list-disc list-inside text-gray-700 pl-4">
-                            <li><span class="font-semibold">กลุ่มเครื่องมือด้านการกำกับดูแลข้อมูล (Data Governance Tools)</span>
-                                <ul class="list-disc list-inside pl-4 mt-1">
-                                    <li>Oracle Cloud Infrastructure (OCI) Data Catalog</li>
-                                </ul>
-                            </li>
-                            <li><span class="font-semibold">กลุ่มเครื่องมือนำเข้า จัดเก็บ และบริหารจัดการข้อมูล (Data Ingestion, Storage & Management Tools)</span>
-                                <ul class="list-disc list-inside pl-4 mt-1">
-                                    <li>Oracle Data Integration (ETL)</li>
-                                    <li>Oracle Autonomous Data Warehouse</li>
-                                </ul>
-                            </li>
-                            <li><span class="font-semibold">กลุ่มเครื่องมือ Data Cleansing, Data Quality, Data Profiling</span>
-                                <ul class="list-disc list-inside pl-4 mt-1">
-                                    <li>Oracle Enterprise Data Quality (EDQ)</li>
-                                </ul>
-                            </li>
-                            <li><span class="font-semibold">กลุ่มเครื่องมือการวิเคราะห์ข้อมูล (Data Analytics Tools)</span>
-                                <ul class="list-disc list-inside pl-4 mt-1">
-                                    <li>Oracle Analytics Cloud (OAC)</li>
-                                    <li>Oracle Autonomous Data Warehouse</li>
-                                </ul>
-                            </li>
-                            <li><span class="font-semibold">กลุ่มเครื่องมือการให้บริการข้อมูล (Data Service Tools)</span>
-                                <ul class="list-disc list-inside pl-4 mt-1">
-                                    <li>Oracle Data Catalog (สำหรับ Access Control)</li>
-                                    <li>Oracle Autonomous Data Warehouse (สำหรับ API & Sharing)</li>
-                                </ul>
-                            </li>
-                            <li><span class="font-semibold">กลุ่มเครื่องมือแสดงผล Data Visualization, Dashboard</span>
-                                <ul class="list-disc list-inside pl-4 mt-1">
-                                    <li>Oracle Analytics Cloud (OAC)</li>
-                                </ul>
-                            </li>
-                        </ul>
-                    </div>
-                    <div class="bg-white p-4 rounded-lg shadow-sm mb-4">
-                        <p class="font-bold text-gray-800 mb-2">ความคุ้มค่าและราคา:</p>
-                        <p class="text-gray-700">มีโครงสร้างราคาที่ยืดหยุ่นตามการใช้งาน แต่การจัดการเพื่อควบคุมค่าใช้จ่ายให้คุ้มค่านั้นอาจต้องใช้ความเชี่ยวชาญ</p>
-                    </div>
-                    <div class="bg-white p-4 rounded-lg shadow-sm mb-4">
-                        <p class="font-bold text-gray-800 mb-2">จุดแข็ง:</p>
-                        <p class="text-gray-700">- เป็นตัวเลือกที่น่าสนใจหากองค์กรมีประสบการณ์กับ Oracle อยู่แล้ว<br>- มีบริการที่รองรับงานด้านข้อมูลหลากหลาย</p>
-                    </div>
-                    <div class="bg-white p-4 rounded-lg shadow-sm mb-4">
-                        <p class="font-bold text-gray-800 mt-2 mb-2">จุดอ่อน:</p>
-                        <p class="text-gray-700">- การบูรณาการบริการยังไม่เป็นหนึ่งเดียวเท่าคู่แข่ง<br>- ขาดความง่ายในการใช้งานแบบ End-to-End</p>
-                    </div>
-                    <div class="bg-white p-4 rounded-lg shadow-sm mb-4">
-                        <p class="font-bold text-gray-800 mt-2 mb-2">Gap ที่เหลือ:</p>
-                        <p class="text-gray-700">ขาดอีก 3 คะแนนคือ **ความง่ายในการใช้งาน** และ **การบูรณาการบริการ**</p>
-                    </div>
-                    <div class="bg-white p-4 rounded-lg shadow-sm">
-                        <p class="font-bold text-gray-800 mt-2 mb-2">วิธีปิด Gap:</p>
-                        <p class="text-gray-700">ต้องใช้เวลาและทรัพยากรในการเชื่อมต่อบริการต่าง ๆ ของ OCI เข้าด้วยกันเพื่อสร้างกระบวนการ End-to-End ที่สมบูรณ์</p>
-                    </div>
-                </div>
-
-                <!-- Option 5: Open Source Stack -->
-                <div class="p-6 rounded-lg shadow-md medal-green">
-                    <h3 class="text-2xl font-bold text-gray-800 mb-2">5. ชุดเครื่องมือ Open Source (Apache Stack)</h3>
-                    <p class="text-4xl font-extrabold text-gray-900 mb-4">6/10</p>
-                    <div class="bg-white p-4 rounded-lg shadow-sm mb-4">
-                        <p class="font-bold text-gray-800 mb-2">เครื่องมือที่เกี่ยวข้อง:</p>
-                        <ul class="list-disc list-inside text-gray-700 pl-4">
-                            <li><span class="font-semibold">กลุ่มเครื่องมือด้านการกำกับดูแลข้อมูล (Data Governance Tools)</span>
-                                <ul class="list-disc list-inside pl-4 mt-1">
-                                    <li>Apache Atlas, Amundsen (Data Catalog, Metadata Management)</li>
-                                </ul>
-                            </li>
-                            <li><span class="font-semibold">กลุ่มเครื่องมือนำเข้า จัดเก็บ และบริหารจัดการข้อมูล (Data Ingestion, Storage & Management Tools)</span>
-                                <ul class="list-disc list-inside pl-4 mt-1">
-                                    <li>Apache Airflow (Data Ingestion)</li>
-                                    <li>Apache Kafka (Real-time Ingestion)</li>
-                                    <li>Apache Hadoop, Apache Hudi (Data Storage)</li>
-                                </ul>
-                            </li>
-                            <li><span class="font-semibold">กลุ่มเครื่องมือ Data Cleansing, Data Quality, Data Profiling</span>
-                                <ul class="list-disc list-inside pl-4 mt-1">
-                                    <li>Great Expectations, Apache Spark (Data Quality, Cleansing)</li>
-                                </ul>
-                            </li>
-                            <li><span class="font-semibold">กลุ่มเครื่องมือการวิเคราะห์ข้อมูล (Data Analytics Tools)</span>
-                                <ul class="list-disc list-inside pl-4 mt-1">
-                                    <li>Apache Spark, Apache Flink</li>
-                                    <li>Python (Pandas, Scikit-learn)</li>
-                                </ul>
-                            </li>
-                            <li><span class="font-semibold">กลุ่มเครื่องมือการให้บริการข้อมูล (Data Service Tools)</span>
-                                <ul class="list-disc list-inside pl-4 mt-1">
-                                    <li>Apache Kafka (สำหรับ API)</li>
-                                    <li>Apache Spark (สำหรับ Batch Processing)</li>
-                                    <li>Apache Ranger (Access Control)</li>
-                                </ul>
-                            </li>
-                            <li><span class="font-semibold">กลุ่มเครื่องมือแสดงผล Data Visualization, Dashboard</span>
-                                <ul class="list-disc list-inside pl-4 mt-1">
-                                    <li>Apache Superset, Metabase</li>
-                                </ul>
-                            </li>
-                        </ul>
-                    </div>
-                    <div class="bg-white p-4 rounded-lg shadow-sm mb-4">
-                        <p class="font-bold text-gray-800 mb-2">ความคุ้มค่าและราคา:</p>
-                        <p class="text-gray-700">เป็นทางเลือกที่คุ้มค่าที่สุดในแง่ของค่าไลเซนส์ แต่มีต้นทุนแฝงในด้านการบำรุงรักษาและการพัฒนาที่สูงกว่า</p>
-                    </div>
-                    <div class="bg-white p-4 rounded-lg shadow-sm mb-4">
-                        <p class="font-bold text-gray-800 mb-2">จุดแข็ง:</p>
-                        <p class="text-gray-700">- คุ้มค่าด้านค่าใช้จ่าย<br>- สามารถปรับแต่งได้อย่างอิสระ</p>
-                    </div>
-                    <div class="bg-white p-4 rounded-lg shadow-sm mb-4">
-                        <p class="font-bold text-gray-800 mt-2 mb-2">จุดอ่อน:</p>
-                        <p class="text-gray-700">- มีความยุ่งยากในการดูแลระบบและการทำงานร่วมกัน<br>- ขาดการสนับสนุนแบบครบวงจร</p>
-                    </div>
-                    <div class="bg-white p-4 rounded-lg shadow-sm mb-4">
-                        <p class="font-bold text-gray-800 mt-2 mb-2">Gap ที่เหลือ:</p>
-                        <p class="text-gray-700">ขาดอีก 4 คะแนนคือ **ความยุ่งยากในการดูแลระบบ** และ **ขาดการสนับสนุน**</p>
-                    </div>
-                    <div class="bg-white p-4 rounded-lg shadow-sm">
-                        <p class="font-bold text-gray-800 mt-2 mb-2">วิธีปิด Gap:</p>
-                        <p class="text-gray-700">ต้องมีทีม **Data Engineering** ขนาดใหญ่ที่พร้อมจะทำตั้งแต่ต้นจนจบ และต้องสร้างความรู้ความเชี่ยวชาญในองค์กรด้วยตัวเอง</p>
-                    </div>
-                </div>
+                                
+                            </td>
+                        </tr>
+                        <!-- Row: ความเชี่ยวชาญของบุคลากร -->
+                        <tr class="table-row-even">
+                            <td class="px-6 py-4 font-semibold table-cell-header">ความเชี่ยวชาญของบุคลากร</td>
+                            <td class="px-6 py-4">สามารถเริ่มได้ด้วยทีมขนาดเล็กที่เน้นทักษะด้าน Business Intelligence (BI) และ Data Analytics ก่อน</td>
+                            <td class="px-6 py-4">ต้องการทีมผู้เชี่ยวชาญเฉพาะทางสำหรับแต่ละเครื่องมือ (เช่น Data Architect, ETL Developer)</td>
+                            <td class="px-6 py-4">ต้องการทีมที่มีความรู้ลึกด้านการออกแบบสถาปัตยกรรมข้อมูล (Data Architecture) และการทำ Data Virtualization</td>
+                            <td class="px-6 py-4">ต้องการทีมที่มีความเชี่ยวชาญในระบบนิเวศของ Oracle (Oracle Ecosystem) และบริการต่าง ๆ บน OCI</td>
+                            <td class="px-6 py-4">ต้องการทีม Data Engineering ที่มีขนาดใหญ่และมีความเชี่ยวชาญสูงในการติดตั้ง, บำรุงรักษา และพัฒนาตั้งแต่ต้นจนจบ</td>
+                        </tr>
+                        <!-- New Row: ระดับความยากในการ Implement -->
+                        <tr class="table-row-odd">
+                            <td class="px-6 py-4 font-semibold table-cell-header">ระดับความยากในการ Implement<br>(คะแนนเต็ม 5)</td>
+                            <td class="px-6 py-4">2/5 (ง่ายมาก)</td>
+                            <td class="px-6 py-4">5/5 (ยากที่สุด)</td>
+                            <td class="px-6 py-4">4/5 (ค่อนข้างยาก)</td>
+                            <td class="px-6 py-4">3/5 (ปานกลาง)</td>
+                            <td class="px-6 py-4">5/5 (ยากที่สุด)</td>
+                        </tr>
+                        <!-- New Row: ระดับความยากในการใช้งาน -->
+                        <tr class="table-row-even">
+                            <td class="px-6 py-4 font-semibold table-cell-header">ระดับความยากในการใช้งาน<br>(คะแนนเต็ม 5)</td>
+                            <td class="px-6 py-4">1/5 (ง่ายที่สุด)</td>
+                            <td class="px-6 py-4">4/5 (ค่อนข้างยาก)</td>
+                            <td class="px-6 py-4">3/5 (ปานกลาง)</td>
+                            <td class="px-6 py-4">3/5 (ปานกลาง)</td>
+                            <td class="px-6 py-4">5/5 (ยากที่สุด)</td>
+                        </tr>
+                        <!-- New Row: ฟันธงโดย AI -->
+                        <tr class="table-row-odd">
+                            <td class="px-6 py-4 font-semibold table-cell-header">ฟันธงโดย AI</td>
+                            <td class="px-6 py-4">**อันดับ 1**<br>เป็นทางเลือกที่ดีที่สุดสำหรับองค์กรที่ต้องการเริ่มทำ Data End-to-End อย่างรวดเร็ว และมีข้อจำกัดด้านบุคลากร</td>
+                            <td class="px-6 py-4">**อันดับ 3**<br>เหมาะสำหรับองค์กรที่ต้องการโซลูชันเชิงลึกในทุกมิติ และมีงบประมาณพร้อมสำหรับเครื่องมือระดับโลก</td>
+                            <td class="px-6 py-4">**อันดับ 2**<br>เป็นทางเลือกที่ยืดหยุ่นและทรงพลัง โดยเฉพาะสำหรับองค์กรที่ต้องการเชื่อมต่อข้อมูลจากหลายแหล่งโดยไม่ต้องย้ายข้อมูล</td>
+                            <td class="px-6 py-4">**อันดับ 4**<br>ควรพิจารณาหากองค์กรมีการใช้งาน Oracle Cloud อยู่แล้วเป็นหลัก แต่ต้องลงทุนเวลาในการบูรณาการ</td>
+                            <td class="px-6 py-4">**อันดับ 5**<br>เป็นตัวเลือกที่ประหยัดต้นทุนไลเซนส์ แต่ต้องแลกมาด้วยความท้าทายในการดูแลระบบและบุคลากรอย่างมหาศาล</td>
+                        </tr>
+                    </tbody>
+                </table>
             </div>
         </div>
-
     </div>
 
 </body>
