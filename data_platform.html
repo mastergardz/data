@@ -15,29 +15,22 @@
             max-width: 1200px;
         }
         .card {
-            border-radius: 1rem;
-            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
-            transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
-            will-change: transform, box-shadow;
+            border-radius: 12px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease;
         }
         .card:hover {
-            transform: translateY(-8px);
-            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+            transform: translateY(-5px);
         }
-        .text-gradient-main {
-            background-image: linear-gradient(to right, #6b46c1, #9f7aea, #4f46e5);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-        }
-        .text-gradient-secondary {
-            background-image: linear-gradient(to right, #4c1d95, #7c3aed);
+        .text-gradient {
+            background-image: linear-gradient(to right, #6b46c1, #9f7aea);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
         }
         .block-card {
             background-color: #ffffff;
             padding: 2.5rem;
-            border-radius: 1rem;
+            border-radius: 12px;
             box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
             margin-bottom: 2.5rem;
         }
@@ -65,28 +58,37 @@
         .score-8 { background-color: #3B82F6; }
         .score-7-5 { background-color: #F59E0B; }
         .score-6 { background-color: #6B7280; }
-        .responsive-table-wrapper {
-            overflow-x: auto;
-        }
     </style>
 </head>
-<body class="p-4 sm:p-8">
+<body class="p-8">
 
-    <div class="container mx-auto px-4 sm:px-6 lg:px-8">
-        <header class="text-center mb-12 py-8 rounded-xl bg-white shadow-lg">
+    <!-- Fixed Menu -->
+    <nav class="sticky top-0 z-50 bg-white shadow-lg py-4">
+        <div class="container mx-auto px-4 flex justify-between items-center">
+            <a href="#top" class="text-xl font-bold text-gray-900 hover:text-purple-600 transition duration-300">หน้าหลัก</a>
+            <div class="space-x-4 flex">
+                <a href="#process-driven" class="text-gray-600 hover:text-purple-600 transition duration-300">1. ส่วนของกระบวนการ</a>
+                <a href="#tool-driven" class="text-gray-600 hover:text-purple-600 transition duration-300">2. ส่วนของเครื่องมือ</a>
+                <a href="#sow-section" class="text-gray-600 hover:text-purple-600 transition duration-300">3. ขอบเขตงาน</a>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container mx-auto" id="top">
+        <header class="text-center mb-12 mt-8">
             <h1 class="text-4xl sm:text-5xl font-extrabold text-gray-900 mb-4">
-                <span class="text-gradient-main">เส้นทางเปลี่ยนข้อมูลสู่เข็มทิศองค์กร</span>
+                <span class="text-gradient">เส้นทางเปลี่ยนข้อมูลสู่เข็มทิศองค์กร</span>
             </h1>
             <p class="text-lg sm:text-xl text-gray-600">แผนภาพกระบวนการจัดการข้อมูลแบบครบวงจร</p>
         </header>
 
         <!-- Process-Driven Phase -->
-        <div class="block-card card">
-            <h2 class="text-3xl font-bold text-gray-800 mb-4 text-gradient-secondary">1. ส่วนของกระบวนการ (Process-Driven Phase)</h2>
+        <div class="block-card" id="process-driven">
+            <h2 class="text-3xl font-bold text-gray-800 mb-4">1. ส่วนของกระบวนการ (Process-Driven Phase)</h2>
             <p class="text-gray-600 mb-4">
                 นี่คือขั้นตอนเริ่มต้นที่สำคัญที่สุดและเป็นงานที่เน้นเรื่อง **คน** และ **กลยุทธ์** เป็นหลัก
             </p>
-            <div class="p-6 bg-purple-50 rounded-lg shadow-inner">
+            <div class="p-6 bg-purple-50 rounded-lg">
                 <h3 class="text-2xl font-semibold text-purple-700 mb-2">กระบวนการที่เกี่ยวข้อง:</h3>
                 <p class="text-gray-700 mb-2">1. กระบวนการกำหนดเจ้าของข้อมูล</p>
                 <p class="text-gray-700 mb-2">2. กระบวนการประเมินระดับความสำคัญของชุดข้อมูล</p>
@@ -97,32 +99,32 @@
         </div>
 
         <!-- Tool-Driven Phase -->
-        <div class="block-card card">
-            <h2 class="text-3xl font-bold text-gray-800 mb-4 text-gradient-secondary">2. ส่วนของการใช้เครื่องมือ (Tool-Driven Phase)</h2>
+        <div class="block-card" id="tool-driven">
+            <h2 class="text-3xl font-bold text-gray-800 mb-4">2. ส่วนของการใช้เครื่องมือ (Tool-Driven Phase)</h2>
             <p class="text-gray-600 mb-6">
                 เมื่อผ่านขั้นตอนแรกและมีข้อมูลที่พร้อมจะนำมาจัดการแล้ว ก็จะเข้าสู่โลกของเครื่องมือ โดยเครื่องมือที่ใช้จะแตกต่างกันไปตามประเภทของข้อมูล
             </p>
 
             <div class="grid md:grid-cols-2 gap-8">
                 <!-- Data not ready for connection -->
-                <div class="p-6 bg-gray-100 rounded-lg shadow-md hover:shadow-xl transition-shadow duration-300">
+                <div class="p-6 bg-gray-100 rounded-lg shadow-sm">
                     <h3 class="text-2xl font-semibold text-gray-700 mb-2">ข้อมูลที่ไม่พร้อมเชื่อมต่อ</h3>
                     <p class="text-gray-600 mb-4">
                         ข้อมูลประเภทนี้จะใช้เครื่องมือควบคู่ไปกับกระบวนการต่างๆ และจะทำได้แค่ **การกำกับดูแล (Governance)** เท่านั้น
                     </p>
-                    <div class="bg-white p-4 rounded-lg shadow-sm">
+                    <div class="bg-white p-4 rounded-lg shadow-md">
                         <p class="font-bold text-gray-800 mb-2">เครื่องมือที่แนะนำเบื้องต้น:</p>
                         <p class="text-gray-700">ใช้ **Data Catalog** (เช่น **Apache Atlas**) เพื่อทำหน้าที่เป็นที่เก็บ **Metadata** (คำอธิบายข้อมูล, เจ้าของ, ระดับความลับ) ทำให้ทุกคนรู้ว่าข้อมูลนี้มีอยู่จริงและอยู่ที่ไหน</p>
                     </div>
                 </div>
 
                 <!-- Data ready for connection -->
-                <div class="p-6 bg-gray-100 rounded-lg shadow-md hover:shadow-xl transition-shadow duration-300">
+                <div class="p-6 bg-gray-100 rounded-lg shadow-sm">
                     <h3 class="text-2xl font-semibold text-gray-700 mb-2">ข้อมูลที่พร้อมเชื่อมต่อ</h3>
                     <p class="text-gray-600 mb-4">
                         ข้อมูลประเภทนี้จะใช้เครื่องมือควบคู่ไปกับกระบวนการต่างๆ และสามารถทำได้แบบ **ครบวงจร (End-to-End)** ตั้งแต่ต้นจนจบ
                     </p>
-                    <div class="bg-white p-4 rounded-lg shadow-sm">
+                    <div class="bg-white p-4 rounded-lg shadow-md">
                         <p class="font-bold text-gray-800 mb-2">เครื่องมือที่แนะนำเบื้องต้น:</p>
                         <p class="text-gray-700">**Microsoft Fabric** ซึ่งเป็นแพลตฟอร์มที่รวมทุกขั้นตอนไว้ในที่เดียว</p>
                     </div>
@@ -203,13 +205,13 @@
         </div>
         
         <!-- Comparison Table -->
-        <div class="block-card card">
-            <h2 class="text-3xl font-bold text-gray-800 mb-4 text-center text-gradient-secondary">ข้อสรุปและคำแนะนำจากการวิเคราะห์ตามบริบทการทำงานของกองบริหารจัดการข้อมูลและการดำเนินงานของ กฟภ.</h2>
-            <div class="responsive-table-wrapper card mt-8">
+        <div class="block-card" id="comparison-table">
+            <h2 class="text-3xl font-bold text-gray-800 mb-4 text-center">ข้อสรุปและคำแนะนำจากการวิเคราะห์ตามบริบทการทำงานของกองบริหารจัดการข้อมูลและการดำเนินงานของ กฟภ.</h2>
+            <div class="overflow-x-auto card mt-8">
                 <table class="min-w-full divide-y divide-gray-200">
                     <thead>
                         <tr class="table-header">
-                            <th class="px-6 py-3 text-left text-sm font-medium uppercase tracking-wider sticky-col" style="min-width: 150px;">คุณสมบัติ</th>
+                            <th class="px-6 py-3 text-left text-sm font-medium uppercase tracking-wider" style="min-width: 150px;">คุณสมบัติ</th>
                             <th class="px-6 py-3 text-left text-sm font-medium uppercase tracking-wider" style="min-width: 200px;">แพลตฟอร์มครบวงจร (Microsoft Fabric)</th>
                             <th class="px-6 py-3 text-left text-sm font-medium uppercase tracking-wider" style="min-width: 200px;">ชุดเครื่องมือ Commercial (Informatica + Tableau + Snowflake/Databricks + Collibra)</th>
                             <th class="px-6 py-3 text-left text-sm font-medium uppercase tracking-wider" style="min-width: 200px;">ชุดเครื่องมือ Commercial (Microsoft Azure + Denodo)</th>
@@ -218,7 +220,7 @@
                         </tr>
                     </thead>
                     <tbody class="divide-y divide-gray-200 text-sm">
-                        <!-- Row: คะแนน -->
+                        <!-- Row: คะแนนประเมินโดยรวม -->
                         <tr class="table-row-odd">
                             <td class="px-6 py-4 font-semibold table-cell-header">คะแนนประเมินโดยรวม</td>
                             <td class="px-6 py-4 text-left font-bold text-lg"><span class="score-box score-9">9/10</span></td>
@@ -371,50 +373,131 @@
                                     <li>**ให้บริการ:** Apache Kafka, Apache Spark, Apache Ranger</li>
                                     <li>**แสดงผล:** Apache Superset, Metabase, Grafana</li>
                                 </ul>
-                                
                             </td>
                         </tr>
                         <!-- Row: ความเชี่ยวชาญของบุคลากร -->
                         <tr class="table-row-even">
                             <td class="px-6 py-4 font-semibold table-cell-header">ความเชี่ยวชาญของบุคลากร</td>
-                            <td class="px-6 py-4">สามารถเริ่มได้ด้วยทีมขนาดเล็กที่เน้นทักษะด้าน Business Intelligence (BI) และ Data Analytics ก่อน</td>
-                            <td class="px-6 py-4">ต้องการทีมผู้เชี่ยวชาญเฉพาะทางสำหรับแต่ละเครื่องมือ (เช่น Data Architect, ETL Developer)</td>
-                            <td class="px-6 py-4">ต้องการทีมที่มีความรู้ลึกด้านการออกแบบสถาปัตยกรรมข้อมูล (Data Architecture) และการทำ Data Virtualization</td>
-                            <td class="px-6 py-4">ต้องการทีมที่มีความเชี่ยวชาญในระบบนิเวศของ Oracle (Oracle Ecosystem) และบริการต่าง ๆ บน OCI</td>
-                            <td class="px-6 py-4">ต้องการทีม Data Engineering ที่มีขนาดใหญ่และมีความเชี่ยวชาญสูงในการติดตั้ง, บำรุงรักษา และพัฒนาตั้งแต่ต้นจนจบ</td>
+                            <td class="px-6 py-4">เนื่องจากเป็นแพลตฟอร์มรวม ทำให้ทีมสามารถเรียนรู้ได้ง่าย และลดความซับซ้อนในการจัดการ</td>
+                            <td class="px-6 py-4">ต้องการทีมที่มีความเชี่ยวชาญเฉพาะทางในเครื่องมือแต่ละตัวสูง (เช่น Informatica Developer, Tableau Specialist, Snowflake Architect)</td>
+                            <td class="px-6 py-4">ต้องการทีมที่มีความเชี่ยวชาญด้าน Azure และ Denodo รวมถึงมีทักษะในการออกแบบ Data Model เพื่อรองรับ Data Virtualization</td>
+                            <td class="px-6 py-4">ต้องการทีมที่มีความเชี่ยวชาญใน Oracle Ecosystem และต้องใช้เวลาในการเรียนรู้การเชื่อมต่อบริการต่าง ๆ เข้าด้วยกัน</td>
+                            <td class="px-6 py-4">ต้องการทีม **Data Engineering** ขนาดใหญ่ที่มีความเชี่ยวชาญสูงในการติดตั้งและดูแลระบบ รวมถึงแก้ไขปัญหาด้วยตัวเอง</td>
                         </tr>
-                        <!-- New Row: ระดับความยากในการ Implement -->
+                        <!-- Row: ระดับความยากในการ Implement -->
                         <tr class="table-row-odd">
-                            <td class="px-6 py-4 font-semibold table-cell-header">ระดับความยากในการ Implement<br>(คะแนนเต็ม 5)</td>
-                            <td class="px-6 py-4">2/5 (ง่ายมาก)</td>
-                            <td class="px-6 py-4">5/5 (ยากที่สุด)</td>
-                            <td class="px-6 py-4">4/5 (ค่อนข้างยาก)</td>
-                            <td class="px-6 py-4">3/5 (ปานกลาง)</td>
-                            <td class="px-6 py-4">5/5 (ยากที่สุด)</td>
+                            <td class="px-6 py-4 font-semibold table-cell-header">ระดับความยากในการ Implement (คะแนนเต็ม 5)</td>
+                            <td class="px-6 py-4 font-bold text-lg">1</td>
+                            <td class="px-6 py-4 font-bold text-lg">4</td>
+                            <td class="px-6 py-4 font-bold text-lg">3</td>
+                            <td class="px-6 py-4 font-bold text-lg">3</td>
+                            <td class="px-6 py-4 font-bold text-lg">5</td>
                         </tr>
-                        <!-- New Row: ระดับความยากในการใช้งาน -->
+                        <!-- Row: ระดับความยากในการใช้งาน -->
                         <tr class="table-row-even">
-                            <td class="px-6 py-4 font-semibold table-cell-header">ระดับความยากในการใช้งาน<br>(คะแนนเต็ม 5)</td>
-                            <td class="px-6 py-4">1/5 (ง่ายที่สุด)</td>
-                            <td class="px-6 py-4">4/5 (ค่อนข้างยาก)</td>
-                            <td class="px-6 py-4">3/5 (ปานกลาง)</td>
-                            <td class="px-6 py-4">3/5 (ปานกลาง)</td>
-                            <td class="px-6 py-4">5/5 (ยากที่สุด)</td>
+                            <td class="px-6 py-4 font-semibold table-cell-header">ระดับความยากในการใช้งาน (คะแนนเต็ม 5)</td>
+                            <td class="px-6 py-4 font-bold text-lg">1</td>
+                            <td class="px-6 py-4 font-bold text-lg">4</td>
+                            <td class="px-6 py-4 font-bold text-lg">3</td>
+                            <td class="px-6 py-4 font-bold text-lg">2</td>
+                            <td class="px-6 py-4 font-bold text-lg">5</td>
                         </tr>
-                        <!-- New Row: ฟันธงโดย AI -->
+                        <!-- Row: ฟันธงโดย AI -->
                         <tr class="table-row-odd">
-                            <td class="px-6 py-4 font-semibold table-cell-header">ฟันธงโดย AI</td>
-                            <td class="px-6 py-4">**อันดับ 1**<br>เป็นทางเลือกที่ดีที่สุดสำหรับองค์กรที่ต้องการเริ่มทำ Data End-to-End อย่างรวดเร็ว และมีข้อจำกัดด้านบุคลากร</td>
-                            <td class="px-6 py-4">**อันดับ 3**<br>เหมาะสำหรับองค์กรที่ต้องการโซลูชันเชิงลึกในทุกมิติ และมีงบประมาณพร้อมสำหรับเครื่องมือระดับโลก</td>
-                            <td class="px-6 py-4">**อันดับ 2**<br>เป็นทางเลือกที่ยืดหยุ่นและทรงพลัง โดยเฉพาะสำหรับองค์กรที่ต้องการเชื่อมต่อข้อมูลจากหลายแหล่งโดยไม่ต้องย้ายข้อมูล</td>
-                            <td class="px-6 py-4">**อันดับ 4**<br>ควรพิจารณาหากองค์กรมีการใช้งาน Oracle Cloud อยู่แล้วเป็นหลัก แต่ต้องลงทุนเวลาในการบูรณาการ</td>
-                            <td class="px-6 py-4">**อันดับ 5**<br>เป็นตัวเลือกที่ประหยัดต้นทุนไลเซนส์ แต่ต้องแลกมาด้วยความท้าทายในการดูแลระบบและบุคลากรอย่างมหาศาล</td>
+                            <td class="px-6 py-4 font-semibold table-cell-header">ฟันธงโดย AI (เรียงตามลำดับความเหมาะสม)</td>
+                            <td class="px-6 py-4">ลำดับที่ 1: Microsoft Fabric</td>
+                            <td class="px-6 py-4">ลำดับที่ 2: Informatica + Tableau + Snowflake/Databricks + Collibra</td>
+                            <td class="px-6 py-4">ลำดับที่ 3: Microsoft Azure + Denodo</td>
+                            <td class="px-6 py-4">ลำดับที่ 4: Oracle Cloud (OCI + Tableau)</td>
+                            <td class="px-6 py-4">ลำดับที่ 5: Open Source (Apache Stack)</td>
                         </tr>
                     </tbody>
                 </table>
             </div>
         </div>
-    </div>
 
+        <!-- SOW Section -->
+        <div class="block-card" id="sow-section">
+            <h2 class="text-3xl font-bold text-gray-800 mb-6">
+                ขอบเขตงานโครงการจัดหาระบบแพลตฟอร์มบริหารจัดการข้อมูล (Data Platform)
+            </h2>
+            <div class="space-y-6 text-gray-700">
+                <div>
+                    <h3 class="text-2xl font-bold text-gray-800 mb-2">1. หลักการและเหตุผล (Rationale)</h3>
+                    <p>กองบริหารจัดการข้อมูล (กจข.) ในฐานะหน่วยงานหลักที่รับผิดชอบการบริหารจัดการวงจรชีวิตข้อมูล (Data Life Cycle Management) ขององค์กร มีความจำเป็นเร่งด่วนในการยกระดับโครงสร้างพื้นฐานด้านข้อมูลให้มีความทันสมัย ยืดหยุ่น และสามารถรองรับการเติบโตของปริมาณข้อมูลและรูปแบบการวิเคราะห์ที่ซับซ้อนในอนาคต เพื่อให้ข้อมูลสามารถเปลี่ยนเป็นสินทรัพย์ที่มีคุณค่า และเป็นเข็มทิศนำทางในการขับเคลื่อนองค์กรได้อย่างแท้จริง **การจัดหาและติดตั้งระบบแพลตฟอร์มบริหารจัดการข้อมูลแบบครบวงจร (End-to-End Data Platform) ที่ครอบคลุมขอบเขตงานตามรายละเอียดในข้อ 3** จึงเป็นโครงการสำคัญที่จะช่วยให้ กฟภ. บรรลุวิสัยทัศน์ดังกล่าวได้อย่างมีประสิทธิภาพ</p>
+                </div>
+                <div>
+                    <h3 class="text-2xl font-bold text-gray-800 mb-2">2. วัตถุประสงค์ (Objectives)</h3>
+                    <ul class="list-disc list-inside pl-4">
+                        <li>เพื่อจัดหาระบบแพลตฟอร์มข้อมูลที่สามารถรองรับการทำงานในกระบวนการจัดการข้อมูลแบบครบวงจรตั้งแต่ต้นน้ำถึงปลายน้ำ</li>
+                        <li>เพื่อลดความซับซ้อนและเพิ่มประสิทธิภาพในการทำงานของทีมงานด้านข้อมูลในทุกแผนกของ กจข. โดยใช้ระบบและเครื่องมือที่ทันสมัย</li>
+                        <li>เพื่อให้ข้อมูลของ กฟภ. มีความน่าเชื่อถือ มีคุณภาพสูง และสามารถเข้าถึงได้ง่ายเพื่อนำไปใช้ประโยชน์ในเชิงธุรกิจผ่านระบบที่จัดหา</li>
+                        <li>เพื่อให้การกำกับดูแลข้อมูล (Data Governance) เป็นไปอย่างมีระบบและสอดคล้องกับนโยบายด้านข้อมูลขององค์กรและกฎหมายที่เกี่ยวข้อง (เช่น PDPA) โดยใช้เครื่องมือที่สามารถบังคับใช้ได้อย่างอัตโนมัติ</li>
+                    </ul>
+                </div>
+                <div>
+                    <h3 class="text-2xl font-bold text-gray-800 mb-2">3. ขอบเขตงาน (Scope of Work)</h3>
+                    <p>ผู้ให้บริการจะต้องจัดหาระบบแพลตฟอร์มบริหารจัดการข้อมูลที่ครอบคลุมการทำงานในทุกมิติ โดยแบ่งการจัดการออกเป็น 2 ประเภท ได้แก่ **ข้อมูลที่พร้อมใช้งาน** (ข้อมูลดิจิทัลที่อยู่ในระบบและพร้อมส่งมอบ) และ **ข้อมูลที่ไม่พร้อมใช้งาน** (ข้อมูลที่เป็นกระดาษหรือไม่พร้อมส่งมอบข้อมูล) โดยมีรายละเอียดขอบเขตงานดังต่อไปนี้</p>
+                    <div class="mt-4 space-y-4">
+                        <div class="p-4 bg-gray-50 rounded-lg">
+                            <h4 class="text-xl font-bold text-gray-800 mb-2">3.1 ระบบสำหรับการกำกับดูแลข้อมูล (Data Governance System)</h4>
+                            <p>ระบบนี้คือหัวใจสำคัญในการสร้างความเชื่อมั่นในข้อมูล (Data Trust) และทำให้ทุกคนในองค์กรเข้าใจว่าข้อมูลคือสินทรัพย์ ระบบต้องทำหน้าที่เป็นศูนย์กลางความรู้เกี่ยวกับข้อมูลทั้งหมดของ กฟภ.</p>
+                            <ul class="list-disc list-inside pl-4 mt-2">
+                                <li>**Data Catalog:** ระบบจะต้องสามารถรวบรวมและจัดเก็บข้อมูลเมทาดาต้า (Metadata) ที่อธิบายชุดข้อมูลต่าง ๆ ได้อย่างมีประสิทธิภาพ สำหรับ **ข้อมูลที่พร้อมใช้งาน** ระบบต้องสามารถ **Harvest** เมทาดาต้าจากแหล่งข้อมูลต้นทางได้โดยอัตโนมัติ ไม่ว่าจะเป็นชื่อตาราง, คอลัมน์, คำอธิบาย, รูปแบบข้อมูล, และดัชนีชี้วัดคุณภาพข้อมูล (Data Quality Score) ส่วนสำหรับ **ข้อมูลที่ไม่พร้อมใช้งาน** ระบบต้องมีเครื่องมือที่ใช้งานง่ายในการกรอกข้อมูลเมทาดาต้าเข้าไปด้วยตนเอง เช่น ชื่อชุดข้อมูล, เจ้าของข้อมูล, คำอธิบาย, และวิธีการร้องขอข้อมูลจริง นอกจากนี้ ระบบต้องสามารถจัดทำพจนานุกรมธุรกิจ (Business Glossary) เพื่อให้คำศัพท์เฉพาะทางในองค์กรมีความหมายที่ตรงกัน</li>
+                                <li>**Data Lineage:** ระบบต้องสามารถสร้างและแสดงสายใยข้อมูล (Data Lineage) แบบอัตโนมัติและเป็นภาพ (Visual Mapping) ตั้งแต่แหล่งข้อมูลต้นทางจนถึงรายงานที่ถูกนำไปใช้งานจริง เพื่อให้ทีมงานสามารถทำความเข้าใจที่มาที่ไปของข้อมูลได้ในทันที สามารถตรวจสอบผลกระทบจากการเปลี่ยนแปลงข้อมูล (Impact Analysis) และช่วยในกระบวนการแก้ไขปัญหาได้อย่างรวดเร็ว</li>
+                                <li>**Data Classification & Policy Enforcement:** ระบบต้องมีฟังก์ชันที่ทรงพลังในการจำแนกประเภทข้อมูล, กำหนดหมวดหมู่ข้อมูล (Data Category) ตามกฎหมาย เช่น ข้อมูลส่วนบุคคล และจัดระดับชั้นความลับ (Data Classification) เพื่อบ่งบอกระดับความสำคัญและความอ่อนไหวของข้อมูล ซึ่งต้องรองรับทั้งการแนะนำโดยอัตโนมัติและการกำหนดด้วยตนเอง รวมถึงสามารถกำหนดและบังคับใช้นโยบายด้านความปลอดภัยข้อมูล (Data Policy) และความเป็นส่วนตัว (Privacy) ได้อย่างเป็นระบบ เช่น การทำข้อมูลปลอม (Data Masking) หรือการเข้ารหัส (Encryption) ข้อมูลที่มีความลับสูงในสภาพแวดล้อมต่าง ๆ</li>
+                            </ul>
+                        </div>
+                        <div class="p-4 bg-gray-50 rounded-lg">
+                            <h4 class="text-xl font-bold text-gray-800 mb-2">3.2 ระบบสำหรับการเตรียมความพร้อมข้อมูล (Data Preparation System)</h4>
+                            <p>ระบบนี้คือโรงงานที่เปลี่ยนข้อมูลดิบให้เป็นข้อมูลพร้อมใช้งานที่สะอาดและมีคุณภาพ ช่วยลดภาระงานด้านการจัดการข้อมูลที่ซ้ำซ้อนและใช้เวลานาน</p>
+                            <ul class="list-disc list-inside pl-4 mt-2">
+                                <li>**Data Ingestion & Integration:** ระบบต้องรองรับการนำเข้าข้อมูล (Data Ingestion) จากแหล่งข้อมูลที่หลากหลายของ กฟภ. (เช่น Databases, APIs, Files, Logs) สำหรับ **ข้อมูลที่พร้อมใช้งาน** โดยต้องมีเครื่องมือสำหรับสร้างเวิร์กโฟลว์การทำงาน (Data Pipeline) เพื่อทำการดึงข้อมูล แปลงข้อมูล (Transformation) และรวมข้อมูล (Orchestration) ได้อย่างมีประสิทธิภาพ ทั้งในรูปแบบ **แบทช์ (Batch Processing)** สำหรับข้อมูลปริมาณมาก และ **เรียลไทม์ (Real-time Streaming)** สำหรับข้อมูลที่มีการเปลี่ยนแปลงตลอดเวลา นอกจากนี้ ระบบต้องสามารถให้บริการข้อมูลแบบเสมือน (Data Virtualization) ได้ เพื่อให้ผู้ใช้งานสามารถเข้าถึงข้อมูลได้โดยไม่ต้องทำการย้ายข้อมูลจริงมาพักไว้ในแพลตฟอร์ม</li>
+                                <li>**Data Quality & Cleansing:** ระบบต้องมีเครื่องมือที่ช่วยให้ทีมงานสามารถกำหนดกฎเกณฑ์ (Rule-based Validation) เพื่อตรวจสอบและประเมินคุณภาพข้อมูล (Data Quality) ได้แบบอัตโนมัติ โดยระบบต้องสามารถทำโปรไฟล์ข้อมูล (Data Profiling) เพื่อแสดงภาพรวมและระบุความผิดปกติของข้อมูลได้ และต้องมีฟังก์ชันที่ช่วยทำความสะอาดข้อมูล (Data Cleansing) ที่ผิดพลาด, ขาดหาย, หรือซ้ำซ้อนให้มีความถูกต้องและสมบูรณ์ พร้อมจัดทำดัชนีชี้วัดคุณภาพข้อมูล (Data Quality Score) สำหรับชุดข้อมูลต่าง ๆ</li>
+                            </ul>
+                        </div>
+                        <div class="p-4 bg-gray-50 rounded-lg">
+                            <h4 class="text-xl font-bold text-gray-800 mb-2">3.3 ระบบสำหรับการให้บริการข้อมูล (Data Service System)</h4>
+                            <p>ระบบนี้คือช่องทางในการส่งมอบข้อมูลไปสู่ผู้ใช้งานอย่างปลอดภัยและมีประสิทธิภาพ ช่วยให้ข้อมูลถูกนำไปใช้ประโยชน์ในวงกว้างโดยมีระบบการควบคุมที่รัดกุม</p>
+                            <ul class="list-disc list-inside pl-4 mt-2">
+                                <li>**Access Control & Security:** ระบบต้องมีกลไกที่ละเอียดอ่อนในการจัดการสิทธิ์การเข้าถึงข้อมูล (Access Control) โดยเฉพาะในระดับคอลัมน์ (Column-level Security) และแถว (Row-level Security) เพื่อให้มั่นใจว่าผู้ใช้แต่ละคนจะเข้าถึงได้เฉพาะข้อมูลที่ได้รับอนุญาตเท่านั้น โดยระบบต้องรองรับการเชื่อมต่อกับระบบยืนยันตัวตนของ กฟภ. (เช่น Active Directory) และสามารถกำหนดสิทธิ์ตามบทบาท (Role-based Access Control) ได้</li>
+                                <li>**Data Delivery:** ระบบต้องให้บริการที่แตกต่างกันสำหรับข้อมูลแต่ละประเภท
+                                    <ul class="list-disc list-inside pl-4 mt-2">
+                                        <li>**สำหรับข้อมูลที่พร้อมใช้งาน:** ระบบต้องสามารถส่งมอบข้อมูล (Data Delivery) ให้แก่ผู้ใช้งานได้อย่างยืดหยุ่นผ่านช่องทางที่หลากหลาย เช่น การสร้าง API, การส่งมอบแบบแบทช์ และการเชื่อมต่อโดยตรง (Direct Connectivity) โดยมีการเข้ารหัสหรือทำข้อมูลปลอม (Data Masking) ตามนโยบาย และมีการบันทึกการใช้งาน (Usage Log) ที่ครบถ้วนและละเอียด เพื่อใช้ในการตรวจสอบและวิเคราะห์การใช้งานข้อมูล</li>
+                                        <li>**สำหรับข้อมูลที่ไม่พร้อมใช้งาน:** ระบบต้องรองรับการร้องขอข้อมูลจริงผ่านระบบ โดยผู้ให้บริการต้องดำเนินการ **Implement** ระบบเพื่อให้ผู้ใช้งานสามารถร้องขอข้อมูลได้ภายในแพลตฟอร์ม ซึ่งระบบจะแสดงเฉพาะเมทาดาต้าใน Data Catalog เท่านั้นในขั้นต้น และมีการแจ้งเตือนไปยังเจ้าของข้อมูลเพื่อดำเนินการส่งมอบข้อมูลต่อไปนอกระบบ (Out-of-System Process with In-System Request)</li>
+                                    </ul>
+                                </li>
+                            </ul>
+                        </div>
+                        <div class="p-4 bg-gray-50 rounded-lg">
+                            <h4 class="text-xl font-bold text-gray-800 mb-2">3.4 ระบบสำหรับการวิเคราะห์ข้อมูล (Data Analytics System)</h4>
+                            <p>ระบบนี้คือพื้นที่สำหรับนักวิทยาศาสตร์ข้อมูล (Data Scientists) และนักวิเคราะห์ธุรกิจ (Business Analysts) เพื่อเปลี่ยนข้อมูลให้กลายเป็นองค์ความรู้และผลิตภัณฑ์ข้อมูลที่ทรงคุณค่าต่อการตัดสินใจขององค์กร</p>
+                            <ul class="list-disc list-inside pl-4 mt-2">
+                                <li>**Analytics & Business Intelligence (BI):** ระบบต้องมีเครื่องมือสำหรับการวิเคราะห์ข้อมูลในตัว (Built-in Analytics) ที่ช่วยให้ผู้ใช้งานสามารถสร้างรายงานและแดชบอร์ด (Dashboard) ได้อย่างรวดเร็วและเป็นภาพ โดยต้องรองรับการวิเคราะห์ขั้นพื้นฐาน (Basic Analytics) และมีฟังก์ชันสำหรับการวิเคราะห์ขั้นสูง (Advanced Analytics) ที่ซับซ้อน เช่น การทำ Descriptive, Diagnostic, Predictive, และ Prescriptive Analytics พร้อมรองรับฟังก์ชันการทำงานร่วมกัน (Collaboration Features) ของทีม</li>
+                                <li>**AI/ML:** ระบบต้องมีสภาพแวดล้อมที่เหมาะสมสำหรับการพัฒนาและประยุกต์ใช้โมเดลปัญญาประดิษฐ์ (AI) และการเรียนรู้ของเครื่อง (ML) โดยรองรับภาษาโปรแกรมยอดนิยม (เช่น Python, R) พร้อมไลบรารีที่จำเป็น และสามารถนำโมเดลที่พัฒนาเสร็จแล้วไปใช้งานจริง (Model Deployment) ได้อย่างสะดวก เพื่อสร้างผลิตภัณฑ์ข้อมูล (Data Product) ที่มีมูลค่าสูงให้กับองค์กร</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <div>
+                    <h3 class="text-2xl font-bold text-gray-800 mb-2">4. ผลลัพธ์ที่คาดหวัง (Expected Outcomes)</h3>
+                    <ul class="list-disc list-inside pl-4">
+                        <li>มีแพลตฟอร์มข้อมูลที่ทันสมัย พร้อมใช้งานสำหรับทุกแผนกใน กจข.</li>
+                        <li>ลดภาระงานซ้ำซ้อนในการจัดการข้อมูล เพิ่มประสิทธิภาพการทำงานของทีม</li>
+                        <li>บุคลากรมีทักษะความเชี่ยวชาญในการใช้เครื่องมือเพื่อสร้างผลิตภัณฑ์ข้อมูลและแดชบอร์ด</li>
+                        <li>องค์กรสามารถนำข้อมูลไปใช้ในการตัดสินใจทางธุรกิจได้อย่างรวดเร็วและแม่นยำ</li>
+                    </ul>
+                </div>
+                <div>
+                    <h3 class="text-2xl font-bold text-gray-800 mb-2">5. เงื่อนไขและข้อกำหนดทั่วไป (General Terms and Conditions)</h3>
+                    <ul class="list-disc list-inside pl-4">
+                        <li>ผู้ให้บริการจะต้องสามารถส่งมอบโซลูชันที่มีคุณสมบัติตรงตามขอบเขตงานที่ระบุทั้งหมด</li>
+                        <li>โซลูชันจะต้องมีความยืดหยุ่นเพียงพอที่จะปรับเปลี่ยนให้เข้ากับสถาปัตยกรรมข้อมูล (Data Architecture) ของ กฟภ. ในอนาคต</li>
+                        <li>ผู้ให้บริการจะต้องมีแผนการฝึกอบรมบุคลากรที่ชัดเจน เพื่อให้ทีมงานสามารถใช้งานและดูแลรักษาระบบได้อย่างต่อเนื่อง</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
 </body>
 </html>
