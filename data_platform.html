@@ -58,6 +58,13 @@
         .score-8 { background-color: #3B82F6; }
         .score-7-5 { background-color: #F59E0B; }
         .score-6 { background-color: #6B7280; }
+        .score-9-5 { background-color: #16a34a; }
+        .rank-1 { background-color: #f59e0b; }
+        .rank-2 { background-color: #10b981; }
+        .rank-3 { background-color: #2563eb; }
+        .rank-4 { background-color: #3b82f6; }
+        .rank-5 { background-color: #6b7280; }
+        .rank-6 { background-color: #9ca3af; }
     </style>
 </head>
 <body class="p-8">
@@ -217,6 +224,7 @@
                             <th class="px-6 py-3 text-left text-sm font-medium uppercase tracking-wider" style="min-width: 200px;">ชุดเครื่องมือ Commercial (Microsoft Azure + Denodo)</th>
                             <th class="px-6 py-3 text-left text-sm font-medium uppercase tracking-wider" style="min-width: 200px;">แพลตฟอร์ม Oracle Cloud (OCI + Tableau)</th>
                             <th class="px-6 py-3 text-left text-sm font-medium uppercase tracking-wider" style="min-width: 200px;">ชุดเครื่องมือ Open Source (Apache Stack)</th>
+                            <th class="px-6 py-3 text-left text-sm font-medium uppercase tracking-wider" style="min-width: 200px;">ชุดเครื่องมือใหม่ (Oracle Cloud Platform)</th>
                         </tr>
                     </thead>
                     <tbody class="divide-y divide-gray-200 text-sm">
@@ -228,6 +236,7 @@
                             <td class="px-6 py-4 text-left font-bold text-lg"><span class="score-box score-8">8/10</span></td>
                             <td class="px-6 py-4 text-left font-bold text-lg"><span class="score-box score-7-5">7.5/10</span></td>
                             <td class="px-6 py-4 text-left font-bold text-lg"><span class="score-box score-6">6/10</span></td>
+                            <td class="px-6 py-4 text-left font-bold text-lg"><span class="score-box score-9-5">9.5/10</span></td>
                         </tr>
                         <!-- Row: จุดแข็ง -->
                         <tr class="table-row-even">
@@ -264,6 +273,15 @@
                                     <li>สามารถปรับแต่งได้อย่างอิสระ</li>
                                 </ul>
                             </td>
+                            <td class="px-6 py-4">
+                                <ul class="list-disc list-inside">
+                                    <li>ใช้ประโยชน์จาก Oracle Universal Credit (UC) ที่มีอยู่แล้วได้อย่างเต็มที่</li>
+                                    <li>เป็นแพลตฟอร์มแบบครบวงจร (End-to-End) ที่ยกระดับจาก Data Lab เดิม</li>
+                                    <li>รองรับการทำงานด้าน AI/ML ที่มีประสิทธิภาพสูงด้วย GPU</li>
+                                    <li>มีเครื่องมือ Data Governance และ Automation ที่สมบูรณ์แบบ</li>
+                                    <li>ลดงาน Manual และ Hard Code ของทีม</li>
+                                </ul>
+                            </td>
                         </tr>
                         <!-- Row: จุดอ่อน -->
                         <tr class="table-row-odd">
@@ -293,6 +311,12 @@
                                     <li>ขาดการสนับสนุนแบบครบวงจร</li>
                                 </ul>
                             </td>
+                            <td class="px-6 py-4">
+                                <ul class="list-disc list-inside">
+                                    <li>อาจมีค่าใช้จ่ายเพิ่มเติมหากใช้ทรัพยากรเกินกว่า UC ที่มีอยู่</li>
+                                    <li>บุคลากรต้องมีการเรียนรู้เครื่องมือใหม่ที่แตกต่างจาก Open Source เดิม</li>
+                                </ul>
+                            </td>
                         </tr>
                         <!-- Row: Gap ที่เหลือ -->
                         <tr class="table-row-even">
@@ -302,6 +326,7 @@
                             <td class="px-6 py-4">ขาดอีก 2 คะแนน คือ **การบูรณาการแบบรวมศูนย์** และ **การจัดการกับข้อมูลที่ไม่พร้อมเชื่อมต่อ**</td>
                             <td class="px-6 py-4">ขาดอีก 2.5 คะแนน คือ **ความง่ายในการใช้งาน** และ **การบูรณาการบริการ**</td>
                             <td class="px-6 py-4">ขาดอีก 3.5 คะแนน คือ **ความยุ่งยากในการดูแลระบบ** และ **ขาดการสนับสนุน**</td>
+                            <td class="px-6 py-4">ขาดอีก 0.5 คะแนน คือ **การสร้างความคุ้นเคยให้กับบุคลากร** และ **การวางแผนค่าใช้จ่ายที่อาจเกินจาก UC**</td>
                         </tr>
                         <!-- Row: วิธีปิด Gap -->
                         <tr class="table-row-odd">
@@ -311,6 +336,7 @@
                             <td class="px-6 py-4">ต้องมีการออกแบบสถาปัตยกรรมร่วมกันระหว่าง Denodo และทีม Azure เพื่อให้เกิดการทำงานที่ราบรื่นที่สุด</td>
                             <td class="px-6 py-4">ต้องใช้เวลาและทรัพยากรในการเชื่อมต่อบริการต่าง ๆ ของ OCI เพื่อสร้างกระบวนการ End-to-End ที่สมบูรณ์</td>
                             <td class="px-6 py-4">ต้องมีทีม **Data Engineering** ขนาดใหญ่ที่พร้อมจะทำตั้งแต่ต้นจนจบ และต้องสร้างความรู้ความเชี่ยวชาญในองค์กรด้วยตัวเอง</td>
+                            <td class="px-6 py-4">จัดอบรมเชิงลึกให้กับทีมงานเพื่อสร้างความคุ้นเคย และวางแผนการใช้ทรัพยากรอย่างรอบคอบเพื่อควบคุมค่าใช้จ่าย</td>
                         </tr>
                         <!-- Row: ความคุ้มค่าและราคา -->
                         <tr class="table-row-even">
@@ -320,6 +346,7 @@
                             <td class="px-6 py-4">เป็นเครื่องมือระดับ Commercial ที่มีค่าไลเซนส์สูง แต่ช่วยลดต้นทุนด้านการจัดเก็บข้อมูลและการทำ ETL ได้อย่างมหาศาล</td>
                             <td class="px-6 py-4">มีโครงสร้างราคาที่ยืดหยุ่นตามการใช้งาน แต่การจัดการเพื่อควบคุมค่าใช้จ่ายให้คุ้มค่าต้องใช้ความเชี่ยวชาญ</td>
                             <td class="px-6 py-4">เป็นทางเลือกที่คุ้มค่าที่สุดในแง่ของค่าไลเซนส์ แต่มีต้นทุนแฝงในด้านการบำรุงรักษาและการพัฒนาที่สูงกว่า</td>
+                            <td class="px-6 py-4">**คุ้มค่าสูงสุด** เพราะใช้ประโยชน์จาก Oracle UC ที่มีอยู่แล้ว ทำให้ต้นทุนเริ่มต้นต่ำ และสามารถควบคุมค่าใช้จ่ายได้หากวางแผนการใช้งานอย่างมีประสิทธิภาพ</td>
                         </tr>
                         <!-- Row: เครื่องมือที่เกี่ยวข้อง -->
                         <tr class="table-row-odd">
@@ -374,6 +401,16 @@
                                     <li>**แสดงผล:** Apache Superset, Metabase, Grafana</li>
                                 </ul>
                             </td>
+                            <td class="px-6 py-4">
+                                <ul class="list-disc list-inside">
+                                    <li>**กำกับดูแล:** Oracle Data Catalog, Oracle Data Safe</li>
+                                    <li>**นำเข้า/จัดเก็บ:** Oracle Data Integration, OCI Lakehouse, OCI Data Flow</li>
+                                    <li>**คุณภาพ:** Oracle Cloud Infrastructure GoldenGate, Data Quality tools</li>
+                                    <li>**วิเคราะห์:** Oracle Analytics Cloud (OAC), OCI Data Science (รองรับ GPU)</li>
+                                    <li>**ให้บริการ:** OCI Data Flow, OCI GoldenGate, API Gateway</li>
+                                    <li>**แสดงผล:** Oracle Analytics Cloud (OAC), BI Tools อื่นๆ (เช่น Tableau)</li>
+                                </ul>
+                            </td>
                         </tr>
                         <!-- Row: ความเชี่ยวชาญของบุคลากร -->
                         <tr class="table-row-even">
@@ -382,7 +419,8 @@
                             <td class="px-6 py-4">ต้องการทีมที่มีความเชี่ยวชาญเฉพาะทางในเครื่องมือแต่ละตัวสูง (เช่น Informatica Developer, Tableau Specialist, Snowflake Architect)</td>
                             <td class="px-6 py-4">ต้องการทีมที่มีความเชี่ยวชาญด้าน Azure และ Denodo รวมถึงมีทักษะในการออกแบบ Data Model เพื่อรองรับ Data Virtualization</td>
                             <td class="px-6 py-4">ต้องการทีมที่มีความเชี่ยวชาญใน Oracle Ecosystem และต้องใช้เวลาในการเรียนรู้การเชื่อมต่อบริการต่าง ๆ เข้าด้วยกัน</td>
-                            <td class="px-6 py-4">ต้องการทีม **Data Engineering** ขนาดใหญ่ที่มีความเชี่ยวชาญสูงในการติดตั้งและดูแลระบบ รวมถึงแก้ไขปัญหาด้วยตัวเอง</td>
+                            <td class="px-6 py-4">ต้องการทีม **Data Engineering** ขนาดใหญ่ที่พร้อมจะทำตั้งแต่ต้นจนจบ และต้องสร้างความรู้ความเชี่ยวชาญในองค์กรด้วยตัวเอง</td>
+                            <td class="px-6 py-4">บุคลากรต้องปรับเปลี่ยนจาก Open Source สู่ Oracle Ecosystem แต่จะทำงานบนแพลตฟอร์มรวมที่ช่วยให้เรียนรู้และบริหารจัดการได้ง่ายกว่าการใช้เครื่องมือหลายตัวพร้อมกัน</td>
                         </tr>
                         <!-- Row: ระดับความยากในการ Implement -->
                         <tr class="table-row-odd">
@@ -392,6 +430,7 @@
                             <td class="px-6 py-4 font-bold text-lg">3</td>
                             <td class="px-6 py-4 font-bold text-lg">3</td>
                             <td class="px-6 py-4 font-bold text-lg">5</td>
+                            <td class="px-6 py-4 font-bold text-lg">2</td>
                         </tr>
                         <!-- Row: ระดับความยากในการใช้งาน -->
                         <tr class="table-row-even">
@@ -401,15 +440,17 @@
                             <td class="px-6 py-4 font-bold text-lg">3</td>
                             <td class="px-6 py-4 font-bold text-lg">2</td>
                             <td class="px-6 py-4 font-bold text-lg">5</td>
+                            <td class="px-6 py-4 font-bold text-lg">2</td>
                         </tr>
                         <!-- Row: ฟันธงโดย AI -->
                         <tr class="table-row-odd">
                             <td class="px-6 py-4 font-semibold table-cell-header">ฟันธงโดย AI (เรียงตามลำดับความเหมาะสม)</td>
-                            <td class="px-6 py-4">ลำดับที่ 1: Microsoft Fabric</td>
-                            <td class="px-6 py-4">ลำดับที่ 2: Informatica + Tableau + Snowflake/Databricks + Collibra</td>
-                            <td class="px-6 py-4">ลำดับที่ 3: Microsoft Azure + Denodo</td>
-                            <td class="px-6 py-4">ลำดับที่ 4: Oracle Cloud (OCI + Tableau)</td>
-                            <td class="px-6 py-4">ลำดับที่ 5: Open Source (Apache Stack)</td>
+                            <td class="px-6 py-4">ลำดับที่ 2</td>
+                            <td class="px-6 py-4">ลำดับที่ 3</td>
+                            <td class="px-6 py-4">ลำดับที่ 4</td>
+                            <td class="px-6 py-4">ลำดับที่ 5</td>
+                            <td class="px-6 py-4">ลำดับที่ 6</td>
+                            <td class="px-6 py-4 font-bold text-lg"><span class="rank-1 score-box">ลำดับที่ 1: Oracle Cloud Platform</span></td>
                         </tr>
                     </tbody>
                 </table>
@@ -419,7 +460,7 @@
         <!-- SOW Section -->
         <div class="block-card" id="sow-section">
             <h2 class="text-3xl font-bold text-gray-800 mb-6">
-                ขอบเขตงานโครงการจัดหาระบบแพลตฟอร์มบริหารจัดการข้อมูล (Data Platform)
+                3. ขอบเขตงานโครงการจัดหาระบบแพลตฟอร์มบริหารจัดการข้อมูล (Data Platform)
             </h2>
             <div class="space-y-6 text-gray-700">
                 <div>
