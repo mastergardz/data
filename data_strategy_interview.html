@@ -1,0 +1,304 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>คู่มือสัมภาษณ์ผู้บริหาร: กลยุทธ์ข้อมูล (Data Strategy)</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #f4f7f9; /* Soft background */
+        }
+        .accordion-header {
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+        .accordion-header:hover {
+            background-color: #f0f4f8;
+        }
+        .question-icon {
+            transition: transform 0.3s ease;
+        }
+        .rotated {
+            transform: rotate(180deg);
+        }
+        .axis-card {
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+        .axis-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+        }
+    </style>
+</head>
+<body class="p-4 md:p-8">
+
+    <div class="max-w-6xl mx-auto bg-white rounded-xl shadow-2xl p-6 md:p-10">
+
+        <!-- Header -->
+        <header class="mb-8 border-b-4 border-blue-600 pb-4">
+            <h1 class="text-3xl md:text-4xl font-extrabold text-gray-900 mb-2">
+                คู่มือการสัมภาษณ์ผู้บริหารระดับสูง
+            </h1>
+            <p class="text-xl text-blue-600 font-semibold">
+                เพื่อจัดทำ กลยุทธ์ข้อมูลองค์กร (Data Strategy)
+            </p>
+        </header>
+
+        <!-- Section: Objectives, Axes, and Data Mesh Context -->
+        <div class="space-y-6 mb-10"> 
+            
+            <!-- Objectives & Results (Combined) -->
+            <div class="bg-indigo-50 border-l-4 border-indigo-500 rounded-lg p-5 shadow-md">
+                <h2 class="text-xl font-bold text-indigo-700 mb-3 flex items-center">
+                    <svg class="w-6 h-6 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 10h18M3 14h18m-9-4v8m-7 0h14a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v8a2 2 0 002 2z"></path></svg>
+                    วัตถุประสงค์ (Objectives) และผลลัพธ์ (Results)
+                </h2>
+                <ul class="list-disc list-inside space-y-2 text-gray-700">
+                    <li>รับฟังและวิเคราะห์วิสัยทัศน์ของผู้บริหารเพื่อใช้จัดทำ **กลยุทธ์ข้อมูล (Data Strategy)**</li>
+                    <li>หาจุดร่วมของเป้าหมายที่ยืดหยุ่นพอที่จะรองรับ **เป้าหมายในอนาคต (To Be)** ของทุกหน่วยงาน</li>
+                    <li>จัดลำดับความสำคัญของ 3 แกนหลัก (**People, Process, Technology**) ตามความโดดเด่นของแต่ละสายงาน</li>
+                    <li class="font-semibold text-indigo-800 pt-2 border-t border-indigo-300 mt-2">ผลลัพธ์ที่คาดหวัง: **กลยุทธ์ข้อมูล (Data Strategy)** ที่ชัดเจนในระยะ สั้น กลาง และยาว</li>
+                </ul>
+                <!-- ADDED: Data Strategy definition -->
+                <div class="mt-4 pt-2 border-t border-indigo-300">
+                    <p class="text-xs text-gray-600 italic">
+                        **กลยุทธ์ข้อมูล (Data Strategy)** คือ แผนงานและแนวทางที่ระบุว่าองค์กรจะบริหาร จัดการ และใช้ประโยชน์จากข้อมูลอย่างไร เพื่อให้บรรลุเป้าหมายทางธุรกิจในระยะสั้น กลาง และยาว
+                    </p>
+                </div>
+            </div>
+
+            <!-- 3 Main Axes - MODIFIED to stack each axis on a new line -->
+            <div class="bg-gray-50 border-l-4 border-gray-500 rounded-lg p-5 shadow-md">
+                <h2 class="text-xl font-bold text-gray-700 mb-3 flex items-center">
+                    <svg class="w-6 h-6 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20 7l-8-4-8 4m16 0l-8 4m8-4v10l-8 4m0-10L4 7m8 4v10m0-4.444L4 7"></path></svg>
+                    3 แกนหลักในการประเมิน
+                </h2>
+                <div class="flex flex-col space-y-2">
+                    <span class="inline-block px-3 py-1 text-sm font-medium bg-blue-100 text-blue-800 rounded-full">1. คนและทักษะ (People & Skills)</span>
+                    <span class="inline-block px-3 py-1 text-sm font-medium bg-purple-100 text-purple-800 rounded-full">2. กระบวนการและธรรมาภิบาล (Process & Governance)</span>
+                    <span class="inline-block px-3 py-1 text-sm font-medium bg-orange-100 text-orange-800 rounded-full">3. เทคโนโลยี (Technology)</span>
+                </div>
+            </div>
+
+            <!-- ADDED: Data Mesh Context Block - MODIFIED CONTENT -->
+            <div class="bg-green-50 border-l-4 border-green-500 rounded-lg p-5 shadow-md">
+                <h2 class="text-xl font-bold text-green-700 mb-3 flex items-center">
+                    <svg class="w-6 h-6 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.27a2 2 0 010 2.828l-1.4 1.4M12 21v-4m-4-2H5.4M20 7h-1.4"></path></svg>
+                    Data Mesh คืออะไร ทำไมถึงเหมาะกับ PEA?
+                </h2>
+                <p class="text-gray-700 mb-3">
+                    **Data Mesh** คือ แนวคิดการบริหารจัดการข้อมูลแบบกระจายศูนย์ (Decentralized Data Management) ที่ออกแบบมาสำหรับองค์กรขนาดใหญ่และซับซ้อนอย่าง PEA เพื่อเพิ่มความเร็วในการสร้างนวัตกรรม (Speed of Innovation) โดยมีหลักการสำคัญ 4 ข้อ:
+                </p>
+                <ul class="list-disc list-inside space-y-1 text-sm text-gray-600 ml-4">
+                    <li>**ข้อมูลคือผลิตภัณฑ์ (Data as a Product):** ข้อมูลที่ส่งออกต้องมีคุณภาพสูง ใช้งานง่าย มีเอกสารกำกับ และพร้อมใช้โดยลูกค้า (หน่วยงานอื่น)</li>
+                    <li>**การเป็นเจ้าของตามสายงาน (Domain Ownership):** หน่วยงานที่สร้างข้อมูลต้องรับผิดชอบดูแลตลอดวงจรชีวิตข้อมูล (Data Life Cycle)</li>
+                    <li>**โครงสร้างพื้นฐานข้อมูลแบบบริการตนเอง (Self-serve Data Platform):** มีเครื่องมือให้หน่วยงานต่าง ๆ สามารถสร้าง Data Product ได้เองอย่างรวดเร็ว</li>
+                    <li>**ธรรมาภิบาลแบบสหพันธ์ (Federated Data Governance):** กำหนดกฎระเบียบร่วมกัน แต่ให้แต่ละสายงานมีอิสระในการจัดการข้อมูลของตนเอง</li>
+                </ul>
+                
+                <div class="mt-4 pt-2 border-t border-green-300">
+                    <span class="font-bold text-green-800 block mb-3">การแบ่งบทบาทที่ชัดเจนสำหรับการขับเคลื่อน:</span>
+                    
+                    <div class="space-y-3">
+                        <!-- Role 1: Domain Owner -->
+                        <div class="p-2 border-l-2 border-blue-600 bg-blue-50 rounded">
+                            <p class="font-bold text-blue-800 mb-1">
+                                เจ้าของสายงาน (Domain Owners): รับผิดชอบอะไรที่เกี่ยวข้องกับข้อมูลของตน
+                            </p>
+                            <ul class="list-disc list-inside space-y-1 text-xs text-gray-700 ml-4">
+                                <li>**คำจำกัดความ (Definition):** กำหนดความหมายและบริบททางธุรกิจของข้อมูล</li>
+                                <li>**กฎเกณฑ์คุณภาพ (Quality Rules):** กำหนดมาตรฐานและความสมบูรณ์ของข้อมูล</li>
+                                <li>**การกำกับดูแล (Governance):** กำหนดสิทธิ์การเข้าถึงและความปลอดภัยของข้อมูลตามกฎหมาย</li>
+                                <li>**คุณค่า (Value):** สร้างประโยชน์และผลตอบแทนทางธุรกิจจาก Data Product</li>
+                            </ul>
+                        </div>
+                        
+                        <!-- Role 2: Digital and Communications -->
+                        <div class="p-2 border-l-2 border-purple-600 bg-purple-50 rounded">
+                            <p class="font-bold text-purple-800 mb-1">
+                                สายงานดิจิทัลและการสื่อสาร: รับผิดชอบอะไรที่เกี่ยวข้องกับข้อมูลของสายงานต่าง ๆ
+                            </p>
+                            <ul class="list-disc list-inside space-y-1 text-xs text-gray-700 ml-4">
+                                <li>**Platform Abstraction:** สร้างเครื่องมือที่ใช้งานง่าย (Low-code/No-code) เพื่อให้ Domain Owner สร้าง Data Product ได้เอง</li>
+                                <li>**Automation:** จัดเตรียมระบบอัตโนมัติในการรวบรวมข้อมูล การทำ Data Pipeline และการตรวจวัดคุณภาพพื้นฐาน</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <p class="text-xs text-green-800 font-semibold mt-3 pt-2 border-t border-green-300">
+                        การแบ่งบทบาทนี้ช่วยแก้ปัญหาคอขวดด้าน Technical และทำให้ PEA สามารถเพิ่มความเร็วในการสร้างนวัตกรรมได้
+                    </p>
+                </div>
+            </div>
+            <!-- End Data Mesh Context Block -->
+
+        </div>
+
+        <!-- Section: Interview Questions (Accordion) -->
+        <h2 class="text-2xl font-bold text-gray-800 mb-6 border-b pb-2">แนวทางคำถาม (Question Guidelines)</h2>
+
+        <div class="space-y-4">
+            <!-- Question 1: Missed Opportunities -->
+            <div class="rounded-lg shadow-md overflow-hidden bg-white border border-gray-200">
+                <div class="accordion-header bg-blue-100 p-4 flex justify-between items-center text-lg font-semibold text-gray-800" onclick="toggleAccordion('q1')">
+                    <span>คำถามที่ 1: โอกาสที่พลาดไปในอดีต (Retrospective)</span>
+                    <!-- Icon is now the same as Q2/Q3, rotation handled by JS on load -->
+                    <svg id="icon-q1" class="w-6 h-6 text-blue-600 question-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+                </div>
+                <div id="content-q1" class="accordion-content p-4 bg-white hidden">
+                    <p class="mb-3 text-lg font-medium text-gray-800">
+                        รบกวนท่านช่วยแชร์สิ่งที่รู้สึกเสียดายหรือ**รู้สึกพลาดโอกาส**ที่องค์กรไม่ได้ทำในอดีต ที่เกี่ยวข้องกับการนำข้อมูลมาใช้ประกอบการตัดสินใจ และเหตุการณ์นั้นส่งผลกระทบอย่างไร
+                    </p>
+                    <div class="border-l-4 border-gray-300 pl-4 py-2 bg-gray-50 rounded">
+                        <p class="text-sm text-gray-600 italic">
+                            (เน้นการวิเคราะห์ผลกระทบ เพื่อเชื่อมโยงไปสู่ความจำเป็นในการมี Data Strategy)
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Question 2: Future Vision & Data Product -->
+            <div class="rounded-lg shadow-md overflow-hidden bg-white border border-gray-200">
+                <div class="accordion-header bg-blue-100 p-4 flex justify-between items-center text-lg font-semibold text-gray-800" onclick="toggleAccordion('q2')">
+                    <span>คำถามที่ 2: เป้าหมายในอนาคตและผลิตภัณฑ์ข้อมูล (Future Vision & Data Product)</span>
+                    <svg id="icon-q2" class="w-6 h-6 text-blue-600 question-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+                </div>
+                <div id="content-q2" class="accordion-content p-4 bg-white hidden">
+                    
+                    <!-- MODIFIED: Changed heading from 1-3 years to generic -->
+                    <h3 class="font-bold text-gray-800 mb-3">2.1 เป้าหมายทางธุรกิจ</h3>
+                    <p class="mb-4 text-gray-700">
+                        หากมองไปในอีก 1-3 ปีข้างหน้า ท่านคิดว่า**เป้าหมายทางธุรกิจที่สำคัญที่สุดเพียงหนึ่งอย่าง** ที่ควรใช้ข้อมูลขับเคลื่อนให้สำเร็จคืออะไร (**เช่น** การเพิ่มรายได้, ลดต้นทุน หรือพลิกโฉมประสบการณ์ลูกค้า) และทำไมท่านถึงเชื่อว่าเป้าหมายนี้สำคัญที่สุดในเวลานี้
+                    </p>
+                    <ul class="list-disc list-inside space-y-2 text-sm text-gray-600 ml-4 mb-6">
+                        <li>2.1.1 เป้าหมายระยะสั้น (ปี 2569-2571) และความสอดคล้องกับทิศทางองค์กร (เหตุผลที่เลือกเป้าหมายได้ชัดเจน และเชื่อมโยงกับความท้าทายขององค์กร เช่น คุณภาพข้อมูล, การใช้ AI)</li>
+                        <li>2.1.2 เป้าหมายระยะกลาง และยาว: หากท่านบรรลุเป้าหมายแรกแล้ว ท่านคิดว่า ‘เป้าหมายถัดไป’ ในการใช้ข้อมูลควรเป็นอย่างไร</li>
+                    </ul>
+
+                    <h3 class="font-bold text-gray-800 mb-3 pt-4 border-t">2.2 การสร้างผลิตภัณฑ์ข้อมูล (Data Product) ชิ้นแรก</h3>
+                    <p class="mb-4 text-gray-700">
+                        การขับเคลื่อนเป้าหมาย [ตามข้อ 2.1] ให้เกิดขึ้นได้จริง ท่านจะเลือกสร้าง **'ผลิตภัณฑ์ข้อมูล (Data Product)*'** อะไรเป็นชิ้นแรก เพื่อเข้ามาแก้ปัญหาและเป็นฐานรากที่มั่นคงให้กับ Initiative อื่น ๆ โดยที่คนคิด คนทำ และคนใช้ คือทีมงานของท่าน และท่านจะวัดผลความสำเร็จของ 'ผลิตภัณฑ์ข้อมูล' นี้ได้อย่างไร
+                    </p>
+                    
+                    <div class="space-y-3 pl-4 border-l-4 border-indigo-300">
+                        <div class="p-3 bg-indigo-50 rounded">
+                            <h4 class="font-semibold text-indigo-700">2.2.1 Data Product (รายละเอียด)</h4>
+                            <ul class="list-disc list-inside space-y-1 text-sm text-gray-600 ml-4">
+                                <li>Data Product ที่เสนอมานั้น **ตอบโจทย์เป้าหมายที่เลือกไว้โดยตรง** อย่างไร</li>
+                                <li>Data Product ในหน่วยงานของท่านมีอะไรบ้าง และชิ้นไหนที่ได้รับความนิยมที่สุดเพราะอะไร</li>
+                                <li>หากท่านพบ Feedback จากหน่วยงานอื่นว่า Data Product ของสายงานท่านไม่มีคุณภาพ ท่านจะดำเนินการอย่างไร</li>
+                                <li>หน่วยงานท่านมีการใช้ Data Product ของหน่วยงานอื่นหรือไม่ อะไรบ้าง และมี Feedback อย่างไร</li>
+                            </ul>
+                        </div>
+                        <div class="p-3 bg-indigo-50 rounded">
+                            <h4 class="font-semibold text-indigo-700">2.2.2 การวัดผล (Measurement)</h4>
+                            <ul class="list-disc list-inside space-y-1 text-sm text-gray-600 ml-4">
+                                <li>ท่านสามารถอธิบายวิธีการวัดผลความสำเร็จของ Data Product ที่ชัดเจนได้อย่างไร</li>
+                                <li>หากมีการประชุมผู้บริหารระดับสูงแบบเร่งด่วน ทีมงานของท่านใช้ระยะเวลาเฉลี่ย นานเท่าไหร่ในการทำข้อมูล/Report เพื่อใช้ในการประชุม</li>
+                            </ul>
+                        </div>
+                    </div>
+                    
+                    <!-- MODIFIED: Expanded Data Product definition -->
+                    <div class="mt-4 border-t pt-2">
+                        <p class="text-xs text-gray-500 italic">
+                            *ผลิตภัณฑ์ข้อมูล (Data Product) คือ **สินทรัพย์ข้อมูลขององค์กรที่ผ่านการบริหารจัดการข้อมูลให้มีคุณภาพและพร้อมใช้งาน เพื่อนำไปสร้างคุณค่าให้กับองค์กร** เช่น Database, Dashboard, ML Model, Data Mart, API, หรือ File (เช่น CSV File)
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Question 3: Bottleneck & Strategy -->
+            <div class="rounded-lg shadow-md overflow-hidden bg-white border border-gray-200">
+                <div class="accordion-header bg-blue-100 p-4 flex justify-between items-center text-lg font-semibold text-gray-800" onclick="toggleAccordion('q3')">
+                    <span>คำถามที่ 3: คอขวดและแผนการแก้ไข (Bottleneck & Resolution Strategy)</span>
+                    <svg id="icon-q3" class="w-6 h-6 text-blue-600 question-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+                </div>
+                <div id="content-q3" class="accordion-content p-4 bg-white hidden">
+                    
+                    <p class="mb-4 text-gray-700 font-medium">
+                        เมื่อมอง 3 แกนหลัก คือ **คนและทักษะ (People & Skills)**, **กระบวนการและธรรมาภิบาล (Process & Governance)** และ **เทคโนโลยี (Technology)** ท่านมองว่าแกนไหนคือ **'คอขวด' (Bottleneck)** ที่ใหญ่ที่สุดในปัจจุบัน ที่เป็นอุปสรรคต่อการทำผลิตภัณฑ์ข้อมูล (Data Product) ที่ท่านเพิ่งเสนอไปข้างต้น
+                    </p>
+                    
+                    <div class="space-y-4">
+                        <div class="p-3 bg-red-50 rounded border-l-4 border-red-500">
+                            <h4 class="font-semibold text-red-700">3.1.1 วิธีและการวางแผนการแก้ปัญหาของสายงานของท่าน</h4>
+                            <ul class="list-disc list-inside space-y-1 text-sm text-gray-600 ml-4 mt-2">
+                                <li>อธิบายปัญหาที่ 'คอขวด' (Bottleneck) ที่ใหญ่ที่สุด พร้อมสาเหตุ</li>
+                                <li>วิธีการแก้ปัญหาระยะสั้น</li>
+                                <li>วิธีการแก้ปัญหาระยะยาว แบบยั่งยืน</li>
+                                <!-- MODIFIED: Added specific axis names -->
+                                <li>ในระหว่างที่ท่านกำลังแก้ปัญหาคอขวด พบว่าต้องใช้ทรัพยากร (คน, เวลา, เงิน) มากกว่าที่คิด ท่านคิดว่าจะดำเนินการแก้ไขปัญหาในแกนที่ **2 (กระบวนการและธรรมาภิบาล)** และ **3 (เทคโนโลยี)** ขนานกันไปอย่างไร</li>
+                            </ul>
+                        </div>
+
+                        <div class="p-3 bg-yellow-50 rounded border-l-4 border-yellow-500">
+                            <h4 class="font-semibold text-yellow-700">3.1.2 มุมของท่านในการแก้ปัญหา Data Product ของสายงานอื่น</h4>
+                            <ul class="list-disc list-inside space-y-1 text-sm text-gray-600 ml-4 mt-2">
+                                <li>หากเป็นปัญหาที่ท่านไม่ได้รับผิดชอบ แต่ได้รับผลกระทบโดยตรง ท่านจะแก้ปัญหานี้อย่างไร</li>
+                            </ul>
+                        </div>
+
+                        <div class="p-3 bg-green-50 rounded border-l-4 border-green-500">
+                            <h4 class="font-semibold text-green-700">3.1.3 ความท้าทาย (Challenges)</h4>
+                            <ul class="list-disc list-inside space-y-1 text-sm text-gray-600 ml-4 mt-2">
+                                <li>ท่านคาดว่าจะเจอกับความท้าทายหรือแรงต้านอะไรบ้าง (เช่น การปรับตัวเข้ากับ AI, วัฒนธรรมองค์กรเดิม) และมีแผนการรับมืออย่างไร</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+            
+            <!-- Footer Notes -->
+            <footer class="mt-8 text-center text-sm text-gray-500 pt-4 border-t">
+                <p>เอกสารประกอบการจัดทำ กลยุทธ์ข้อมูล (Data Strategy) | กองบริหารจัดการข้อมูล (กจข.)</p>
+            </footer>
+
+        </div>
+
+    </div>
+
+    <script>
+        // JavaScript for Accordion functionality
+        function toggleAccordion(id) {
+            const content = document.getElementById(`content-${id}`);
+            const icon = document.getElementById(`icon-${id}`);
+            
+            // Close all other accordions
+            document.querySelectorAll('.accordion-content').forEach(item => {
+                if (item.id !== `content-${id}` && !item.classList.contains('hidden')) {
+                    item.classList.add('hidden');
+                    
+                    // FIX: Added null check here to prevent "Cannot read properties of null (reading 'classList')"
+                    const otherIcon = document.getElementById(`icon-${item.id.replace('content-', 'icon-')}`);
+                    if (otherIcon) {
+                        otherIcon.classList.remove('rotated');
+                    }
+                }
+            });
+
+            // Toggle the clicked accordion
+            if (content) {
+                content.classList.toggle('hidden');
+            }
+            if (icon) {
+                icon.classList.toggle('rotated');
+            }
+        }
+
+        // Add event listeners to initial collapse state
+        window.onload = () => {
+             // Ensure all are hidden on load (if they weren't already)
+            document.querySelectorAll('.accordion-content').forEach(item => {
+                item.classList.add('hidden');
+            });
+            // Open the first question by default for initial focus
+            toggleAccordion('q1');
+        };
+    </script>
+</body>
+</html>
