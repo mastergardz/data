@@ -1,0 +1,389 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PEA Data Factory: The Big 5 Use Cases</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Sarabun:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Sarabun', 'sans-serif'],
+                    },
+                    colors: {
+                        pea: {
+                            purple: '#7A2F8F',
+                            gold: '#FDB913',
+                            dark: '#4A1D58',
+                            light: '#F3E5F5'
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        body {
+            background-color: #f8f9fa;
+        }
+        .card-hover {
+            transition: all 0.3s ease;
+        }
+        .card-hover:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1), 0 8px 10px -6px rgba(0, 0, 0, 0.1);
+        }
+        .gradient-bg {
+            background: linear-gradient(135deg, #7A2F8F 0%, #4A1D58 100%);
+        }
+    </style>
+</head>
+<body class="font-sans text-gray-800 antialiased">
+
+    <!-- Navbar -->
+    <nav class="bg-white shadow-md sticky top-0 z-50">
+        <div class="container mx-auto px-4 py-3 flex justify-between items-center">
+            <div class="flex items-center space-x-3">
+                <div class="w-10 h-10 bg-pea-purple rounded-full flex items-center justify-center text-white font-bold text-xl">
+                    <i class="fa-solid fa-bolt"></i>
+                </div>
+                <div>
+                    <h1 class="text-xl font-bold text-pea-purple leading-none">PEA Data Factory</h1>
+                    <p class="text-xs text-gray-500">The Big 5 Strategic Use Cases</p>
+                </div>
+            </div>
+            <div class="hidden md:flex space-x-6 text-sm font-medium text-gray-600">
+                <a href="#overview" class="hover:text-pea-purple transition">ภาพรวม</a>
+                <a href="#usecases" class="hover:text-pea-purple transition">5 Use Cases</a>
+                <a href="#impact" class="hover:text-pea-purple transition">ผลลัพธ์</a>
+            </div>
+            <a href="#usecases" class="bg-pea-gold text-pea-dark font-bold py-2 px-4 rounded-lg hover:bg-yellow-400 transition text-sm shadow-sm">
+                ดูรายละเอียด
+            </a>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <header class="gradient-bg text-white pt-20 pb-24 relative overflow-hidden">
+        <div class="absolute top-0 right-0 -mr-20 -mt-20 w-96 h-96 bg-white opacity-5 rounded-full blur-3xl"></div>
+        <div class="absolute bottom-0 left-0 -ml-20 -mb-20 w-72 h-72 bg-pea-gold opacity-10 rounded-full blur-2xl"></div>
+        
+        <div class="container mx-auto px-4 text-center relative z-10">
+            <span class="inline-block py-1 px-3 rounded-full bg-white/20 backdrop-blur-sm text-pea-gold text-xs font-bold mb-4 border border-white/10">
+                PEA MOVE Strategic Alignment
+            </span>
+            <h1 class="text-4xl md:text-6xl font-bold mb-6 leading-tight">
+                ขับเคลื่อน <span class="text-pea-gold">กฟภ.</span> สู่อนาคต<br>
+                ด้วยพลังข้อมูลและ AI
+            </h1>
+            <p class="text-lg md:text-xl text-gray-200 max-w-3xl mx-auto mb-10">
+                5 โครงการนำร่องศักยภาพสูง (High-Impact Use Cases) ที่ผสานพลังของ Hybrid Multi-Cloud และ Data Factory เพื่อตอบโจทย์นโยบาย PEA MOVE และแผนยุทธศาสตร์ดิจิทัล
+            </p>
+            <div class="flex justify-center gap-4">
+                <a href="#usecases" class="bg-white text-pea-purple font-bold py-3 px-8 rounded-full shadow-lg hover:bg-gray-100 transition transform hover:scale-105">
+                    สำรวจทั้ง 5 Use Cases
+                </a>
+            </div>
+        </div>
+    </header>
+
+    <!-- Statistics / Overview Bar -->
+    <div class="container mx-auto px-4 -mt-12 relative z-20 mb-16">
+        <div class="bg-white rounded-xl shadow-xl p-6 grid grid-cols-2 md:grid-cols-4 gap-6 border-b-4 border-pea-gold">
+            <div class="text-center border-r border-gray-100 last:border-0">
+                <p class="text-gray-500 text-sm mb-1">Alignment</p>
+                <p class="text-2xl font-bold text-pea-purple">PEA MOVE</p>
+            </div>
+            <div class="text-center border-r border-gray-100 last:border-0">
+                <p class="text-gray-500 text-sm mb-1">Technology</p>
+                <p class="text-2xl font-bold text-pea-purple">AI & Big Data</p>
+            </div>
+            <div class="text-center border-r border-gray-100 last:border-0">
+                <p class="text-gray-500 text-sm mb-1">Platform</p>
+                <p class="text-2xl font-bold text-pea-purple">Hybrid Cloud</p>
+            </div>
+            <div class="text-center">
+                <p class="text-gray-500 text-sm mb-1">Goal</p>
+                <p class="text-2xl font-bold text-pea-purple">ROI & Sustainability</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Main Content: The Big 5 -->
+    <section id="usecases" class="container mx-auto px-4 mb-20">
+        <div class="text-center mb-16">
+            <h2 class="text-3xl font-bold text-gray-800 mb-4">The Big 5 Use Cases</h2>
+            <div class="h-1 w-20 bg-pea-gold mx-auto rounded"></div>
+            <p class="text-gray-600 mt-4 max-w-2xl mx-auto">
+                คัดเลือกและกลั่นกรองจากความท้าทายเชิงยุทธศาสตร์ เพื่อสร้างผลลัพธ์ที่จับต้องได้จริง ทั้งด้านการลดต้นทุน การเพิ่มรายได้ และความมั่นคงของระบบ
+            </p>
+        </div>
+
+        <div class="grid grid-cols-1 gap-10">
+
+            <!-- Use Case 1 -->
+            <div class="bg-white rounded-2xl shadow-lg overflow-hidden border border-gray-100 card-hover flex flex-col md:flex-row">
+                <div class="md:w-1/3 bg-blue-50 p-8 flex flex-col justify-center items-center text-center border-r border-blue-100 relative overflow-hidden">
+                    <div class="absolute top-0 left-0 w-full h-2 bg-blue-500"></div>
+                    <div class="w-20 h-20 bg-blue-100 rounded-full flex items-center justify-center mb-6 text-blue-600 text-4xl shadow-sm">
+                        <i class="fa-solid fa-gears"></i>
+                    </div>
+                    <h3 class="text-2xl font-bold text-gray-800 mb-2">Grid Asset Performance</h3>
+                    <p class="text-blue-600 font-semibold mb-4">& Operational Intelligence</p>
+                    <div class="flex flex-wrap justify-center gap-2 mt-2">
+                        <span class="px-3 py-1 bg-white border border-blue-200 rounded-full text-xs font-bold text-blue-600">M1 Modern</span>
+                        <span class="px-3 py-1 bg-white border border-blue-200 rounded-full text-xs font-bold text-blue-600">E1 Efficient</span>
+                    </div>
+                </div>
+                <div class="md:w-2/3 p-8">
+                    <div class="mb-6">
+                        <h4 class="text-lg font-bold text-gray-800 flex items-center mb-2">
+                            <i class="fa-solid fa-circle-question text-pea-gold mr-2"></i> ความจำเป็นเร่งด่วนเชิงยุทธศาสตร์ (Strategic Urgency)
+                        </h4>
+                        <p class="text-gray-600 text-sm leading-relaxed pl-6">
+                            การซ่อมบำรุงแบบเดิม (Time-Based) มีต้นทุนสูงและเสี่ยงต่อเหตุขัดข้องที่ไม่คาดคิด หากไม่ทำ กฟภ. จะแบกรับต้นทุนการซ่อมบำรุงสูงเกินจริง และเสียโอกาสในการยืดอายุสินทรัพย์ที่มีมูลค่ามหาศาล
+                        </p>
+                    </div>
+                    
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
+                        <div class="bg-gray-50 p-4 rounded-lg">
+                            <h5 class="font-bold text-gray-700 mb-2 text-sm"><i class="fa-solid fa-bullseye text-blue-500 mr-1"></i> วัตถุประสงค์</h5>
+                            <p class="text-xs text-gray-600">เปลี่ยนจาก "ซ่อมเมื่อพัง" เป็น <strong>"ซ่อมก่อนพัง" (Predictive Maintenance)</strong> และลดหน่วยสูญเสีย (Loss) ในระบบ</p>
+                        </div>
+                        <div class="bg-gray-50 p-4 rounded-lg">
+                            <h5 class="font-bold text-gray-700 mb-2 text-sm"><i class="fa-solid fa-server text-blue-500 mr-1"></i> Data & Compute</h5>
+                            <p class="text-xs text-gray-600">IoT/Sensor, DTMS, SCADA, ภาพถ่ายโดรน<br><span class="text-blue-600 font-semibold">Tech:</span> Computer Vision, Deep Learning (RUL)</p>
+                        </div>
+                    </div>
+
+                    <div>
+                        <h5 class="font-bold text-gray-800 mb-2 text-sm border-b pb-1">ผลลัพธ์ที่คาดว่าจะได้รับ (ROI)</h5>
+                        <ul class="list-disc list-inside text-sm text-gray-600 space-y-1">
+                            <li>ลดค่าใช้จ่ายบำรุงรักษา (OPEX) และยืดอายุสินทรัพย์ (ลด CAPEX)</li>
+                            <li>ปรับปรุงค่า SAIFI/SAIDI ให้ดีขึ้นตามเป้าหมาย</li>
+                            <li>ลดหน่วยสูญเสีย (Technical Loss) ในระบบจำหน่าย</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Use Case 2 -->
+            <div class="bg-white rounded-2xl shadow-lg overflow-hidden border border-gray-100 card-hover flex flex-col md:flex-row">
+                <div class="md:w-1/3 bg-amber-50 p-8 flex flex-col justify-center items-center text-center border-r border-amber-100 relative overflow-hidden">
+                    <div class="absolute top-0 left-0 w-full h-2 bg-amber-500"></div>
+                    <div class="w-20 h-20 bg-amber-100 rounded-full flex items-center justify-center mb-6 text-amber-600 text-4xl shadow-sm">
+                        <i class="fa-solid fa-solar-panel"></i>
+                    </div>
+                    <h3 class="text-2xl font-bold text-gray-800 mb-2">Hyper-local Load</h3>
+                    <p class="text-amber-600 font-semibold mb-4">& RE Forecasting</p>
+                    <div class="flex flex-wrap justify-center gap-2 mt-2">
+                        <span class="px-3 py-1 bg-white border border-amber-200 rounded-full text-xs font-bold text-amber-600">M1 Modern</span>
+                        <span class="px-3 py-1 bg-white border border-amber-200 rounded-full text-xs font-bold text-amber-600">M2 Digital</span>
+                    </div>
+                </div>
+                <div class="md:w-2/3 p-8">
+                    <div class="mb-6">
+                        <h4 class="text-lg font-bold text-gray-800 flex items-center mb-2">
+                            <i class="fa-solid fa-circle-question text-pea-gold mr-2"></i> ความจำเป็นเร่งด่วนเชิงยุทธศาสตร์ (Strategic Urgency)
+                        </h4>
+                        <p class="text-gray-600 text-sm leading-relaxed pl-6">
+                            ร่างแผน PDP ใหม่กำหนดสัดส่วนพลังงานทดแทนถึง 51% ทำให้โครงข่ายเจอความผันผวนหนัก หากไม่มีระบบพยากรณ์ระดับ Hyper-local จะเกิดปัญหาไฟตก/ดับ หรือต้องลงทุนขยายระบบเกินความจำเป็น
+                        </p>
+                    </div>
+                    
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
+                        <div class="bg-gray-50 p-4 rounded-lg">
+                            <h5 class="font-bold text-gray-700 mb-2 text-sm"><i class="fa-solid fa-bullseye text-amber-500 mr-1"></i> วัตถุประสงค์</h5>
+                            <p class="text-xs text-gray-600">พยากรณ์การผลิตไฟฟ้า (Solar/Wind) และ Load ระดับราย 15 นาที เพื่อบริหารจัดการความมั่นคงของ Smart Grid</p>
+                        </div>
+                        <div class="bg-gray-50 p-4 rounded-lg">
+                            <h5 class="font-bold text-gray-700 mb-2 text-sm"><i class="fa-solid fa-server text-amber-500 mr-1"></i> Data & Compute</h5>
+                            <p class="text-xs text-gray-600">Load Profile 15 min, Weather, VSPP Data<br><span class="text-amber-600 font-semibold">Tech:</span> HPC, LSTM/Transformer Models</p>
+                        </div>
+                    </div>
+
+                    <div>
+                        <h5 class="font-bold text-gray-800 mb-2 text-sm border-b pb-1">ผลลัพธ์ที่คาดว่าจะได้รับ (ROI)</h5>
+                        <ul class="list-disc list-inside text-sm text-gray-600 space-y-1">
+                            <li>ลดต้นทุนการซื้อไฟฟ้าและการสำรองไฟฟ้า (Reserve Margin)</li>
+                            <li>รองรับการเชื่อมต่อ Renewable Energy ได้มากขึ้นโดยระบบไม่ล่ม</li>
+                            <li>สนับสนุนนโยบาย Digital & Green Grid</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Use Case 3 -->
+            <div class="bg-white rounded-2xl shadow-lg overflow-hidden border border-gray-100 card-hover flex flex-col md:flex-row">
+                <div class="md:w-1/3 bg-pink-50 p-8 flex flex-col justify-center items-center text-center border-r border-pink-100 relative overflow-hidden">
+                    <div class="absolute top-0 left-0 w-full h-2 bg-pink-500"></div>
+                    <div class="w-20 h-20 bg-pink-100 rounded-full flex items-center justify-center mb-6 text-pink-600 text-4xl shadow-sm">
+                        <i class="fa-solid fa-users-viewfinder"></i>
+                    </div>
+                    <h3 class="text-2xl font-bold text-gray-800 mb-2">Digital Energy</h3>
+                    <p class="text-pink-600 font-semibold mb-4">& Customer Experience</p>
+                    <div class="flex flex-wrap justify-center gap-2 mt-2">
+                        <span class="px-3 py-1 bg-white border border-pink-200 rounded-full text-xs font-bold text-pink-600">O1 Oriented</span>
+                        <span class="px-3 py-1 bg-white border border-pink-200 rounded-full text-xs font-bold text-pink-600">S3 New Biz</span>
+                    </div>
+                </div>
+                <div class="md:w-2/3 p-8">
+                    <div class="mb-6">
+                        <h4 class="text-lg font-bold text-gray-800 flex items-center mb-2">
+                            <i class="fa-solid fa-circle-question text-pea-gold mr-2"></i> ความจำเป็นเร่งด่วนเชิงยุทธศาสตร์ (Strategic Urgency)
+                        </h4>
+                        <p class="text-gray-600 text-sm leading-relaxed pl-6">
+                            พฤติกรรมลูกค้าเปลี่ยนเป็น Prosumer และการแข่งขันรุนแรง ต้องเปลี่ยนฐานข้อมูลลูกค้า 22 ล้านรายให้เป็นขุมทรัพย์ สร้างรายได้ New S-Curve จากธุรกิจ Non-Regulated ก่อนเสียส่วนแบ่งตลาด
+                        </p>
+                    </div>
+                    
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
+                        <div class="bg-gray-50 p-4 rounded-lg">
+                            <h5 class="font-bold text-gray-700 mb-2 text-sm"><i class="fa-solid fa-bullseye text-pink-500 mr-1"></i> วัตถุประสงค์</h5>
+                            <p class="text-xs text-gray-600">นำเสนอผลิตภัณฑ์และบริการที่ "รู้ใจ" (Personalization) เพื่อเพิ่มรายได้จากธุรกิจเกี่ยวเนื่อง (Solar, EV, Smart Home)</p>
+                        </div>
+                        <div class="bg-gray-50 p-4 rounded-lg">
+                            <h5 class="font-bold text-gray-700 mb-2 text-sm"><i class="fa-solid fa-server text-pink-500 mr-1"></i> Data & Compute</h5>
+                            <p class="text-xs text-gray-600">Customer Usage, Payment, PEA Volta<br><span class="text-pink-600 font-semibold">Tech:</span> Clustering, Recommendation Engine</p>
+                        </div>
+                    </div>
+
+                    <div>
+                        <h5 class="font-bold text-gray-800 mb-2 text-sm border-b pb-1">ผลลัพธ์ที่คาดว่าจะได้รับ (ROI)</h5>
+                        <ul class="list-disc list-inside text-sm text-gray-600 space-y-1">
+                            <li>เพิ่มรายได้จากธุรกิจ B2C และ B2B (ตาม KPI รายได้ธุรกิจใหม่)</li>
+                            <li>เพิ่มระดับความผูกพันของลูกค้า (Customer Engagement)</li>
+                            <li>เพิ่มยอดผู้ใช้งาน Active บน PEA Smart Plus</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Use Case 4 -->
+            <div class="bg-white rounded-2xl shadow-lg overflow-hidden border border-gray-100 card-hover flex flex-col md:flex-row">
+                <div class="md:w-1/3 bg-indigo-50 p-8 flex flex-col justify-center items-center text-center border-r border-indigo-100 relative overflow-hidden">
+                    <div class="absolute top-0 left-0 w-full h-2 bg-indigo-500"></div>
+                    <div class="w-20 h-20 bg-indigo-100 rounded-full flex items-center justify-center mb-6 text-indigo-600 text-4xl shadow-sm">
+                        <i class="fa-solid fa-boxes-stacked"></i>
+                    </div>
+                    <h3 class="text-2xl font-bold text-gray-800 mb-2">Supply Chain</h3>
+                    <p class="text-indigo-600 font-semibold mb-4">& Financial Optimization</p>
+                    <div class="flex flex-wrap justify-center gap-2 mt-2">
+                        <span class="px-3 py-1 bg-white border border-indigo-200 rounded-full text-xs font-bold text-indigo-600">E1 Efficient</span>
+                        <span class="px-3 py-1 bg-white border border-indigo-200 rounded-full text-xs font-bold text-indigo-600">E3 Lean</span>
+                    </div>
+                </div>
+                <div class="md:w-2/3 p-8">
+                    <div class="mb-6">
+                        <h4 class="text-lg font-bold text-gray-800 flex items-center mb-2">
+                            <i class="fa-solid fa-circle-question text-pea-gold mr-2"></i> ความจำเป็นเร่งด่วนเชิงยุทธศาสตร์ (Strategic Urgency)
+                        </h4>
+                        <p class="text-gray-600 text-sm leading-relaxed pl-6">
+                            พัสดุคงคลังมูลค่ามหาศาลและ Dead Stock ทำให้เงินจมและเกิดต้นทุนเสียโอกาส แผน Digital Supply Chain Transformation ต้องการลดต้นทุนและมูลค่าสินค้าคงคลังลง 5% นี่คือเงินสดที่กู้คืนได้ทันที
+                        </p>
+                    </div>
+                    
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
+                        <div class="bg-gray-50 p-4 rounded-lg">
+                            <h5 class="font-bold text-gray-700 mb-2 text-sm"><i class="fa-solid fa-bullseye text-indigo-500 mr-1"></i> วัตถุประสงค์</h5>
+                            <p class="text-xs text-gray-600">บริหารจัดการ Inventory Optimization ลดของขาด/เกิน และลดต้นทุนโลจิสติกส์ด้วย Advanced Analytics</p>
+                        </div>
+                        <div class="bg-gray-50 p-4 rounded-lg">
+                            <h5 class="font-bold text-gray-700 mb-2 text-sm"><i class="fa-solid fa-server text-indigo-500 mr-1"></i> Data & Compute</h5>
+                            <p class="text-xs text-gray-600">Inventory History, Movement, Procurement<br><span class="text-indigo-600 font-semibold">Tech:</span> Optimization Models, Demand Forecasting</p>
+                        </div>
+                    </div>
+
+                    <div>
+                        <h5 class="font-bold text-gray-800 mb-2 text-sm border-b pb-1">ผลลัพธ์ที่คาดว่าจะได้รับ (ROI)</h5>
+                        <ul class="list-disc list-inside text-sm text-gray-600 space-y-1">
+                            <li>ลดมูลค่าพัสดุคงคลังและต้นทุนบริหารคลังลง 5%</li>
+                            <li>ลดค่าใช้จ่ายในการดำเนินงาน (OPEX)</li>
+                            <li>เพิ่มประสิทธิภาพกระบวนการจัดซื้อจัดจ้าง</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Use Case 5 -->
+            <div class="bg-white rounded-2xl shadow-lg overflow-hidden border border-gray-100 card-hover flex flex-col md:flex-row">
+                <div class="md:w-1/3 bg-teal-50 p-8 flex flex-col justify-center items-center text-center border-r border-teal-100 relative overflow-hidden">
+                    <div class="absolute top-0 left-0 w-full h-2 bg-teal-500"></div>
+                    <div class="w-20 h-20 bg-teal-100 rounded-full flex items-center justify-center mb-6 text-teal-600 text-4xl shadow-sm">
+                        <i class="fa-solid fa-scale-balanced"></i>
+                    </div>
+                    <h3 class="text-2xl font-bold text-gray-800 mb-2">GRC & Market</h3>
+                    <p class="text-teal-600 font-semibold mb-4">Readiness</p>
+                    <div class="flex flex-wrap justify-center gap-2 mt-2">
+                        <span class="px-3 py-1 bg-white border border-teal-200 rounded-full text-xs font-bold text-teal-600">E2 Governance</span>
+                        <span class="px-3 py-1 bg-white border border-teal-200 rounded-full text-xs font-bold text-teal-600">SO3 Strategy</span>
+                    </div>
+                </div>
+                <div class="md:w-2/3 p-8">
+                    <div class="mb-6">
+                        <h4 class="text-lg font-bold text-gray-800 flex items-center mb-2">
+                            <i class="fa-solid fa-circle-question text-pea-gold mr-2"></i> ความจำเป็นเร่งด่วนเชิงยุทธศาสตร์ (Strategic Urgency)
+                        </h4>
+                        <p class="text-gray-600 text-sm leading-relaxed pl-6">
+                            การเปิดเสรีตลาดไฟฟ้าและ TPA กำลังจะเกิดขึ้น กฟภ. ต้องเตรียมระบบให้พร้อมสำหรับการเป็น DSO/DMO และบริหารความเสี่ยง (Risk) ที่ซับซ้อนขึ้น รวมถึงการตรวจจับการทุจริตเพื่อความโปร่งใส
+                        </p>
+                    </div>
+                    
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
+                        <div class="bg-gray-50 p-4 rounded-lg">
+                            <h5 class="font-bold text-gray-700 mb-2 text-sm"><i class="fa-solid fa-bullseye text-teal-500 mr-1"></i> วัตถุประสงค์</h5>
+                            <p class="text-xs text-gray-600">เตรียมความพร้อมรองรับตลาดซื้อขายไฟฟ้า และสร้างระบบตรวจจับความเสี่ยง/ทุจริตแบบอัตโนมัติ</p>
+                        </div>
+                        <div class="bg-gray-50 p-4 rounded-lg">
+                            <h5 class="font-bold text-gray-700 mb-2 text-sm"><i class="fa-solid fa-server text-teal-500 mr-1"></i> Data & Compute</h5>
+                            <p class="text-xs text-gray-600">Transaction Logs, Contracts, Financial Data<br><span class="text-teal-600 font-semibold">Tech:</span> Market Simulation, Anomaly Detection</p>
+                        </div>
+                    </div>
+
+                    <div>
+                        <h5 class="font-bold text-gray-800 mb-2 text-sm border-b pb-1">ผลลัพธ์ที่คาดว่าจะได้รับ (ROI)</h5>
+                        <ul class="list-disc list-inside text-sm text-gray-600 space-y-1">
+                            <li>มีความพร้อมรองรับโครงสร้างกิจการไฟฟ้าใหม่ (TPA/Direct PPA) 100%</li>
+                            <li>ลดความเสี่ยงด้านการปฏิบัติตามกฎระเบียบ (Compliance)</li>
+                            <li>ลดความเสียหายจากการทุจริต (Fraud Detection)</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- Call to Action -->
+    <section id="impact" class="bg-pea-purple text-white py-16">
+        <div class="container mx-auto px-4 text-center">
+            <h2 class="text-3xl font-bold mb-6">ทำไมต้องลงทุนใน Data Factory ตอนนี้?</h2>
+            <p class="text-lg text-purple-100 max-w-4xl mx-auto mb-10">
+                "การลงทุนใน Data Factory และ 5 Use Case นี้ ไม่ใช่แค่เรื่องไอที แต่คือเรื่อง <span class="font-bold text-pea-gold">ความอยู่รอด การทำกำไร และอนาคตของ กฟภ.</span> 
+                เพื่อเปลี่ยนผ่านสู่ Digital Utility ที่แข็งแกร่งและยั่งยืน"
+            </p>
+            <button class="bg-pea-gold text-pea-purple font-bold py-4 px-10 rounded-full text-lg shadow-lg hover:bg-yellow-400 transition transform hover:scale-105">
+                อนุมัติโครงการ Data Factory
+            </button>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-pea-dark text-gray-400 py-8">
+        <div class="container mx-auto px-4 flex flex-col md:flex-row justify-between items-center">
+            <div class="mb-4 md:mb-0">
+                <p class="font-bold text-white">PEA Data Factory Strategic Proposal</p>
+                <p class="text-sm">กองบริหารจัดการข้อมูล (กจข.)</p>
+            </div>
+            <div class="text-sm">
+                © 2025 Provincial Electricity Authority. All Rights Reserved.
+            </div>
+        </div>
+    </footer>
+
+</body>
+</html>
