@@ -1,0 +1,442 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PEA Data Exchange Blueprint</title>
+    <!-- Google Fonts: Prompt for Thai -->
+    <link href="https://fonts.googleapis.com/css2?family=Prompt:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Mermaid JS for Diagrams -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/mermaid/10.6.1/mermaid.min.js"></script>
+    
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Prompt', 'sans-serif'],
+                    },
+                    colors: {
+                        pea: {
+                            purple: '#7A1F77', // PEA Purple (Approx)
+                            gold: '#FBB03B',   // PEA Gold (Approx)
+                            light: '#F3E5F5',
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        body { font-family: 'Prompt', sans-serif; }
+        .mermaid svg { max-width: 100%; height: auto; }
+        .glass-panel {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+        }
+        .gradient-bg {
+            background: linear-gradient(135deg, #7A1F77 0%, #4A148C 100%);
+        }
+    </style>
+</head>
+<body class="bg-gray-50 text-gray-800">
+
+    <!-- Navbar -->
+    <nav class="sticky top-0 z-50 gradient-bg text-white shadow-lg">
+        <div class="container mx-auto px-4 py-3 flex justify-between items-center">
+            <div class="flex items-center space-x-3">
+                <div class="w-10 h-10 bg-white rounded-full flex items-center justify-center text-pea-purple font-bold text-xl">
+                    <i class="fa-solid fa-bolt"></i>
+                </div>
+                <div>
+                    <h1 class="text-lg font-bold leading-tight">PEA Data Exchange Integration</h1>
+                    <p class="text-xs text-purple-200">กองบริหารจัดการข้อมูล (กจข.)</p>
+                </div>
+            </div>
+            <div class="hidden md:flex space-x-6 text-sm font-medium">
+                <a href="#current-state" class="hover:text-pea-gold transition">Current State</a>
+                <a href="#strategy" class="hover:text-pea-gold transition">To-Be Model</a>
+                <a href="#roles" class="hover:text-pea-gold transition">Roles & SLA</a>
+                <a href="#action-plan" class="bg-pea-gold text-purple-900 px-4 py-2 rounded-full hover:bg-yellow-400 transition shadow">Action Plan</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <header class="relative bg-white border-b border-gray-200 overflow-hidden">
+        <div class="absolute top-0 right-0 w-64 h-64 bg-purple-100 rounded-full mix-blend-multiply filter blur-3xl opacity-70 -mr-16 -mt-16"></div>
+        <div class="absolute bottom-0 left-0 w-64 h-64 bg-yellow-100 rounded-full mix-blend-multiply filter blur-3xl opacity-70 -ml-16 -mb-16"></div>
+        
+        <div class="container mx-auto px-4 py-16 text-center relative z-10">
+            <span class="inline-block py-1 px-3 rounded-full bg-purple-100 text-pea-purple text-xs font-bold mb-4">Project Blueprint v1.1</span>
+            <h2 class="text-4xl md:text-5xl font-bold text-gray-900 mb-6">บูรณาการการให้บริการข้อมูลภาครัฐ</h2>
+            <p class="text-xl text-gray-600 max-w-3xl mx-auto mb-8">
+                เปลี่ยนจาก "ต่างคนต่างขอ" สู่ระบบ <span class="text-pea-purple font-bold">"One Standard Governance"</span> <br>
+                ควบคุม ตรวจสอบ และติดตามการใช้ข้อมูลอย่างมีประสิทธิภาพ
+            </p>
+            <div class="flex justify-center gap-4">
+                <div class="flex items-center space-x-2 text-gray-500">
+                    <i class="fa-solid fa-user-tie"></i>
+                    <span>ผู้อำนวยการ กจข.</span>
+                </div>
+                <span class="text-gray-300">|</span>
+                <div class="flex items-center space-x-2 text-gray-500">
+                    <i class="fa-solid fa-calendar"></i>
+                    <span>FY 2025</span>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Section 1: Current State & Pain Points -->
+    <section id="current-state" class="py-16 bg-gray-50">
+        <div class="container mx-auto px-4">
+            <div class="text-center mb-12">
+                <h3 class="text-3xl font-bold text-gray-800">สถานการณ์ปัจจุบัน (Current State)</h3>
+                <p class="text-gray-500 mt-2">ปัญหาและความท้าทายในปัจจุบัน</p>
+            </div>
+
+            <div class="grid md:grid-cols-2 gap-8 max-w-5xl mx-auto">
+                <!-- Card 1: Linkage Center -->
+                <div class="bg-white rounded-2xl shadow-lg border-l-4 border-blue-500 overflow-hidden hover:shadow-xl transition-shadow duration-300">
+                    <div class="p-8">
+                        <div class="flex items-center justify-between mb-6">
+                            <div class="flex items-center space-x-3">
+                                <div class="w-12 h-12 bg-blue-100 rounded-lg flex items-center justify-center text-blue-600 text-2xl">
+                                    <i class="fa-solid fa-network-wired"></i>
+                                </div>
+                                <h4 class="text-xl font-bold text-gray-800">Linkage Center</h4>
+                            </div>
+                            <span class="bg-blue-100 text-blue-800 text-xs px-2 py-1 rounded">กรมการปกครอง</span>
+                        </div>
+                        <p class="text-gray-600 mb-4">เชื่อมโยงผ่านเลขบัตรประชาชน (1 Dataset: ข้อมูลการใช้ไฟ 6 เดือน)</p>
+                        
+                        <div class="space-y-3 bg-red-50 p-4 rounded-xl border border-red-100">
+                            <h5 class="text-red-700 font-semibold text-sm flex items-center"><i class="fa-solid fa-circle-exclamation mr-2"></i> Pain Points</h5>
+                            <ul class="space-y-2 text-sm text-red-600">
+                                <li class="flex items-start"><i class="fa-solid fa-xmark mt-1 mr-2 opacity-50"></i> <span><b>Blind Spot:</b> ไม่รู้ว่าใครเข้ามาขอใช้บ้าง</span></li>
+                                <li class="flex items-start"><i class="fa-solid fa-xmark mt-1 mr-2 opacity-50"></i> <span><b>No Screening:</b> ขาดการพิจารณาอนุญาตที่เหมาะสม</span></li>
+                                <li class="flex items-start"><i class="fa-solid fa-xmark mt-1 mr-2 opacity-50"></i> <span><b>No Monitoring:</b> ตรวจสอบปริมาณการใช้ไม่ได้</span></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Card 2: Direct / MOU -->
+                <div class="bg-white rounded-2xl shadow-lg border-l-4 border-pea-purple overflow-hidden hover:shadow-xl transition-shadow duration-300">
+                    <div class="p-8">
+                        <div class="flex items-center justify-between mb-6">
+                            <div class="flex items-center space-x-3">
+                                <div class="w-12 h-12 bg-purple-100 rounded-lg flex items-center justify-center text-pea-purple text-2xl">
+                                    <i class="fa-solid fa-handshake"></i>
+                                </div>
+                                <h4 class="text-xl font-bold text-gray-800">Direct / MOU</h4>
+                            </div>
+                            <span class="bg-purple-100 text-purple-800 text-xs px-2 py-1 rounded">4 หน่วยงานหลัก</span>
+                        </div>
+                        <p class="text-gray-600 mb-4">ตำรวจ, ทางรัฐ, ธปท., กปภ. (3 API Sets)</p>
+                        
+                        <div class="space-y-3 bg-red-50 p-4 rounded-xl border border-red-100">
+                            <h5 class="text-red-700 font-semibold text-sm flex items-center"><i class="fa-solid fa-circle-exclamation mr-2"></i> Pain Points</h5>
+                            <ul class="space-y-2 text-sm text-red-600">
+                                <li class="flex items-start"><i class="fa-solid fa-xmark mt-1 mr-2 opacity-50"></i> <span><b>Unregistered:</b> ข้อมูลยังไม่ขึ้น PEA Data Catalog</span></li>
+                                <li class="flex items-start"><i class="fa-solid fa-xmark mt-1 mr-2 opacity-50"></i> <span><b>Governance Gap:</b> ขาดมาตรฐานการกำกับดูแล Consent</span></li>
+                                <li class="flex items-start"><i class="fa-solid fa-xmark mt-1 mr-2 opacity-50"></i> <span><b>Manual Process:</b> ใช้เวลาทำหนังสือ/สัญญานาน</span></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Section 2: Strategy & Flow -->
+    <section id="strategy" class="py-16 bg-white relative">
+        <div class="container mx-auto px-4">
+            <div class="text-center mb-12">
+                <h3 class="text-3xl font-bold text-gray-800">กระบวนการทำงานใหม่ (To-Be Model)</h3>
+                <p class="text-gray-500 mt-2">Process Flow Diagram</p>
+            </div>
+
+            <!-- Strategy Pills -->
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-4 mb-12 max-w-5xl mx-auto">
+                <div class="bg-green-50 p-4 rounded-xl text-center border border-green-100">
+                    <div class="text-green-600 text-xl mb-2"><i class="fa-solid fa-layer-group"></i></div>
+                    <div class="font-bold text-gray-800">Standardization</div>
+                    <div class="text-xs text-gray-500">4 ชุดข้อมูลมาตรฐาน</div>
+                </div>
+                <div class="bg-blue-50 p-4 rounded-xl text-center border border-blue-100">
+                    <div class="text-blue-600 text-xl mb-2"><i class="fa-solid fa-book-open"></i></div>
+                    <div class="font-bold text-gray-800">Cataloging</div>
+                    <div class="text-xs text-gray-500">ขึ้นทะเบียน PEA Catalog</div>
+                </div>
+                <div class="bg-purple-50 p-4 rounded-xl text-center border border-purple-100">
+                    <div class="text-pea-purple text-xl mb-2"><i class="fa-solid fa-gavel"></i></div>
+                    <div class="font-bold text-gray-800">Governance</div>
+                    <div class="text-xs text-gray-500">คัดกรองทุกคำขอ</div>
+                </div>
+                <div class="bg-yellow-50 p-4 rounded-xl text-center border border-yellow-100">
+                    <div class="text-yellow-600 text-xl mb-2"><i class="fa-solid fa-chart-line"></i></div>
+                    <div class="font-bold text-gray-800">Total Monitoring</div>
+                    <div class="text-xs text-gray-500">รวม Log 2 ช่องทาง</div>
+                </div>
+            </div>
+
+            <!-- Mermaid Diagram Container -->
+            <div class="bg-gray-50 border border-gray-200 rounded-2xl p-6 shadow-inner overflow-x-auto max-w-6xl mx-auto">
+                <div class="mermaid text-center">
+                    flowchart TD
+                        %% Definitions
+                        classDef requester fill:#e1f5fe,stroke:#01579b,stroke-width:2px
+                        classDef system fill:#fff9c4,stroke:#fbc02d,stroke-width:2px
+                        classDef peaProcess fill:#e8f5e9,stroke:#2e7d32,stroke-width:2px
+                        classDef critical fill:#ffccbc,stroke:#bf360c,stroke-width:2px,stroke-dasharray: 5 5
+
+                        %% Nodes - Safe IDs and No Special Chars in text
+                        N_Start(("เริ่มต้น"))
+                        N_Check_Source{"ตรวจสอบแหล่งข้อมูล"}
+                        
+                        %% Linkage
+                        N_Linkage_Web["Linkage Center Portal"]
+                        N_Req_Linkage["ทำหนังสือขอใช้ข้อมูล"]
+                        
+                        %% Direct
+                        N_GD_Cat["GD / PEA Catalog"]
+                        N_Req_Direct["ทำหนังสือขอใช้ข้อมูล"]
+                        
+                        %% PEA Internal
+                        N_Governor["ผู้ว่าการ / สายงาน ดส."]
+                        N_Assign_Teams{"แทงเรื่องสั่งการ"}
+                        N_Gov_Team["ฝดข. / กจข."]
+                        N_Tech_Team["ฝปด."]
+                        N_Governance_Process["พิจารณา Case by Case / เสนอ CDO"]
+                        N_Approval_Signal(("แจ้งผลอนุมัติ"))
+                        N_Record_Permit["บันทึกข้อมูลการอนุญาต"]
+                        N_Wait_Step["รออนุมัติจาก ฝดข."]
+                        N_Linkage_Action["ดำเนินการตามขั้นตอน Linkage"]
+                        N_Prep_API["เตรียม API / เชื่อมโยง"]
+                        
+                        %% Monitoring
+                        N_Usage_Linkage["ใช้งานผ่าน Linkage API"]
+                        N_Usage_Direct["ใช้งานผ่าน Direct API"]
+                        N_Monitor_Linkage["เก็บ Log จาก Linkage"]
+                        N_Monitor_Direct["Monitor การใช้งานจริง"]
+
+                        %% Structure
+                        subgraph External_User ["ผู้ขอใช้ข้อมูล ภายนอก"]
+                            N_Start --> N_Check_Source
+                        end
+
+                        subgraph Public_Channel ["ช่องทาง 1: Linkage Center"]
+                            N_Check_Source -- "1 Dataset" --> N_Linkage_Web
+                            N_Linkage_Web --> |"พบข้อมูล"| N_Req_Linkage
+                        end
+
+                        subgraph Direct_Channel ["ช่องทาง 2: Direct / MOU"]
+                            N_Check_Source -- "3 Datasets" --> N_GD_Cat
+                            N_GD_Cat --> |"พบข้อมูล"| N_Req_Direct
+                        end
+
+                        subgraph PEA_Internal ["กระบวนการภายใน PEA"]
+                            N_Req_Linkage --> N_Governor
+                            N_Req_Direct --> N_Governor
+                            
+                            N_Governor --> N_Assign_Teams
+                            
+                            N_Assign_Teams --> |"ด้านธรรมาภิบาล (Linkage และ Direct)"| N_Gov_Team
+                            N_Assign_Teams --> |"ด้านเทคนิค (เฉพาะ Direct)"| N_Tech_Team
+                            
+                            N_Gov_Team --> N_Governance_Process
+                            N_Governance_Process --> |"อนุมัติ"| N_Approval_Signal
+                            
+                            N_Approval_Signal --> |"Case: Linkage"| N_Record_Permit
+                            N_Approval_Signal --> |"Case: Direct"| N_Wait_Step
+                            
+                            N_Record_Permit --> N_Linkage_Action
+                            N_Tech_Team -.-> N_Wait_Step
+                            N_Wait_Step:::critical --> N_Prep_API
+                        end
+
+                        subgraph Monitoring ["การติดตามผล"]
+                            N_Linkage_Action --> N_Usage_Linkage
+                            N_Prep_API --> N_Usage_Direct
+                            
+                            N_Usage_Linkage --> N_Monitor_Linkage
+                            N_Usage_Direct --> N_Monitor_Direct
+                        end
+
+                        %% Apply Classes
+                        class N_Start,N_Req_Linkage,N_Req_Direct requester
+                        class N_Linkage_Web,N_GD_Cat system
+                        class N_Governor,N_Gov_Team,N_Tech_Team,N_Governance_Process,N_Approval_Signal,N_Record_Permit,N_Wait_Step,N_Linkage_Action,N_Prep_API peaProcess
+                </div>
+            </div>
+            <div class="text-center mt-4 text-xs text-gray-400">
+                <i class="fa-solid fa-info-circle"></i> Diagram generated dynamically with Mermaid.js
+            </div>
+        </div>
+    </section>
+
+    <!-- Section 3: Roles & Responsibilities -->
+    <section id="roles" class="py-16 bg-gradient-to-br from-gray-50 to-gray-100">
+        <div class="container mx-auto px-4">
+            <div class="text-center mb-12">
+                <h3 class="text-3xl font-bold text-gray-800">บทบาทหน้าที่ & ข้อตกลง (Roles & SLA)</h3>
+                <p class="text-gray-500 mt-2">การแบ่งงานและการส่งต่องานที่ชัดเจน</p>
+            </div>
+
+            <div class="flex flex-col md:flex-row gap-6 max-w-6xl mx-auto">
+                <!-- Role: ฝดข. -->
+                <div class="flex-1 bg-white rounded-2xl shadow-lg border border-purple-100 p-6 relative overflow-hidden group">
+                    <div class="absolute top-0 right-0 p-4 opacity-10 group-hover:opacity-20 transition">
+                        <i class="fa-solid fa-shield-halved text-8xl text-pea-purple"></i>
+                    </div>
+                    <h4 class="text-xl font-bold text-pea-purple mb-4 flex items-center">
+                        <i class="fa-solid fa-user-shield mr-2"></i> ฝ่ายกำกับดูแลข้อมูล (ฝดข.)
+                    </h4>
+                    <span class="inline-block bg-purple-100 text-purple-700 text-xs px-2 py-1 rounded mb-4 font-semibold">The Gatekeeper</span>
+                    <ul class="space-y-3 text-sm text-gray-600">
+                        <li class="flex items-start">
+                            <i class="fa-solid fa-check-circle text-green-500 mt-1 mr-2"></i>
+                            <div><strong>Phase 1:</strong> รับเรื่อง, ตรวจสอบกฎหมาย/PDPA, ประสาน Data Owner, เสนอ CDO อนุมัติ</div>
+                        </li>
+                        <li class="flex items-start">
+                            <i class="fa-solid fa-check-circle text-green-500 mt-1 mr-2"></i>
+                            <div><strong>Phase 2:</strong> ขึ้นทะเบียน Metadata บน Catalog, ทำทะเบียนผู้ขอใช้ข้อมูล</div>
+                        </li>
+                        <li class="flex items-start">
+                            <i class="fa-solid fa-star text-yellow-500 mt-1 mr-2"></i>
+                            <div><strong>Key Output:</strong> "บันทึกแจ้งอนุมัติ" ส่งให้ ฝปด.</div>
+                        </li>
+                    </ul>
+                </div>
+
+                <!-- Handshake / SLA -->
+                <div class="w-full md:w-1/3 bg-gray-800 text-white rounded-2xl shadow-lg p-6 flex flex-col justify-center">
+                    <h4 class="text-lg font-bold text-pea-gold mb-4 text-center">
+                        <i class="fa-solid fa-handshake-simple mr-2"></i> Handshake Protocol (SLA)
+                    </h4>
+                    <div class="space-y-4 text-sm">
+                        <div class="flex justify-between items-center border-b border-gray-700 pb-2">
+                            <span>1. แจ้งผลอนุมัติ (ฝดข. > ฝปด.)</span>
+                            <span class="text-green-400 font-mono">3 วัน</span>
+                        </div>
+                        <div class="flex justify-between items-center border-b border-gray-700 pb-2">
+                            <span>2. แจ้งผลเชื่อมต่อ (ฝปด. > ฝดข.)</span>
+                            <span class="text-green-400 font-mono">5-10 วัน</span>
+                        </div>
+                        <div class="flex justify-between items-center">
+                            <span>3. รายงานการใช้ (ฝปด. > ฝดข.)</span>
+                            <span class="text-green-400 font-mono">ทุกวันที่ 5</span>
+                        </div>
+                    </div>
+                    <div class="mt-6 text-xs text-gray-400 text-center">
+                        *เป้าหมายเวลาทำการ (Business Days)
+                    </div>
+                </div>
+
+                <!-- Role: ฝปด. -->
+                <div class="flex-1 bg-white rounded-2xl shadow-lg border border-blue-100 p-6 relative overflow-hidden group">
+                    <div class="absolute top-0 right-0 p-4 opacity-10 group-hover:opacity-20 transition">
+                        <i class="fa-solid fa-cogs text-8xl text-blue-600"></i>
+                    </div>
+                    <h4 class="text-xl font-bold text-blue-600 mb-4 flex items-center">
+                        <i class="fa-solid fa-code-branch mr-2"></i> ฝ่ายปฏิบัติการข้อมูล (ฝปด.)
+                    </h4>
+                    <span class="inline-block bg-blue-100 text-blue-700 text-xs px-2 py-1 rounded mb-4 font-semibold">The Builder</span>
+                    <ul class="space-y-3 text-sm text-gray-600">
+                        <li class="flex items-start">
+                            <i class="fa-solid fa-check-circle text-green-500 mt-1 mr-2"></i>
+                            <div><strong>Phase 1:</strong> รอใบแจ้งอนุมัติ, พัฒนา API, กำหนดสิทธิ์ Access</div>
+                        </li>
+                        <li class="flex items-start">
+                            <i class="fa-solid fa-check-circle text-green-500 mt-1 mr-2"></i>
+                            <div><strong>Phase 2:</strong> เชื่อมต่อระบบ, ทดสอบ (UAT), แจ้ง Go-Live</div>
+                        </li>
+                        <li class="flex items-start">
+                            <i class="fa-solid fa-check-circle text-green-500 mt-1 mr-2"></i>
+                            <div><strong>Phase 3:</strong> Monitor ระบบ, เก็บ Log, สรุป Report ส่งคืน ฝดข.</div>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Section 4: Action Plan -->
+    <section id="action-plan" class="py-16 bg-white">
+        <div class="container mx-auto px-4">
+            <div class="text-center mb-12">
+                <h3 class="text-3xl font-bold text-gray-800">แผนการดำเนินงานเร่งด่วน (Next Steps)</h3>
+            </div>
+            
+            <div class="max-w-4xl mx-auto">
+                <div class="relative pl-8 border-l-2 border-gray-200 space-y-8">
+                    <!-- Step 1 -->
+                    <div class="relative">
+                        <div class="absolute -left-[41px] bg-white border-4 border-pea-purple w-6 h-6 rounded-full"></div>
+                        <h4 class="text-lg font-bold text-gray-800">1. Cataloging</h4>
+                        <p class="text-gray-600">จัดทำรายละเอียด Metadata ของชุดข้อมูล API ทั้ง 4 ชุด ให้ครบถ้วนสมบูรณ์</p>
+                    </div>
+                    <!-- Step 2 -->
+                    <div class="relative">
+                        <div class="absolute -left-[41px] bg-white border-4 border-pea-purple w-6 h-6 rounded-full"></div>
+                        <h4 class="text-lg font-bold text-gray-800">2. Publishing</h4>
+                        <p class="text-gray-600">ประกาศขึ้น PEA Data Catalog และส่ง Metadata 3 ชุดไปยัง GD Catalog</p>
+                    </div>
+                    <!-- Step 3 -->
+                    <div class="relative">
+                        <div class="absolute -left-[41px] bg-white border-4 border-pea-purple w-6 h-6 rounded-full"></div>
+                        <h4 class="text-lg font-bold text-gray-800">3. Governance Setup</h4>
+                        <p class="text-gray-600">กำหนดกระบวนการพิจารณาอนุญาตให้ชัดเจน และสื่อสารกับ Data Owner</p>
+                    </div>
+                    <!-- Step 4 -->
+                    <div class="relative">
+                        <div class="absolute -left-[41px] bg-white border-4 border-pea-purple w-6 h-6 rounded-full"></div>
+                        <h4 class="text-lg font-bold text-gray-800">4. Technical Prep</h4>
+                        <p class="text-gray-600">เตรียม API และระบบ Monitoring ให้พร้อมรองรับ Log จากทั้ง 2 ช่องทาง</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-gray-900 text-white py-8">
+        <div class="container mx-auto px-4 text-center">
+            <div class="mb-4">
+                <i class="fa-solid fa-bolt text-pea-gold text-2xl"></i>
+            </div>
+            <p class="text-gray-400 text-sm">
+                กองบริหารจัดการข้อมูล (กจข.)<br>
+                การไฟฟ้าส่วนภูมิภาค (PEA)
+            </p>
+            <p class="text-gray-600 text-xs mt-4">
+                Designed for Internal Strategy Communication © 2025
+            </p>
+        </div>
+    </footer>
+
+    <!-- Initialize Mermaid -->
+    <script>
+        mermaid.initialize({
+            startOnLoad: true,
+            theme: 'base',
+            themeVariables: {
+                primaryColor: '#F3E5F5',
+                primaryTextColor: '#4A148C',
+                primaryBorderColor: '#7A1F77',
+                lineColor: '#7A1F77',
+                secondaryColor: '#E3F2FD',
+                tertiaryColor: '#fff',
+            }
+        });
+    </script>
+</body>
+</html>
